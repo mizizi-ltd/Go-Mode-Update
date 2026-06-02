@@ -1,0 +1,737 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;800;900&display=swap');
+
+/* Base Design System Tokens */
+:root {
+  --color-primary: #0B3C2B;        /* Deep Jungle Green */
+  --color-primary-light: #16523d;  /* Lighter Jungle Green for hover states */
+  --color-accent: #E5A93C;         /* Ochre / Sunshine Gold */
+  --color-accent-hover: #cca02d;   /* Sunshine Gold hover state */
+  --color-bg: #F7F5F0;             /* Soft Sand / Off-White */
+  --color-card: #FFFFFF;           /* Pure White Cards */
+  --color-border: #E5E7EB;         /* border-stone-200 */
+  --color-text-dark: #1F2937;      /* stone-800 */
+  --color-text-light: #6B7280;     /* stone-500 */
+  --color-red: #DC2626;            /* Alert red */
+}
+
+/* Base resets & typography scale optimized for glare and vibrations */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: transparent; /* Transparent so the map background fills entirely */
+  color: var(--color-text-dark);
+  font-size: 13px; /* Reduced overall site's font size (was 14px) */
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* Global light corner rounding for all images on the site (Requirement 5) */
+img {
+  border-radius: 4px !important;
+}
+
+/* Smartphone Wrapper Constraint */
+.app-wrapper {
+  max-width: 480px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background-color: var(--color-bg);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* If full mobile view, take 100% of viewport width */
+@media (max-width: 480px) {
+  body {
+    background-color: var(--color-bg);
+  }
+  .app-wrapper {
+    box-shadow: none;
+  }
+}
+
+/* Fun Keyframe Animations */
+@keyframes bajaj-bounce {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-2px) rotate(-0.5deg);
+  }
+  75% {
+    transform: translateY(1px) rotate(0.5deg);
+  }
+}
+
+@keyframes elastic-pop {
+  0% {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.01);
+    opacity: 0.95;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes compass-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse-gold {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 2px 8px 0 rgba(229, 169, 60, 0.3);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 2px 14px 4px rgba(229, 169, 60, 0.5);
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes confetti-fall {
+  0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+/* Snappy slide-in animation from left to right for Details pane content (Requirement 2) */
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Playful Animation Utility Classes */
+.animate-bounce-bajaj {
+  animation: bajaj-bounce 0.8s ease-in-out infinite;
+}
+
+.animate-pop-elastic {
+  animation: elastic-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-pulse-gold {
+  animation: pulse-gold 2s infinite ease-in-out;
+}
+
+.hover-spin-compass:hover .compass-icon {
+  animation: compass-spin 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Glassmorphism & Cards (Significantly reduced rounding: 0.375rem/6px) */
+.mizizi-card {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 0.375rem; /* Reduced rounding */
+  padding: 1rem;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.mizizi-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Header Vibe */
+.jungle-header {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+}
+
+/* Buttons (Significantly reduced rounding: 0.375rem/6px) */
+.btn-gold {
+  background-color: var(--color-accent);
+  color: var(--color-primary);
+  font-weight: 700;
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: 0.5px;
+  border-radius: 0.375rem; /* Reduced rounding */
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-gold:hover {
+  background-color: var(--color-accent-hover);
+  transform: translateY(-1px);
+}
+
+.btn-jungle {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  border-radius: 0.375rem; /* Reduced rounding */
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-jungle:hover {
+  background-color: var(--color-primary-light);
+  transform: translateY(-1px);
+}
+
+/* Blur Lock overlays for Landing page teaser grid */
+.teaser-locked {
+  position: relative;
+  overflow: hidden;
+}
+
+.teaser-locked::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(247, 245, 240, 0) 0%, rgba(247, 245, 240, 0.95) 100%);
+  pointer-events: none;
+}
+
+.blur-overlay {
+  filter: blur(5px);
+  user-select: none;
+  opacity: 0.65;
+}
+
+/* Badge tags (Significantly reduced rounding: 0.25rem/4px) */
+.badge-gold {
+  background-color: rgba(229, 169, 60, 0.15);
+  color: #925f0e;
+  font-weight: 700;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem; /* Reduced rounding */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-jungle {
+  background-color: rgba(11, 60, 43, 0.1);
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem; /* Reduced rounding */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Timeline Components */
+.timeline-line {
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: var(--color-border);
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 12px;
+  width: 17px;
+  height: 17px;
+  border-radius: 9999px;
+  background-color: var(--color-accent);
+  border: 3px solid var(--color-bg);
+  box-shadow: 0 0 0 1px var(--color-accent);
+  z-index: 10;
+}
+
+/* Accordion expand/collapse transition */
+.card-content-wrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-expanded .card-content-wrapper {
+  max-height: 1000px;
+}
+
+.rotate-arrow {
+  transition: transform 0.3s ease;
+}
+
+.card-expanded .rotate-arrow {
+  transform: rotate(180deg);
+}
+
+/* Input Styles (Significantly reduced rounding: 0.375rem/6px) */
+.mizizi-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem; /* Reduced rounding */
+  border: 2px solid var(--color-border);
+  background-color: #FFFFFF;
+  font-size: 0.95rem;
+  color: var(--color-text-dark);
+  transition: all 0.2s ease;
+}
+
+.mizizi-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(11, 60, 43, 0.1);
+}
+
+/* Modals & Fullsheets (Significantly reduced rounding) */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(11, 60, 43, 0.4);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-sheet {
+  background-color: var(--color-bg);
+  width: 100%;
+  max-width: 480px;
+  border-top-left-radius: 0.375rem; /* Reduced rounding */
+  border-top-right-radius: 0.375rem;
+  max-height: 92vh;
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 -10px 25px -5px rgba(0, 0, 0, 0.15);
+}
+
+.modal-overlay.active .modal-sheet {
+  transform: translateY(0);
+}
+
+.modal-drag-handle {
+  width: 40px;
+  height: 5px;
+  background-color: #CBD5E1;
+  border-radius: 9999px;
+  margin: 0.75rem auto;
+}
+
+/* Driver swahili overlay styling (Significantly reduced rounding) */
+.driver-card {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  border-radius: 0.375rem; /* Reduced rounding */
+  padding: 1.25rem;
+  border-left: 5px solid var(--color-accent);
+}
+
+.driver-speech {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.3;
+  color: #FFFFFF;
+}
+
+/* Custom Scrollbar for app dashboard */
+.app-wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+
+.app-wrapper::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+.app-wrapper::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+
+/* Confetti element */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  z-index: 2000;
+  opacity: 0.9;
+  border-radius: 2px;
+  animation: confetti-fall 2.5s linear infinite;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   WANDERLOG ARCHITECTURE (V2 Split-Pane & Background Maps)
+   ========================================================================== */
+
+/* Full-Screen Map Base */
+.map-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  filter: saturate(1.1) contrast(1.05); /* Boost map visuals */
+}
+
+/* Floating Hamburger Menu Button (Reduced rounding, aligned with M logo - Requirement 6) */
+.hamburger-btn {
+  position: fixed;
+  top: 1.25rem; /* Re-aligned to balance with header brand row */
+  left: 1rem;
+  z-index: 70; /* ALWAYS ON TOP (Requirement 1) */
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.375rem; /* Reduced rounding */
+  background-color: var(--color-accent);
+  color: var(--color-primary);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hamburger-btn:hover {
+  background-color: var(--color-accent-hover);
+  transform: scale(1.04);
+}
+
+.hamburger-btn.active {
+  background-color: transparent;
+  color: #FFFFFF;
+  box-shadow: none;
+}
+
+.hamburger-btn.active:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1);
+}
+
+/* Split-Pane Two-Column Sidebar Container */
+.sidebar-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  z-index: 60; /* ALWAYS ON TOP (Requirement 1) */
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-100%); /* Hidden by default */
+  box-shadow: 8px 0 20px rgba(0,0,0,0.15);
+}
+
+.sidebar-container.active {
+  transform: translateX(0); /* Exposed leftward */
+}
+
+/* Column 1: Main Dark Navigation */
+.sidebar-nav {
+  width: 200px;
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  font-family: 'Outfit', sans-serif;
+}
+
+/* Sidebar Nav Branding - Padded horizontally to make space for fixed Hamburger (Requirement 6) */
+.sidebar-brand {
+  height: 5.5rem;
+  display: flex;
+  align-items: center;
+  padding-left: 4.5rem; /* Aligns horizontally next to the floating hamburger button */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Sidebar Navigation Items (Reduced font size to 12px and aligned text left straight - Requirement 4) */
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Aligns straight to the left */
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  font-weight: 500; /* Removed bolding */
+  font-size: 12px; /* Set font size to 12px */
+  color: rgba(255, 255, 255, 0.85);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  border-left: 4px solid transparent;
+  width: 100%;
+  text-align: left; /* Aligns straight */
+}
+
+.sidebar-link:hover, .sidebar-link.active {
+  color: var(--color-accent);
+  background-color: rgba(255, 255, 255, 0.04);
+  border-left-color: var(--color-accent);
+}
+
+/* Collapsible locations sub-menu */
+.sidebar-sub-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out;
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.sidebar-sub-menu.open {
+  max-height: 500px;
+}
+
+/* Sidebar Sub Items (Reduced font size to 11px and aligned text left straight - Requirement 4) */
+.sidebar-sub-link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Aligns straight */
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem 0.65rem 2.25rem;
+  font-size: 11px; /* Reduced sub items size */
+  font-weight: 500; /* Removed bolding */
+  color: rgba(255, 255, 255, 0.65);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  width: 100%;
+  text-align: left; /* Aligns straight */
+}
+
+.sidebar-sub-link:hover, .sidebar-sub-link.active {
+  color: var(--color-accent);
+}
+
+/* Column 2: Light Sand Details Panel (Twice as wide: 560px - Requirement 6) */
+.sidebar-details {
+  width: 560px; /* TWICE AS WIDE */
+  background-color: var(--color-bg);
+  color: var(--color-text-dark);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  border-right: 1px solid var(--color-border);
+  position: relative; /* Position relative for floating collapse arrow toggle */
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Collapsed state for Column 2 Details Panel (Requirement 1) */
+.sidebar-details.collapsed {
+  width: 0;
+  border-right-width: 0;
+  overflow: hidden;
+}
+
+/* Column 2 Float Border toggle arrow button (Requirement 1) */
+.details-toggle-btn {
+  position: absolute;
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 48px;
+  background-color: var(--color-accent);
+  border: 1px solid var(--color-border);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 50;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.15);
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.details-toggle-btn:hover {
+  background-color: var(--color-accent-hover);
+}
+
+/* Details Panel Header */
+.details-header {
+  background-color: #FFFFFF;
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.details-header h2 {
+  font-weight: 800; /* Keep bold for titles */
+}
+
+/* Details Panel Body Container */
+.details-body {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Dynamic Detailing Fullscreen Overlays ("Read More") */
+.overlay-screen {
+  position: fixed;
+  inset: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 50; /* BELOW SIDEBAR (Requirement 1) */
+  background-color: rgba(247, 245, 240, 0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  padding-left: 200px; /* Offset to keep nav Column 1 always visible! */
+}
+
+/* Responsive adjustment if sidebar active */
+.overlay-screen.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Premium Detailing Header (Reduced rounding to 0.375rem / 6px) */
+.overlay-header {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Detailing Scroll Container */
+.overlay-scroll-container {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 2rem;
+}
+
+/* Content card inside overlay (Significantly reduced rounding) */
+.overlay-content-card {
+  max-width: 680px;
+  margin: 0 auto;
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: 0.375rem; /* Reduced rounding */
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.overlay-content-card img {
+  border-radius: 0.375rem; /* Reduced rounding */
+}
+
+/* Responsive constraints on mobile screens */
+@media (max-width: 768px) {
+  .overlay-screen {
+    padding-left: 0; /* No offset on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  /* Sidebar spans the entire mobile view width */
+  .sidebar-container {
+    width: 100%;
+  }
+  .sidebar-nav {
+    width: 110px; /* Slimmer nav */
+  }
+  .sidebar-details {
+    flex-grow: 1;
+    width: auto; /* Takes the rest of the mobile screen */
+  }
+  .sidebar-link {
+    font-size: 11px; /* Slightly smaller for mobile bounds */
+    padding: 0.75rem 0.5rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    text-align: center;
+    justify-content: center;
+  }
+  .sidebar-link svg {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+  .sidebar-sub-link {
+    padding: 0.5rem 0.5rem;
+    font-size: 10px;
+    text-align: center;
+    justify-content: center;
+  }
+  .overlay-scroll-container {
+    padding: 1rem;
+  }
+  .overlay-content-card {
+    padding: 1rem;
+    border-radius: 0.375rem;
+  }
+}
+
+/* Swahili surviving lingo badge style */
+.lingo-badge {
+  background-color: rgba(11, 60, 43, 0.05);
+  border: 1px dashed var(--color-primary);
+  border-radius: 0.375rem; /* Reduced rounding */
+  padding: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}

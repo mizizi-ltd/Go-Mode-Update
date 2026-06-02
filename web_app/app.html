@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mizizi Premium Dashboard - Wanderlog Street Safari</title>
+  <meta name="description" content="Premium protected Wanderlog-style dashboard containing the interactive Arusha Inner-City Loop matrix.">
+  
+  <!-- Tailwind CSS via Play CDN (for lightweight utility styles) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            jungle: '#0B3C2B',
+            ochre: '#E5A93C',
+            sand: '#F7F5F0',
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Custom Mizizi Styling -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Custom print style for offline guide generation -->
+  <style>
+    @media print {
+      body, .map-container, .hamburger-btn, .sidebar-container, header, #map-click-overlay {
+        display: none !important;
+      }
+      .overlay-screen {
+        position: relative !important;
+        opacity: 1 !important;
+        pointer-events: all !important;
+        display: block !important;
+        background-color: #FFFFFF !important;
+        height: auto !important;
+        padding-left: 0 !important;
+      }
+      .overlay-scroll-container {
+        overflow: visible !important;
+        padding: 0 !important;
+      }
+      .overlay-content-card {
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+      }
+      .overlay-header {
+        background-color: #FFFFFF !important;
+        color: #000000 !important;
+        border-bottom: 2px solid #000000 !important;
+        padding: 1rem 0 !important;
+      }
+      .overlay-header button {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="overflow-hidden bg-stone-100">
+
+  <!-- 1. Background Interactive Google Map Layer -->
+  <div class="map-container">
+    <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1lGijNmrGj-pSjvuguIQUxrDMf0-VE1M&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>
+  </div>
+
+  <!-- 1b. Transparent Map Click Overlay (Catches clicks outside to close sidebar details/overlays) -->
+  <div id="map-click-overlay" class="fixed inset-0 z-30 cursor-pointer"></div>
+
+  <!-- 2. Floating Hamburger Menu Icon -->
+  <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle Navigation Sidebar">
+    <!-- Hamburger icon -->
+    <svg id="hamburger-icon-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/>
+    </svg>
+    <!-- Close icon (cross) -->
+    <svg id="hamburger-icon-close" class="hidden w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+    </svg>
+  </button>
+
+  <!-- 3. Split-Pane Two-Column Sidebar Overlay -->
+  <div id="sidebar" class="sidebar-container">
+    
+    <!-- Column 1: Sleek Navigation Pane (Jungle Green) -->
+    <div class="sidebar-nav">
+      <!-- Top Spacer for Hamburger Menu Button (Requirement 2) -->
+      <div class="sidebar-brand flex items-center justify-center" style="height: 5.5rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+        <!-- Empty inside because the fixed hamburger button sits exactly here! -->
+      </div>
+
+      <!-- Core Links List -->
+      <div class="flex-grow py-4">
+        <!-- HOME LINK (Non-collapsible, routes user appropriately) -->
+        <button id="nav-home-btn" class="sidebar-link active">
+          <svg class="w-4 h-4 text-ochre" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+          </svg>
+          <span>HOME</span>
+        </button>
+
+        <!-- Route Overview Link -->
+        <button id="nav-overview-btn" class="sidebar-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+          <span>Route Overview</span>
+        </button>
+
+        <!-- Map Visibility Toggle -->
+        <button id="nav-map-btn" class="sidebar-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 01.553-.894L9 2l6 3 6-3v11.382a1 1 0 01-.553.894L15 20l-6-3z"/>
+          </svg>
+          <span>Route Map</span>
+        </button>
+
+        <!-- Collapsible Locations Menu -->
+        <div>
+          <button id="nav-locations-toggle" class="sidebar-link justify-between">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+              <span>Locations</span>
+            </div>
+            <!-- Arrow -->
+            <svg id="locations-arrow" class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          
+          <!-- Collapsible Locations List -->
+          <div id="locations-sub-menu" class="sidebar-sub-menu">
+            <button class="sidebar-sub-link" data-index="0">1. Fifi's Café</button>
+            <button class="sidebar-sub-link" data-index="1">2. Tanzanite Exp.</button>
+            <button class="sidebar-sub-link" data-index="2">3. Cultural Heritage</button>
+            <button class="sidebar-sub-link" data-index="3">4. Coffee Lodge</button>
+            <button class="sidebar-sub-link" data-index="4">5. Canvas &amp; Clay</button>
+            <button class="sidebar-sub-link" data-index="5">6. Gran Melia</button>
+            <button class="sidebar-sub-link" data-index="6">7. Amber Restaurant</button>
+          </div>
+        </div>
+
+        <!-- Swahili Survival Link -->
+        <button id="nav-survival-btn" class="sidebar-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+          </svg>
+          <span>Swahili Survival</span>
+        </button>
+
+        <!-- Emergency Protocol Link -->
+        <button id="nav-emergency-btn" class="sidebar-link">
+          <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+          </svg>
+          <span>Emergency Protocol</span>
+        </button>
+      </div>
+
+      <!-- Logged-in profile section -->
+      <div class="p-4 border-t border-emerald-950 bg-emerald-950 text-[10px] space-y-2 font-bold tracking-wider">
+        <div class="flex items-center gap-1.5 text-emerald-400">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+          <span id="user-email-badge" class="truncate normal-case">loading...</span>
+        </div>
+        <button id="sign-out-btn" class="text-amber-400 hover:text-white transition-colors block w-full text-left uppercase">Sign Out</button>
+      </div>
+    </div>
+
+    <!-- Column 2: Dynamic Teaser details Panel (Soft Sand Paper) -->
+    <div class="sidebar-details" id="sidebar-details-column">
+      
+      <!-- Column 2 Floating Toggle Button (Requirement 1) -->
+      <button id="details-pane-toggle-btn" class="details-toggle-btn" aria-label="Toggle Details Panel">
+        <!-- Chevron Left -->
+        <svg id="details-toggle-arrow" class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/>
+        </svg>
+      </button>
+
+      <!-- Pane sticky header -->
+      <div class="details-header">
+        <h2 id="details-pane-title" class="font-black text-lg text-slate-800 tracking-tight">Morning Brief</h2>
+        <p id="details-pane-subtitle" class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">Route 1 Overview</p>
+      </div>
+      
+      <!-- Dynamic body container with snappy slide-in animation class -->
+      <div id="details-pane-body" class="details-body animate-slide-in-right">
+        <!-- Rendered dynamically by js/routes.js -->
+        <div class="flex flex-col items-center justify-center py-20 text-center gap-3">
+          <div class="w-8 h-8 border-3 border-jungle border-t-ochre rounded-full animate-spin"></div>
+          <p class="text-xs text-stone-500 font-bold uppercase tracking-wider">Compiling safari...</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 4. Global Full-Detail Detailing Overlay ("Read More" Page Container) -->
+  <div id="detail-overlay" class="overlay-screen">
+    <div class="overlay-header">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-ochre flex items-center justify-center font-black text-jungle text-md animate-bounce-bajaj">M</div>
+        <h2 id="overlay-title" class="font-black text-lg tracking-tight text-white">Fifi's Cafe Detail</h2>
+      </div>
+      <button id="overlay-close-btn" class="py-2 px-5 bg-ochre text-jungle font-black text-xs uppercase tracking-widest rounded-full hover:bg-white transition-all shadow-md">
+        Close Page
+      </button>
+    </div>
+    
+    <div class="overlay-scroll-container">
+      <div id="overlay-content" class="overlay-content-card animate-pop-elastic">
+        <!-- Rendered dynamically strictly via textContent/innerText -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Simulated SDK logic engines -->
+  <script src="js/auth.js"></script>
+  <script src="js/payments.js"></script>
+  <script src="js/routes.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Connect sign-out button
+      const signOutBtn = document.getElementById('sign-out-btn');
+      if (signOutBtn) {
+        signOutBtn.addEventListener('click', async () => {
+          if (confirm('Are you sure you want to end your Arusha Street Safari session?')) {
+            await FirebaseSim.signOut();
+            window.location.href = 'index.html';
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

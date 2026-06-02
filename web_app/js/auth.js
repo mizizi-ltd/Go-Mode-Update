@@ -1,0 +1,157 @@
+/**
+ * Firebase Auth & Firestore Client-Side Simulation Engine
+ * Optimized for local-first execution, speed on slow networks, and offline storage.
+ */
+
+const FirebaseSim = (() => {
+  const USERS_KEY = 'mizizi_sim_users';
+  const SESSION_KEY = 'mizizi_sim_session';
+
+  // Seed default demo users if they don't exist
+  const getStoredUsers = () => {
+    const users = localStorage.getItem(USERS_KEY);
+    if (!users) {
+      const defaultUsers = {
+        'guest@mizizi.com': {
+          email: 'guest@mizizi.com',
+          password: 'password123',
+          hasPaid: false,
+          createdAt: new Date().toISOString()
+        },
+        'paid@mizizi.com': {
+          email: 'paid@mizizi.com',
+          password: 'password123',
+          hasPaid: true,
+          createdAt: new Date().toISOString()
+        }
+      };
+      localStorage.setItem(USERS_KEY, JSON.stringify(defaultUsers));
+      return defaultUsers;
+    }
+    return JSON.parse(users);
+  };
+
+  const saveStoredUsers = (users) => {
+    localStorage.setItem(USERS_KEY, JSON.stringify(users));
+  };
+
+  // Get current active session user
+  const getCurrentUser = () => {
+    const session = localStorage.getItem(SESSION_KEY);
+    if (!session) return null;
+    try {
+      const parsedSession = JSON.parse(session);
+      // Fetch latest record from users db to get updated payment status
+      const users = getStoredUsers();
+      return users[parsedSession.email] || null;
+    } catch (e) {
+      return null;
+    }
+  };
+
+  // Set current user session
+  const setCurrentUser = (user) => {
+    if (!user) {
+      localStorage.removeItem(SESSION_KEY);
+    } else {
+      localStorage.setItem(SESSION_KEY, JSON.stringify({ email: user.email }));
+    }
+  };
+
+  // Global observers array
+  const authStateListeners = [];
+
+  return {
+    // Firebase Auth: onAuthStateChanged listener
+    onAuthStateChanged: (callback) => {
+      authStateListeners.push(callback);
+      // Immediately trigger for the current session state
+      const currentUser = getCurrentUser();
+      callback(currentUser);
+    },
+
+    // Trigger observers manually
+    _notifyListeners: () => {
+      const currentUser = getCurrentUser();
+      authStateListeners.forEach(listener => listener(currentUser));
+    },
+
+    // SignUp / Register
+    signUp: async (email, password) => {
+      // Small simulated delay for native feel
+      await new Promise(resolve => setTimeout(resolve, 800));
+
+      const users = getStoredUsers();
+      if (users[email]) {
+        throw new Error('This email is already registered! Try logging in.');
+      }
+
+      users[email] = {
+        email: email,
+        password: password,
+        hasPaid: false,
+        createdAt: new Date().toISOString()
+      };
+
+      saveStoredUsers(users);
+      const newUser = users[email];
+      setCurrentUser(newUser);
+      FirebaseSim._notifyListeners();
+      return newUser;
+    },
+
+    // SignIn / LogIn
+    signIn: async (email, password) => {
+      await new Promise(resolve => setTimeout(resolve, 800));
+
+      const users = getStoredUsers();
+      const user = users[email];
+
+      if (!user || user.password !== password) {
+        throw new Error('Invalid email or password! Please try again.');
+      }
+
+      setCurrentUser(user);
+      FirebaseSim._notifyListeners();
+      return user;
+    },
+
+    // SignOut
+    signOut: async () => {
+      await new Promise(resolve => setTimeout(resolve, 300));
+      setCurrentUser(null);
+      FirebaseSim._notifyListeners();
+      return true;
+    },
+
+    // Firestore Simulate: Get user record
+    getUserRecord: async (email) => {
+      const users = getStoredUsers();
+      return users[email] || null;
+    },
+
+    // Firestore Simulate: Update user record (e.g. mark paid)
+    updateUserRecord: async (email, data) => {
+      const users = getStoredUsers();
+      if (!users[email]) throw new Error('User not found in simulated Firestore database.');
+      
+      users[email] = { ...users[email], ...data };
+      saveStoredUsers(users);
+      FirebaseSim._notifyListeners();
+      return users[email];
+    }
+  };
+})();
+
+// Guard app.html from unauthorized intruders
+if (window.location.pathname.endsWith('app.html')) {
+  document.addEventListener('DOMContentLoaded', () => {
+    FirebaseSim.onAuthStateChanged((user) => {
+      if (!user) {
+        // Instantly bounce intruders out to the landing page
+        console.warn('Unauthorized intruder detected. Redirecting to access gate...');
+        window.location.replace('index.html');
+      }
+    });
+  });
+}

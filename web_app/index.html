@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mizizi Bajaj Adventures - Unlock Arusha in 9 Hours</title>
+  <meta name="description" content="High-value, lightweight, self-guided one-day Arusha city itineraries designed for tourists using local Bajaj transit.">
+  
+  <!-- Tailwind CSS via Play CDN (for lightweight execution) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            jungle: '#0B3C2B',
+            ochre: '#E5A93C',
+            sand: '#F7F5F0',
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Custom Mizizi Styling -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-200">
+
+  <!-- Mobile-First Smartphone Wrapper -->
+  <div class="app-wrapper flex flex-col justify-between">
+    
+    <!-- Top Global Access Header -->
+    <header class="jungle-header flex items-center justify-between px-6 py-4 sticky top-0 z-40 shadow-md">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-full bg-ochre flex items-center justify-center font-black text-jungle text-lg">M</div>
+        <span class="font-extrabold text-lg tracking-wider text-ochre">MIZIZI</span>
+      </div>
+      <button id="nav-login-btn" class="px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider bg-ochre text-jungle hover:bg-white transition-all">Log In</button>
+    </header>
+
+    <!-- Main Content Stream -->
+    <main class="flex-grow p-6 space-y-8">
+      
+      <!-- High-Energy Illustration Hero Section -->
+      <section class="text-center space-y-4 animate-pop-elastic">
+        <div class="relative w-full overflow-hidden shadow-md">
+          <img src="assets/hero.png" alt="Mizizi Bajaj Street Safari Adventures" class="w-full h-auto object-cover border-none rounded-none">
+          <div class="absolute top-4 left-4 bg-jungle text-ochre font-black px-3 py-1 rounded-sm text-xs uppercase tracking-wider animate-bounce-bajaj">
+            Safari Mode 🚀
+          </div>
+        </div>
+
+        <h1 class="text-3xl font-black text-slate-800 leading-tight tracking-tight mt-4 font-Outfit" style="font-family: 'Outfit', sans-serif;">
+          Unlock Arusha in <span class="text-ochre">9 Hours</span> via Bajaj for the Price of a Coffee!
+        </h1>
+        
+        <p class="text-stone-500 font-semibold text-sm leading-relaxed px-2">
+          Hold onto your hats! A wild, premium street safari balancing authentic local Bajaj texture with hand-picked local dining anchors.
+        </p>
+
+        <!-- Breathing Pulse CTA Button -->
+        <div class="pt-2">
+          <button id="hero-cta-btn" class="w-full py-4 btn-gold text-lg shadow-lg animate-pulse-gold">
+            Get Instant Access — £6
+          </button>
+          <p class="text-xs text-stone-400 font-medium mt-2">Zero subscription. Lifetime access. 100% local street-smart secrets.</p>
+        </div>
+      </section>
+
+      <!-- Horizontal Divider -->
+      <div class="h-px bg-stone-200"></div>
+
+      <!-- Quick Itinerary Teaser Grid -->
+      <section class="space-y-4">
+        <div class="flex justify-between items-baseline">
+          <h2 class="text-xl font-black text-slate-800 tracking-tight">The Arusha Inner-City Loop</h2>
+          <span class="badge-gold">9 Nodes</span>
+        </div>
+        
+        <p class="text-xs text-stone-500 font-semibold leading-relaxed">
+          Unlock a comprehensive, hour-by-hour self-guided map complete with custom driver translator cards and vetted local secrets.
+        </p>
+
+        <!-- Chronological Highlights (Fifi's, Tanzanite, etc.) -->
+        <div class="space-y-4">
+          <!-- Teaser 1: Fifi's Cafe -->
+          <div class="mizizi-card bg-white p-4 relative overflow-hidden flex gap-4">
+            <img src="assets/clock-tower.jpg" class="w-16 h-16 object-cover rounded-xl border border-stone-200 flex-shrink-0" alt="Fifi's Cafe">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="font-extrabold text-xs text-amber-600">08:00</span>
+                <span class="badge-jungle">Morning Anchor</span>
+              </div>
+              <h3 class="font-extrabold text-slate-800 text-sm">Fifi's Café</h3>
+              <p class="text-stone-400 text-xs mt-1">Start at the historic mid-point Clock Tower. Delicious panini and origin Tanzanian macchiatos await...</p>
+            </div>
+          </div>
+
+          <!-- Teaser 2: Tanzanite Experience -->
+          <div class="mizizi-card bg-white p-4 relative overflow-hidden flex gap-4">
+            <img src="assets/tanzanite.jpg" class="w-16 h-16 object-cover rounded-xl border border-stone-200 flex-shrink-0" alt="Tanzanite">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="font-extrabold text-xs text-amber-600">09:30</span>
+                <span class="badge-jungle">Heritage Stop</span>
+              </div>
+              <h3 class="font-extrabold text-slate-800 text-sm">The Tanzanite Experience</h3>
+              <p class="text-stone-400 text-xs mt-1">Walk directly up to the Blue Plaza museum floor. Discover the secret grading checklist for raw gems...</p>
+            </div>
+          </div>
+
+          <!-- Teaser 3: Cultural Heritage -->
+          <div class="mizizi-card bg-white p-4 relative overflow-hidden flex gap-4">
+            <img src="assets/cultural-heritage.jpg" class="w-16 h-16 object-cover rounded-xl border border-stone-200 flex-shrink-0" alt="Cultural Heritage">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="font-extrabold text-xs text-amber-600">11:30</span>
+                <span class="badge-jungle">Cultural Core</span>
+              </div>
+              <h3 class="font-extrabold text-slate-800 text-sm">Cultural Heritage Centre Gallery</h3>
+              <p class="text-stone-400 text-xs mt-1">Scale straight to the top floor mask gallery showroom for the ultimate unobstructed photo viewpoint...</p>
+            </div>
+          </div>
+
+          <!-- Locked Teaser Overlay Rows -->
+          <div class="teaser-locked relative">
+            <div class="mizizi-card bg-white p-4 flex gap-4 blur-overlay">
+              <div class="w-16 h-16 bg-stone-300 rounded-xl flex-shrink-0"></div>
+              <div>
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="font-extrabold text-xs text-amber-600">13:00</span>
+                  <span class="badge-gold">Culinary Stop</span>
+                </div>
+                <h3 class="font-extrabold text-slate-800 text-sm">Arusha Coffee Lodge</h3>
+                <p class="text-stone-400 text-xs mt-1">Beautiful garden loungers. Coffee plantation history, but this vetted local secret tip is blocked...</p>
+              </div>
+            </div>
+            <!-- Padlock Badge Overlay -->
+            <div class="absolute inset-0 flex items-center justify-center z-10">
+              <span class="bg-jungle text-ochre font-extrabold px-3 py-1.5 rounded-full text-xs flex items-center gap-1.5 shadow-md">
+                🔒 Premium Paywall Lock
+              </span>
+            </div>
+          </div>
+
+          <div class="teaser-locked relative">
+            <div class="mizizi-card bg-white p-4 flex gap-4 blur-overlay">
+              <div class="w-16 h-16 bg-stone-300 rounded-xl flex-shrink-0"></div>
+              <div>
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="font-extrabold text-xs text-amber-600">14:30</span>
+                  <span class="badge-gold">Logistics Pivot</span>
+                </div>
+                <h3 class="font-extrabold text-slate-800 text-sm">Transit Core: Bypass to Njiro</h3>
+                <p class="text-stone-400 text-xs mt-1">High-speed road limits. Dangerous leg details blurred. Driver WhatsApp direct shortcut coordinates hidden...</p>
+              </div>
+            </div>
+            <div class="absolute inset-0 flex items-center justify-center z-10">
+              <span class="bg-jungle text-ochre font-extrabold px-3 py-1.5 rounded-full text-xs flex items-center gap-1.5 shadow-md">
+                🔒 Premium Paywall Lock
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Horizontal Divider -->
+      <div class="h-px bg-stone-200"></div>
+
+      <!-- Social Proof / Testimonials Masonry Tier -->
+      <section class="space-y-4">
+        <h2 class="text-xl font-black text-slate-800 tracking-tight text-center">Rider Testimonials</h2>
+        
+        <div class="grid grid-cols-1 gap-4">
+          <div class="mizizi-card bg-[#F4F9F6] border-emerald-100 p-4 space-y-2">
+            <p class="text-stone-600 text-xs italic">"Absolute highlight of our East Africa trip! We saved over $100 compared to a structured tour, and the Swahili driver card templates worked flawlessly on our phone!"</p>
+            <div class="flex justify-between items-center pt-2">
+              <span class="font-bold text-xs text-slate-700">James &amp; Clara, UK 🇬🇧</span>
+              <span class="text-ochre">★★★★★</span>
+            </div>
+          </div>
+
+          <div class="mizizi-card bg-[#FFFDF6] border-amber-100 p-4 space-y-2">
+            <p class="text-stone-600 text-xs italic">"Being inside the rattling Bajaj and cruising past the historic clock tower while easily reading the 16px font guide on my mobile was super comfortable. The Fifi panini tip was perfect!"</p>
+            <div class="flex justify-between items-center pt-2">
+              <span class="font-bold text-xs text-slate-700">Aisha M., South Africa 🇿🇦</span>
+              <span class="text-ochre">★★★★★</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer Area -->
+    <footer class="bg-jungle text-stone-300 text-center py-6 px-4 text-xs font-semibold space-y-1">
+      <p>© 2026 Mizizi Bajaj Adventures. All rights reserved.</p>
+      <p class="text-ochre opacity-80">Locally planned, vetted, and sourced in Arusha, Tanzania.</p>
+    </footer>
+
+  </div>
+
+  <!-- Simulated Firebase Login Modal sheet -->
+  <div id="login-modal" class="modal-overlay">
+    <div class="modal-sheet">
+      <div class="modal-drag-handle"></div>
+      <div class="p-6 space-y-6">
+        <div class="text-center">
+          <span class="text-4xl block mb-2 animate-bounce-bajaj"> Tuk-Tuk! 🛺</span>
+          <h2 class="text-2xl font-black text-slate-800" id="modal-title">Ready for Adventure?</h2>
+          <p class="text-stone-500 text-xs mt-1" id="modal-subtitle">Sign up below or log in to access your dashboard.</p>
+        </div>
+
+        <form id="auth-form" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Email Address</label>
+            <input type="email" id="auth-email" class="mizizi-input" placeholder="rider@mizizi.com" required>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Password</label>
+            <input type="password" id="auth-password" class="mizizi-input" placeholder="••••••••" required>
+          </div>
+
+          <div id="auth-error-msg" class="hidden bg-red-50 border border-red-200 text-red-600 rounded-xl p-3 text-xs font-semibold"></div>
+
+          <button type="submit" id="auth-submit-btn" class="w-full py-4 btn-jungle font-bold text-lg flex items-center justify-center gap-2">
+            <span id="auth-btn-text">Let's Ride!</span>
+            <div id="auth-btn-spinner" class="hidden w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+          </button>
+        </form>
+
+        <!-- Quick Credentials Switch (High-Fidelity testing helper) -->
+        <div class="bg-stone-50 border border-stone-200 rounded-2xl p-4 text-center space-y-3">
+          <p class="text-xs font-black text-stone-500 uppercase tracking-widest">💡 Quick Testing Credentials</p>
+          <div class="grid grid-cols-2 gap-2">
+            <button id="quick-unpaid-btn" class="py-2.5 px-3 bg-white border border-stone-300 rounded-xl text-xs font-bold text-slate-700 hover:bg-amber-50 hover:border-amber-400 transition-colors">
+              🔑 Unpaid Demo User
+              <span class="block text-[10px] text-stone-400 font-normal">guest@mizizi.com</span>
+            </button>
+            <button id="quick-paid-btn" class="py-2.5 px-3 bg-white border border-stone-300 rounded-xl text-xs font-bold text-slate-700 hover:bg-emerald-50 hover:border-emerald-400 transition-colors">
+              🔓 Paid Demo User
+              <span class="block text-[10px] text-stone-400 font-normal">paid@mizizi.com</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="text-center pt-2">
+          <button id="toggle-auth-mode" class="text-xs font-black text-amber-600 hover:text-amber-700 uppercase tracking-widest">
+            Already registered? Switch to Login
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Simulator Scripts (Local Firebase + Stripe Checkout Simulation) -->
+  <script src="js/auth.js"></script>
+  <script src="js/payments.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginModal = document.getElementById('login-modal');
+      const authForm = document.getElementById('auth-form');
+      const authEmail = document.getElementById('auth-email');
+      const authPassword = document.getElementById('auth-password');
+      const errorMsg = document.getElementById('auth-error-msg');
+      
+      const submitBtn = document.getElementById('auth-submit-btn');
+      const btnText = document.getElementById('auth-btn-text');
+      const btnSpinner = document.getElementById('auth-btn-spinner');
+      
+      const toggleModeBtn = document.getElementById('toggle-auth-mode');
+      const modalTitle = document.getElementById('modal-title');
+      const modalSubtitle = document.getElementById('modal-subtitle');
+
+      let isSignUpMode = true;
+
+      // Close modal on tap outside sheet
+      loginModal.addEventListener('click', (e) => {
+        if (e.target === loginModal) {
+          loginModal.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+
+      // Show modal triggers
+      const openModal = () => {
+        loginModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      };
+
+      document.getElementById('nav-login-btn').addEventListener('click', () => {
+        isSignUpMode = false;
+        modalTitle.textContent = "Welcome Back!";
+        modalSubtitle.textContent = "Enter your rider credentials to load your dashboard.";
+        btnText.textContent = "Start Journey";
+        toggleModeBtn.textContent = "Need an account? Sign Up Now";
+        openModal();
+      });
+
+      document.getElementById('hero-cta-btn').addEventListener('click', () => {
+        isSignUpMode = true;
+        modalTitle.textContent = "Ready for Adventure?";
+        modalSubtitle.textContent = "Create an account to start your Arusha Street Safari.";
+        btnText.textContent = "Let's Ride!";
+        toggleModeBtn.textContent = "Already registered? Switch to Login";
+        openModal();
+      });
+
+      // Toggle signup/signin modes
+      toggleModeBtn.addEventListener('click', () => {
+        isSignUpMode = !isSignUpMode;
+        errorMsg.classList.add('hidden');
+        if (isSignUpMode) {
+          modalTitle.textContent = "Ready for Adventure?";
+          modalSubtitle.textContent = "Create an account to start your Arusha Street Safari.";
+          btnText.textContent = "Let's Ride!";
+          toggleModeBtn.textContent = "Already registered? Switch to Login";
+        } else {
+          modalTitle.textContent = "Welcome Back!";
+          modalSubtitle.textContent = "Enter your rider credentials to load your dashboard.";
+          btnText.textContent = "Start Journey";
+          toggleModeBtn.textContent = "Need an account? Sign Up Now";
+        }
+      });
+
+      // Submit Auth form handler
+      authForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        errorMsg.classList.add('hidden');
+        
+        submitBtn.disabled = true;
+        btnSpinner.classList.remove('hidden');
+        btnText.textContent = isSignUpMode ? 'Starting Engine...' : 'Opening Gates...';
+
+        try {
+          let user;
+          if (isSignUpMode) {
+            user = await FirebaseSim.signUp(authEmail.value, authPassword.value);
+          } else {
+            user = await FirebaseSim.signIn(authEmail.value, authPassword.value);
+          }
+          
+          // Successful Authenticated Session Redirect Flow
+          if (user.hasPaid) {
+            window.location.href = 'app.html';
+          } else {
+            // Unpaid user triggers immediate Stripe paywall checkout modal
+            loginModal.classList.remove('active');
+            document.body.style.overflow = '';
+            StripeSim.open();
+          }
+
+        } catch (err) {
+          errorMsg.textContent = err.message;
+          errorMsg.classList.remove('hidden');
+          
+          submitBtn.disabled = false;
+          btnSpinner.classList.add('hidden');
+          btnText.textContent = isSignUpMode ? "Let's Ride!" : "Start Journey";
+        }
+      });
+
+      // Quick-test login credentials triggers
+      document.getElementById('quick-unpaid-btn').addEventListener('click', async () => {
+        authEmail.value = 'guest@mizizi.com';
+        authPassword.value = 'password123';
+        isSignUpMode = false;
+        authForm.dispatchEvent(new Event('submit'));
+      });
+
+      document.getElementById('quick-paid-btn').addEventListener('click', async () => {
+        authEmail.value = 'paid@mizizi.com';
+        authPassword.value = 'password123';
+        isSignUpMode = false;
+        authForm.dispatchEvent(new Event('submit'));
+      });
+    });
+  </script>
+</body>
+</html>
