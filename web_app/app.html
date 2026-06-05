@@ -22,6 +22,9 @@
     }
   </script>
   
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
   <!-- Custom Mizizi Styling -->
   <link rel="stylesheet" href="css/style.css">
   
@@ -63,13 +66,17 @@
 </head>
 <body class="overflow-hidden bg-stone-100">
 
-  <!-- 1. Background Interactive Google Map Layer -->
-  <div class="map-container">
-    <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1lGijNmrGj-pSjvuguIQUxrDMf0-VE1M&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>
+  <!-- 1. Background Interactive OpenStreetMap/Leaflet Layer -->
+  <div class="map-container" id="map-container">
+    <div id="map" class="w-full h-full"></div>
+    <button id="map-theme-toggle" class="map-theme-btn" title="Toggle Minimal Map Theme">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+      <span>Toggle Minimal Map</span>
+    </button>
   </div>
 
   <!-- 1b. Transparent Map Click Overlay (Catches clicks outside to close sidebar details/overlays) -->
-  <div id="map-click-overlay" class="fixed inset-0 z-30 cursor-pointer"></div>
+  <div id="map-click-overlay" class="fixed inset-0"></div>
 
   <!-- 2. Floating Hamburger Menu Icon -->
   <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle Navigation Sidebar">
@@ -137,13 +144,81 @@
           
           <!-- Collapsible Locations List -->
           <div id="locations-sub-menu" class="sidebar-sub-menu">
-            <button class="sidebar-sub-link" data-index="0">1. Fifi's Café</button>
-            <button class="sidebar-sub-link" data-index="1">2. Tanzanite Exp.</button>
-            <button class="sidebar-sub-link" data-index="2">3. Cultural Heritage</button>
-            <button class="sidebar-sub-link" data-index="3">4. Coffee Lodge</button>
-            <button class="sidebar-sub-link" data-index="4">5. Canvas &amp; Clay</button>
-            <button class="sidebar-sub-link" data-index="5">6. Gran Melia</button>
-            <button class="sidebar-sub-link" data-index="6">7. Amber Restaurant</button>
+
+            <!-- 1. Fifi's Café (collapsible — has alternatives) -->
+            <div class="sidebar-sub-link-collapsible">
+              <button class="sub-link-name sidebar-sub-link" data-index="0">1. Fifi's Café</button>
+              <button class="sub-link-chevron" data-alt-toggle="fifi-alts" aria-label="Toggle alternatives">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+              </button>
+            </div>
+            <div id="fifi-alts" class="sidebar-alt-menu">
+              <button class="sidebar-alt-link" data-alt-id="1a">1a. Kitamu Coffee</button>
+              <button class="sidebar-alt-link" data-alt-id="1b">1b. Coffee Culture</button>
+            </div>
+
+            <!-- 2. Clock Tower (simple) -->
+            <button class="sidebar-sub-link" data-index="1">2. Clock Tower</button>
+
+            <!-- 3. Tanzanite Exp. (simple) -->
+            <button class="sidebar-sub-link" data-index="2">3. Tanzanite Exp.</button>
+
+            <!-- 4. Maasai Market (collapsible — has alternatives) -->
+            <div class="sidebar-sub-link-collapsible">
+              <button class="sub-link-name sidebar-sub-link" data-index="3">4. Maasai Market</button>
+              <button class="sub-link-chevron" data-alt-toggle="maasai-alts" aria-label="Toggle alternatives">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+              </button>
+            </div>
+            <div id="maasai-alts" class="sidebar-alt-menu">
+              <button class="sidebar-alt-link" data-alt-id="4a">4a. Bounce Warehouse</button>
+            </div>
+
+            <!-- 5. Cultural Heritage (simple) -->
+            <button class="sidebar-sub-link" data-index="5">5. Cultural Heritage</button>
+
+            <!-- 6. Coffee Lodge (collapsible — has alternatives) -->
+            <div class="sidebar-sub-link-collapsible">
+              <button class="sub-link-name sidebar-sub-link" data-index="6">6. Coffee Lodge</button>
+              <button class="sub-link-chevron" data-alt-toggle="coffee-alts" aria-label="Toggle alternatives">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+              </button>
+            </div>
+            <div id="coffee-alts" class="sidebar-alt-menu">
+              <button class="sidebar-alt-link" data-alt-id="6a">6a. Sable Square</button>
+              <button class="sidebar-alt-link" data-alt-id="6b">6b. Basecamp</button>
+              <button class="sidebar-alt-link" data-alt-id="6c">6c. Blue Heron</button>
+              <button class="sidebar-alt-link" data-alt-id="6d">6d. Tumbili Lodge</button>
+            </div>
+
+            <!-- 7. Canvas & Clay (collapsible — has alternatives) -->
+            <div class="sidebar-sub-link-collapsible">
+              <button class="sub-link-name sidebar-sub-link" data-index="8">7. Canvas &amp; Clay</button>
+              <button class="sub-link-chevron" data-alt-toggle="clay-alts" aria-label="Toggle alternatives">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+              </button>
+            </div>
+            <div id="clay-alts" class="sidebar-alt-menu">
+              <button class="sidebar-alt-link" data-alt-id="7a">7a. Village Supermarket</button>
+              <button class="sidebar-alt-link" data-alt-id="7b">7b. Beer Garden</button>
+            </div>
+
+            <!-- 8. Gran Melia (simple) -->
+            <button class="sidebar-sub-link" data-index="9">8. Gran Melia</button>
+
+            <!-- 9. Amber Restaurant (collapsible — has alternatives) -->
+            <div class="sidebar-sub-link-collapsible">
+              <button class="sub-link-name sidebar-sub-link" data-index="10">9. Amber Restaurant</button>
+              <button class="sub-link-chevron" data-alt-toggle="amber-alts" aria-label="Toggle alternatives">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+              </button>
+            </div>
+            <div id="amber-alts" class="sidebar-alt-menu">
+              <button class="sidebar-alt-link" data-alt-id="9a">9a. Georges Tavern</button>
+              <button class="sidebar-alt-link" data-alt-id="9b">9b. Peace Chinese</button>
+              <button class="sidebar-alt-link" data-alt-id="9c">9c. Kibila Restaurant</button>
+            </div>
+
           </div>
         </div>
 
@@ -221,6 +296,33 @@
       </div>
     </div>
   </div>
+
+  <!-- Custom Pin Drop Input Modal Sheet -->
+  <div id="custom-pin-modal" class="modal-overlay">
+    <div class="modal-sheet">
+      <div class="modal-drag-handle"></div>
+      <div class="p-6 space-y-6">
+        <div class="text-center">
+          <span class="text-4xl block mb-2 animate-bounce-bajaj">📍</span>
+          <h2 class="text-2xl font-black text-slate-800">What did you find here?</h2>
+          <p class="text-stone-500 text-xs mt-1">Add your own custom traveler pin and save it to your session.</p>
+        </div>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Location Description / Note</label>
+            <input type="text" id="custom-pin-note" class="mizizi-input" placeholder="e.g., Excellent craft vendor, clean restroom, nice view..." required>
+          </div>
+          <div class="flex gap-3">
+            <button id="custom-pin-cancel-btn" class="w-1/2 py-3 bg-stone-200 text-slate-700 font-bold rounded-xl text-xs uppercase tracking-wider">Cancel</button>
+            <button id="custom-pin-save-btn" class="w-1/2 py-3 btn-gold font-bold rounded-xl text-xs uppercase tracking-wider">Save Pin</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leaflet JS Library -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <!-- Simulated SDK logic engines -->
   <script src="js/auth.js"></script>

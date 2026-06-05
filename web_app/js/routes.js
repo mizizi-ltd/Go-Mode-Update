@@ -12,6 +12,9 @@ const RouteEngine = (() => {
       category: "Morning Anchor",
       title: "Fifi's Café",
       image: "assets/clock-tower.jpg",
+      lat: -3.3733340,
+      lng: 36.6930866,
+      localTip: "Order their Tanzanian cappuccino & request a table near the balcony.",
       swahiliPhrase: "Kahawa ya kienyeji (Traditional coffee)",
       shortDesc: "Kickstart your adventure at Fifi's Café, centered directly beside the historic mid-point landmark (Arusha Clock Tower). It's a bustling local favorite with wonderful breakfast items, reliable Wi-Fi, and single-origin Tanzanian espresso.",
       fullDesc: "Centered directly beside the historic midpoint landmark (Clock Tower), Fifi's Café is the ultimate morning anchor in Arusha. It's a highly vibrant, premium coffee shop that balances standard western amenities with incredible local flavor. The setting is bright, lively, and highly comfortable—perfect for orienting yourself before dive-bombing into local Bajaj transits. Spend this morning stop checking your map layers and pre-loading routing coordinates using their high-speed, stable Wi-Fi connection.",
@@ -21,10 +24,29 @@ const RouteEngine = (() => {
     },
     {
       index: 1,
+      time: "08:30",
+      category: "Historic Landmark",
+      title: "Arusha Clock Tower",
+      image: "assets/clock-tower.jpg",
+      lat: -3.3723398,
+      lng: 36.6944861,
+      localTip: "Stand at the exact geographic midpoint between Cairo and Cape Town for a once-in-a-lifetime photo.",
+      swahiliPhrase: "Mnara wa Saa (Clock Tower monument)",
+      shortDesc: "Walk 2 minutes from Fifi's to the iconic Arusha Clock Tower — the geographic midpoint between Cairo and Cape Town. This historic roundabout landmark is the symbolic heart of Arusha and the perfect orientation checkpoint.",
+      fullDesc: "The Arusha Clock Tower is the most iconic landmark in the city, standing at the exact midpoint between Cairo and Cape Town on the legendary Cape-to-Cairo highway. This charming roundabout monument serves as the geographic and cultural heart of Arusha. Originally built during the British colonial era, it has become a symbol of Arusha's central role in East African diplomacy and tourism. It's the perfect spot for an iconic photo and to orient yourself before diving into the Bajaj street safari network.",
+      safetyTips: "Stay on the sidewalk when photographing the tower — the roundabout has active traffic. Watch your belongings in the busy intersection area.",
+      swahiliLesson: "Landmark & Direction Dialogues:\n- 'Mnara wa Saa uko wapi?' (Where is the Clock Tower?)\n- 'Hapa ndipo katikati ya Afrika!' (This is the center of Africa!)\n- 'Tafadhali nipige picha.' (Please take my photo.)\n- 'Asante, picha nzuri!' (Thank you, nice photo!)",
+      audioGuide: "arusha_clock_tower.mp3"
+    },
+    {
+      index: 2,
       time: "09:30",
       category: "Heritage Stop",
       title: "The Tanzanite Experience",
       image: "assets/tanzanite.jpg",
+      lat: -3.3712749,
+      lng: 36.6945194,
+      localTip: "Always check for the official grading certification inside the museum showroom.",
       swahiliPhrase: "Madini ya Tanzanite (Tanzanite gemstones)",
       shortDesc: "Take a short 2-minute walking transfer to the Blue Plaza building. Scale up to the museum floor to discover the mesmerizing geology, mining history, and grading checklists of the rare Tanzanite gem, unique to Northern Tanzania.",
       fullDesc: "Located on the 3rd floor of the Blue Plaza building, just a 2-minute walk from the Clock Tower, The Tanzanite Experience offers a spectacular and secure deep dive into Tanzania's blue-violet crown jewel. You'll browse visual dioramas of the deep mines beneath Mt. Kilimanjaro and review the official Tanzanite grading system. Vetting gem quality (Color, Cut, Clarity, Carat) before browsing commercial showrooms protects you from street scams and ensures total bargaining power.",
@@ -33,11 +55,30 @@ const RouteEngine = (() => {
       audioGuide: "arusha_tanzanite_narration.mp3"
     },
     {
-      index: 2,
-      time: "11:00",
+      index: 3,
+      time: "10:30",
+      category: "Cultural Shopping",
+      title: "Maasai Market",
+      image: "assets/hero.png",
+      lat: -3.3758457,
+      lng: 36.6923590,
+      localTip: "Always bargain respectfully—aim for 50-60% of the initial vendor offer.",
+      swahiliPhrase: "Soko la Wamasai (Maasai open-air market)",
+      shortDesc: "Hop into a Bajaj back to the town center near the Clock Tower. Step into the vibrant, color-packed Maasai Market to browse thousands of local beadwork pieces, hand-carved ebony sculptures, and colorful blankets.",
+      fullDesc: "Located just off Fire Road in the heart of Arusha, the Maasai Market Curios and Crafts is a legendary open-air bazaar. It brings together hundreds of local artisans selling vibrant, handmade products. You'll find spectacular hand-beaded necklaces, authentic red-and-black checkered shúkà blankets, wood-carved wildlife sculptures, and gorgeous custom paintings. Bargaining is a respected art form here—always start your negotiation at roughly 50-60% of the vendor's initial offer and enjoy the friendly, lively banter.",
+      safetyTips: "Stick to the main central walkways. Keep your wallet and phone inside a secured front pocket or cross-body bag. Vendors are highly enthusiastic—feel free to say 'Hapana, asante' (No, thank you) politely if you are not interested.",
+      swahiliLesson: "Market Bargaining Dialogues:\n- 'Hii ni shilingi ngapi?' (How many shillings is this?)\n- 'Punguza bei kidogo, rafiki.' (Reduce the price a bit, friend.)\n- 'Nitaongeza elfu mbili.' (I will add two thousand.)\n- 'Sawa, nitachukua.' (Okay, I will take it.)",
+      audioGuide: "arusha_maasai_market.mp3"
+    },
+    {
+      index: 4,
+      time: "11:15",
       category: "Transit Core",
       title: "Bajaj to Cultural Heritage Centre",
       image: "assets/hero.png",
+      lat: -3.3723398,
+      lng: 36.6944861,
+      localTip: "Secure your bags on the floor. Do not hold your phone outside the cabin frame.",
       swahiliPhrase: "Safari ya Bajaj (Bajaj street safari)",
       shortDesc: "Spot a passing blue and yellow Bajaj (Tuk-Tuk) and negotiate the transfer down Dodoma Road to the Cultural Heritage Centre. Hold onto your hats—this is your first high-adrenaline local street safari!",
       fullDesc: "Cruising down Dodoma Road inside an open-cabin Bajaj is the true local transport texture of Arusha. You'll zip past local street vendors, palm trees, and vibrating municipal lanes. Negotiating a fair rate beforehand is key: target base pricing is 3,000 to 5,000 Tanzanian Shillings (TZS). Keep your bags placed securely on the floor panel between your feet, never dangling loosely over your shoulder near the open cabin frame where passersby could grab them.",
@@ -46,11 +87,14 @@ const RouteEngine = (() => {
       audioGuide: "arusha_transit_narration.mp3"
     },
     {
-      index: 3,
-      time: "11:30",
+      index: 5,
+      time: "11:45",
       category: "Cultural Core",
       title: "Cultural Heritage Centre Gallery",
       image: "assets/cultural-heritage.jpg",
+      lat: -3.3769058,
+      lng: 36.6581811,
+      localTip: "Climb to the top-floor mask gallery showroom for the best art collection.",
       swahiliPhrase: "Sanaa ya Kiafrika (African art masterpieces)",
       shortDesc: "Explore a massive, architectural masterpiece shaped like a traditional African shield. It houses the largest collection of pristine African art, wood carvings, historic weapons, and mask galleries on the continent.",
       fullDesc: "The Arusha Cultural Heritage Centre is an architectural marvel. Shaped like a massive traditional warrior shield, it stands as a global monument to African history and creative arts. The interior is a spiral ramp that leads you past towering ebony wood carvings, custom-painted canvases, and historic mask gallery rooms. The best unobstructed viewpoint for gorgeous panoramic photos is located beside the shield monument structures out in the main garden area.",
@@ -59,11 +103,14 @@ const RouteEngine = (() => {
       audioGuide: "arusha_gallery_narration.mp3"
     },
     {
-      index: 4,
-      time: "13:00",
+      index: 6,
+      time: "13:15",
       category: "Culinary Stop",
       title: "Arusha Coffee Lodge",
       image: "assets/coffee-lodge.webp",
+      lat: -3.3745016,
+      lng: 36.6439397,
+      localTip: "Ask for a seat in the outdoor garden pavilion for a tranquil dining atmosphere.",
       swahiliPhrase: "Shamba la kahawa (Coffee farm plantation)",
       shortDesc: "Zip down Dodoma Road in a secondary quick Bajaj hop to enter the leafy, peaceful acres of one of Tanzania's oldest coffee plantations. Sit in the garden lounge and order premium local roasts.",
       fullDesc: "Situated along the green slopes of Mount Meru, the Arusha Coffee Lodge is a tranquil culinary oasis. You'll escape the town's dust and step into a lush, leafy garden lounge. Ask to be seated in the outdoor garden pavilion, order their famous single-origin Tanzanian coffee, and enjoy a premium lunch while listening to the wind rustling through coffee leaves. This stop is perfect for unwinding and preparing for the logistics crossing to Njiro.",
@@ -72,11 +119,14 @@ const RouteEngine = (() => {
       audioGuide: "arusha_coffee_narration.mp3"
     },
     {
-      index: 5,
-      time: "14:30",
+      index: 7,
+      time: "14:45",
       category: "Logistics Pivot",
       title: "Bypass Transfer to Njiro",
       image: "assets/hero.png",
+      lat: -3.3750000,
+      lng: 36.6800000,
+      localTip: "Highway dust is severe and high-speed saloon traffic makes open cabins dangerous. Use a private saloon car.",
       swahiliPhrase: "Usalama barabarani (Road safety coordinates)",
       shortDesc: "CRITICAL SAFETY LEG: Avoid Bajaj transits here! This leg crosses town limits on high-speed bypasses with heavy dust and traffic. Tap below to connect with a vetted saloon driver via WhatsApp for 20,000-30,000 TZS.",
       fullDesc: "Important logistical pivot crossing the town limits from Dodoma Road to Njiro. This leg crosses major national highway bypasses characterized by heavy logistics trucks, high-speed saloon traffic, and massive dust waves. A Bajaj is highly unsafe and uncomfortable for this leg. We require all Mizizi riders to utilize our direct WhatsApp shortcut below to engage a vetted, private saloon vehicle driver. Target base pricing is 20,000 to 30,000 TZS maximum.",
@@ -85,11 +135,14 @@ const RouteEngine = (() => {
       audioGuide: "arusha_emergency_saloon.mp3"
     },
     {
-      index: 6,
-      time: "15:00",
+      index: 8,
+      time: "15:15",
       category: "Creative Stop",
       title: "Clay & Canvas (Njiro)",
       image: "assets/hero.png",
+      lat: -3.3980875,
+      lng: 36.7047969,
+      localTip: "Paint traditional clay mugs and sip local sweet banana wine under a covered canopy garden.",
       swahiliPhrase: "Ufinyanzi na mvinyo (Pottery and banana wine)",
       shortDesc: "Unwind in Njiro's cozy creative compound. Paint gorgeous local pottery while tasting rich Tanzanian banana wine. Note: operations are strictly by appointment only—verify your reservation card.",
       fullDesc: "Clay & Canvas is Arusha's hidden creative sanctuary. Tucked away in the quiet green suburbs of Njiro, this cozy arts compound offers structured pottery painting and wine tasting seminars. You'll relax, paint traditional clay mugs, and sip local sweet banana wines under a covered canopy garden. It is an exceptional way to interact with local Tanzanian artists and purchase customized souvenirs.",
@@ -98,11 +151,14 @@ const RouteEngine = (() => {
       audioGuide: "arusha_clay_canvas.mp3"
     },
     {
-      index: 7,
+      index: 9,
       time: "17:30",
       category: "Sundowner",
       title: "Rooftop Lounge at Gran Melia",
       image: "assets/gran-melia.jpg",
+      lat: -3.3706290,
+      lng: 36.7066330,
+      localTip: "Arrive by 17:45 sharp to watch the sky turn brilliant orange and purple directly over Mount Meru.",
       swahiliPhrase: "Machweo ya Jua (Mt. Meru Sunset View)",
       shortDesc: "A five-star rooftop terrace offering breathtaking, unobstructed views of Mount Meru. Arrive by 17:45 sharp to watch the sky turn brilliant orange and purple directly over the volcanic peak.",
       fullDesc: "The Rooftop Lounge at the Gran Melia Arusha is the premier sundowner venue in Northern Tanzania. Situated on a luxury five-star terrace, it features a glass-railed observation platform pointing directly at the majestic, sharp volcanic peak of Mount Meru. Arriving by 17:45 is highly recommended, as the sunset colors paint the mountain in dramatic hues of orange, gold, and deep violet. Close out your day safari with premium cocktails and local appetizers.",
@@ -111,17 +167,161 @@ const RouteEngine = (() => {
       audioGuide: "arusha_gran_melia.mp3"
     },
     {
-      index: 8,
+      index: 10,
       time: "19:00",
       category: "Dinner Anchor",
       title: "Amber Restaurant",
       image: "assets/hero.png",
+      lat: -3.3764860,
+      lng: 36.7032019,
+      localTip: "Request their Chicken Makhanwala paired with hot clay-oven garlic naan bread.",
       swahiliPhrase: "Swahili-Indian Fusion (Swahili dinner anchor)",
       shortDesc: "Close out your incredible 9-hour Arusha street safari by dining at Amber, a stunning restaurant celebrated for its fresh Swahili-Indian dishes, clay-oven naans, and Chicken Makhanwala.",
       fullDesc: "Amber Restaurant is the crown jewel of Arusha's Swahili-Indian culinary fusion scene. Meticulously blending rich Indian tandoori spices with traditional Swahili coconut milk bases, Amber offers an explosion of flavors in a cozy, premium-lit interior layout. Request their signature Chicken Makhanwala paired with hot, clay-oven garlic naan bread to close out your incredible 9-hour Arusha city loop.",
       safetyTips: "Make a dinner table reservation via the app before arriving. Security is tight here—private secure parking is provided for your salon driver.",
       swahiliLesson: "Dining & Gratitude Dialogues:\n- 'Chakula kilikuwa kitamu sana, asante sana!' (The dinner was very delicious, thank you very much!)\n- 'Tafadhali leta bili.' (Please bring the bill.)\n- 'Tutaonana tena badaye.' (We will see you again later.)\n- 'Mungu akubariki!' (God bless you!)",
       audioGuide: "arusha_dinner_narration.mp3"
+    }
+  ];
+
+  // Alternative / Detour Locations Database (Column 2 only — no full overlay pages)
+  const ALTERNATIVE_LOCATIONS = [
+    // --- Fifi's Café alternatives ---
+    {
+      altId: '1a',
+      parentIndex: 0,
+      title: "Kitamu Coffee",
+      image: "assets/hero.png",
+      lat: -3.370835,
+      lng: 36.693797,
+      localTip: "Try their signature spiced chai latte — it's brewed with fresh Tanzanian ginger and cardamom.",
+      swahiliPhrase: "Kahawa tamu (Sweet coffee)",
+      shortDesc: "A cozy specialty coffee house tucked behind the Clock Tower roundabout. Kitamu sources single-origin beans from smallholder farms on Mount Meru and roasts them in-house daily. Perfect for a quieter morning alternative to the bustling Fifi's."
+    },
+    {
+      altId: '1b',
+      parentIndex: 0,
+      title: "Coffee Culture",
+      image: "assets/hero.png",
+      lat: -3.3719259221558495,
+      lng: 36.694397155849444,
+      localTip: "Grab a window seat overlooking the street for excellent people-watching and photography.",
+      swahiliPhrase: "Utamaduni wa kahawa (Coffee culture)",
+      shortDesc: "A modern, Instagram-friendly café with industrial-chic interiors and excellent cold-brew options. Coffee Culture caters to digital nomads with fast Wi-Fi, global power outlets, and a quiet upstairs loft workspace."
+    },
+    // --- Maasai Market alternatives ---
+    {
+      altId: '4a',
+      parentIndex: 3,
+      title: "Bounce Warehouse",
+      image: "assets/hero.png",
+      lat: -3.383785,
+      lng: 36.683923,
+      localTip: "Book the 1-hour freestyle session — it includes access to the foam pit and climbing wall.",
+      swahiliPhrase: "Kuruka na kucheza (Jump and play)",
+      shortDesc: "Arusha's only indoor trampoline and adventure park. Bounce Warehouse offers high-energy fun with wall-to-wall trampolines, ninja obstacle courses, and a dedicated toddler zone. A brilliant detour for families or anyone craving an adrenaline break."
+    },
+    // --- Coffee Lodge alternatives ---
+    {
+      altId: '6a',
+      parentIndex: 6,
+      title: "Sable Square",
+      image: "assets/hero.png",
+      lat: -3.360309,
+      lng: 36.609154,
+      localTip: "Visit the rooftop terrace for panoramic views of the Arusha-Dodoma highway corridor.",
+      swahiliPhrase: "Soko la kisasa (Modern marketplace)",
+      shortDesc: "A sleek modern commercial plaza on the western bypass featuring artisan food stalls, boutique shops, and a landscaped courtyard with shaded seating. Ideal for a relaxed lunch stop with contemporary Tanzanian cuisine."
+    },
+    {
+      altId: '6b',
+      parentIndex: 6,
+      title: "Endurance Estate",
+      image: "assets/hero.png",
+      lat: -3.354186,
+      lng: 36.615962,
+      localTip: "Ask about their guided nature walk through the adjacent acacia woodland — it's complimentary for diners.",
+      swahiliPhrase: "Kambi ya msingi (Base camp)",
+      shortDesc: "An adventure-themed restaurant and lodge set within the Endurance Estate on the outskirts of Arusha. Surrounded by indigenous gardens and acacia trees, Basecamp serves hearty safari-style meals and craft beers in a rustic outdoor setting."
+    },
+    {
+      altId: '6c',
+      parentIndex: 6,
+      title: "Blue Heron (Schwari)",
+      image: "assets/hero.png",
+      lat: -3.386010,
+      lng: 36.613022,
+      localTip: "Order the Swahili fish curry — it's the chef's signature dish made with fresh Lake Victoria tilapia.",
+      swahiliPhrase: "Ndege wa maji (Water bird)",
+      shortDesc: "A tranquil waterside restaurant in the Schwari neighbourhood known for its fresh seafood, lush garden seating, and live weekend jazz performances. Blue Heron blends Swahili coastal flavors with a modern fine-dining presentation."
+    },
+    {
+      altId: '6d',
+      parentIndex: 6,
+      title: "Tumbili Lodge Restaurant",
+      image: "assets/hero.png",
+      lat: -3.392684,
+      lng: 36.627238,
+      localTip: "Dine under the giant fig tree canopy — the monkeys (tumbili) often swing by during lunch!",
+      swahiliPhrase: "Nyumba ya tumbili (House of monkeys)",
+      shortDesc: "Nestled within a private wildlife conservancy, Tumbili Lodge offers an immersive bush dining experience. Watch colobus monkeys play in the canopy overhead while enjoying wood-fired pizzas and fresh tropical juice blends."
+    },
+    // --- Canvas & Clay alternatives ---
+    {
+      altId: '7a',
+      parentIndex: 8,
+      title: "Village Supermarket",
+      image: "assets/hero.png",
+      lat: -3.392783,
+      lng: 36.704375,
+      localTip: "Stock up on Tanzanian chocolate bars (Kokoa Kamili) — they make excellent souvenirs.",
+      swahiliPhrase: "Duka kuu la kijiji (Village supermarket)",
+      shortDesc: "Njiro's largest modern grocery store, stocked with imported goods, local organic produce, and a well-curated deli counter. Perfect for picking up snacks, bottled water, and local treats before continuing your safari."
+    },
+    {
+      altId: '7b',
+      parentIndex: 8,
+      title: "Beer Garden",
+      image: "assets/hero.png",
+      lat: -3.3872896,
+      lng: 36.7015253,
+      localTip: "Try a cold Safari Lager or Kilimanjaro Premium — both are brewed locally in Arusha.",
+      swahiliPhrase: "Bustani ya bia (Beer garden)",
+      shortDesc: "A relaxed open-air pub in the heart of Njiro with cold local brews on tap, a charcoal nyama choma grill, and big-screen sports. The Beer Garden is where locals unwind after work — a great spot to mix with Arusha residents."
+    },
+    // --- Amber Restaurant alternatives ---
+    {
+      altId: '9a',
+      parentIndex: 10,
+      title: "Georges Tavern & Pub",
+      image: "assets/hero.png",
+      lat: -3.3717635,
+      lng: 36.7025014,
+      localTip: "Arrive before 19:00 to grab one of the outdoor terrace tables with fairy-light canopy views.",
+      swahiliPhrase: "Tavern ya George (George's tavern)",
+      shortDesc: "A lively neighbourhood pub near Njiro with a strong cocktail menu, wood-fired bar snacks, and a covered terrace. Georges is known for its vibrant Friday evening atmosphere and live acoustic music sessions."
+    },
+    {
+      altId: '9b',
+      parentIndex: 10,
+      title: "Peace Chinese Restaurant",
+      image: "assets/hero.png",
+      lat: -3.366377,
+      lng: 36.702023,
+      localTip: "The Szechuan mapo tofu and hand-pulled noodles are outstanding — request extra chili oil.",
+      swahiliPhrase: "Chakula cha Kichina (Chinese cuisine)",
+      shortDesc: "Arusha's top-rated Chinese restaurant offering authentic Szechuan and Cantonese dishes. Peace Chinese is a local favourite for its generous portions, fresh handmade noodles, and cozy red-lantern interior ambiance."
+    },
+    {
+      altId: '9c',
+      parentIndex: 10,
+      title: "Kibila Restaurant",
+      image: "assets/hero.png",
+      lat: -3.376795,
+      lng: 36.700784,
+      localTip: "Try the Kibila Special Platter — a shared feast of grilled meats, pilau rice, and kachumbari salad.",
+      swahiliPhrase: "Chakula cha jadi (Traditional cuisine)",
+      shortDesc: "An authentic Tanzanian grill house specializing in slow-roasted nyama choma, fragrant pilau rice, and fresh kachumbari. Kibila is a no-frills local gem with massive portions and incredibly warm hospitality."
     }
   ];
 
@@ -180,6 +380,71 @@ const RouteEngine = (() => {
     document.body.style.overflow = 'hidden';
   };
 
+  let activeStopIndex = null;
+  let activeAltId = null;
+
+  // Helper to clear continuous pulsing animations from all markers
+  const clearAllMarkerPulses = () => {
+    ARUSHA_LOOP_PAYLOAD.forEach(node => {
+      if (node.marker) {
+        const el = node.marker.getElement();
+        if (el) el.classList.remove('pulse-active');
+      }
+    });
+    ALTERNATIVE_LOCATIONS.forEach(alt => {
+      if (alt.marker) {
+        const el = alt.marker.getElement();
+        if (el) el.classList.remove('pulse-active');
+      }
+    });
+  };
+
+  // Re-apply pulse-active class to the active marker DOM element (maintains state across Leaflet view redraws)
+  const refreshMarkerStates = () => {
+    const runRefresh = () => {
+      clearAllMarkerPulses();
+
+      if (activeStopIndex !== null) {
+        const node = ARUSHA_LOOP_PAYLOAD.find(n => n.index === activeStopIndex);
+        if (node && node.marker) {
+          const el = node.marker.getElement();
+          if (el) el.classList.add('pulse-active');
+        }
+      } else if (activeAltId !== null) {
+        const alt = ALTERNATIVE_LOCATIONS.find(a => a.altId === activeAltId);
+        if (alt && alt.marker) {
+          const el = alt.marker.getElement();
+          if (el) el.classList.add('pulse-active');
+        }
+      }
+    };
+
+    runRefresh();
+    // Safety fallback timeouts to handle Leaflet's asynchronous DOM rendering and transitions
+    setTimeout(runRefresh, 50);
+    setTimeout(runRefresh, 150);
+    setTimeout(runRefresh, 300);
+    setTimeout(runRefresh, 600);
+  };
+
+  // Helper to clear active styles from all navigation elements and stop all marker pulses
+  const clearActiveNav = () => {
+    document.querySelectorAll('.sidebar-link').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.sidebar-sub-link').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.sidebar-alt-link').forEach(btn => btn.classList.remove('active'));
+    
+    // Auto-hide any active full detail overlays to transition seamlessly between tabs
+    const overlay = document.getElementById('detail-overlay');
+    if (overlay) {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    activeStopIndex = null;
+    activeAltId = null;
+    refreshMarkerStates();
+  };
+
   // Render locations sub-menu detail card in Column 2
   const showLocationDetails = (index) => {
     expandDetailsPane();
@@ -187,6 +452,16 @@ const RouteEngine = (() => {
 
     const node = ARUSHA_LOOP_PAYLOAD[index];
     if (!node) return;
+
+    // Smoothly pan and zoom Leaflet map to selected location (Dynamic Design Vibe)
+    if (map && node.lat && node.lng) {
+      map.setView([node.lat, node.lng], 15);
+    }
+
+    // Set active pulsing animation
+    activeStopIndex = node.index;
+    activeAltId = null;
+    refreshMarkerStates();
 
     const detailsTitle = document.getElementById('details-pane-title');
     const detailsSubtitle = document.getElementById('details-pane-subtitle');
@@ -332,6 +607,69 @@ const RouteEngine = (() => {
     });
 
     detailsBody.appendChild(btn);
+  };
+
+  // Render alternative location details in Column 2 (no Read More button)
+  const showAlternativeDetails = (altId) => {
+    const alt = ALTERNATIVE_LOCATIONS.find(a => a.altId === altId);
+    if (!alt) return;
+
+    expandDetailsPane();
+    triggerSlideInAnimation();
+
+    // Pan map to the alternative location
+    if (map && alt.lat && alt.lng) {
+      map.setView([alt.lat, alt.lng], 16);
+    }
+
+    // Set active pulsing animation
+    activeStopIndex = null;
+    activeAltId = alt.altId;
+    refreshMarkerStates();
+
+    const detailsTitle = document.getElementById('details-pane-title');
+    const detailsSubtitle = document.getElementById('details-pane-subtitle');
+    const detailsBody = document.getElementById('details-pane-body');
+
+    if (!detailsTitle || !detailsSubtitle || !detailsBody) return;
+
+    detailsTitle.textContent = alt.title;
+    detailsSubtitle.textContent = `Detour Option | Alternative Stop`;
+
+    detailsBody.innerHTML = '';
+
+    // 1. Banner Image
+    const img = document.createElement('img');
+    img.src = alt.image;
+    img.className = 'w-full h-32 object-cover rounded-xl border border-stone-200';
+    img.alt = alt.title;
+    detailsBody.appendChild(img);
+
+    // 2. Swahili Phrase badge
+    const lingoBadge = document.createElement('div');
+    lingoBadge.className = 'badge-gold text-[10px] py-1.5 px-3 rounded-lg flex items-center gap-1.5 font-bold tracking-wider';
+    lingoBadge.innerHTML = `\uD83D\uDDE3\uFE0F <span class="truncate">${alt.swahiliPhrase}</span>`;
+    detailsBody.appendChild(lingoBadge);
+
+    // 3. Short description
+    const desc = document.createElement('p');
+    desc.className = 'text-xs text-stone-600 font-semibold leading-relaxed';
+    desc.textContent = alt.shortDesc;
+    detailsBody.appendChild(desc);
+
+    // 4. Local Tip card
+    const tipCard = document.createElement('div');
+    tipCard.className = 'bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-800 flex gap-2 items-start';
+    tipCard.innerHTML = `<span>\uD83D\uDCA1</span><div><p class="font-extrabold uppercase text-[10px] tracking-widest text-amber-600 mb-0.5">Local Tip</p><p class="font-medium">${alt.localTip}</p></div>`;
+    detailsBody.appendChild(tipCard);
+
+    // 5. Get Directions link (no Read More button)
+    const dirLink = document.createElement('a');
+    dirLink.href = `https://www.google.com/maps/dir/?api=1&destination=${alt.lat},${alt.lng}`;
+    dirLink.target = '_blank';
+    dirLink.className = 'w-full py-3 btn-jungle text-xs uppercase tracking-widest font-black shadow-md mt-auto text-center block';
+    dirLink.textContent = 'Get Directions \uD83D\uDE97';
+    detailsBody.appendChild(dirLink);
   };
 
   // Helper to compile full Route 1 Overview contents (Requirement 3)
@@ -632,6 +970,435 @@ const RouteEngine = (() => {
     });
   };
 
+  // Leaflet Map instance variables
+  let map = null;
+  const premiumMarkersList = [];
+  let routePolylineGroup = null;
+
+  const initLeafletMap = () => {
+    // Prevent double initialization errors on single-page sessions
+    if (map) return;
+
+    // 1. Center on Arusha Clock Tower Coordinates at optimized street zoom 14
+    map = L.map('map', {
+      zoomControl: false // Deactivate default zoom to prevent overlapping the top-left hamburger button!
+    }).setView([-3.3719, 36.6944], 14);
+
+    // Add zoom controls to the bottom right for professional UI balance (Requirement 2 & 6)
+    L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+    // 2. OpenStreetMap lightweight tiles configured to save mobile footprints
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors',
+      updateWhenIdle: true, // Prevents background data pre-fetching inside active transits!
+      updateWhenZooming: false
+    }).addTo(map);
+
+    // 3. Define user-generated pin icon
+    const userIcon = L.divIcon({
+      html: `
+        <div class="flex items-center justify-center w-8 h-8 rounded-full bg-amber-500 border-2 border-emerald-950 shadow-lg text-white font-bold text-xs">
+          ⭐
+        </div>
+      `,
+      className: 'custom-leaflet-icon-user',
+      iconSize: [32, 32],
+      iconAnchor: [16, 32],
+      popupAnchor: [0, -32]
+    });
+
+    // 4. Plot premium loop itineraries (skipping pure transit connections)
+    let stopCounter = 0; // Tracks chronological step number for visible stops
+    ARUSHA_LOOP_PAYLOAD.forEach((node) => {
+      if (node.category === "Transit Core" || node.category === "Logistics Pivot") {
+        return; // Exclude highway transits from pin droplets
+      }
+
+      if (!node.lat || !node.lng) return;
+
+      stopCounter++;
+
+      // Build a dynamic numbered badge icon per stop (Increased size to 120x65, anchor center of 36px circle)
+      const stopIcon = L.divIcon({
+        html: `
+          <div class="mizizi-marker-inner">
+            <div class="mizizi-marker-number">${stopCounter}</div>
+            <div class="mizizi-marker-label">${node.title}</div>
+          </div>
+        `,
+        className: 'mizizi-marker-badge',
+        iconSize: [120, 65],
+        iconAnchor: [60, 18],
+        popupAnchor: [0, -18]
+      });
+
+      const marker = L.marker([node.lat, node.lng], { icon: stopIcon }).addTo(map);
+      premiumMarkersList.push(marker);
+      node.marker = marker; // Reference for pulsing behavior
+
+      marker.on('click', () => {
+        // Clear active styling from all nav elements, then highlight this stop in sidebar
+        clearActiveNav();
+        
+        // Find corresponding sidebar link and mark it active
+        const link = document.querySelector(`.sidebar-sub-link[data-index="${node.index}"]`);
+        if (link) {
+          link.classList.add('active');
+        }
+        const locationsToggle = document.getElementById('nav-locations-toggle');
+        if (locationsToggle) locationsToggle.classList.add('active');
+
+        // Show details in Column 2 (which handles panning and pulsing!)
+        showLocationDetails(node.index);
+      });
+
+      const popupHtml = `
+        <div class="space-y-2.5 max-w-[250px]">
+          <h3 class="font-black text-emerald-900 text-sm tracking-tight leading-tight">${node.title}</h3>
+          <span class="inline-block text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-stone-100 border text-stone-500 uppercase tracking-wider">${node.category}</span>
+          
+          <div class="bg-amber-50 border border-amber-200 rounded-lg p-2 text-[10px] text-amber-800 leading-normal">
+            <strong>💡 Quick Tip:</strong> ${node.localTip || node.shortDesc}
+          </div>
+
+          <!-- On-Demand Custom Audio Player -->
+          <div class="bg-emerald-950 text-white rounded-xl p-2.5 flex items-center justify-between gap-3 shadow-sm">
+            <div class="space-y-0.5 min-w-0 flex-grow">
+              <p class="text-[9px] font-black tracking-widest text-amber-400 uppercase truncate">Audio Guide</p>
+              <p id="map-audio-status-${node.index}" class="text-[8px] text-emerald-300 font-semibold uppercase truncate">Ready</p>
+            </div>
+            <button id="map-audio-btn-${node.index}" class="p-2 bg-amber-400 text-emerald-950 rounded-full font-black text-xs hover:bg-white transition-all flex-shrink-0 flex items-center justify-center shadow">
+              <svg id="map-audio-icon-${node.index}" class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </button>
+          </div>
+
+          <a href="https://www.google.com/maps/dir/?api=1&destination=${node.lat},${node.lng}" target="_blank" class="w-full py-2 bg-emerald-900 hover:bg-emerald-950 text-white font-extrabold rounded-lg text-[10px] uppercase tracking-widest text-center flex items-center justify-center gap-1 shadow-sm transition-colors">
+            Get Directions 🚗
+          </a>
+        </div>
+      `;
+
+      marker.bindPopup(popupHtml);
+
+      // Listen for popup opening to bind audio element and click controls dynamically!
+      marker.on('popupopen', () => {
+        const playBtn = document.getElementById(`map-audio-btn-${node.index}`);
+        const playIcon = document.getElementById(`map-audio-icon-${node.index}`);
+        const statusText = document.getElementById(`map-audio-status-${node.index}`);
+
+        if (!playBtn) return;
+
+        // Initialize on-demand HTML5 audio object strictly with no preloading!
+        if (!node.audioElement) {
+          node.audioElement = new Audio(`assets/${node.audioGuide}`);
+          node.audioElement.preload = "none";
+          node.audioElement.addEventListener('ended', () => {
+            node.isPlaying = false;
+            if (playIcon) playIcon.innerHTML = `<path d="M8 5v14l11-7z"/>`;
+            if (statusText) statusText.textContent = "Finished";
+          });
+        }
+
+        // Maintain visual state matches
+        if (node.isPlaying) {
+          playIcon.innerHTML = `<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>`;
+          statusText.textContent = "Playing... 🎧";
+          statusText.style.color = '#34D399';
+        }
+
+        playBtn.addEventListener('click', () => {
+          // Deactivate any other active voiceover guides to keep sound clean
+          ARUSHA_LOOP_PAYLOAD.forEach(otherNode => {
+            if (otherNode.index !== node.index && otherNode.audioElement && !otherNode.audioElement.paused) {
+              otherNode.audioElement.pause();
+              otherNode.isPlaying = false;
+              const otherIcon = document.getElementById(`map-audio-icon-${otherNode.index}`);
+              const otherStatus = document.getElementById(`map-audio-status-${otherNode.index}`);
+              if (otherIcon) otherIcon.innerHTML = `<path d="M8 5v14l11-7z"/>`;
+              if (otherStatus) {
+                otherStatus.textContent = "Ready";
+                otherStatus.style.color = '#AEF3D6';
+              }
+            }
+          });
+
+          node.isPlaying = !node.isPlaying;
+          if (node.isPlaying) {
+            node.audioElement.play().catch(err => console.warn("Audio stream blocked: ", err));
+            playIcon.innerHTML = `<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>`;
+            statusText.textContent = "Playing... 🎧";
+            statusText.style.color = '#34D399';
+          } else {
+            node.audioElement.pause();
+            playIcon.innerHTML = `<path d="M8 5v14l11-7z"/>`;
+            statusText.textContent = "Paused";
+            statusText.style.color = '#AEF3D6';
+          }
+        });
+      });
+
+      // Stop audio playback when marker popup closes to save battery and system resources
+      marker.on('popupclose', () => {
+        if (node.audioElement && node.isPlaying) {
+          node.audioElement.pause();
+          node.isPlaying = false;
+        }
+      });
+    });
+
+    // 5. Adventure Trail — Polyline Route Connector Lines
+    // Sequential coordinates following the day's circular itinerary
+    const routeCoords = [
+      [-3.3733340, 36.6930866], // Fifi's Café (Start)
+      [-3.3723398, 36.6944861], // Clock Tower
+      [-3.3712749, 36.6945194], // Tanzanite Experience
+      [-3.3758457, 36.6923590], // Maasai Market
+      [-3.3769058, 36.6581811], // Cultural Heritage Centre
+      [-3.3745016, 36.6439397], // Arusha Coffee Lodge
+      [-3.3980875, 36.7047969], // Canvas & Clay (Njiro)
+      [-3.3706290, 36.7066330], // Gran Melia
+      [-3.3764860, 36.7032019], // Amber Restaurant
+      [-3.3733340, 36.6930866]  // ← Close loop back to Fifi's Café
+    ];
+
+    // Baby pastel palette — one distinct color per route segment (all 10 colors used)
+    const segmentColors = [
+      '#ffb3ba', // Fifi's → Clock Tower (Blush Pink)
+      '#ffdfba', // Clock Tower → Tanzanite (Peach Cream)
+      '#ffffba', // Tanzanite → Maasai Market (Lemon Chiffon)
+      '#baffc9', // Maasai Market → Cultural Heritage (Mint Green)
+      '#bae1ff', // Cultural Heritage → Coffee Lodge (Baby Blue)
+      '#a8e6cf', // Coffee Lodge → Canvas & Clay (Seafoam)
+      '#dcedc1', // Canvas & Clay → Gran Melia (Pistachio)
+      '#ffd3b6', // Gran Melia → Amber (Apricot)
+      '#ffaaa5', // Amber → Fifi's return (Salmon)
+      '#ff8b94'  // Reserve segment (Rose)
+    ];
+
+    // Soft shadow line underneath for subtle depth on the pastel trails
+    const shadowLine = L.polyline(routeCoords, {
+      color: '#c0b8a8',
+      weight: 10,
+      opacity: 0.35,
+      lineCap: 'round',
+      lineJoin: 'round'
+    }).addTo(map);
+
+    // Draw individual gradient-colored dashed segments — boosted weight & opacity for visibility
+    const segmentLayers = [];
+    for (let i = 0; i < routeCoords.length - 1; i++) {
+      const segment = L.polyline(
+        [routeCoords[i], routeCoords[i + 1]],
+        {
+          color: segmentColors[i],
+          weight: 5,
+          opacity: 1.0,
+          dashArray: '12, 8',
+          lineCap: 'round',
+          lineJoin: 'round'
+        }
+      ).addTo(map);
+      segmentLayers.push(segment);
+    }
+
+    // Bundle all trail layers and auto-zoom to fit the complete loop
+    routePolylineGroup = L.featureGroup([shadowLine, ...segmentLayers]);
+    map.fitBounds(routePolylineGroup.getBounds().pad(0.06));
+
+    // 7. User-Generated Pin Dropping Mechanism
+    let activeClickCoords = null;
+
+    map.on('click', (e) => {
+      const modal = document.getElementById('custom-pin-modal');
+      const input = document.getElementById('custom-pin-note');
+      
+      if (!modal || !input) return;
+
+      activeClickCoords = e.latlng;
+      input.value = '';
+      modal.classList.add('active');
+    });
+
+    // Bind custom pin dialog modal anchors
+    const cancelBtn = document.getElementById('custom-pin-cancel-btn');
+    const saveBtn = document.getElementById('custom-pin-save-btn');
+    const modal = document.getElementById('custom-pin-modal');
+    const input = document.getElementById('custom-pin-note');
+
+    if (cancelBtn && modal) {
+      cancelBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+        activeClickCoords = null;
+      });
+    }
+
+    if (saveBtn && modal && input) {
+      saveBtn.addEventListener('click', () => {
+        const note = input.value.trim();
+        if (!note || !activeClickCoords) {
+          alert("Please enter a short note before saving your pin!");
+          return;
+        }
+
+        // Plot custom traveler pin on the map viewport
+        plotCustomUserPin(activeClickCoords.lat, activeClickCoords.lng, note);
+
+        // Serialize and store note within browser session persistence layers
+        saveUserPinToStorage(activeClickCoords.lat, activeClickCoords.lng, note);
+
+        // Terminate active modal view state
+        modal.classList.remove('active');
+        activeClickCoords = null;
+      });
+    }
+
+    // Helper to draw user pins
+    const plotCustomUserPin = (lat, lng, note) => {
+      const pin = L.marker([lat, lng], { icon: userIcon }).addTo(map);
+
+      // Create popup container DOM element to attach direct event listeners
+      const container = document.getElementById('details-pane-body') ? document.createElement('div') : null;
+      const el = container || document.createElement('div');
+      el.className = 'space-y-1.5 max-w-[220px]';
+
+      // Header
+      const header = document.createElement('h3');
+      header.className = 'font-extrabold text-amber-600 text-xs uppercase tracking-wider';
+      header.textContent = '⭐ Traveler Finding';
+      el.appendChild(header);
+
+      // Note text
+      const noteEl = document.createElement('p');
+      noteEl.className = 'text-xs font-semibold text-slate-800 leading-relaxed';
+      noteEl.textContent = note;
+      el.appendChild(noteEl);
+
+      // Coordinates
+      const coords = document.createElement('p');
+      coords.className = 'text-[8px] text-stone-400 font-medium italic mt-1';
+      coords.textContent = `Coordinates: ${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+      el.appendChild(coords);
+
+      // Get Directions Button
+      const dirLink = document.createElement('a');
+      dirLink.href = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+      dirLink.target = '_blank';
+      dirLink.className = 'w-full py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold rounded-lg text-[9px] uppercase tracking-wider text-center flex items-center justify-center gap-1 shadow-sm mt-2 transition-colors block';
+      dirLink.textContent = 'Get Directions 🚗';
+      el.appendChild(dirLink);
+
+      // Delete Button
+      const deleteBtn = document.createElement('button');
+      deleteBtn.className = 'w-full py-1.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg text-[9px] uppercase tracking-wider text-center flex items-center justify-center gap-1 shadow-sm mt-1 transition-colors';
+      deleteBtn.textContent = 'Delete Finding 🗑️';
+      deleteBtn.addEventListener('click', () => {
+        if (confirm("Are you sure you want to delete this Traveler Finding?")) {
+          pin.closePopup();
+          map.removeLayer(pin);
+          const saved = JSON.parse(localStorage.getItem('mizizi_user_pins') || '[]');
+          const updated = saved.filter(p => !(Math.abs(p.lat - lat) < 1e-9 && Math.abs(p.lng - lng) < 1e-9));
+          localStorage.setItem('mizizi_user_pins', JSON.stringify(updated));
+        }
+      });
+      el.appendChild(deleteBtn);
+
+      pin.bindPopup(el);
+      return pin;
+    };
+
+    // Helper to serialize & push custom pins into localStorage
+    const saveUserPinToStorage = (lat, lng, note) => {
+      const saved = JSON.parse(localStorage.getItem('mizizi_user_pins') || '[]');
+      saved.push({ lat, lng, note });
+      localStorage.setItem('mizizi_user_pins', JSON.stringify(saved));
+    };
+
+    // Boot function scanning localStorage to redraw saved pins
+    const loadStoredUserPins = () => {
+      const saved = JSON.parse(localStorage.getItem('mizizi_user_pins') || '[]');
+      saved.forEach(pin => {
+        plotCustomUserPin(pin.lat, pin.lng, pin.note);
+      });
+    };
+
+    loadStoredUserPins();
+
+    // 7. Plot Alternative / Detour Location Markers (distinct Ochre icons, no polylines)
+    ALTERNATIVE_LOCATIONS.forEach((alt) => {
+      if (!alt.lat || !alt.lng) return;
+
+      const altIcon = L.divIcon({
+        html: `
+          <div class="mizizi-alt-marker-inner">
+            <div class="mizizi-alt-marker-number">${alt.altId}</div>
+            <div class="mizizi-alt-marker-label">${alt.title}</div>
+          </div>
+        `,
+        className: 'mizizi-alt-marker-badge',
+        iconSize: [100, 50],
+        iconAnchor: [50, 13],
+        popupAnchor: [0, -13]
+      });
+
+      const marker = L.marker([alt.lat, alt.lng], { icon: altIcon }).addTo(map);
+      alt.marker = marker; // Reference for pulsing behavior
+
+      marker.on('click', () => {
+        // Clear active styling from all nav elements
+        clearActiveNav();
+        document.querySelectorAll('.sidebar-alt-link').forEach(l => l.classList.remove('active'));
+
+        // Highlight in sidebar
+        const link = document.querySelector(`.sidebar-alt-link[data-alt-id="${alt.altId}"]`);
+        if (link) {
+          link.classList.add('active');
+          // Make sure parent collapsible menu is open!
+          const altMenu = link.closest('.sidebar-alt-menu');
+          if (altMenu) {
+            // Exclusivity: close all other collapsible menus and chevrons
+            document.querySelectorAll('.sidebar-alt-menu').forEach(menu => {
+              if (menu !== altMenu) menu.classList.remove('open');
+            });
+            document.querySelectorAll('.sub-link-chevron').forEach(chev => {
+              const toggleId = chev.getAttribute('data-alt-toggle');
+              if (toggleId !== altMenu.id) chev.classList.remove('open');
+            });
+
+            altMenu.classList.add('open');
+            const chevron = document.querySelector(`.sub-link-chevron[data-alt-toggle="${altMenu.id}"]`);
+            if (chevron) chevron.classList.add('open');
+          }
+        }
+        const locationsToggle = document.getElementById('nav-locations-toggle');
+        if (locationsToggle) locationsToggle.classList.add('active');
+
+        // Show details in Column 2 (which handles panning and pulsing!)
+        showAlternativeDetails(alt.altId);
+      });
+
+      marker.bindPopup(`
+        <div class="space-y-2 max-w-[230px]">
+          <h3 class="font-black text-amber-700 text-sm tracking-tight leading-tight">${alt.title}</h3>
+          <span class="inline-block text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-amber-50 border border-amber-200 text-amber-600 uppercase tracking-wider">Detour Option</span>
+          <div class="bg-stone-50 border border-stone-200 rounded-lg p-2 text-[10px] text-stone-600 leading-normal">
+            <strong>\uD83D\uDCA1 Tip:</strong> ${alt.localTip}
+          </div>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=${alt.lat},${alt.lng}" target="_blank" class="w-full py-2 bg-amber-500 hover:bg-amber-600 text-white font-extrabold rounded-lg text-[10px] uppercase tracking-widest text-center flex items-center justify-center gap-1 shadow-sm transition-colors">
+            Get Directions \uD83D\uDE97
+          </a>
+        </div>
+      `);
+    });
+
+    // Re-apply pulsing classes whenever Leaflet completes drawing or panning the map view
+    map.on('zoomend viewreset moveend popupopen', () => {
+      refreshMarkerStates();
+    });
+  };
+
   // Bind all interactive menu layout anchors
   const bindEvents = () => {
     const hamburgerBtn = document.getElementById('hamburger-btn');
@@ -653,6 +1420,10 @@ const RouteEngine = (() => {
         } else {
           iconOpen.classList.remove('hidden');
           iconClose.classList.add('hidden');
+
+          // Deactivate map click overlay when sidebar closes so the map becomes interactive
+          const overlay = document.getElementById('map-click-overlay');
+          if (overlay) overlay.classList.remove('active');
         }
       });
     }
@@ -677,18 +1448,7 @@ const RouteEngine = (() => {
       });
     }
 
-    // Remove active class styling from navigation buttons
-    const clearActiveNav = () => {
-      document.querySelectorAll('.sidebar-link').forEach(btn => btn.classList.remove('active'));
-      document.querySelectorAll('.sidebar-sub-link').forEach(btn => btn.classList.remove('active'));
-      
-      // Auto-hide any active full detail overlays to transition seamlessly between tabs
-      const overlay = document.getElementById('detail-overlay');
-      if (overlay) {
-        overlay.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-    };
+    // clearActiveNav now defined at module level to share with map clicks
 
     // HOME Navigation: Load Morning Brief / Overview
     const navHomeBtn = document.getElementById('nav-home-btn');
@@ -766,6 +1526,13 @@ const RouteEngine = (() => {
         // Hide the transparent click overlay (allowing direct interaction with background maps)
         if (mapClickOverlay) {
           mapClickOverlay.classList.remove('active');
+        }
+
+        // Smooth autozoom to fit the entire adventure trail loop into the viewport
+        if (map && routePolylineGroup) {
+          map.fitBounds(routePolylineGroup.getBounds().pad(0.06));
+        } else if (map) {
+          map.setView([-3.3719, 36.6944], 14);
         }
       });
     }
@@ -912,6 +1679,70 @@ const RouteEngine = (() => {
         mapClickOverlay.classList.remove('active');
       });
     }
+
+    // Alternative Locations — Chevron toggle + alt-link click handlers
+    document.querySelectorAll('.sub-link-chevron').forEach((chevron) => {
+      chevron.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const targetId = chevron.getAttribute('data-alt-toggle');
+        const altMenu = document.getElementById(targetId);
+        if (altMenu) {
+          const wasOpen = altMenu.classList.contains('open');
+
+          // Exclusivity: Close all other collapsible alt menus and chevrons
+          document.querySelectorAll('.sidebar-alt-menu').forEach(menu => {
+            if (menu.id !== targetId) menu.classList.remove('open');
+          });
+          document.querySelectorAll('.sub-link-chevron').forEach(chev => {
+            if (chev !== chevron) chev.classList.remove('open');
+          });
+
+          // Toggle the current menu
+          if (wasOpen) {
+            altMenu.classList.remove('open');
+            chevron.classList.remove('open');
+          } else {
+            altMenu.classList.add('open');
+            chevron.classList.add('open');
+          }
+        }
+      });
+    });
+
+    document.querySelectorAll('.sidebar-alt-link').forEach((link) => {
+      link.addEventListener('click', () => {
+        // Clear active styling from all nav elements
+        clearActiveNav();
+        document.querySelectorAll('.sidebar-alt-link').forEach(l => l.classList.remove('active'));
+        
+        // Mark this alt link and its parent Locations toggle active
+        link.classList.add('active');
+        locationsToggle.classList.add('active');
+
+        const altId = link.getAttribute('data-alt-id');
+        // Show details in Column 2 (which handles panning and pulsing!)
+        showAlternativeDetails(altId);
+      });
+    });
+
+    // Map Theme Toggle (Minimal Map Filter)
+    const themeBtn = document.getElementById('map-theme-toggle');
+    const mapEl = document.getElementById('map');
+    
+    if (themeBtn && mapEl) {
+      // Check localStorage for saved map theme preference
+      const isMinimal = localStorage.getItem('mizizi_minimal_map') === 'true';
+      if (isMinimal) {
+        mapEl.classList.add('minimal-map');
+        themeBtn.classList.add('active');
+      }
+
+      themeBtn.addEventListener('click', () => {
+        const active = mapEl.classList.toggle('minimal-map');
+        themeBtn.classList.toggle('active', active);
+        localStorage.setItem('mizizi_minimal_map', active);
+      });
+    }
   };
 
   return {
@@ -1000,6 +1831,9 @@ const RouteEngine = (() => {
 
         // Bind navigation hooks
         bindEvents();
+
+        // Initialize live Leaflet.js interactive maps
+        initLeafletMap();
       });
     }
   };
