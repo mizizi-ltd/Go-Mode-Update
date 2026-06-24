@@ -382,6 +382,7 @@ const RouteEngine = (() => {
 
   let activeStopIndex = null;
   let activeAltId = null;
+  let currentUserEmail = null;
 
   // Helper to clear continuous pulsing animations from all markers
   const clearAllMarkerPulses = () => {
@@ -1298,9 +1299,10 @@ const RouteEngine = (() => {
         if (confirm("Are you sure you want to delete this Traveler Finding?")) {
           pin.closePopup();
           map.removeLayer(pin);
-          const saved = JSON.parse(localStorage.getItem('mizizi_user_pins') || '[]');
+          const key = currentUserEmail ? `mizizi_user_pins_${currentUserEmail}` : 'mizizi_user_pins';
+          const saved = JSON.parse(localStorage.getItem(key) || '[]');
           const updated = saved.filter(p => !(Math.abs(p.lat - lat) < 1e-9 && Math.abs(p.lng - lng) < 1e-9));
-          localStorage.setItem('mizizi_user_pins', JSON.stringify(updated));
+          localStorage.setItem(key, JSON.stringify(updated));
         }
       });
       el.appendChild(deleteBtn);
@@ -1311,14 +1313,16 @@ const RouteEngine = (() => {
 
     // Helper to serialize & push custom pins into localStorage
     const saveUserPinToStorage = (lat, lng, note) => {
-      const saved = JSON.parse(localStorage.getItem('mizizi_user_pins') || '[]');
+      const key = currentUserEmail ? `mizizi_user_pins_${currentUserEmail}` : 'mizizi_user_pins';
+      const saved = JSON.parse(localStorage.getItem(key) || '[]');
       saved.push({ lat, lng, note });
-      localStorage.setItem('mizizi_user_pins', JSON.stringify(saved));
+      localStorage.setItem(key, JSON.stringify(saved));
     };
 
     // Boot function scanning localStorage to redraw saved pins
     const loadStoredUserPins = () => {
-      const saved = JSON.parse(localStorage.getItem('mizizi_user_pins') || '[]');
+      const key = currentUserEmail ? `mizizi_user_pins_${currentUserEmail}` : 'mizizi_user_pins';
+      const saved = JSON.parse(localStorage.getItem(key) || '[]');
       saved.forEach(pin => {
         plotCustomUserPin(pin.lat, pin.lng, pin.note);
       });
@@ -1751,9 +1755,12 @@ const RouteEngine = (() => {
       // Check auth observer
       FirebaseSim.onAuthStateChanged(async (user) => {
         if (!user) {
+          currentUserEmail = null;
           // Redirect handled securely by auth.js
           return;
         }
+
+        currentUserEmail = user.email;
 
         // Paid status authorization gating check
         if (user.hasPaid !== true) {
