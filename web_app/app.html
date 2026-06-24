@@ -321,6 +321,48 @@
     </div>
   </div>
 
+  <!-- 5. Persistent Global Audio Player Bar (Fixed Bottom — Hidden by Default) -->
+  <div id="global-audio-player" class="global-audio-player">
+    <!-- Progress Bar (clickable/seekable, sits at the very top edge of the bar) -->
+    <div id="audio-progress-track" class="audio-progress-track">
+      <div id="audio-progress-fill" class="audio-progress-fill"></div>
+    </div>
+
+    <div class="audio-player-inner">
+      <!-- Track Info (left side) -->
+      <div class="audio-player-info">
+        <p id="audio-player-title" class="audio-player-title">Loading track...</p>
+        <p id="audio-player-meta" class="audio-player-meta">
+          <span id="audio-player-time">0:00</span>
+          <span class="audio-meta-dot">·</span>
+          <span id="audio-player-duration">0:00</span>
+          <span class="audio-meta-dot">·</span>
+          <span id="audio-player-status">Ready</span>
+        </p>
+      </div>
+
+      <!-- Transport Controls (right side) -->
+      <div class="audio-player-controls">
+        <!-- Speed Toggle -->
+        <button id="audio-speed-btn" class="audio-ctrl-btn audio-speed-btn" title="Playback Speed">1x</button>
+
+        <!-- Play / Pause -->
+        <button id="audio-play-btn" class="audio-ctrl-btn audio-play-btn" title="Play / Pause">
+          <svg id="audio-play-icon" class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+
+        <!-- Stop & Close -->
+        <button id="audio-stop-btn" class="audio-ctrl-btn audio-stop-btn" title="Stop & Close">
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+            <path d="M6 6h12v12H6z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Leaflet JS Library -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 

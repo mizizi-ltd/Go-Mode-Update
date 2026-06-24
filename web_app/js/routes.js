@@ -380,6 +380,190 @@ const RouteEngine = (() => {
     document.body.style.overflow = 'hidden';
   };
 
+  // ============================================================
+  //  GlobalAudioPlayer — Persistent bottom-bar audio controller
+  // ============================================================
+  const GlobalAudioPlayer = (() => {
+    let audio = null;             // Single shared Audio object
+    let animFrame = null;         // requestAnimationFrame handle
+    let currentTrackSrc = null;   // Currently loaded source path
+    let speedIndex = 0;           // Index into SPEEDS array
+    const SPEEDS = [1, 1.5, 2];
+
+    // DOM references (lazy-cached on first use)
+    let els = null;
+    const getEls = () => {
+      if (els) return els;
+      els = {
+        bar:      document.getElementById('global-audio-player'),
+        title:    document.getElementById('audio-player-title'),
+        time:     document.getElementById('audio-player-time'),
+        duration: document.getElementById('audio-player-duration'),
+        status:   document.getElementById('audio-player-status'),
+        playBtn:  document.getElementById('audio-play-btn'),
+        playIcon: document.getElementById('audio-play-icon'),
+        stopBtn:  document.getElementById('audio-stop-btn'),
+        speedBtn: document.getElementById('audio-speed-btn'),
+        track:    document.getElementById('audio-progress-track'),
+        fill:     document.getElementById('audio-progress-fill'),
+      };
+      return els;
+    };
+
+    const fmtTime = (s) => {
+      if (!s || !isFinite(s)) return '0:00';
+      const m = Math.floor(s / 60);
+      const sec = Math.floor(s % 60);
+      return `${m}:${sec < 10 ? '0' : ''}${sec}`;
+    };
+
+    const tick = () => {
+      const e = getEls();
+      if (audio && !audio.paused) {
+        e.time.textContent = fmtTime(audio.currentTime);
+        e.duration.textContent = fmtTime(audio.duration);
+        const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+        e.fill.style.width = pct + '%';
+        animFrame = requestAnimationFrame(tick);
+      }
+    };
+
+    const setPlayIcon = () => {
+      getEls().playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+    };
+    const setPauseIcon = () => {
+      getEls().playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+    };
+
+    const show = () => {
+      const e = getEls();
+      e.bar.classList.remove('hiding');
+      e.bar.classList.add('visible');
+    };
+
+    const hide = () => {
+      const e = getEls();
+      e.bar.classList.remove('visible');
+      e.bar.classList.add('hiding');
+      setTimeout(() => e.bar.classList.remove('hiding'), 350);
+    };
+
+    // Public API
+    const load = (title, audioSrc) => {
+      const e = getEls();
+
+      // If same track, just toggle play/pause
+      if (currentTrackSrc === audioSrc && audio) {
+        if (audio.paused) { play(); } else { pause(); }
+        return;
+      }
+
+      // Stop previous if any
+      if (audio) {
+        audio.pause();
+        audio.removeAttribute('src');
+        cancelAnimationFrame(animFrame);
+      }
+
+      currentTrackSrc = audioSrc;
+      audio = new Audio(audioSrc);
+      audio.preload = 'auto';
+      audio.playbackRate = SPEEDS[speedIndex];
+
+      // Update UI
+      e.title.textContent = title;
+      e.status.textContent = 'Loading...';
+      e.fill.style.width = '0%';
+      e.time.textContent = '0:00';
+      e.duration.textContent = '0:00';
+      show();
+
+      // Events
+      audio.addEventListener('canplay', () => {
+        e.duration.textContent = fmtTime(audio.duration);
+        play();
+      }, { once: true });
+
+      audio.addEventListener('ended', () => {
+        setPlayIcon();
+        e.status.textContent = 'Finished';
+        cancelAnimationFrame(animFrame);
+      });
+
+      audio.addEventListener('error', () => {
+        e.status.textContent = 'Audio unavailable';
+        setPlayIcon();
+      });
+
+      audio.load();
+    };
+
+    const play = () => {
+      if (!audio) return;
+      audio.play().catch(() => {
+        getEls().status.textContent = 'Tap to play';
+      });
+      setPauseIcon();
+      getEls().status.textContent = 'Playing 🎧';
+      tick();
+    };
+
+    const pause = () => {
+      if (!audio) return;
+      audio.pause();
+      setPlayIcon();
+      getEls().status.textContent = 'Paused';
+      cancelAnimationFrame(animFrame);
+    };
+
+    const stop = () => {
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+        audio.removeAttribute('src');
+      }
+      currentTrackSrc = null;
+      cancelAnimationFrame(animFrame);
+      const e = getEls();
+      e.fill.style.width = '0%';
+      e.time.textContent = '0:00';
+      e.duration.textContent = '0:00';
+      e.status.textContent = 'Ready';
+      setPlayIcon();
+      hide();
+    };
+
+    const cycleSpeed = () => {
+      speedIndex = (speedIndex + 1) % SPEEDS.length;
+      const rate = SPEEDS[speedIndex];
+      if (audio) audio.playbackRate = rate;
+      getEls().speedBtn.textContent = rate + 'x';
+    };
+
+    const seek = (e) => {
+      if (!audio || !audio.duration) return;
+      const rect = getEls().track.getBoundingClientRect();
+      const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      audio.currentTime = ratio * audio.duration;
+      getEls().fill.style.width = (ratio * 100) + '%';
+    };
+
+    // Bind controls once DOM is ready
+    const init = () => {
+      const e = getEls();
+      if (!e.bar) return; // guard
+      e.playBtn.addEventListener('click', () => {
+        if (!audio) return;
+        audio.paused ? play() : pause();
+      });
+      e.stopBtn.addEventListener('click', stop);
+      e.speedBtn.addEventListener('click', cycleSpeed);
+      e.track.addEventListener('click', seek);
+    };
+
+    return { load, play, pause, stop, init };
+  })();
+
   let activeStopIndex = null;
   let activeAltId = null;
   let currentUserEmail = null;
@@ -551,59 +735,42 @@ const RouteEngine = (() => {
         swahiliEl.textContent = node.swahiliLesson;
         container.appendChild(swahiliEl);
 
-        // Cinematic Simulated Audio Guide Section
+        // Audio Guide — Load to Global Player
         const audioTitle = document.createElement('h4');
         audioTitle.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-3 border-b pb-2';
         audioTitle.textContent = "🎧 Atmospheric Audio Guide";
         container.appendChild(audioTitle);
 
-        // Simulated HTML5 Audio lingo player controls
-        const audioSim = document.createElement('div');
-        audioSim.className = 'bg-emerald-950 text-white rounded-2xl p-4 flex items-center justify-between gap-4 shadow-sm';
-        
+        const audioTrigger = document.createElement('div');
+        audioTrigger.className = 'bg-emerald-950 text-white rounded-2xl p-4 flex items-center justify-between gap-4 shadow-sm cursor-pointer hover:bg-emerald-900 transition-colors';
+
         const audioInfo = document.createElement('div');
         audioInfo.className = 'space-y-0.5';
-        
+
         const audioTrackName = document.createElement('p');
         audioTrackName.className = 'text-xs font-black tracking-wider text-ochre uppercase';
-        audioTrackName.textContent = "Arusha Local Narration Track";
-        
-        const audioStatus = document.createElement('p');
-        audioStatus.className = 'text-[10px] text-emerald-300 font-semibold';
-        audioStatus.id = `sim-audio-status-${node.index}`;
-        audioStatus.textContent = "Status: Connected (Ready to Play)";
+        audioTrackName.textContent = node.title + ' — Narration';
+
+        const audioHint = document.createElement('p');
+        audioHint.className = 'text-[10px] text-emerald-300 font-semibold';
+        audioHint.textContent = 'Tap to play in audio player ▸';
 
         audioInfo.appendChild(audioTrackName);
-        audioInfo.appendChild(audioStatus);
+        audioInfo.appendChild(audioHint);
 
         const playBtn = document.createElement('button');
-        playBtn.className = 'p-3 bg-ochre text-jungle rounded-full font-black text-xs hover:bg-white transition-colors flex items-center justify-center';
-        playBtn.innerHTML = `
-          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" id="sim-audio-icon-${node.index}">
-            <path d="M8 5v14l11-7z"/>
-          </svg>
-        `;
+        playBtn.className = 'p-3 bg-ochre text-jungle rounded-full font-black text-xs hover:bg-white transition-colors flex items-center justify-center flex-shrink-0';
+        playBtn.innerHTML = `<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
 
-        let isPlaying = false;
-        playBtn.addEventListener('click', () => {
-          isPlaying = !isPlaying;
-          const statusText = document.getElementById(`sim-audio-status-${node.index}`);
-          const playIcon = document.getElementById(`sim-audio-icon-${node.index}`);
-          
-          if (isPlaying) {
-            statusText.textContent = "Status: Streaming Narrator Audio... 🎧";
-            statusText.style.color = '#34D399'; // Lighter green
-            playIcon.innerHTML = `<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>`; // Pause symbol
-          } else {
-            statusText.textContent = "Status: Paused";
-            statusText.style.color = '#AEF3D6';
-            playIcon.innerHTML = `<path d="M8 5v14l11-7z"/>`; // Play symbol
-          }
-        });
+        const triggerPlay = () => {
+          GlobalAudioPlayer.load(`${node.title} — ${node.category}`, `assets/${node.audioGuide}`);
+        };
+        audioTrigger.addEventListener('click', triggerPlay);
+        playBtn.addEventListener('click', (e) => { e.stopPropagation(); triggerPlay(); });
 
-        audioSim.appendChild(audioInfo);
-        audioSim.appendChild(playBtn);
-        container.appendChild(audioSim);
+        audioTrigger.appendChild(audioInfo);
+        audioTrigger.appendChild(playBtn);
+        container.appendChild(audioTrigger);
       });
     });
 
@@ -844,57 +1011,54 @@ const RouteEngine = (() => {
       intro.textContent = "Kiswahili is the beautiful national language of Tanzania. While many tourism workers speak English, local Bajaj (Tuk-Tuk) drivers and street artists appreciate when you show respect by speaking Swahili. It breaks down walls immediately, brings big smiles, and ensures you get authentic local rates!";
       container.appendChild(intro);
 
-      // Waveform Audio Guide Simulator
+      // Swahili Audio Tracks — Load to Global Player
       const soundTitle = document.createElement('h4');
       soundTitle.className = 'text-sm font-black text-jungle uppercase tracking-widest mb-3 border-b pb-2';
-      soundTitle.textContent = "🎧 Swahili Audio Pronunciation Simulator";
+      soundTitle.textContent = "🎧 Swahili Audio Pronunciation Guide";
       container.appendChild(soundTitle);
 
       const audioSim = document.createElement('div');
-      audioSim.className = 'bg-emerald-950 text-white rounded-2xl p-4 mb-6 space-y-4 shadow-md';
-      
+      audioSim.className = 'bg-emerald-950 text-white rounded-2xl p-4 mb-6 space-y-3 shadow-md';
+
       const audioHead = document.createElement('div');
-      audioHead.className = 'flex justify-between items-center';
-      
+      audioHead.className = 'flex justify-between items-center mb-1';
+
       const audioLabel = document.createElement('span');
       audioLabel.className = 'text-xs font-black tracking-widest text-ochre uppercase';
-      audioLabel.textContent = "Kiswahili Street Lingo Guide";
+      audioLabel.textContent = "Kiswahili Street Lingo";
 
-      const playingStatus = document.createElement('span');
-      playingStatus.className = 'text-[9px] text-emerald-300 font-bold uppercase tracking-wider';
-      playingStatus.id = "survival-audio-status";
-      playingStatus.textContent = "Ready to Play";
+      const audioHint = document.createElement('span');
+      audioHint.className = 'text-[9px] text-emerald-300 font-bold uppercase tracking-wider';
+      audioHint.textContent = 'Tap track to play ▸';
 
       audioHead.appendChild(audioLabel);
-      audioHead.appendChild(playingStatus);
+      audioHead.appendChild(audioHint);
       audioSim.appendChild(audioHead);
 
-      // Mock audio tracks
+      // Audio lesson tracks
       const tracks = [
-        { title: "Essential Greetings Lesson", length: "1:45" },
-        { title: "Bargaining with Bajaj Drivers", length: "2:30" },
-        { title: "Ordering Dinner in Swahili", length: "1:20" }
+        { title: "Essential Greetings Lesson", file: "swahili_greetings.mp3", length: "1:45" },
+        { title: "Bargaining with Bajaj Drivers", file: "swahili_bargaining.mp3", length: "2:30" },
+        { title: "Ordering Dinner in Swahili", file: "swahili_dinner.mp3", length: "1:20" }
       ];
 
       const trackList = document.createElement('div');
       trackList.className = 'space-y-2';
 
-      tracks.forEach((track, tIndex) => {
+      tracks.forEach((track) => {
         const item = document.createElement('div');
         item.className = 'flex justify-between items-center py-2 px-3 bg-emerald-900 bg-opacity-40 rounded-xl text-xs hover:bg-emerald-900 transition-colors cursor-pointer';
-        
+
         const info = document.createElement('span');
         info.className = 'font-bold';
         info.textContent = `▶️ ${track.title}`;
-        
+
         const len = document.createElement('span');
         len.className = 'text-[10px] text-emerald-300 font-bold';
         len.textContent = track.length;
 
         item.addEventListener('click', () => {
-          const status = document.getElementById("survival-audio-status");
-          status.textContent = `Streaming: ${track.title} 🎧`;
-          status.style.color = '#34D399';
+          GlobalAudioPlayer.load(`Swahili — ${track.title}`, `assets/audio/${track.file}`);
         });
 
         item.appendChild(info);
@@ -1063,14 +1227,14 @@ const RouteEngine = (() => {
             <strong>💡 Quick Tip:</strong> ${node.localTip || node.shortDesc}
           </div>
 
-          <!-- On-Demand Custom Audio Player -->
-          <div class="bg-emerald-950 text-white rounded-xl p-2.5 flex items-center justify-between gap-3 shadow-sm">
+          <!-- Audio Guide — Load to Global Player -->
+          <div id="map-audio-trigger-${node.index}" class="bg-emerald-950 text-white rounded-xl p-2.5 flex items-center justify-between gap-3 shadow-sm cursor-pointer hover:bg-emerald-900 transition-colors">
             <div class="space-y-0.5 min-w-0 flex-grow">
               <p class="text-[9px] font-black tracking-widest text-amber-400 uppercase truncate">Audio Guide</p>
-              <p id="map-audio-status-${node.index}" class="text-[8px] text-emerald-300 font-semibold uppercase truncate">Ready</p>
+              <p class="text-[8px] text-emerald-300 font-semibold uppercase truncate">Tap to play ▸</p>
             </div>
-            <button id="map-audio-btn-${node.index}" class="p-2 bg-amber-400 text-emerald-950 rounded-full font-black text-xs hover:bg-white transition-all flex-shrink-0 flex items-center justify-center shadow">
-              <svg id="map-audio-icon-${node.index}" class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+            <button class="p-2 bg-amber-400 text-emerald-950 rounded-full font-black text-xs hover:bg-white transition-all flex-shrink-0 flex items-center justify-center shadow">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                 <path d="M8 5v14l11-7z"/>
               </svg>
             </button>
@@ -1084,70 +1248,17 @@ const RouteEngine = (() => {
 
       marker.bindPopup(popupHtml);
 
-      // Listen for popup opening to bind audio element and click controls dynamically!
+      // Listen for popup opening to bind the audio trigger to the global player
       marker.on('popupopen', () => {
-        const playBtn = document.getElementById(`map-audio-btn-${node.index}`);
-        const playIcon = document.getElementById(`map-audio-icon-${node.index}`);
-        const statusText = document.getElementById(`map-audio-status-${node.index}`);
+        const trigger = document.getElementById(`map-audio-trigger-${node.index}`);
+        if (!trigger) return;
 
-        if (!playBtn) return;
-
-        // Initialize on-demand HTML5 audio object strictly with no preloading!
-        if (!node.audioElement) {
-          node.audioElement = new Audio(`assets/${node.audioGuide}`);
-          node.audioElement.preload = "none";
-          node.audioElement.addEventListener('ended', () => {
-            node.isPlaying = false;
-            if (playIcon) playIcon.innerHTML = `<path d="M8 5v14l11-7z"/>`;
-            if (statusText) statusText.textContent = "Finished";
-          });
-        }
-
-        // Maintain visual state matches
-        if (node.isPlaying) {
-          playIcon.innerHTML = `<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>`;
-          statusText.textContent = "Playing... 🎧";
-          statusText.style.color = '#34D399';
-        }
-
-        playBtn.addEventListener('click', () => {
-          // Deactivate any other active voiceover guides to keep sound clean
-          ARUSHA_LOOP_PAYLOAD.forEach(otherNode => {
-            if (otherNode.index !== node.index && otherNode.audioElement && !otherNode.audioElement.paused) {
-              otherNode.audioElement.pause();
-              otherNode.isPlaying = false;
-              const otherIcon = document.getElementById(`map-audio-icon-${otherNode.index}`);
-              const otherStatus = document.getElementById(`map-audio-status-${otherNode.index}`);
-              if (otherIcon) otherIcon.innerHTML = `<path d="M8 5v14l11-7z"/>`;
-              if (otherStatus) {
-                otherStatus.textContent = "Ready";
-                otherStatus.style.color = '#AEF3D6';
-              }
-            }
-          });
-
-          node.isPlaying = !node.isPlaying;
-          if (node.isPlaying) {
-            node.audioElement.play().catch(err => console.warn("Audio stream blocked: ", err));
-            playIcon.innerHTML = `<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>`;
-            statusText.textContent = "Playing... 🎧";
-            statusText.style.color = '#34D399';
-          } else {
-            node.audioElement.pause();
-            playIcon.innerHTML = `<path d="M8 5v14l11-7z"/>`;
-            statusText.textContent = "Paused";
-            statusText.style.color = '#AEF3D6';
-          }
+        trigger.addEventListener('click', () => {
+          GlobalAudioPlayer.load(`${node.title} — ${node.category}`, `assets/${node.audioGuide}`);
         });
       });
 
-      // Stop audio playback when marker popup closes to save battery and system resources
-      marker.on('popupclose', () => {
-        if (node.audioElement && node.isPlaying) {
-          node.audioElement.pause();
-          node.isPlaying = false;
-        }
-      });
+      // Audio now persists in global player — no popupclose kill needed
     });
 
     // 5. Adventure Trail — Polyline Route Connector Lines
@@ -1841,6 +1952,9 @@ const RouteEngine = (() => {
 
         // Initialize live Leaflet.js interactive maps
         initLeafletMap();
+
+        // Initialize global audio player listeners
+        GlobalAudioPlayer.init();
       });
     }
   };
