@@ -16,10 +16,10 @@ const RouteEngine = (() => {
       lng: 36.6930866,
       localTip: "Order their Tanzanian cappuccino & request a table near the balcony.",
       swahiliPhrase: "Kahawa ya kienyeji (Traditional coffee)",
-      shortDesc: "Kickstart your adventure at Fifi's Café, centered directly beside the historic mid-point landmark (Arusha Clock Tower). It's a bustling local favorite with wonderful breakfast items, reliable Wi-Fi, and single-origin Tanzanian espresso.",
-      fullDesc: "Centered directly beside the historic midpoint landmark (Clock Tower), Fifi's Café is the ultimate morning anchor in Arusha. It's a highly vibrant, premium coffee shop that balances standard western amenities with incredible local flavor. The setting is bright, lively, and highly comfortable—perfect for orienting yourself before dive-bombing into local Bajaj transits. Spend this morning stop checking your map layers and pre-loading routing coordinates using their high-speed, stable Wi-Fi connection.",
-      safetyTips: "Pre-load your offline maps now. The Wi-Fi is strong here—do not rely on cellular signal inside dense transit alleys later in the day.",
-      swahiliLesson: "Ordering Food Dialogues:\n- 'Habari za asubuhi!' (Good morning!)\n- 'Nataka panini ya kuku na kahawa, tafadhali.' (I want a chicken panini and a coffee, please.)\n- 'Bei gani?' (How much is it?)\n- 'Asante sana!' (Thank you very much!)",
+      shortDesc: "Get a coffee and some breakfast in the morning. Kickstart your adventure at Fifi's Café, centred directly beside the historic mid-point landmark (Arusha Clock Tower). Fifi’s is a bustling local favourite with wonderful breakfast items, reliable Wi-Fi, and single-origin Tanzanian espresso. A good start for a morning brew. Say hi to Fiane (Fifi) when you walk in.",
+      fullDesc: "Centred directly beside the historic midpoint landmark (Clock Tower), Fifi's Café is the ultimate morning anchor in Arusha. It's a highly vibrant, premium coffee shop that balances standard Western amenities with incredible local flavour. The setting is bright, lively, and highly comfortable: perfect for orienting yourself before dive-bombing into local Bajaj transits. Spend this morning stop checking your map layers and pre-loading routing coordinates using their high-speed, stable Wi-Fi connection.",
+      safetyTips: "Pre-load your offline maps now. The Wi-Fi is strong here: do not rely on cellular signal inside dense transit alleys later in the day.",
+      swahiliLesson: "Basic Swahili Practice: How to sound less like a tourist\n\n“Naomba”: ~nah-woh-mbah~ loosely means “I Humbly request...”. This is the most important lesson of your Swahili today. In Tanzania, this is the only polite and respectful way to ask for any service or any request from someone. Kenyan Swahili lets you say “I want...” (“Nataka”), but Tanzanians view “Nataka” as a direct order or a demand, and they consider it rude, bossy, and impolite. Use “Naomba” liberally, and you will immediately gain more rapport and trust in your day. Tourists say \"Nataka\"; seasoned residents and locals say “Naomba”.\n\nHakuna Matata:\nTourists say “Hakuna Matata”; people will say that to sell you something. Seasoned residents and locals say “Hamna Shida!” or “Hakuna shida” which means “It is not a concern” or “Not an issue”. Save Hakuna Matata for the clueless tourists.\n\nSawa:\nMeans “OK”. You will hear \"sawa\" everywhere, and you should sprinkle it in everywhere you would normally say “OK”. Tourists do not use sawa; seasoned residents will find themselves saying Sawa when they go back home abroad. It becomes ingrained in your daily lexicon.\n\nMambo Vipi / Poa:\nIn a nutshell, it is equivalent to saying “Yo! What’s up!”. Response is \"Poa\" (Cool).\n\nBwana:\nThe secret to disarming any man you may be negotiating with or trying to convince. Bwana is a street Swahili term meaning “Boss!” or “Sir”.\n\nGreeting: Mambo/Vipi\nResponse: Poa\n\"Pole, sielewi Kiswahili\" (Sorry, I do not understand Swahili).\n\nOrdering Food Dialogues:\n- 'Habari za asubuhi!' (Good morning!)\n- 'Naomba Coca-cola na kahawa, tafadhali.' (I kindly request a Coca-cola and coffee, please.)\n- 'Bei gani?' (How much is it?)\n- 'Asante sana!' (Thank you very much!)",
       audioGuide: "arusha_fifi_narration.mp3"
     },
     {
@@ -27,15 +27,15 @@ const RouteEngine = (() => {
       time: "08:30",
       category: "Historic Landmark",
       title: "Arusha Clock Tower",
-      image: "assets/clock-tower.jpg",
+      image: "assets/arusha-clock-tower.jpg",
       lat: -3.3723398,
       lng: 36.6944861,
       localTip: "Stand at the exact geographic midpoint between Cairo and Cape Town for a once-in-a-lifetime photo.",
       swahiliPhrase: "Mnara wa Saa (Clock Tower monument)",
-      shortDesc: "Walk 2 minutes from Fifi's to the iconic Arusha Clock Tower — the geographic midpoint between Cairo and Cape Town. This historic roundabout landmark is the symbolic heart of Arusha and the perfect orientation checkpoint.",
+      shortDesc: "Walk 2 minutes from Fifi's to the iconic Arusha Clock Tower: the geographic midpoint between Cairo and Cape Town. This historic roundabout landmark is the symbolic heart of Arusha and the perfect orientation checkpoint.",
       fullDesc: "The Arusha Clock Tower is the most iconic landmark in the city, standing at the exact midpoint between Cairo and Cape Town on the legendary Cape-to-Cairo highway. This charming roundabout monument serves as the geographic and cultural heart of Arusha. Originally built during the British colonial era, it has become a symbol of Arusha's central role in East African diplomacy and tourism. It's the perfect spot for an iconic photo and to orient yourself before diving into the Bajaj street safari network.",
-      safetyTips: "Stay on the sidewalk when photographing the tower — the roundabout has active traffic. Watch your belongings in the busy intersection area.",
-      swahiliLesson: "Landmark & Direction Dialogues:\n- 'Mnara wa Saa uko wapi?' (Where is the Clock Tower?)\n- 'Hapa ndipo katikati ya Afrika!' (This is the center of Africa!)\n- 'Tafadhali nipige picha.' (Please take my photo.)\n- 'Asante, picha nzuri!' (Thank you, nice photo!)",
+      safetyTips: "When taking pictures of the tower, stay on the sidewalk: the roundabout is very busy. Beware of people selling and dragging dogs around the Clock Tower: they are illegal breeders. It is best to avoid getting involved with them or trying to rescue the dogs, which inadvertently supports the dog breeding industry in Arusha. Each dog purchased helps to keep these breeding operations alive.",
+      swahiliLesson: "Landmark & Direction Dialogues:\n- 'Mnara wa Saa uko wapi?' (Where is the Clock Tower?)\n- 'Hapa ndipo katikati ya Afrika!' (This is the centre of Africa!)\n- 'Tafadhali nipige picha.' (Please take my photo.)\n- 'Asante, picha nzuri!' (Thank you, nice photo!)",
       audioGuide: "arusha_clock_tower.mp3"
     },
     {
@@ -48,9 +48,9 @@ const RouteEngine = (() => {
       lng: 36.6945194,
       localTip: "Always check for the official grading certification inside the museum showroom.",
       swahiliPhrase: "Madini ya Tanzanite (Tanzanite gemstones)",
-      shortDesc: "Take a short 2-minute walking transfer to the Blue Plaza building. Scale up to the museum floor to discover the mesmerizing geology, mining history, and grading checklists of the rare Tanzanite gem, unique to Northern Tanzania.",
+      shortDesc: "Take a short 2-minute walking transfer to the Blue Plaza building. Scale up to the museum floor to discover the geology, mining history, and grading checklists of the rare Tanzanite gem, unique to Northern Tanzania.",
       fullDesc: "Located on the 3rd floor of the Blue Plaza building, just a 2-minute walk from the Clock Tower, The Tanzanite Experience offers a spectacular and secure deep dive into Tanzania's blue-violet crown jewel. You'll browse visual dioramas of the deep mines beneath Mt. Kilimanjaro and review the official Tanzanite grading system. Vetting gem quality (Color, Cut, Clarity, Carat) before browsing commercial showrooms protects you from street scams and ensures total bargaining power.",
-      safetyTips: "Always head directly to the 3rd floor museum office. Avoid unauthorized street brokers outside the plaza offering 'cheap raw gemstones'—these are fake glass traps.",
+      safetyTips: "Always head directly to the 3rd floor museum office. Avoid unauthorised street brokers outside the plaza offering 'cheap raw gemstones': these are fake glass traps.",
       swahiliLesson: "Gem Trade & Quality Dialogues:\n- 'Hii ni Tanzanite halisi?' (Is this genuine Tanzanite?)\n- 'Naomba cheti cha ubora.' (Please show me the quality certificate.)\n- 'Nafanya mazungumzo tu.' (I am only browsing/discussing.)\n- 'Ni nzuri sana.' (It is very beautiful.)",
       audioGuide: "arusha_tanzanite_narration.mp3"
     },
@@ -59,14 +59,14 @@ const RouteEngine = (() => {
       time: "10:30",
       category: "Cultural Shopping",
       title: "Maasai Market",
-      image: "assets/hero.png",
+      image: "assets/maasai_market_lane.jpg",
       lat: -3.3758457,
       lng: 36.6923590,
       localTip: "Always bargain respectfully—aim for 50-60% of the initial vendor offer.",
       swahiliPhrase: "Soko la Wamasai (Maasai open-air market)",
-      shortDesc: "Hop into a Bajaj back to the town center near the Clock Tower. Step into the vibrant, color-packed Maasai Market to browse thousands of local beadwork pieces, hand-carved ebony sculptures, and colorful blankets.",
-      fullDesc: "Located just off Fire Road in the heart of Arusha, the Maasai Market Curios and Crafts is a legendary open-air bazaar. It brings together hundreds of local artisans selling vibrant, handmade products. You'll find spectacular hand-beaded necklaces, authentic red-and-black checkered shúkà blankets, wood-carved wildlife sculptures, and gorgeous custom paintings. Bargaining is a respected art form here—always start your negotiation at roughly 50-60% of the vendor's initial offer and enjoy the friendly, lively banter.",
-      safetyTips: "Stick to the main central walkways. Keep your wallet and phone inside a secured front pocket or cross-body bag. Vendors are highly enthusiastic—feel free to say 'Hapana, asante' (No, thank you) politely if you are not interested.",
+      shortDesc: "The Vibe: Vibrant, High-Energy, & Culturally Rich. Best Time to Visit: Mid-morning or early afternoon when the market is fully active but before the peak evening rush. Perfect For: Souvenir hunters, art lovers, and travellers wanting to experience a classic, bustling East African marketplace.",
+      fullDesc: "Located just off Fire Road in the heart of Arusha, the Maasai Market Curios and Crafts is a legendary open-air bazaar. It brings together hundreds of local artisans selling vibrant, handmade products. You'll find spectacular hand-beaded necklaces, authentic red-and-black checkered shúkà blankets, wood-carved wildlife sculptures, and gorgeous custom paintings. Bargaining is a respected art form here: always start your negotiation at roughly 50-60% of the vendor's initial offer and enjoy the friendly, lively banter.",
+      safetyTips: "Vendors here tend to be very experienced selling to tourists and will typically respect your space. Accept zero pressure to buy anything forced upon you, and do not tolerate undue harassment. If you are not interested in an item, look the vendor in the eye, smile, and say firmly but politely: 'Hapana, lakini asante!' (No, but thank you!). Repeat it as a polite mantra and keep walking: they will quickly respect your boundary and move on.",
       swahiliLesson: "Market Bargaining Dialogues:\n- 'Hii ni shilingi ngapi?' (How many shillings is this?)\n- 'Punguza bei kidogo, rafiki.' (Reduce the price a bit, friend.)\n- 'Nitaongeza elfu mbili.' (I will add two thousand.)\n- 'Sawa, nitachukua.' (Okay, I will take it.)",
       audioGuide: "arusha_maasai_market.mp3"
     },
@@ -91,14 +91,14 @@ const RouteEngine = (() => {
       time: "11:45",
       category: "Cultural Core",
       title: "Cultural Heritage Centre Gallery",
-      image: "assets/cultural-heritage.jpg",
+      image: "assets/cultural_heritage_centre.jpg",
       lat: -3.3769058,
       lng: 36.6581811,
       localTip: "Climb to the top-floor mask gallery showroom for the best art collection.",
       swahiliPhrase: "Sanaa ya Kiafrika (African art masterpieces)",
       shortDesc: "Explore a massive, architectural masterpiece shaped like a traditional African shield. It houses the largest collection of pristine African art, wood carvings, historic weapons, and mask galleries on the continent.",
-      fullDesc: "The Arusha Cultural Heritage Centre is an architectural marvel. Shaped like a massive traditional warrior shield, it stands as a global monument to African history and creative arts. The interior is a spiral ramp that leads you past towering ebony wood carvings, custom-painted canvases, and historic mask gallery rooms. The best unobstructed viewpoint for gorgeous panoramic photos is located beside the shield monument structures out in the main garden area.",
-      safetyTips: "Do not wander aimlessly down the lower wings; climb straight up the central ramp to the top floor mask gallery showroom where the absolute best art collections are housed.",
+      fullDesc: "The Cultural Heritage Centre, founded in 1994, has expanded from humble family beginnings into a sprawling compound that serves as a museum, high-end art gallery, vault for precious stones, and a stage for international diplomacy. Its complex design is a conscious break from colonial aesthetics, unlike the European-style urbanisation that characterises much of central Arusha, which grew up around the German-built Boma. The complex is architecturally divided into buildings that are patterned after the three most powerful icons of traditional African life: the Drum, the Spear, and the Shield.",
+      safetyTips: "Do not wander aimlessly down the lower wings: climb straight up the central ramp to the top floor mask gallery showroom where the absolute best art collections are housed.",
       swahiliLesson: "Art & Museum Dialogues:\n- 'Naomba kupiga picha hapa?' (Am I allowed to take photos here?)\n- 'Sanaa hii imetengenezwa kwa nini?' (What material is this artwork made of?)\n- 'Mti wa Mpingo.' (Ebony wood.)\n- 'Ni kazi nzuri sana!' (This is excellent work!)",
       audioGuide: "arusha_gallery_narration.mp3"
     },
@@ -107,13 +107,13 @@ const RouteEngine = (() => {
       time: "13:15",
       category: "Culinary Stop",
       title: "Arusha Coffee Lodge",
-      image: "assets/coffee-lodge.webp",
+      image: "assets/bannercoffeelodge.jpg",
       lat: -3.3745016,
       lng: 36.6439397,
       localTip: "Ask for a seat in the outdoor garden pavilion for a tranquil dining atmosphere.",
       swahiliPhrase: "Shamba la kahawa (Coffee farm plantation)",
-      shortDesc: "Zip down Dodoma Road in a secondary quick Bajaj hop to enter the leafy, peaceful acres of one of Tanzania's oldest coffee plantations. Sit in the garden lounge and order premium local roasts.",
-      fullDesc: "Situated along the green slopes of Mount Meru, the Arusha Coffee Lodge is a tranquil culinary oasis. You'll escape the town's dust and step into a lush, leafy garden lounge. Ask to be seated in the outdoor garden pavilion, order their famous single-origin Tanzanian coffee, and enjoy a premium lunch while listening to the wind rustling through coffee leaves. This stop is perfect for unwinding and preparing for the logistics crossing to Njiro.",
+      shortDesc: "The Vibe: Luxurious, Historic, & Purpose-Driven. Best Time to Visit: Mid-morning for a tour and lunch, or late afternoon for a relaxed coffee. Perfect For: Travellers seeking high-end hospitality, fine dining, and unique, ethically made local crafts.",
+      fullDesc: "Set within one of Tanzania's largest coffee plantations on the edge of the city, this beautiful estate seamlessly blends old-world charm with modern luxury. The property serves a dual purpose, acting as both an exclusive retreat for discerning travellers and the home of a heartwarming, globally recognised social enterprise. It is the perfect respite for those looking to experience premier hospitality in a lush, secure, and tranquil environment.",
       safetyTips: "Relax in the garden lounge. Vetted local private taxi drivers can be summoned from the lodge lobby desk if you need immediate assistance.",
       swahiliLesson: "Dining & Coffee Dialogues:\n- 'Naomba meza ya bustanini.' (I would like a table in the garden.)\n- 'Kahawa hii inatoka wapi?' (Where is this coffee sourced from?)\n- 'Inatoka Mlima Meru.' (It comes from Mount Meru.)\n- 'Lete bili, tafadhali.' (Please bring the bill.)",
       audioGuide: "arusha_coffee_narration.mp3"
@@ -139,13 +139,13 @@ const RouteEngine = (() => {
       time: "15:15",
       category: "Creative Stop",
       title: "Clay & Canvas (Njiro)",
-      image: "assets/hero.png",
+      image: "assets/canvas_clay-pots.jpg",
       lat: -3.3980875,
       lng: 36.7047969,
       localTip: "Paint traditional clay mugs and sip local sweet banana wine under a covered canopy garden.",
       swahiliPhrase: "Ufinyanzi na mvinyo (Pottery and banana wine)",
-      shortDesc: "Unwind in Njiro's cozy creative compound. Paint gorgeous local pottery while tasting rich Tanzanian banana wine. Note: operations are strictly by appointment only—verify your reservation card.",
-      fullDesc: "Clay & Canvas is Arusha's hidden creative sanctuary. Tucked away in the quiet green suburbs of Njiro, this cozy arts compound offers structured pottery painting and wine tasting seminars. You'll relax, paint traditional clay mugs, and sip local sweet banana wines under a covered canopy garden. It is an exceptional way to interact with local Tanzanian artists and purchase customized souvenirs.",
+      shortDesc: "The Vibe: Artistic, Meditative, & Community-Focused. Best Time to Visit: Mid-day or late afternoon to escape the heat. Perfect For: Creative souls, couples looking for a unique date activity, and families travelling with children.",
+      fullDesc: "Tucked away as a hidden gem in Arusha, Canvas & Clay is a wonderfully inviting, interactive art studio that offers a completely different pace from standard city sightseeing. It is an independent, locally celebrated creative space designed for people of all skill levels to slow down, disconnect from screens, and build something beautiful with their hands. Far more than a traditional gallery where you simply look at art, Canvas & Clay invites you to become the artist, making it an excellent tactile experience for travellers seeking deep connection and personal keepsakes.",
       safetyTips: "This creative seminar operates strictly by appointment. Ensure your reservation window was validated 24 hours prior using our direct link shortcut.",
       swahiliLesson: "Artistic & Creative Dialogues:\n- 'Naomba rangi zaidi, tafadhali.' (I would like more paint colors, please.)\n- 'Mvinyo hii ni tamu sana!' (This wine is very delicious!)\n- 'Nimetengeneza hii mwenyewe.' (I made this pottery myself.)\n- 'Kazi safi!' (Clean work / Excellent job!)",
       audioGuide: "arusha_clay_canvas.mp3"
@@ -155,13 +155,13 @@ const RouteEngine = (() => {
       time: "17:30",
       category: "Sundowner",
       title: "Rooftop Lounge at Gran Melia",
-      image: "assets/gran-melia.jpg",
+      image: "assets/gran_melia_cocktails.jpg",
       lat: -3.3706290,
       lng: 36.7066330,
       localTip: "Arrive by 17:45 sharp to watch the sky turn brilliant orange and purple directly over Mount Meru.",
       swahiliPhrase: "Machweo ya Jua (Mt. Meru Sunset View)",
-      shortDesc: "A five-star rooftop terrace offering breathtaking, unobstructed views of Mount Meru. Arrive by 17:45 sharp to watch the sky turn brilliant orange and purple directly over the volcanic peak.",
-      fullDesc: "The Rooftop Lounge at the Gran Melia Arusha is the premier sundowner venue in Northern Tanzania. Situated on a luxury five-star terrace, it features a glass-railed observation platform pointing directly at the majestic, sharp volcanic peak of Mount Meru. Arriving by 17:45 is highly recommended, as the sunset colors paint the mountain in dramatic hues of orange, gold, and deep violet. Close out your day safari with premium cocktails and local appetizers.",
+      shortDesc: "The Vibe: Sleek, Panoramic, & Sophisticated. Best Time to Visit: 4:30 PM to 7:00 PM to catch the artisan workshop before moving upstairs for a spectacular sunset. Perfect For: Cocktail connoisseurs and luxury seekers looking for the premier sundowner vantage point.",
+      fullDesc: "The Gran Meliá Arusha is a gorgeous luxury resort set on 18 acres of working organic coffee and tea farm in the heart of the city. It is a solid destination for day visitors in the evening thanks to its bars, restaurants and vast estate trails, even though it provides an ultra-high-end sanctuary for overnight guests. The property stands on the historic grounds of the former state-run Hotel 77, host of the famous 1979 G-77 global summit: locals still affectionately call the location just '77'.",
       safetyTips: "Walk past the central lobby to the elevator core and select the rooftop terrace layout. Smart casual dress is required—no open sandals or singlets.",
       swahiliLesson: "Sunset & Scenic Dialogues:\n- 'Mlima Meru unapendeza sana machweoni!' (Mount Meru looks beautiful at sunset!)\n- 'Kinywaji kiko wapi?' (Where is the drink?)\n- 'Kiti cha nje, tafadhali.' (A seat outside, please.)\n- 'Hapa ni pazuri mno.' (This place is absolutely wonderful.)",
       audioGuide: "arusha_gran_melia.mp3"
@@ -190,13 +190,33 @@ const RouteEngine = (() => {
     {
       altId: '1a',
       parentIndex: 0,
-      title: "Kitamu Coffee",
+      title: "Kitamu Coffee Shop",
       image: "assets/hero.png",
       lat: -3.370835,
       lng: 36.693797,
-      localTip: "Try their signature spiced chai latte — it's brewed with fresh Tanzanian ginger and cardamom.",
       swahiliPhrase: "Kahawa tamu (Sweet coffee)",
-      shortDesc: "A cozy specialty coffee house tucked behind the Clock Tower roundabout. Kitamu sources single-origin beans from smallholder farms on Mount Meru and roasts them in-house daily. Perfect for a quieter morning alternative to the bustling Fifi's."
+      shortDesc: "The Vibe: Bustling, Cozy, & Central. Best Time to Visit: Early morning (6:30 AM – 8:00 AM) before your main tour itinerary begins. Perfect For: Travellers looking for a high-quality morning pick-me-up, premium Tanzanian coffee, and a quick breakfast right in the heart of town.",
+      hasDetailedGuide: true,
+      vibe: "Bustling, Cozy, & Central",
+      bestTime: "Early morning (6:30 AM – 8:00 AM) before your main tour itinerary begins.",
+      perfectFor: "Travellers looking for a high-quality morning pick-me-up, premium Tanzanian coffee, and a quick breakfast right in the heart of town.",
+      overview: "Kitamu Coffee is one of the quintessential downtown starting points. Opening early, it serves as the perfect launchpad for day tours. It provides a warm, modern, and comfortable urban space to fuel up before the city fully wakes up and your trip begins.",
+      whatToDo: [
+        { title: "The Coffee Experience", text: "Sample rich, flavourful Tanzanian black coffee, or choose from a full menu of hot beverages." },
+        { title: "The Early Breakfast", text: "Pair your morning brew with freshly baked pastries, classic chapatis with beans." },
+        { title: "Gear Up & Connect", text: "Take advantage of the free high-speed Wi-Fi and air conditioning to download your maps, check the day's itinerary, and comfortably wait for your guide." }
+      ],
+      theScene: "Kitamu offers a fascinating glimpse into the city's early morning routine. The atmosphere inside is clean, and welcoming, acting as a calm, secure bubble right next to the city's main landmarks. You will find a pleasant mix of early-rising tourists preparing for safaris, local business professionals heading into meetings, and tour operators coordinating their day.",
+      insiderTip: "Because of its prime location next to the Clock Tower, it is one of the easiest and safest navigation landmarks to meet people. Order a signature Tanzanian black coffee to truly appreciate the notes of the local volcanic soil.",
+      goIfYou: [
+        "Need an exceptional cup of coffee and a solid breakfast early in the morning.",
+        "Want an easily accessible, highly central downtown meeting.",
+        "Appreciate reliable Wi-Fi, clean facilities, & quick morning service."
+      ],
+      avoidIf: [
+        "You are looking for a secluded, quiet garden escape: this is an urban cafe in a bustling commercial district.",
+        "You want a slow, rural farm-to-table experience (save that for the lodges later in the day)."
+      ]
     },
     {
       altId: '1b',
@@ -205,9 +225,29 @@ const RouteEngine = (() => {
       image: "assets/hero.png",
       lat: -3.3719259221558495,
       lng: 36.694397155849444,
-      localTip: "Grab a window seat overlooking the street for excellent people-watching and photography.",
       swahiliPhrase: "Utamaduni wa kahawa (Coffee culture)",
-      shortDesc: "A modern, Instagram-friendly café with industrial-chic interiors and excellent cold-brew options. Coffee Culture caters to digital nomads with fast Wi-Fi, global power outlets, and a quiet upstairs loft workspace."
+      shortDesc: "The Vibe: Modern, Chic, & Relaxed. Best Time to Visit: Morning (8:00 AM – 10:00 AM) for a premium breakfast, or as a cozy workspace mid-day. Perfect For: Coffee purists, digital nomads, and travellers looking for a highly polished, comfortable urban sanctuary.",
+      hasDetailedGuide: true,
+      vibe: "Modern, Chic, & Relaxed",
+      bestTime: "Morning (8:00 AM – 10:00 AM) for a premium breakfast, or as a cozy workspace mid-day.",
+      perfectFor: "Coffee purists, digital nomads, and travellers looking for a highly polished, comfortable urban sanctuary.",
+      overview: "Situated directly at the iconic Clock Tower roundabout, Coffee Culture is a stylish, boutique gem that brings a sleek and contemporary aesthetic to Arusha’s central hub. Known for its meticulously curated, beautiful interiors and welcoming air-conditioned space, it feels world-class from the moment you step inside. The cafe balances an upbeat city-centre energy with an interior atmosphere designed for slow, relaxed enjoyment, making it a favourite for those who appreciate fine details and warm hospitality.",
+      whatToDo: [
+        { title: "The Signature Brews", text: "This is the place to indulge in specialty coffees. Their rich, smooth Moccachinos are a major highlight, perfectly balancing premium Tanzanian coffee with decadent chocolate notes." },
+        { title: "A Hearty Menu", text: "While they serve classic breakfasts, they are locally famous for their indulgent waffles (pro-tip: ask for a drizzle of local honey) and an exceptionally good Alfredo Pasta that rivals fine-dining establishments. They also feature fresh, healthy options like Buddha bowls." },
+        { title: "Work & Play", text: "Equipped with reliable high-speed Wi-Fi, it’s a brilliant remote working spot. Alternatively, if you are killing time before your guide arrives, they keep a collection of board games available for guests." }
+      ],
+      theScene: "Stepping out of the lively chaos of the central roundabout and into Coffee Culture feels like discovering a peaceful oasis. Accompanied by a great musical backdrop (often spinning relaxed global sounds like Cesaria Evora), the atmosphere is cozy and deeply inviting. The owner frequently walks the floor to personally greet guests, instilling a genuine warmth that sets it apart. Furthermore, the café prides itself on its spotlessly clean facilities, even featuring a rare baby-changing station: a thoughtful touch for travelling families.",
+      insiderTip: "While the staff is incredibly friendly and professional, the kitchen values precision over speed. This isn't a 'grab-and-go in five minutes' spot: it’s a place to settle in, enjoy the music, play a game, and let your guide pick you up right from the heart of the city.",
+      goIfYou: [
+        "Want premium, expertly crafted specialty coffee drinks and standout brunch options like waffles or pasta.",
+        "Appreciate beautiful, highly clean, and well-maintained modern spaces with great music and air conditioning.",
+        "Need a reliable central spot to open a laptop, use strong Wi-Fi, or comfortably wait for a tour to start."
+      ],
+      avoidIf: [
+        "You are in an extreme rush: the friendly service runs at a leisurely, relaxed pace to ensure quality.",
+        "You want a sprawling outdoor garden setting: this is a premium, cozy urban cafe."
+      ]
     },
     // --- Maasai Market alternatives ---
     {
@@ -217,9 +257,29 @@ const RouteEngine = (() => {
       image: "assets/hero.png",
       lat: -3.383785,
       lng: 36.683923,
-      localTip: "Book the 1-hour freestyle session — it includes access to the foam pit and climbing wall.",
       swahiliPhrase: "Kuruka na kucheza (Jump and play)",
-      shortDesc: "Arusha's only indoor trampoline and adventure park. Bounce Warehouse offers high-energy fun with wall-to-wall trampolines, ninja obstacle courses, and a dedicated toddler zone. A brilliant detour for families or anyone craving an adrenaline break."
+      shortDesc: "First Premium Indoor Sports Arena of Arusha. Popular for Padel, Pickleball, Badminton, Football etc. This is a great place to hangout & meet residents & locals in a natural way.",
+      hasDetailedGuide: true,
+      vibe: "Energetic, Active, & Social",
+      bestTime: "Late afternoon & evenings on weekdays: mornings on weekends.",
+      perfectFor: "Active travellers, sports enthusiasts, and anyone looking to meet Arusha residents, expats, and locals in a natural social setting.",
+      overview: "Bounce Warehouse is Arusha's premier indoor sports arena, offering facilities for Padel, Pickleball, Badminton, and Football. It sits slightly off the main tourist trail, making it a hub where middle-class locals, residents, and expats gather to play, exercise, and socialise.",
+      whatToDo: [
+        { title: "Indoor Sports", text: "Rent a court for a game of Padel, Pickleball, or Badminton with friends or join local pickup matches." },
+        { title: "Social Gatherings", text: "Attend themed community events like karaoke nights, tournaments, and women's social game leagues." },
+        { title: "Hangout Deck", text: "Relax on the social deck after a game, order local juices or drinks, and mingle with Arushans unwinding after work." }
+      ],
+      theScene: "Bounce is high-energy and very community-centric. It offers a authentic glimpse into Arusha's urban social life. If you want to experience the city from a resident's perspective, this venue comes alive on weekday evenings with a warm, inclusive crowd.",
+      insiderTip: "During weekdays, it is best to book court times for the evening: on weekends, mornings are highly popular and offer a great family-friendly sports vibe.",
+      goIfYou: [
+        "Want to play indoor racket sports or football in a modern facility.",
+        "Are keen to interact with local expats, business professionals, and resident Arushans.",
+        "Enjoy active recreation and community-driven social events."
+      ],
+      avoidIf: [
+        "You prefer a quiet, historic museum or sightseeing tour.",
+        "You are looking for traditional outdoor wildlife viewing or safaris."
+      ]
     },
     // --- Coffee Lodge alternatives ---
     {
@@ -229,9 +289,29 @@ const RouteEngine = (() => {
       image: "assets/hero.png",
       lat: -3.360309,
       lng: 36.609154,
-      localTip: "Visit the rooftop terrace for panoramic views of the Arusha-Dodoma highway corridor.",
       swahiliPhrase: "Soko la kisasa (Modern marketplace)",
-      shortDesc: "A sleek modern commercial plaza on the western bypass featuring artisan food stalls, boutique shops, and a landscaped courtyard with shaded seating. Ideal for a relaxed lunch stop with contemporary Tanzanian cuisine."
+      shortDesc: "A commercial plaza with a wildlife corridor. Features boutique shopping, Butter & Scotch deck, Msumbi Coffees, and views of Arusha Airport's runway.",
+      hasDetailedGuide: true,
+      vibe: "Convenient, Surprising, & Nature-Infused",
+      bestTime: "Late morning for coffee, or afternoon to watch gazelles in the wildlife corridor.",
+      perfectFor: "Travellers seeking convenience, great coffee, and a quiet spot to wait for airport transfers or read in silence.",
+      overview: "Sable Square sits on a quietly remarkable piece of land in northern Arusha. Adjacent to Arusha Airport, this commercial plaza features boutique shops, specialty cafes, and a functioning wildlife corridor running right along its boundary.",
+      whatToDo: [
+        { title: "Butter & Scotch Deck", text: "Order a coffee or their signature chilli gin on the deck while listening to relaxed French jazz." },
+        { title: "Msumbi Coffees Sanctuary", text: "Visit this quiet, music-free cafe: a local haven for researchers, writers, and long-term residents seeking silent workspace." },
+        { title: "Spot the Wildlife", text: "Look out over the fenced wetland corridor to see habituated Grant's gazelles grazing, or catch a glimpse of the rare, prehistoric-looking local birds." }
+      ],
+      theScene: "On the surface, Sable Square is a modern shopping plaza. Underneath, it sits on a historic colonial sorghum farm established by Colonel Grey in the 1950s, complete with a private airstrip that evolved into Arusha Airport. It is also famous among locals as the runway where an Ethiopian Airlines Boeing 767 made a mistake landing in 2013, successfully taking off again after being completely stripped of seats and fuel.",
+      insiderTip: "If you need a quiet place to read or work, choose Msumbi Coffees: if you want a lively vibe and outdoor seating next to the gazelle corridor, head to Butter & Scotch.",
+      goIfYou: [
+        "Need a convenient stop near Arusha Airport with great food and coffee options.",
+        "Appreciate quiet workspace environments or want to observe gazelles in a city setting.",
+        "Want to stock up on travel supplies or safari gear."
+      ],
+      avoidIf: [
+        "You are seeking an old, traditional African street market.",
+        "You want a rustic wilderness safari: this is a modern commercial complex."
+      ]
     },
     {
       altId: '6b',
@@ -240,9 +320,29 @@ const RouteEngine = (() => {
       image: "assets/hero.png",
       lat: -3.354186,
       lng: 36.615962,
-      localTip: "Ask about their guided nature walk through the adjacent acacia woodland — it's complimentary for diners.",
       swahiliPhrase: "Kambi ya msingi (Base camp)",
-      shortDesc: "An adventure-themed restaurant and lodge set within the Endurance Estate on the outskirts of Arusha. Surrounded by indigenous gardens and acacia trees, Basecamp serves hearty safari-style meals and craft beers in a rustic outdoor setting."
+      shortDesc: "Basecamp is a dynamic community hub designed by expats and locals. Offers padel, pickleball, climbing walls, bouldering, and a popular social pub.",
+      hasDetailedGuide: true,
+      vibe: "Energetic, Social, & Active",
+      bestTime: "Weekdays after 5:00 PM: weekends for social match play.",
+      perfectFor: "Active travellers, climbing enthusiasts, and solo adventurers looking to connect with expats and young local professionals.",
+      overview: "Born from a collaboration between long-term expats and Tanzanian locals, Basecamp is one of Arusha’s newest and most dynamic community hubs. It was explicitly designed to break the mould of traditional nightlife by offering a healthy, high-energy environment centred around sports, recreation, and casual socialisation.",
+      whatToDo: [
+        { title: "Climbing & Bouldering", text: "Test your grip on the dedicated climbing and bouldering wall: perfect for both beginners and seasoned climbers." },
+        { title: "Racket Sports", text: "Smash a game of Padel or Pickleball on their top-tier courts, which are driving the fast-growing racket sports trend in Arusha." },
+        { title: "Unwind & Socialise", text: "Play a friendly game of cornhole outdoors, or grab a drink and a bite to eat at the social hub after a session." }
+      ],
+      theScene: "Basecamp truly comes alive in the evenings. Starting around 5:00 PM, the energy shifts as a diverse, friendly crowd of residents, young professionals, expats, and locals gather after work. If you are looking to integrate into Arusha's active community, this is one of the best and safest spaces to do so: the atmosphere is inclusive and warm, making it easy to strike up a conversation between games.",
+      insiderTip: "Head here around sunset on weeknights to catch the post-work rush, or check their schedule for community tournament days to experience the absolute best of Basecamp's vibrant social scene.",
+      goIfYou: [
+        "Enjoy active bouldering, climbing, padel, or pickleball.",
+        "Want to meet a friendly expat and local crowd in a casual, sports-focused setting.",
+        "Appreciate outdoor spaces with good food, cold drinks, and a high-energy vibe."
+      ],
+      avoidIf: [
+        "You want a quiet, intimate, candle-lit fine-dining experience.",
+        "You prefer a slow-paced museum tour or cultural site."
+      ]
     },
     {
       altId: '6c',
@@ -251,9 +351,29 @@ const RouteEngine = (() => {
       image: "assets/hero.png",
       lat: -3.386010,
       lng: 36.613022,
-      localTip: "Order the Swahili fish curry — it's the chef's signature dish made with fresh Lake Victoria tilapia.",
       swahiliPhrase: "Ndege wa maji (Water bird)",
-      shortDesc: "A tranquil waterside restaurant in the Schwari neighbourhood known for its fresh seafood, lush garden seating, and live weekend jazz performances. Blue Heron blends Swahili coastal flavors with a modern fine-dining presentation."
+      shortDesc: "A beloved Arusha staple bridging the gap between a peaceful garden sanctuary and an active social hub. Features wood-fired pizzas, Schwari padel courts, and local crafts shopping.",
+      hasDetailedGuide: true,
+      vibe: "Relaxed, Garden Oasis, & Multi-Generational",
+      bestTime: "Weekend lunches for families, or late afternoons for wood-fired pizza and sunset drinks.",
+      perfectFor: "Families, groups of friends, foodies, and padel players looking for a scenic game and casual dining.",
+      overview: "The Blue Heron is a beloved Arusha staple that masterfully bridges the gap between a peaceful garden sanctuary and an active social hub. Nestled on a beautiful property featuring expansive, regenerating green lawns, it is designed for long, lazy afternoons that easily stretch into cozy evenings.",
+      whatToDo: [
+        { title: "Schwari Padel Centre", text: "Play Padel on the top-tier courts (operated in partnership with Padel Centre TZ) set within the gorgeous gardens." },
+        { title: "Wood-Fired Dining", text: "Order from their menu, famous locally for wood-fired pizzas, fresh farm-to-table salads, and large shareable comfort food portions." },
+        { title: "Artisan Shopping", text: "Browse the on-site boutique featuring ethical local crafts (including hand-woven products from WomenCraft) and custom handmade clothing." }
+      ],
+      theScene: "The Blue Heron has an unpretentious atmosphere that feels both vibrant and deeply relaxing. By day, you will find families enjoying weekend brunches and friends gathering under the mature trees. As the sun sets, the mood shifts into a cozy lounge vibe: perfect for a girls' night out, post-padel drinks, or a romantic dinner. It draws a pleasant blend of travellers, expats, and longtime Arusha residents.",
+      insiderTip: "If you want to play a game on the new padel courts, it is highly recommended to book your slot in advance through the Padel Centre Tanzania platform, as peak evening and weekend times fill up fast!",
+      goIfYou: [
+        "Want an excellent meal (especially wood-fired pizza) in a beautiful, open-air garden setting.",
+        "Are travelling with family or a group and need a space that accommodates all ages.",
+        "Want to pair a high-energy sport like Padel with a relaxed post-game drink and boutique shopping."
+      ],
+      avoidIf: [
+        "You want a fast, grab-and-go dining experience: service here follows a relaxed, leisurely pace.",
+        "You are strictly on a tight backpacker budget (the portions are large, but prices are slightly higher than typical local eateries)."
+      ]
     },
     {
       altId: '6d',
@@ -262,9 +382,29 @@ const RouteEngine = (() => {
       image: "assets/hero.png",
       lat: -3.392684,
       lng: 36.627238,
-      localTip: "Dine under the giant fig tree canopy — the monkeys (tumbili) often swing by during lunch!",
       swahiliPhrase: "Nyumba ya tumbili (House of monkeys)",
-      shortDesc: "Nestled within a private wildlife conservancy, Tumbili Lodge offers an immersive bush dining experience. Watch colobus monkeys play in the canopy overhead while enjoying wood-fired pizzas and fresh tropical juice blends."
+      shortDesc: "A hidden culinary sanctuary in the quiet suburbs of Olasiti. Features manicured garden pathways, a central fish pond, cozy fireplace terrace, and local/sushi menus.",
+      hasDetailedGuide: true,
+      vibe: "Peaceful, Botanical Oasis, & Intimate",
+      bestTime: "Late afternoon (around 4:00 PM) for garden walks and sundowners, leading into dinner.",
+      perfectFor: "Foodies looking for a hidden gem, couples seeking a romantic setting, and travellers wanting a quiet, nature-filled escape.",
+      overview: "Tumbili Lodge is a beautiful boutique estate located in the quiet outskirts of Arusha (near Olasiti), but you don't need to check in to experience its best features. For day visitors, the property opens up as a stunning, hidden culinary sanctuary. Surrounded by mature acacia trees, vibrant tropical plants, and a beautiful central pond, the estate feels like a secret botanical garden.",
+      whatToDo: [
+        { title: "Intimate Dining", text: "Dine at the restaurant, which boasts a highly praised menu that creatively spins local ingredients into international delicacies, alongside a specialized Friday sushi menu." },
+        { title: "Sundowners by the Pond", text: "Grab a cocktail or a glass of wine from the bar and sit on the terrace next to the fish pond as golden hour fades." },
+        { title: "Garden Wandering", text: "Walk the manicured pathways before your meal: true to its name ('Tumbili' means monkey in Swahili), you are highly likely to spot playful monkeys leaping through the canopy." }
+      ],
+      theScene: "The atmosphere at Tumbili is defined by absolute tranquillity. Because it functions primarily as a boutique lodge, the restaurant never feels overcrowded, offering a level of privacy that is hard to find in central Arusha. Tables are spaced generously across outside terraces, garden nooks, and around the pond, shifting into a romantic, candle-lit ambiance as night falls.",
+      insiderTip: "If your schedule allows, aim for a Friday visit to experience their specialized sushi menu alongside their standard à la carte options, and make sure to request a table right by the pond for the best sunset views.",
+      goIfYou: [
+        "Want an exceptional, peaceful dining experience away from the noise of the city centre.",
+        "Are looking for a scenic, nature-rich spot for afternoon drinks or sunset cocktails.",
+        "Appreciate fresh, farm-to-table menus with great options for both meat-eaters and vegetarians."
+      ],
+      avoidIf: [
+        "You want a quick stopover: the venue is located a bit further out in the suburbs and deserves a leisurely, unhurried afternoon.",
+        "You are looking for a high-energy social scene or a bustling nightlife crowd."
+      ]
     },
     // --- Canvas & Clay alternatives ---
     {
@@ -274,9 +414,29 @@ const RouteEngine = (() => {
       image: "assets/hero.png",
       lat: -3.392783,
       lng: 36.704375,
-      localTip: "Stock up on Tanzanian chocolate bars (Kokoa Kamili) — they make excellent souvenirs.",
       swahiliPhrase: "Duka kuu la kijiji (Village supermarket)",
-      shortDesc: "Njiro's largest modern grocery store, stocked with imported goods, local organic produce, and a well-curated deli counter. Perfect for picking up snacks, bottled water, and local treats before continuing your safari."
+      shortDesc: "A modern, high-end family-run grocery chain. Perfect for digital nomads, international restocks, or a quick coffee/gelato at the attached cafe.",
+      hasDetailedGuide: true,
+      vibe: "Familiar, Westernised, & Convenient",
+      bestTime: "Mid-morning for grocery restocks and coffee, or a quick lunch stop between itinerary segments.",
+      perfectFor: "Expats, safari travellers needing a serious snack haul, and digital nomads seeking a clean, air-conditioned workspace.",
+      overview: "With its primary branch in the residential Njiro area (and another at AIM Mall on Dodoma Road), Village Supermarket is a high-end, family-run grocery chain that serves as a comforting slice of home for international travellers. It offers a clean, air-conditioned urban escape featuring premium imports and an attached cafe.",
+      whatToDo: [
+        { title: "The Supermarket Haul", text: "Browse spotlessly clean aisles stocked with premium global imports, organic/gluten-free specialty items, an international wine market, an in-house bakery, and a fresh butcher shop." },
+        { title: "The In-Store Café", text: "Enjoy a latte, fresh in-house gelato, or a multi-cuisine menu (ranging from toasted sandwiches to Indian biryani) at the attached Village Cafe." },
+        { title: "Work in Comfort", text: "Open a laptop in the cafe: a quiet sanctuary for digital nomads with fast Wi-Fi, abundant power outlets, and a safe, unbothered environment." }
+      ],
+      theScene: "The atmosphere at Village Supermarket and its café is a stark contrast to Arusha’s chaotic open-air street markets. It is exceptionally clean, organised, and modern, acting as a convenient restock station before setting out on safaris.",
+      insiderTip: "If you are staying on the southern side of the city near Njiro, the Njiro Complex branch is widely considered the cleanest, most reliably managed commercial spot in the neighbourhood. Make sure to try their fresh gelato after you wrap up your grocery shopping.",
+      goIfYou: [
+        "Need specialized dietary products (gluten-free, organic) or specific international brands you forgot to pack.",
+        "Want a secure, clean environment to open a laptop, use fast Wi-Fi, and enjoy a quality coffee.",
+        "Are setting out on a multi-day safari and need a comprehensive snack and supply restock."
+      ],
+      avoidIf: [
+        "You are looking for an immersive, deeply traditional Tanzanian market experience (head to the Maasai Market instead).",
+        "You expect fast-paced, high-speed kitchen service at the café: the staff is exceptionally warm, but the kitchen operates at a typical, relaxed local pace."
+      ]
     },
     {
       altId: '7b',
@@ -617,9 +777,7 @@ const RouteEngine = (() => {
     document.querySelectorAll('.sidebar-link').forEach(btn => btn.classList.remove('active'));
     document.querySelectorAll('.sidebar-sub-link').forEach(btn => btn.classList.remove('active'));
     document.querySelectorAll('.sidebar-alt-link').forEach(btn => btn.classList.remove('active'));
-    
-    // Auto-hide any active full detail overlays to transition seamlessly between tabs
-    const overlay = document.getElementById('detail-overlay');
+        const overlay = document.getElementById('detail-overlay');
     if (overlay) {
       overlay.classList.remove('active');
       document.body.style.overflow = '';
@@ -628,6 +786,702 @@ const RouteEngine = (() => {
     activeStopIndex = null;
     activeAltId = null;
     refreshMarkerStates();
+  };
+
+  // Dynamic full guide compiler for main stops
+  const compileDetailedGuide = (node, container) => {
+    // 1. Full Image
+    const fullImg = document.createElement('img');
+    fullImg.src = node.image;
+    fullImg.className = 'w-full h-56 object-cover rounded-2xl border border-stone-200 mb-6';
+    container.appendChild(fullImg);
+
+    // 2. Category Badge
+    const catBadge = document.createElement('span');
+    catBadge.className = 'badge-jungle text-xs mb-3 inline-block';
+    catBadge.textContent = `${node.time} | ${node.category}`;
+    container.appendChild(catBadge);
+
+    // 3. Heading
+    const titleEl = document.createElement('h3');
+    titleEl.className = 'text-2xl font-black text-slate-800 tracking-tight mb-4';
+    titleEl.textContent = node.title;
+    container.appendChild(titleEl);
+
+    // 4. Custom compilations for specific stops
+    if (node.index === 0) { // Fifi's Café
+      // Welcoming message
+      const welcomePara = document.createElement('p');
+      welcomePara.className = 'text-sm text-stone-600 leading-relaxed mb-4 font-medium';
+      welcomePara.textContent = "Karibuni Arusha! Mizizi Bajaj Adventures is a locally designed tour experience made to enjoy at your pace using the most local mode of travel: the Tanzanian Bajaj (or \"tuk-tuk\", as the more travelled of you might know it).";
+      container.appendChild(welcomePara);
+
+      const routeOverview = document.createElement('p');
+      routeOverview.className = 'text-sm text-stone-600 leading-relaxed mb-4 font-medium';
+      routeOverview.textContent = "This Central Route is a 9-hour adrenaline high loop through Arusha. You'll explore the historic clock tower, view raw tanzanite gemstone checklists, African art, coffee plantations, sunset views, authentic culinary foods, and maybe... just maybe you'll get to experience and see Arushan life beyond the usual tourist experience.";
+      container.appendChild(routeOverview);
+
+      // Main full description
+      const descEl = document.createElement('p');
+      descEl.className = 'text-sm text-stone-600 leading-relaxed mb-6 font-medium';
+      descEl.textContent = node.fullDesc;
+      container.appendChild(descEl);
+    } 
+    else if (node.index === 1) { // Clock Tower
+      const desc1 = document.createElement('p');
+      desc1.className = 'text-sm text-stone-600 leading-relaxed mb-4 font-medium';
+      desc1.textContent = "The Arusha Clock Tower: midpoint between Cairo and Cape Town... or is it actually? The true depth of the history of the clock tower lies less in the story of its construction and more in the rich colonial history of the area where it stands.";
+      container.appendChild(desc1);
+
+      const sub1 = document.createElement('h4');
+      sub1.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-2 border-b pb-1';
+      sub1.textContent = "Pre-War Era";
+      container.appendChild(sub1);
+
+      const desc2 = document.createElement('p');
+      desc2.className = 'text-sm text-stone-600 leading-relaxed mb-4 font-medium';
+      desc2.textContent = "This tour properly begins at the Arusha Clock Tower, a significant symbol of Arusha's colonial history. This area was once inhabited by the agro-pastoralist Arusha Maasai, attracted by its cooler climate, fertile volcanic soil, and plentiful water sources for livestock and agriculture. Colonial ambitions of the German Empire (the first colonial power to claim Arusha), led by Captain Kurt Johannes, involved military force to dominate the local population and establish a lasting presence. The Arusha Clock Tower now stands on the site of the former German Fortress Boma, the headquarters of this colonial expansion.";
+      container.appendChild(desc2);
+
+      const sub2 = document.createElement('h4');
+      sub2.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-2 border-b pb-1';
+      sub2.textContent = "British Colonisation";
+      container.appendChild(sub2);
+
+      const desc3 = document.createElement('p');
+      desc3.className = 'text-sm text-stone-600 leading-relaxed mb-4 font-medium';
+      desc3.textContent = "Arusha transitioned from a military garrison to a commercial town during World War I in 1916 when the British took control, leading to the emergence of a notable Greek community. The Arusha Clock Tower, a gift from Christos Galanos, a Greek millionaire, symbolises the 'rags-to-riches' story of the early 20th-century East African diaspora. Galanos arrived in East Africa around 1908 as a railway subcontractor and, coming from humble beginnings, built a fortune through sisal and coffee farming, owning large estates in Tanga, Nairobi, Morogoro, and Lindi. He donated the clock tower to commemorate the end of World War II, with the plaque that reads: 'Presented by Christos Galanos, Esquire, to commemorate the glorious victory of the Allied Nations, 1945.'";
+      container.appendChild(desc3);
+
+      const sub3 = document.createElement('h4');
+      sub3.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-2 border-b pb-1';
+      sub3.textContent = "The Midpoint Myth: Cape to Cairo and the Colonial Fantasy";
+      container.appendChild(sub3);
+
+      const desc4 = document.createElement('p');
+      desc4.className = 'text-sm text-stone-600 leading-relaxed mb-4 font-medium';
+      desc4.textContent = "The Arusha Clock Tower is often claimed to be the halfway point between Cairo, Egypt, and Cape Town, South Africa, a notion stemming from the 'Cape to Cairo' vision of British colonialist Cecil Rhodes for a continuous line of British territories and a transcontinental railway across Africa. Although this claim is scientifically inaccurate, the myth endures, as the tower symbolises the heart of the former British Empire in Africa and serves as a landmark for overland travellers exploring the continent by car or motorcycle.";
+      container.appendChild(desc4);
+
+      const sub4 = document.createElement('h4');
+      sub4.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-2 border-b pb-1';
+      sub4.textContent = "The Arusha Clock Tower on Screen";
+      container.appendChild(sub4);
+
+      const desc5 = document.createElement('p');
+      desc5.className = 'text-sm text-stone-600 leading-relaxed mb-6 font-medium';
+      desc5.textContent = "The clock tower features prominently in the John Wayne film, Hatari!, offering a glimpse into Tanzania's pre-conservation history. A memorable scene shows a baby elephant chasing the character 'Dallas' into the nearby 'Clock Tower Supermarket', which is still operational today, with the exit used by the character still recognisable.";
+      container.appendChild(desc5);
+
+      // Timeline Table
+      const tblTitle = document.createElement('h4');
+      tblTitle.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-3 border-b pb-1';
+      tblTitle.textContent = "⌛ Historical Milestones Timeline";
+      container.appendChild(tblTitle);
+
+      const timelineData = [
+        { y: "1830s", m: "Arusha Maasai settle the Meru slopes." },
+        { y: "1896", m: "German military occupation begins." },
+        { y: "1900", m: "The Old Boma is constructed using forced labour." },
+        { y: "1916", m: "British forces take control during WWI." },
+        { y: "1930", m: "Railway expansion from Moshi to Arusha opens." },
+        { y: "1945", m: "The Clock Tower is built by Christos Galanos to mark the WWII victory." },
+        { y: "1953", m: "A crown was placed on the tower for Queen Elizabeth II's coronation." },
+        { y: "1960", m: "Filming of Hatari! begins in Arusha." },
+        { y: "1961", m: "Documents for Tanganyika independence signed in Arusha." },
+        { y: "1967", m: "The Arusha Declaration was proclaimed by Julius Nyerere." },
+        { y: "2000", m: "Bill Clinton labels Arusha the 'Geneva of Africa'." },
+        { y: "2006", m: "Arusha was officially declared a city." }
+      ];
+
+      const table = document.createElement('table');
+      table.className = 'w-full text-xs text-left border-collapse border border-stone-200 mb-6';
+      
+      const thead = document.createElement('thead');
+      thead.className = 'bg-stone-50 border-b border-stone-200';
+      thead.innerHTML = `<tr>
+        <th class="p-2.5 font-extrabold text-slate-800 w-20">Year</th>
+        <th class="p-2.5 font-extrabold text-slate-800">Historical Milestone</th>
+      </tr>`;
+      table.appendChild(thead);
+
+      const tbody = document.createElement('tbody');
+      timelineData.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.className = 'border-b border-stone-100 hover:bg-stone-50';
+        tr.innerHTML = `<td class="p-2.5 font-bold text-amber-600">${row.y}</td>
+          <td class="p-2.5 text-stone-600 font-medium">${row.m}</td>`;
+        tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
+      container.appendChild(table);
+    } 
+    else if (node.index === 2) { // Tanzanite Experience
+      const desc1 = document.createElement('p');
+      desc1.className = 'text-sm text-stone-600 leading-relaxed mb-6 font-medium';
+      desc1.textContent = node.fullDesc;
+      container.appendChild(desc1);
+
+      const sub1 = document.createElement('h4');
+      sub1.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-2 border-b pb-1';
+      sub1.textContent = "The History of Discovery";
+      container.appendChild(sub1);
+
+      const desc2 = document.createElement('p');
+      desc2.className = 'text-sm text-stone-600 leading-relaxed mb-4 font-medium';
+      desc2.textContent = "Tanzanite is one of the most important mineralogical discoveries of the 20th century. The gem was first discovered by Jumanne Mhero Ngoma in January 1967, but it was the efforts of Manuel de Souza, a Goan tailor and part-time prospector, with the find in July 1967 that set the course of the gem's global recognition and scientific identification.";
+      container.appendChild(desc2);
+
+      const sub2 = document.createElement('h4');
+      sub2.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-2 border-b pb-1';
+      sub2.textContent = "Maasai Fire Legend";
+      container.appendChild(sub2);
+
+      const desc3 = document.createElement('p');
+      desc3.className = 'text-sm text-stone-600 leading-relaxed mb-4 font-medium';
+      desc3.textContent = "A lesser-known Maasai legend speaks of a bush fire near Mount Kilimanjaro that heated brown zoisite crystals, transforming them into stunning blue gems. The Maasai found these radiant stones among the ashes and shared them with prospectors like de Souza. This cultural connection persists, as the Maasai associate the colour blue with spirituality and purity. The tanzanite industry has a complex relationship with the Maasai. They possess a profound spiritual bond with the land and regard tanzanite as a representation of the sky and purity. However, the industry's expansion has displaced them from their ancestral territories. The discovery and mining of tanzanite have also generated significant wealth and opportunities for certain Maasai families and tribes.";
+      container.appendChild(desc3);
+
+      const sub3 = document.createElement('h4');
+      sub3.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-2 border-b pb-1';
+      sub3.textContent = "Tiffany & Co.'s Role: Branding and Market Hegemony";
+      container.appendChild(sub3);
+
+      const desc4 = document.createElement('p');
+      desc4.className = 'text-sm text-stone-600 leading-relaxed mb-6 font-medium';
+      desc4.textContent = "Tiffany & Co. played an essential role in transforming tanzanite from a local curiosity into a global luxury gem. Recognising its potential shortly after its 1968 discovery, Henry B. Platt, great-grandson of Louis Comfort Tiffany, and the marketing team opted for the name 'TANZANITE' over 'blue zoisite' to honour its origin, making it the only gemstone named after a country. Tiffany secured exclusive selling rights for several years and launched a strong advertising campaign. Today, tanzanite is mined in only two locations, including Tanzania. By 2001, it became the second most popular coloured gemstone in the American market, after sapphire. Tiffany & Co.’s branding exemplifies effective gemstone marketing, turning a mineral similar to smoky quartz into a valuable competitor to diamonds, rubies, and emeralds. Unlike diamonds, tanzanite is a limited resource found only in one area. Geologists predict that the Mererani deposits may be depleted in 10 to 30 years, earning tanzanite the title of the 'one-generation gemstone', which poses significant implications for its value.";
+      container.appendChild(desc4);
+    } 
+    else if (node.index === 3) { // Maasai Market
+      const desc1 = document.createElement('p');
+      desc1.className = 'text-sm text-stone-600 leading-relaxed mb-6 font-medium';
+      desc1.textContent = node.fullDesc;
+      container.appendChild(desc1);
+
+      // Embedded authentic photos grid for rich visual experience
+      const imageGrid = document.createElement('div');
+      imageGrid.className = 'grid grid-cols-2 gap-3 mb-6';
+      imageGrid.innerHTML = `
+        <img src="assets/maasaiwoman.jpg" class="w-full h-36 object-cover rounded-xl border border-stone-200" alt="Maasai Woman Artisan">
+        <img src="assets/maasaimarketgirl.jpg" class="w-full h-36 object-cover rounded-xl border border-stone-200" alt="Maasai Market Bead Seller">
+      `;
+      container.appendChild(imageGrid);
+
+      const sub1 = document.createElement('h4');
+      sub1.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-2 border-b pb-1';
+      sub1.textContent = "Maasai Market Curios & Craft";
+      container.appendChild(sub1);
+
+      const desc2 = document.createElement('p');
+      desc2.className = 'text-sm text-stone-600 leading-relaxed mb-4 font-medium';
+      desc2.textContent = "The Maasai market encompasses more than just Maasai artwork and artisans. For the Maasai, Chagga, Pare, and Meru peoples of northern Tanzania, craftsmanship represents a 'living museum' of heritage, evolving from rural traditions to urban micro-enterprises.";
+      container.appendChild(desc2);
+
+      const sub2 = document.createElement('h4');
+      sub2.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-2 border-b pb-1';
+      sub2.textContent = "Bead & Artisan Artworks";
+      container.appendChild(sub2);
+
+      const desc3 = document.createElement('p');
+      desc3.className = 'text-sm text-stone-600 leading-relaxed mb-4 font-medium';
+      desc3.textContent = "Maasai bead and leather adornments vividly reflect their rich cultural heritage. The intricate patterns, jewellery shapes, and colours act as historical records passed down through generations, communicating status and rites of passage long before literacy. For instance, the wedding necklace (Enkarewa) employs specific colours to signify fertility and family harmony. Although materials have shifted from 19th-century Venetian and Bohemian glass beads to modern recycled items like plastic and thread, the essence and cultural significance of the beadwork remain intact. The beads, bracelets, and colours in Maasai attire illustrate the community’s connection to the land, each other, and the phase of life they are in. Individual colour choices are rarely based on personal preference: instead, they are strictly determined by age set, gender, and social status.";
+      container.appendChild(desc3);
+
+      const sub3 = document.createElement('h4');
+      sub3.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-2 border-b pb-1';
+      sub3.textContent = "The Market as a Living Archive";
+      container.appendChild(sub3);
+
+      const bulletList = document.createElement('ul');
+      bulletList.className = 'list-disc pl-5 space-y-2.5 text-xs text-stone-600 font-medium mb-6 leading-relaxed';
+      bulletList.innerHTML = `
+        <li><strong>Preservation of Craft:</strong> By providing a consistent monetary incentive, the market protects ancient woodcarving, leathercrafting, and textile practices from disappearing. It serves as a canvas of stories where every carving and bead carries the imprint of family history and cultural memory.</li>
+        <li><strong>Female Empowerment:</strong> Traditionally confined to the domestic sphere, Maasai women (YeYo or 'Mamas') now operate independent micro-enterprises within the market.</li>
+        <li><strong>Economic Impact:</strong> The income generated from these sales is often used to fund community health, medical expenses, and education (schooling for children) back in their native villages.</li>
+      `;
+      container.appendChild(bulletList);
+
+      // Colors Table
+      const colTitle = document.createElement('h4');
+      colTitle.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-3 border-b pb-1';
+      colTitle.textContent = "🎨 Maasai Color Symbolism Chart";
+      container.appendChild(colTitle);
+
+      const colorsData = [
+        { c: "Red", bg: "bg-red-600 text-white", m: "Blood, cattle, & bravery", msg: "Strength, bravery, and unity.", n: "A dominant colour worn post-circumcision by the young warrior class/generation of the Maasai (the Moran phase)." },
+        { c: "White", bg: "bg-white text-stone-700 border border-stone-200", m: "Cow's milk", msg: "Peace, purity, & good health.", n: "A staple in Maasai jewellery and beadwork: white is frequently worn during major life transitions like weddings and age-grade ceremonies." },
+        { c: "Blue", bg: "bg-blue-600 text-white", m: "Sky and rain", msg: "Energy, wisdom, spirituality, & marital bonds.", n: "Blue becomes prominent as Maasai men and women marry and leave the warrior phase, adopting dark blues and blacks. For older adults and elders, blue signifies maturity, responsibility, and the sanctity of marriage." },
+        { c: "Green", bg: "bg-green-600 text-white", m: "Grass & pastures", msg: "Good health, growth, & connection to the land.", n: "Rather than being worn as a solid-coloured cloak, green is integrated into traditional practices through beadwork, ceremonies, and plant rituals." },
+        { c: "Black", bg: "bg-stone-900 text-white", m: "Wisdom, People & Struggle", msg: "Endurance, community solidarity, & the divine.", n: "Unlike in many other cultures where black represents mourning, the Maasai view black as a positive colour of divine protection, identity, and resilience. Young boys wear solid-black cloaks for 4 to 8 months immediately following their circumcision during warrior training." },
+        { c: "Yellow/Orange", bg: "bg-amber-400 text-stone-800", m: "Sun, warmth, & animal skins", msg: "Hospitality, friendship, fertility, & continuation of life.", n: "Women are the primary wearers of heavy yellow beadwork, usually in large, flat circular collars, earrings, and necklaces to broadcast homestead hospitality." }
+      ];
+
+      const cTable = document.createElement('table');
+      cTable.className = 'w-full text-[11px] text-left border-collapse border border-stone-200 mb-6';
+      
+      const cThead = document.createElement('thead');
+      cThead.className = 'bg-stone-50 border-b border-stone-200';
+      cThead.innerHTML = `<tr>
+        <th class="p-2 font-extrabold text-slate-800 w-24">Color Code</th>
+        <th class="p-2 font-extrabold text-slate-800 w-24">Natural Meaning</th>
+        <th class="p-2 font-extrabold text-slate-800 w-32">Symbolism</th>
+        <th class="p-2 font-extrabold text-slate-800">Guide Notes</th>
+      </tr>`;
+      cTable.appendChild(cThead);
+
+      const cTbody = document.createElement('tbody');
+      colorsData.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.className = 'border-b border-stone-100 hover:bg-stone-50';
+        tr.innerHTML = `
+          <td class="p-2 font-black"><span class="px-2 py-1 rounded ${row.bg} text-[10px] font-black uppercase tracking-wider block text-center">${row.c}</span></td>
+          <td class="p-2 font-bold text-stone-700">${row.m}</td>
+          <td class="p-2 font-semibold text-amber-700">${row.msg}</td>
+          <td class="p-2 text-stone-500 font-medium leading-normal">${row.n}</td>
+        `;
+        cTbody.appendChild(tr);
+      });
+      cTable.appendChild(cTbody);
+      container.appendChild(cTable);
+
+      // Insider Negotiation Tactics
+      const sub4 = document.createElement('h4');
+      sub4.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-2 border-b pb-1';
+      sub4.textContent = "Insider Negotiation Tactics";
+      container.appendChild(sub4);
+
+      const desc4 = document.createElement('p');
+      desc4.className = 'text-sm text-stone-600 leading-relaxed mb-6 font-medium';
+      desc4.innerHTML = `
+        <strong>Clarify the Currency:</strong> Seasoned vendors here, when negotiating with tourists, will often quote a flat number, like 'Twenty'. Never assume: always ask for immediate clarification: 'Twenty US Dollars, or twenty-thousand Tanzanian Shillings?'<br><br>
+        <strong>The Baseline Rule:</strong> As a benchmark, 1,000 Tanzanian Shillings (TZS) holds a similar psychological value to locals as $1 USD or £1 GBP does back home. Before bidding, ask yourself what you would realistically pay for the item in a boutique shop in your home country. If it feels like a $20 item, starting your bid around 20,000 to 25,000 TZS is a solid, fair jumping-off point.
+      `;
+      container.appendChild(desc4);
+    } 
+    else if (node.index === 5) { // Cultural Heritage Centre
+      const desc1 = document.createElement('p');
+      desc1.className = 'text-sm text-stone-600 leading-relaxed mb-6 font-medium';
+      desc1.textContent = node.fullDesc;
+      container.appendChild(desc1);
+
+      // Arch Element Table
+      const tblTitle1 = document.createElement('h4');
+      tblTitle1.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-3 border-b pb-1';
+      tblTitle1.textContent = "🛡️ Symbolic Architecture Breakdown";
+      container.appendChild(tblTitle1);
+
+      const archData = [
+        { e: "The Drum", m: "Unity, Communication, Celebration", r: "Main gathering space and entry points for communal exhibits." },
+        { e: "The Spear", m: "Defence and Valour", r: "Facade integration and entry totems signalling a secure space for culture." },
+        { e: "The Shield", m: "Protection and Resilience", r: "Structural motifs that house the most precious artifacts." }
+      ];
+
+      const table1 = document.createElement('table');
+      table1.className = 'w-full text-xs text-left border-collapse border border-stone-200 mb-6';
+      table1.innerHTML = `
+        <thead class="bg-stone-50 border-b border-stone-200">
+          <tr>
+            <th class="p-2.5 font-extrabold text-slate-800 w-28">Architectural Icon</th>
+            <th class="p-2.5 font-extrabold text-slate-800 w-36">Symbolic Meaning</th>
+            <th class="p-2.5 font-extrabold text-slate-800">Functional Role within the Centre</th>
+          </tr>
+        </thead>
+      `;
+      const tbody1 = document.createElement('tbody');
+      archData.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.className = 'border-b border-stone-100 hover:bg-stone-50';
+        tr.innerHTML = `<td class="p-2.5 font-bold text-amber-700">${row.e}</td>
+          <td class="p-2.5 font-semibold text-stone-700">${row.m}</td>
+          <td class="p-2.5 text-stone-500 font-medium">${row.r}</td>`;
+        tbody1.appendChild(tr);
+      });
+      table1.appendChild(tbody1);
+      container.appendChild(table1);
+
+      const desc2 = document.createElement('p');
+      desc2.className = 'text-sm text-stone-600 leading-relaxed mb-6 font-medium';
+      desc2.textContent = "The centre's most significant role is as a sanctuary for 'dying' arts: as the old artisans who hold the secrets of traditional carving and mask-making pass away, and the younger generation moves to cities, the Centre preserves these masteries. Since Tanzania contains over 120 distinct ethnic groups living in relative harmony, the Centre acts as a single compound where the past and present of all these tribes can be viewed.";
+      container.appendChild(desc2);
+
+      // Diplomatic Table
+      const tblTitle2 = document.createElement('h4');
+      tblTitle2.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-3 border-b pb-1';
+      tblTitle2.textContent = "🤝 Royal and Diplomatic Guest Register";
+      container.appendChild(tblTitle2);
+
+      const guestData = [
+        { g: "Bill Clinton", r: "Former US President", d: "Visited in 2000 (signed Burundi peace accord), planned 15-minute shopping but stayed 1 hour 15 minutes, bought $1,400 of art, and returned twice since as a civilian enthusiast." },
+        { g: "King Harald V", r: "King of Norway", d: "Accompanied by Queen Sonja and Princess Märtha Louise." },
+        { g: "Thabo Mbeki", r: "President of South Africa", d: "Visited with his wife Zanele Mbeki, emphasizing pan-African solidarity." },
+        { g: "James Baker", r: "Former US Secretary of State", d: "A repeat visitor who stopped by the centre twice while on private hunting safaris." },
+        { g: "Warren Christopher", r: "Former US Secretary of State", d: "Visited in 1996 for regional meetings with African leaders including Julius Nyerere." }
+      ];
+
+      const table2 = document.createElement('table');
+      table2.className = 'w-full text-xs text-left border-collapse border border-stone-200 mb-6';
+      table2.innerHTML = `
+        <thead class="bg-stone-50 border-b border-stone-200">
+          <tr>
+            <th class="p-2.5 font-extrabold text-slate-800 w-28">Guest Name</th>
+            <th class="p-2.5 font-extrabold text-slate-800 w-36">Title/Role</th>
+            <th class="p-2.5 font-extrabold text-slate-800">Notable Detail of Visit</th>
+          </tr>
+        </thead>
+      `;
+      const tbody2 = document.createElement('tbody');
+      guestData.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.className = 'border-b border-stone-100 hover:bg-stone-50';
+        tr.innerHTML = `<td class="p-2.5 font-bold text-amber-700">${row.g}</td>
+          <td class="p-2.5 font-semibold text-stone-700">${row.r}</td>
+          <td class="p-2.5 text-stone-500 font-medium leading-normal">${row.d}</td>`;
+        tbody2.appendChild(tr);
+      });
+      table2.appendChild(tbody2);
+      container.appendChild(table2);
+
+      // Tribal Exhibits
+      const tblTitle3 = document.createElement('h4');
+      tblTitle3.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-3 border-b pb-1';
+      tblTitle3.textContent = "🛖 Tribal Exhibits & Key Artifacts";
+      container.appendChild(tblTitle3);
+
+      const tribalData = [
+        { t: "Maasai", a: "Beadwork, Shukas, Spears", s: "Colors in beadwork represent values like bravery (red) and purity (white)." },
+        { t: "Makonde", a: "Ebony 'Family Trees', Masks", s: "Famous for abstract and symbolic representations of the human spirit." },
+        { t: "Chaga", a: "Traditional tools, Musical instruments", s: "Reflects the history of the coffee-growing people of Mount Kilimanjaro." },
+        { t: "Sukuma", a: "Ceremonial drums, Pottery", s: "Representation of the largest ethnic group in Tanzania and their social structures." },
+        { t: "Hadzabe", a: "Traditional bows and arrows", s: "Showcases the lifestyle of one of the world's last remaining hunter-gatherer tribes." }
+      ];
+
+      const table3 = document.createElement('table');
+      table3.className = 'w-full text-xs text-left border-collapse border border-stone-200 mb-6';
+      table3.innerHTML = `
+        <thead class="bg-stone-50 border-b border-stone-200">
+          <tr>
+            <th class="p-2.5 font-extrabold text-slate-800 w-28">Tribe</th>
+            <th class="p-2.5 font-extrabold text-slate-800 w-36">Iconic Artifacts on Display</th>
+            <th class="p-2.5 font-extrabold text-slate-800">Cultural Significance</th>
+          </tr>
+        </thead>
+      `;
+      const tbody3 = document.createElement('tbody');
+      tribalData.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.className = 'border-b border-stone-100 hover:bg-stone-50';
+        tr.innerHTML = `<td class="p-2.5 font-bold text-amber-700">${row.t}</td>
+          <td class="p-2.5 font-semibold text-stone-700">${row.a}</td>
+          <td class="p-2.5 text-stone-500 font-medium leading-normal">${row.s}</td>`;
+        tbody3.appendChild(tr);
+      });
+      table3.appendChild(tbody3);
+      container.appendChild(table3);
+    } 
+    else if (node.index === 6) { // Coffee Lodge
+      const desc1 = document.createElement('p');
+      desc1.className = 'text-sm text-stone-600 leading-relaxed mb-6 font-medium';
+      desc1.textContent = node.fullDesc;
+      container.appendChild(desc1);
+
+      const sub1 = document.createElement('h4');
+      sub1.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-2 border-b pb-1';
+      sub1.textContent = "Arusha Coffee Lodge: More Than a Place to Sleep";
+      container.appendChild(sub1);
+
+      const desc2 = document.createElement('p');
+      desc2.className = 'text-sm text-stone-600 leading-relaxed mb-4 font-medium';
+      desc2.textContent = "Before we even walk through those gates, stop and breathe. That smell: that's not the restaurant, that's not a candle. That's actual coffee, growing all around you, right now. You are standing inside a working farm. This is the Elewana Arusha Coffee Lodge, and it sits inside the Burka Coffee Estate, one of the oldest coffee plantations in Tanzania. The first seeds went into this volcanic soil in 1899. German settlers planted them, then the British took over after World War One. Then Swiss investors bought it, and then Tanzania became independent and everything changed again. This land has seen a lot.";
+      container.appendChild(desc2);
+
+      const desc3 = document.createElement('p');
+      desc3.className = 'text-sm text-stone-600 leading-relaxed mb-4 font-medium';
+      desc3.textContent = "All of this, the coffee, the forest, the springs you can hear, it all comes from one source: Mount Meru. That mountain is a dormant volcano, and for thousands of years it has been pushing minerals up through the soil (potassium, phosphorus, all the things that make Arabica coffee taste the way it does). The water in those springs? It filters through layers of volcanic rock deep inside the mountain before it comes out here, clean and cold. The Waarusha people, who have lived on these slopes for centuries, believe the mountain is sacred. Every year, elders climb to specific spots in the forest and make a sacrifice to call for rain: a tradition still alive today. This 118-hectare forest alongside the estate is one of the last native forests left inside Arusha town, hosting colobus monkeys in the canopy, bushbuck moving through at dusk, and over 120 bird species.";
+      container.appendChild(desc3);
+
+      const sub2 = document.createElement('h4');
+      sub2.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-2 border-b pb-1';
+      sub2.textContent = "Shanga Ethical Workshop";
+      container.appendChild(sub2);
+
+      const desc4 = document.createElement('p');
+      desc4.className = 'text-sm text-stone-600 leading-relaxed mb-4 font-medium';
+      desc4.textContent = "In 2007, a woman named Saskia Rechsteiner started making fabric necklaces in her backyard to help a local deaf woman earn some money. The necklaces sold out at a holiday fair, so she built a workshop. Today, that workshop employs over 70 people with physical and mental disabilities. Deaf, mute, and physically challenged artisans work full time collecting old wine and spirit bottles from safari lodges, crushing the glass, melting it at 1,500 degrees, and blowing it by hand into carafes and beads. Shanga runs the only glass-blowing operation in Tanzania. You may have seen photos of Amal Clooney wearing a beaded necklace made here, or read about the Duchess of Edinburgh's visit in October 2024, where the team spent three days weaving her a custom scarf by hand.";
+      container.appendChild(desc4);
+
+      const sub3 = document.createElement('h4');
+      sub3.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-2 border-b pb-1';
+      sub3.textContent = "A Legacy of Hospitality: Denise Sulle";
+      container.appendChild(sub3);
+
+      const desc5 = document.createElement('p');
+      desc5.className = 'text-sm text-stone-600 leading-relaxed mb-6 font-medium';
+      desc5.textContent = "Denise Sulle turned 80 this year. He was born in Karatu in 1944 and started working in hospitality in 1967 as a bar cleaner. Within two weeks, he was promoted to waiter. He spent the next decades serving guests, including President Julius Nyerere, Tanzania's founding father. He retired at 65, then joined this lodge, going through full training to welcome guests on the SkySafari route: a job he still does today. Two of his children now work in Tanzanian hospitality.";
+      container.appendChild(desc5);
+    } 
+    else if (node.index === 9) { // Gran Melia
+      const desc1 = document.createElement('p');
+      desc1.className = 'text-sm text-stone-600 leading-relaxed mb-6 font-medium';
+      desc1.textContent = node.fullDesc;
+      container.appendChild(desc1);
+
+      const sub1 = document.createElement('h4');
+      sub1.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-2 border-b pb-1';
+      sub1.textContent = "The Story Behind '77'";
+      container.appendChild(sub1);
+
+      const desc2 = document.createElement('p');
+      desc2.className = 'text-sm text-stone-600 leading-relaxed mb-4 font-medium';
+      desc2.textContent = "Locals still call this place '77'. Not because of an address, but because of a hotel the whole city remembers. In 1979, Tanzania's founding president Julius Nyerere had an ambitious goal: prove that an African city could host a global diplomatic summit at the highest level. Arusha was chosen as the venue for the Conference of the Group of 77, a bloc of developing nations pushing for a fairer world economy. To receive these world leaders, the Tanzanian government built a landmark state hotel right here on this ground and named it Hotel 77, featuring over 300 rooms and 23 presidential suites. Through the 1980s, it was the social heart of Arusha, hosting diplomats making deals at the bar and travellers dancing all night at Mawingu, the most famous discotheque in the region.";
+      container.appendChild(desc2);
+
+      // Gran Melia Timeline Table
+      const tblTitle = document.createElement('h4');
+      tblTitle.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-3 border-b pb-1';
+      tblTitle.textContent = "⌛ Timeline of the Land";
+      container.appendChild(tblTitle);
+
+      const hotelTimeline = [
+        { y: "1979", m: "Hotel 77 opens", d: "Built by the Tanzanian government to host the G-77 summit. President Nyerere signals to the world that Arusha is a serious diplomatic city." },
+        { y: "1980s", m: "The golden era", d: "The hotel becomes the social and political centre of Arusha. Diplomats, travellers, and locals fill its bars, restaurants, and the legendary Mawingu disco." },
+        { y: "Late 1990s", m: "A slow decline", d: "The technology ages, the carpets wear thin, and the magic fades. The government decides to privatise the property." },
+        { y: "Early 2000s", m: "Years of uncertainty", d: "A local developer wins the contract but political changes cancel the deal. Dubai-based Albwardy Investments takes over, triggering a long legal battle. Hyatt and Kempinski plans fall through." },
+        { y: "2019", m: "Gran Meliá Arusha opens", d: "A boutique luxury resort of 171 rooms rises from the same ground, bringing Spanish design and Tanzanian culture together." }
+      ];
+
+      const hTable = document.createElement('table');
+      hTable.className = 'w-full text-xs text-left border-collapse border border-stone-200 mb-6';
+      hTable.innerHTML = `
+        <thead class="bg-stone-50 border-b border-stone-200">
+          <tr>
+            <th class="p-2.5 font-extrabold text-slate-800 w-20">Year</th>
+            <th class="p-2.5 font-extrabold text-slate-800 w-36">Milestone</th>
+            <th class="p-2.5 font-extrabold text-slate-800">History & Context</th>
+          </tr>
+        </thead>
+      `;
+      const hTbody = document.createElement('tbody');
+      hotelTimeline.forEach(row => {
+        hTbody.innerHTML += `<tr class="border-b border-stone-100 hover:bg-stone-50">
+          <td class="p-2.5 font-bold text-amber-600">${row.y}</td>
+          <td class="p-2.5 font-semibold text-stone-700">${row.m}</td>
+          <td class="p-2.5 text-stone-500 font-medium leading-normal">${row.d}</td>
+        </tr>`;
+      });
+      hTable.appendChild(hTbody);
+      container.appendChild(hTable);
+
+      const sub2 = document.createElement('h4');
+      sub2.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-2 border-b pb-1';
+      sub2.textContent = "What Makes This Place Different";
+      container.appendChild(sub2);
+
+      const bulletList = document.createElement('ul');
+      bulletList.className = 'list-disc pl-5 space-y-2.5 text-xs text-stone-600 font-medium mb-6 leading-relaxed';
+      bulletList.innerHTML = `
+        <li><strong>The Sanaa Workshop:</strong> A social enterprise employing Tanzanian artists living with disabilities. Glassblowers melt down the hotel's empty wine bottles to create handmade vases. Every purchase goes directly to the artists.</li>
+        <li><strong>A World-Class Kitchen:</strong> Celebrity chef Sanjeev Kapoor leads Yellow Chilli, bringing authentic Indian flavours rooted in the Mughal Empire.</li>
+        <li><strong>The Roof:</strong> Arusha's finest sundowner spot. Unobstructed views of Mount Meru, Peruvian-Spanish tapas, and cocktails made with organic ingredients from the hotel's own gardens.</li>
+        <li><strong>The Infinity Pool:</strong> Green tiles that mirror the surrounding forest, with lounge beds half-submerged in shallow water.</li>
+      `;
+      container.appendChild(bulletList);
+    } 
+    else {
+      // Fallback description for other locations (Index 4, 7, 8, 10)
+      const descEl = document.createElement('p');
+      descEl.className = 'text-sm text-stone-600 leading-relaxed mb-6 font-medium';
+      descEl.textContent = node.fullDesc;
+      container.appendChild(descEl);
+    }
+
+    // 5. Transit/Safety Warn Card (universal if safetyTips exists)
+    if (node.safetyTips) {
+      const warnCard = document.createElement('div');
+      warnCard.className = 'bg-stone-50 border border-stone-200 rounded-xl p-4 flex gap-3 items-start mb-6 text-xs text-stone-600';
+      warnCard.innerHTML = `<span class="text-lg">⚠️</span>
+        <div>
+          <p class="font-extrabold uppercase text-[10px] tracking-widest text-slate-500 mb-0.5">Logistics & Safety Warning</p>
+          <p class="font-medium">${node.safetyTips}</p>
+        </div>`;
+      container.appendChild(warnCard);
+    }
+
+    // 6. Swahili Lesson Title & dialogues (universal if swahiliLesson exists)
+    if (node.swahiliLesson) {
+      const lessonTitle = document.createElement('h4');
+      lessonTitle.className = 'text-sm font-black text-jungle uppercase tracking-widest mb-3 border-b pb-2';
+      lessonTitle.textContent = "🗣️ Local Swahili Lesson";
+      container.appendChild(lessonTitle);
+
+      const swahiliEl = document.createElement('pre');
+      swahiliEl.className = 'bg-stone-50 rounded-xl p-4 text-xs font-semibold text-stone-700 leading-relaxed whitespace-pre-wrap font-sans';
+      swahiliEl.textContent = node.swahiliLesson;
+      container.appendChild(swahiliEl);
+    }
+
+    // 7. Audio Guide — Load to Global Player
+    if (node.audioGuide) {
+      const audioTitle = document.createElement('h4');
+      audioTitle.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-3 border-b pb-2';
+      audioTitle.textContent = "🎧 Atmospheric Audio Guide";
+      container.appendChild(audioTitle);
+
+      const audioTrigger = document.createElement('div');
+      audioTrigger.className = 'bg-emerald-950 text-white rounded-2xl p-4 flex items-center justify-between gap-4 shadow-sm cursor-pointer hover:bg-emerald-900 transition-colors';
+
+      const audioInfo = document.createElement('div');
+      audioInfo.className = 'space-y-0.5';
+
+      const audioTrackName = document.createElement('p');
+      audioTrackName.className = 'text-xs font-black tracking-wider text-ochre uppercase';
+      audioTrackName.textContent = node.title + ' — Narration';
+
+      const audioHint = document.createElement('p');
+      audioHint.className = 'text-[10px] text-emerald-300 font-semibold';
+      audioHint.textContent = 'Tap to play in audio player ▸';
+
+      audioInfo.appendChild(audioTrackName);
+      audioInfo.appendChild(audioHint);
+
+      const playBtn = document.createElement('button');
+      playBtn.className = 'p-3 bg-ochre text-jungle rounded-full font-black text-xs hover:bg-white transition-colors flex items-center justify-center flex-shrink-0';
+      playBtn.innerHTML = `<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+
+      const triggerPlay = () => {
+        GlobalAudioPlayer.load(`${node.title} — ${node.category}`, `assets/${node.audioGuide}`);
+      };
+      audioTrigger.addEventListener('click', triggerPlay);
+      playBtn.addEventListener('click', (e) => { e.stopPropagation(); triggerPlay(); });
+
+      audioTrigger.appendChild(audioInfo);
+      audioTrigger.appendChild(playBtn);
+      container.appendChild(audioTrigger);
+    }
+  };
+
+  // Dynamic full guide compiler for detour stops
+  const compileDetailedAltGuide = (alt, container) => {
+    // 1. Full Image
+    const fullImg = document.createElement('img');
+    fullImg.src = alt.image;
+    fullImg.className = 'w-full h-56 object-cover rounded-2xl border border-stone-200 mb-6';
+    container.appendChild(fullImg);
+
+    // 2. Detour Badge
+    const badge = document.createElement('span');
+    badge.className = 'badge-gold text-xs mb-3 inline-block';
+    badge.textContent = `Detour Option | Alternative Stop`;
+    container.appendChild(badge);
+
+    // 3. Heading
+    const titleEl = document.createElement('h3');
+    titleEl.className = 'text-2xl font-black text-slate-800 tracking-tight mb-4';
+    titleEl.textContent = alt.title;
+    container.appendChild(titleEl);
+
+    // 4. Quick Info Box (Vibe, Best Time, Perfect For)
+    const infoBox = document.createElement('div');
+    infoBox.className = 'bg-stone-50 border border-stone-200 rounded-xl p-4 space-y-2 mb-6 text-xs text-stone-600';
+    infoBox.innerHTML = `
+      <div><span class="font-extrabold uppercase text-[9px] tracking-widest text-slate-400 block">The Vibe</span><span class="font-bold text-slate-700">${alt.vibe}</span></div>
+      <div class="border-t border-stone-100 pt-2"><span class="font-extrabold uppercase text-[9px] tracking-widest text-slate-400 block">Best Time to Visit</span><span class="font-bold text-slate-700">${alt.bestTime}</span></div>
+      <div class="border-t border-stone-100 pt-2"><span class="font-extrabold uppercase text-[9px] tracking-widest text-slate-400 block">Perfect For</span><span class="font-bold text-slate-700">${alt.perfectFor}</span></div>
+    `;
+    container.appendChild(infoBox);
+
+    // 5. Overview Paragraph
+    const overviewTitle = document.createElement('h4');
+    overviewTitle.className = 'text-sm font-black text-jungle uppercase tracking-widest mb-2 border-b pb-1';
+    overviewTitle.textContent = "Overview";
+    container.appendChild(overviewTitle);
+
+    const overviewEl = document.createElement('p');
+    overviewEl.className = 'text-sm text-stone-600 leading-relaxed mb-6 font-medium';
+    overviewEl.textContent = alt.overview;
+    container.appendChild(overviewEl);
+
+    // 6. What to Do
+    if (alt.whatToDo && alt.whatToDo.length > 0) {
+      const whatTitle = document.createElement('h4');
+      whatTitle.className = 'text-sm font-black text-jungle uppercase tracking-widest mb-3 border-b pb-1';
+      whatTitle.textContent = "🏃 What to Do";
+      container.appendChild(whatTitle);
+
+      const whatList = document.createElement('div');
+      whatList.className = 'space-y-4 mb-6';
+      alt.whatToDo.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = 'flex gap-3 items-start text-xs';
+        div.innerHTML = `
+          <span class="w-5 h-5 rounded-full bg-amber-400 text-jungle flex items-center justify-center font-black flex-shrink-0">${index + 1}</span>
+          <div>
+            <p class="font-extrabold text-slate-800 mb-0.5">${item.title}</p>
+            <p class="text-stone-600 font-medium leading-normal">${item.text}</p>
+          </div>
+        `;
+        whatList.appendChild(div);
+      });
+      container.appendChild(whatList);
+    }
+
+    // 7. The Scene
+    const sceneTitle = document.createElement('h4');
+    sceneTitle.className = 'text-sm font-black text-jungle uppercase tracking-widest mb-2 border-b pb-1';
+    sceneTitle.textContent = "🎭 The Scene";
+    container.appendChild(sceneTitle);
+
+    const sceneEl = document.createElement('p');
+    sceneEl.className = 'text-sm text-stone-600 leading-relaxed mb-6 font-medium bg-stone-50 rounded-xl p-4 border-l-4 border-amber-400';
+    sceneEl.textContent = alt.theScene;
+    container.appendChild(sceneEl);
+
+    // 8. Insider Tip
+    const tipCard = document.createElement('div');
+    tipCard.className = 'bg-amber-50 border border-amber-200 rounded-xl p-4 flex gap-3 items-start mb-6 text-xs text-amber-800';
+    tipCard.innerHTML = `
+      <span class="text-lg">💡</span>
+      <div>
+        <p class="font-extrabold uppercase text-[10px] tracking-widest text-amber-600 mb-0.5">Insider Tip</p>
+        <p class="font-medium leading-normal">${alt.insiderTip}</p>
+      </div>
+    `;
+    container.appendChild(tipCard);
+
+    // 9. Go If You vs Avoid If Split Grid
+    const splitGrid = document.createElement('div');
+    splitGrid.className = 'grid grid-cols-1 md:grid-cols-2 gap-4 mb-6';
+
+    const goCard = document.createElement('div');
+    goCard.className = 'bg-emerald-50 border border-emerald-100 rounded-xl p-4 space-y-2 text-xs';
+    goCard.innerHTML = `<p class="font-extrabold text-emerald-800 uppercase text-[10px] tracking-widest mb-2">✔️ Go If You</p>`;
+    alt.goIfYou.forEach(point => {
+      const row = document.createElement('div');
+      row.className = 'flex gap-2 items-start text-emerald-700 font-medium';
+      row.innerHTML = `<span class="flex-shrink-0">✦</span><span>${point}</span>`;
+      goCard.appendChild(row);
+    });
+
+    const avoidCard = document.createElement('div');
+    avoidCard.className = 'bg-rose-50 border border-rose-100 rounded-xl p-4 space-y-2 text-xs';
+    avoidCard.innerHTML = `<p class="font-extrabold text-rose-800 uppercase text-[10px] tracking-widest mb-2">❌ Avoid If</p>`;
+    alt.avoidIf.forEach(point => {
+      const row = document.createElement('div');
+      row.className = 'flex gap-2 items-start text-rose-700 font-medium';
+      row.innerHTML = `<span class="flex-shrink-0">✦</span><span>${point}</span>`;
+      avoidCard.appendChild(row);
+    });
+
+    splitGrid.appendChild(goCard);
+    splitGrid.appendChild(avoidCard);
+    container.appendChild(splitGrid);
+
+    // 10. Directions Button
+    const dirBtn = document.createElement('a');
+    dirBtn.href = `https://www.google.com/maps/dir/?api=1&destination=${alt.lat},${alt.lng}`;
+    dirBtn.target = '_blank';
+    dirBtn.className = 'w-full py-3.5 bg-emerald-900 hover:bg-emerald-950 text-white font-extrabold rounded-xl text-xs uppercase tracking-widest text-center block shadow-md';
+    dirBtn.textContent = 'Get Directions 🚗';
+    container.appendChild(dirBtn);
   };
 
   // Render locations sub-menu detail card in Column 2
@@ -687,90 +1541,7 @@ const RouteEngine = (() => {
     btn.addEventListener('click', () => {
       // Trigger dynamic detail overlay compilation
       openOverlay(`${node.title} - Detailed Guide`, (container) => {
-        // Build sanitized overlay details
-        
-        // Image
-        const fullImg = document.createElement('img');
-        fullImg.src = node.image;
-        fullImg.className = 'w-full h-56 object-cover rounded-2xl border border-stone-200 mb-6';
-        container.appendChild(fullImg);
-
-        // Category Badge
-        const catBadge = document.createElement('span');
-        catBadge.className = 'badge-jungle text-xs mb-3 inline-block';
-        catBadge.textContent = `${node.time} | ${node.category}`;
-        container.appendChild(catBadge);
-
-        // Heading
-        const titleEl = document.createElement('h3');
-        titleEl.className = 'text-2xl font-black text-slate-800 tracking-tight mb-4';
-        titleEl.textContent = node.title;
-        container.appendChild(titleEl);
-
-        // Core Description
-        const descEl = document.createElement('p');
-        descEl.className = 'text-sm text-stone-600 leading-relaxed mb-6 font-medium';
-        descEl.textContent = node.fullDesc;
-        container.appendChild(descEl);
-
-        // Transit/Safety Warn Card
-        const warnCard = document.createElement('div');
-        warnCard.className = 'bg-stone-50 border border-stone-200 rounded-xl p-4 flex gap-3 items-start mb-6 text-xs text-stone-600';
-        warnCard.innerHTML = `<span class="text-lg">⚠️</span>
-          <div>
-            <p class="font-extrabold uppercase text-[10px] tracking-widest text-slate-500 mb-0.5">Logistics & Safety Warning</p>
-            <p class="font-medium">${node.safetyTips}</p>
-          </div>`;
-        container.appendChild(warnCard);
-
-        // Swahili Lesson Title
-        const lessonTitle = document.createElement('h4');
-        lessonTitle.className = 'text-sm font-black text-jungle uppercase tracking-widest mb-3 border-b pb-2';
-        lessonTitle.textContent = "🗣️ Local Swahili Lesson";
-        container.appendChild(lessonTitle);
-
-        // Swahili Dialogues
-        const swahiliEl = document.createElement('pre');
-        swahiliEl.className = 'bg-stone-50 rounded-xl p-4 text-xs font-semibold text-stone-700 leading-relaxed whitespace-pre-wrap font-sans';
-        swahiliEl.textContent = node.swahiliLesson;
-        container.appendChild(swahiliEl);
-
-        // Audio Guide — Load to Global Player
-        const audioTitle = document.createElement('h4');
-        audioTitle.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-3 border-b pb-2';
-        audioTitle.textContent = "🎧 Atmospheric Audio Guide";
-        container.appendChild(audioTitle);
-
-        const audioTrigger = document.createElement('div');
-        audioTrigger.className = 'bg-emerald-950 text-white rounded-2xl p-4 flex items-center justify-between gap-4 shadow-sm cursor-pointer hover:bg-emerald-900 transition-colors';
-
-        const audioInfo = document.createElement('div');
-        audioInfo.className = 'space-y-0.5';
-
-        const audioTrackName = document.createElement('p');
-        audioTrackName.className = 'text-xs font-black tracking-wider text-ochre uppercase';
-        audioTrackName.textContent = node.title + ' — Narration';
-
-        const audioHint = document.createElement('p');
-        audioHint.className = 'text-[10px] text-emerald-300 font-semibold';
-        audioHint.textContent = 'Tap to play in audio player ▸';
-
-        audioInfo.appendChild(audioTrackName);
-        audioInfo.appendChild(audioHint);
-
-        const playBtn = document.createElement('button');
-        playBtn.className = 'p-3 bg-ochre text-jungle rounded-full font-black text-xs hover:bg-white transition-colors flex items-center justify-center flex-shrink-0';
-        playBtn.innerHTML = `<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
-
-        const triggerPlay = () => {
-          GlobalAudioPlayer.load(`${node.title} — ${node.category}`, `assets/${node.audioGuide}`);
-        };
-        audioTrigger.addEventListener('click', triggerPlay);
-        playBtn.addEventListener('click', (e) => { e.stopPropagation(); triggerPlay(); });
-
-        audioTrigger.appendChild(audioInfo);
-        audioTrigger.appendChild(playBtn);
-        container.appendChild(audioTrigger);
+        compileDetailedGuide(node, container);
       });
     });
 
@@ -816,7 +1587,7 @@ const RouteEngine = (() => {
     // 2. Swahili Phrase badge
     const lingoBadge = document.createElement('div');
     lingoBadge.className = 'badge-gold text-[10px] py-1.5 px-3 rounded-lg flex items-center gap-1.5 font-bold tracking-wider';
-    lingoBadge.innerHTML = `\uD83D\uDDE3\uFE0F <span class="truncate">${alt.swahiliPhrase}</span>`;
+    lingoBadge.innerHTML = `🗣️ <span class="truncate">${alt.swahiliPhrase}</span>`;
     detailsBody.appendChild(lingoBadge);
 
     // 3. Short description
@@ -826,17 +1597,32 @@ const RouteEngine = (() => {
     detailsBody.appendChild(desc);
 
     // 4. Local Tip card
-    const tipCard = document.createElement('div');
-    tipCard.className = 'bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-800 flex gap-2 items-start';
-    tipCard.innerHTML = `<span>\uD83D\uDCA1</span><div><p class="font-extrabold uppercase text-[10px] tracking-widest text-amber-600 mb-0.5">Local Tip</p><p class="font-medium">${alt.localTip}</p></div>`;
-    detailsBody.appendChild(tipCard);
+    if (alt.localTip) {
+      const tipCard = document.createElement('div');
+      tipCard.className = 'bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-800 flex gap-2 items-start';
+      tipCard.innerHTML = `<span>💡</span><div><p class="font-extrabold uppercase text-[10px] tracking-widest text-amber-600 mb-0.5">Local Tip</p><p class="font-medium">${alt.localTip}</p></div>`;
+      detailsBody.appendChild(tipCard);
+    }
 
-    // 5. Get Directions link (no Read More button)
+    // 5. Read More button (if detour guide exists)
+    if (alt.hasDetailedGuide) {
+      const readMoreBtn = document.createElement('button');
+      readMoreBtn.className = 'w-full py-3 btn-gold text-xs uppercase tracking-widest font-black shadow-md mt-2';
+      readMoreBtn.textContent = 'Read Full Detour Guide';
+      readMoreBtn.addEventListener('click', () => {
+        openOverlay(`${alt.title} - Detailed Guide`, (container) => {
+          compileDetailedAltGuide(alt, container);
+        });
+      });
+      detailsBody.appendChild(readMoreBtn);
+    }
+
+    // 6. Get Directions link
     const dirLink = document.createElement('a');
     dirLink.href = `https://www.google.com/maps/dir/?api=1&destination=${alt.lat},${alt.lng}`;
     dirLink.target = '_blank';
-    dirLink.className = 'w-full py-3 btn-jungle text-xs uppercase tracking-widest font-black shadow-md mt-auto text-center block';
-    dirLink.textContent = 'Get Directions \uD83D\uDE97';
+    dirLink.className = 'w-full py-3 btn-jungle text-xs uppercase tracking-widest font-black shadow-md mt-auto text-center block text-white';
+    dirLink.textContent = 'Get Directions 🚗';
     detailsBody.appendChild(dirLink);
   };
 
@@ -1007,9 +1793,20 @@ const RouteEngine = (() => {
       container.appendChild(header);
 
       const intro = document.createElement('p');
-      intro.className = 'text-sm text-stone-600 leading-relaxed mb-6 font-medium';
+      intro.className = 'text-sm text-stone-600 leading-relaxed mb-4 font-medium';
       intro.textContent = "Kiswahili is the beautiful national language of Tanzania. While many tourism workers speak English, local Bajaj (Tuk-Tuk) drivers and street artists appreciate when you show respect by speaking Swahili. It breaks down walls immediately, brings big smiles, and ensures you get authentic local rates!";
       container.appendChild(intro);
+
+      // "Naomba" vs "Nataka" custom card
+      const politeCard = document.createElement('div');
+      politeCard.className = 'bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6 text-xs text-amber-900';
+      politeCard.innerHTML = `
+        <p class="font-extrabold uppercase text-[10px] tracking-widest text-amber-700 mb-1.5">💡 Tanzanian Politeness Protocol</p>
+        <p class="font-semibold leading-relaxed">
+          Always use <strong>"Naomba..."</strong> (~nah-woh-mbah~, meaning "I Humbly Request...") to ask for anything in Tanzania. While Kenyan Swahili commonly uses "Nataka" ("I want"), Tanzanians view "Nataka" as a direct command or demand, which they consider rude, bossy, and impolite.
+        </p>
+      `;
+      container.appendChild(politeCard);
 
       // Swahili Audio Tracks — Load to Global Player
       const soundTitle = document.createElement('h4');
