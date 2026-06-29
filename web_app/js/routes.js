@@ -526,6 +526,14 @@ const RouteEngine = (() => {
 
     if (!overlay || !overlayTitle || !overlayContent) return;
 
+    // Auto-collapse the 2nd column (details panel) so it doesn't obscure the overlay
+    const detailsCol = document.getElementById('sidebar-details-column');
+    const overlayClick = document.getElementById('map-click-overlay');
+    const toggleArrow = document.getElementById('details-toggle-arrow');
+    if (detailsCol) detailsCol.classList.add('collapsed');
+    if (overlayClick) overlayClick.classList.remove('active');
+    if (toggleArrow) toggleArrow.style.transform = 'rotate(180deg)';
+
     // Securely set Title
     overlayTitle.textContent = title;
 
@@ -2746,6 +2754,71 @@ const RouteEngine = (() => {
 
         // Bind navigation hooks
         bindEvents();
+
+        // ===== Touch Swipe Gesture Support (Mobile) =====
+        (() => {
+          let touchStartX = 0;
+          let touchStartY = 0;
+          let touchStartTime = 0;
+          const SWIPE_THRESHOLD = 60;  // Minimum horizontal distance
+          const SWIPE_MAX_Y = 80;      // Maximum vertical drift
+          const EDGE_ZONE = 40;        // Left-edge trigger zone in px
+
+          const openSidebar = () => {
+            const sb = document.getElementById('sidebar');
+            const hb = document.getElementById('hamburger-btn');
+            const io = document.getElementById('hamburger-icon-open');
+            const ic = document.getElementById('hamburger-icon-close');
+            if (sb && !sb.classList.contains('active')) {
+              sb.classList.add('active');
+              if (hb) hb.classList.add('active');
+              if (io) io.classList.add('hidden');
+              if (ic) ic.classList.remove('hidden');
+            }
+          };
+
+          const closeSidebar = () => {
+            const sb = document.getElementById('sidebar');
+            const hb = document.getElementById('hamburger-btn');
+            const io = document.getElementById('hamburger-icon-open');
+            const ic = document.getElementById('hamburger-icon-close');
+            if (sb && sb.classList.contains('active')) {
+              sb.classList.remove('active');
+              if (hb) hb.classList.remove('active');
+              if (io) io.classList.remove('hidden');
+              if (ic) ic.classList.add('hidden');
+              const overlay = document.getElementById('map-click-overlay');
+              if (overlay) overlay.classList.remove('active');
+            }
+          };
+
+          document.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            touchStartTime = Date.now();
+          }, { passive: true });
+
+          document.addEventListener('touchend', (e) => {
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
+            const elapsed = Date.now() - touchStartTime;
+
+            // Only process quick, intentional horizontal swipes
+            if (dy > SWIPE_MAX_Y || elapsed > 400) return;
+
+            const sb = document.getElementById('sidebar');
+            const isSidebarOpen = sb && sb.classList.contains('active');
+
+            // Swipe right from left edge to open
+            if (dx > SWIPE_THRESHOLD && touchStartX < EDGE_ZONE && !isSidebarOpen) {
+              openSidebar();
+            }
+            // Swipe left anywhere on sidebar to close
+            if (dx < -SWIPE_THRESHOLD && isSidebarOpen) {
+              closeSidebar();
+            }
+          }, { passive: true });
+        })();
 
         // Initialize live Leaflet.js interactive maps
         initLeafletMap();
