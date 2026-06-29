@@ -534,6 +534,9 @@ const RouteEngine = (() => {
     if (overlayClick) overlayClick.classList.remove('active');
     if (toggleArrow) toggleArrow.style.transform = 'rotate(180deg)';
 
+    // Auto-collapse the main sidebar (Column 1) so it doesn't cover overlay contents
+    closeMainSidebar();
+
     // Securely set Title
     overlayTitle.textContent = title;
 
@@ -802,6 +805,22 @@ const RouteEngine = (() => {
     activeStopIndex = null;
     activeAltId = null;
     refreshMarkerStates();
+  };
+
+  // Helper to programmatically close the main sidebar (Column 1)
+  const closeMainSidebar = () => {
+    const sb = document.getElementById('sidebar');
+    const hb = document.getElementById('hamburger-btn');
+    const io = document.getElementById('hamburger-icon-open');
+    const ic = document.getElementById('hamburger-icon-close');
+    if (sb && sb.classList.contains('active')) {
+      sb.classList.remove('active');
+      if (hb) hb.classList.remove('active');
+      if (io) io.classList.remove('hidden');
+      if (ic) ic.classList.add('hidden');
+      const overlay = document.getElementById('map-click-overlay');
+      if (overlay) overlay.classList.remove('active');
+    }
   };
 
   // Dynamic full guide compiler for main stops
@@ -2455,6 +2474,9 @@ const RouteEngine = (() => {
         if (mapClickOverlay) {
           mapClickOverlay.classList.remove('active');
         }
+
+        // Collapse the main sidebar (Column 1) so the full map backdrop is revealed
+        closeMainSidebar();
 
         // Smooth autozoom to fit the entire adventure trail loop into the viewport
         if (map && routePolylineGroup) {
