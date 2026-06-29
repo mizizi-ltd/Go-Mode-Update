@@ -791,6 +791,14 @@ const RouteEngine = (() => {
       document.body.style.overflow = '';
     }
 
+    // Collapse the 2nd column (details panel) so it moves out of the way
+    const detailsCol = document.getElementById('sidebar-details-column');
+    const overlayClick = document.getElementById('map-click-overlay');
+    const toggleArrow = document.getElementById('details-toggle-arrow');
+    if (detailsCol) detailsCol.classList.add('collapsed');
+    if (overlayClick) overlayClick.classList.remove('active');
+    if (toggleArrow) toggleArrow.style.transform = 'rotate(180deg)';
+
     activeStopIndex = null;
     activeAltId = null;
     refreshMarkerStates();

@@ -844,9 +844,13 @@ img {
 
 /* Collapsed state for Column 2 Details Panel (Requirement 1) */
 .sidebar-details.collapsed {
-  width: 0;
+  width: 0 !important;
+  min-width: 0 !important;
+  flex-grow: 0 !important;
+  flex-basis: 0 !important;
   border-right-width: 0;
   overflow: hidden;
+  padding: 0;
 }
 
 /* Column 2 Float Border toggle arrow button (Requirement 1) */
@@ -1013,6 +1017,15 @@ img {
   .sidebar-details {
     flex-grow: 1;
     width: auto; /* Takes the rest of the mobile screen */
+  }
+  .sidebar-details.collapsed {
+    width: 0 !important;
+    min-width: 0 !important;
+    flex-grow: 0 !important;
+    flex-basis: 0 !important;
+    overflow: hidden;
+    padding: 0;
+    border-right-width: 0;
   }
 
   /* Sidebar brand spacer: ensure hamburger/X never overlaps menu */
