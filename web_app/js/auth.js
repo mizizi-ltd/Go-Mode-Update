@@ -143,15 +143,15 @@ const FirebaseSim = (() => {
   };
 })();
 
-// Guard app.html from unauthorized intruders
-if (window.location.pathname.endsWith('app.html')) {
-  document.addEventListener('DOMContentLoaded', () => {
+// Guard app.html and dashboard.html from unauthorized intruders
+document.addEventListener('DOMContentLoaded', () => {
+  const path = window.location.pathname;
+  if (path.endsWith('app.html') || path.endsWith('dashboard.html')) {
     FirebaseSim.onAuthStateChanged((user) => {
       if (!user) {
-        // Instantly bounce intruders out to the landing page
         console.warn('Unauthorized intruder detected. Redirecting to access gate...');
         window.location.replace('index.html');
       }
     });
-  });
-}
+  }
+});

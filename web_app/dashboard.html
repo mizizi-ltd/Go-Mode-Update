@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mizizi Route Portal - Select Your City Adventure</title>
+  <meta name="description" content="Access your self-guided municipal travel guides, browse international packages, and manage your billing settings.">
+  
+  <!-- Tailwind CSS via Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            jungle: '#0B3C2B',
+            ochre: '#E5A93C',
+            sand: '#F7F5F0',
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Custom Mizizi Styling -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-[#F3F4F6]">
+
+  <!-- Mobile-First Smartphone Wrapper -->
+  <div class="app-wrapper flex flex-col justify-between bg-sand">
+    
+    <!-- Top Global Header -->
+    <header class="jungle-header flex items-center justify-between px-6 py-4 sticky top-0 z-40 shadow-md">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-full bg-ochre flex items-center justify-center font-black text-jungle text-lg">M</div>
+        <span class="font-extrabold text-lg tracking-wider text-ochre">MIZIZI</span>
+      </div>
+      <button id="dashboard-logout-btn" class="px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider bg-red-600 text-white hover:bg-red-700 transition-all">Sign Out</button>
+    </header>
+
+    <!-- Abandoned Cart Discount Banner (Hidden by default) -->
+    <div id="abandonment-banner" class="hidden bg-amber-50 border-b border-amber-200 px-6 py-3.5 flex items-start gap-3 text-xs text-amber-900 animate-slide-in-right">
+      <span class="text-base flex-shrink-0">💡</span>
+      <div class="flex-grow pr-4">
+        <p class="font-extrabold uppercase text-[10px] tracking-widest text-amber-700 mb-0.5">Special Recovery Discount</p>
+        <p class="font-semibold leading-relaxed">
+          Finish your setup! Use code <strong class="text-amber-800">MIZIZI10</strong> at checkout for an instant 10% discount on the Arusha City Loop.
+        </p>
+      </div>
+      <button id="close-banner-btn" class="text-stone-400 hover:text-stone-600 font-bold text-sm select-none">✕</button>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow p-6 space-y-6">
+      
+      <!-- Welcome Profile Section -->
+      <section class="bg-white rounded-3xl p-6 border border-stone-200 shadow-sm space-y-2">
+        <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest">Rider Portal</p>
+        <h1 class="text-2xl font-black text-slate-800 tracking-tight leading-none" id="welcome-title">Welcome, Traveller!</h1>
+        <div class="flex items-center gap-1.5 text-xs text-emerald-600 font-bold">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span id="user-email" class="truncate font-medium text-stone-500">loading profile...</span>
+        </div>
+      </section>
+
+      <!-- Route Catalog Section -->
+      <section class="space-y-6">
+        <div class="flex justify-between items-baseline">
+          <h2 class="text-xl font-black text-slate-800 tracking-tight">Adventure Catalog</h2>
+          <span class="badge-gold" id="route-count-badge">1 Unlocked</span>
+        </div>
+        
+        <!-- Routes Grid grouped by Country -->
+        <div class="space-y-6">
+          
+          <!-- Country Group: Tanzania -->
+          <div class="space-y-3">
+            <h3 class="text-xs font-black text-stone-400 uppercase tracking-widest border-b pb-1.5 flex items-center gap-1.5">
+              <span>🇹🇿</span> Tanzania
+            </h3>
+            
+            <!-- Route Card: Arusha -->
+            <div class="mizizi-card bg-white p-4 relative overflow-hidden flex flex-col gap-4 border border-stone-200">
+              <div class="flex gap-4">
+                <img src="assets/arusha-clock-tower.jpg" class="w-20 h-20 object-cover rounded-xl border border-stone-200 flex-shrink-0" alt="Arusha Loop">
+                <div class="min-width-0 flex-grow">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="badge-jungle">9 Hours Loop</span>
+                    <span class="text-xs font-bold text-amber-600" id="arusha-status-price">£6.00</span>
+                  </div>
+                  <h4 class="font-extrabold text-slate-800 text-sm">Arusha Inner-City Loop</h4>
+                  <p class="text-stone-400 text-xs mt-1 leading-relaxed">A wild, high-value street safari balancing local Bajaj transits with dining anchors and deep history.</p>
+                </div>
+              </div>
+              
+              <!-- Features Bullet list -->
+              <div class="bg-stone-50 border border-stone-150 rounded-xl p-3 text-[11px] text-stone-500 space-y-1.5">
+                <p class="font-extrabold uppercase text-[9px] tracking-wider text-stone-400">Included Features</p>
+                <div class="grid grid-cols-2 gap-x-2 gap-y-1 font-semibold">
+                  <div class="flex items-center gap-1">🟢 9 City Stops</div>
+                  <div class="flex items-center gap-1">🟢 Offline Maps</div>
+                  <div class="flex items-center gap-1">🟢 Swahili Guide</div>
+                  <div class="flex items-center gap-1">🟢 Audio Narration</div>
+                </div>
+              </div>
+              
+              <button id="arusha-action-btn" class="w-full py-3.5 rounded-xl font-black text-xs uppercase tracking-widest transition-all text-center block shadow-sm">
+                Loading status...
+              </button>
+            </div>
+          </div>
+
+          <!-- Country Group: Kenya (Coming Soon) -->
+          <div class="space-y-3">
+            <h3 class="text-xs font-black text-stone-400 uppercase tracking-widest border-b pb-1.5 flex items-center gap-1.5">
+              <span>🇰🇪</span> Kenya
+            </h3>
+            
+            <!-- Nairobi Card -->
+            <div class="mizizi-card bg-stone-50 p-4 opacity-75 border border-stone-200">
+              <div class="flex gap-4">
+                <div class="w-20 h-20 bg-stone-200 rounded-xl flex items-center justify-center text-stone-400 font-extrabold text-xs flex-shrink-0">🇰🇪</div>
+                <div>
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="badge-gold">Nairobi</span>
+                    <span class="text-xs font-bold text-stone-400">Coming Soon</span>
+                  </div>
+                  <h4 class="font-extrabold text-slate-400 text-sm">Nairobi Street Beat</h4>
+                  <p class="text-stone-400 text-xs mt-1 leading-relaxed">Explore the lively backstreets of the Green City in the Sun, including local markets and Matatu culture.</p>
+                </div>
+              </div>
+              <button disabled class="w-full py-3.5 bg-stone-200 text-stone-400 rounded-xl font-black text-xs uppercase tracking-widest mt-4 cursor-not-allowed">
+                Coming Soon
+              </button>
+            </div>
+          </div>
+
+          <!-- Country Group: Uganda (Coming Soon) -->
+          <div class="space-y-3">
+            <h3 class="text-xs font-black text-stone-400 uppercase tracking-widest border-b pb-1.5 flex items-center gap-1.5">
+              <span>🇺🇬</span> Uganda
+            </h3>
+            
+            <!-- Kampala Card -->
+            <div class="mizizi-card bg-stone-50 p-4 opacity-75 border border-stone-200">
+              <div class="flex gap-4">
+                <div class="w-20 h-20 bg-stone-200 rounded-xl flex items-center justify-center text-stone-400 font-extrabold text-xs flex-shrink-0">🇺🇬</div>
+                <div>
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="badge-gold">Kampala</span>
+                    <span class="text-xs font-bold text-stone-400">Coming Soon</span>
+                  </div>
+                  <h4 class="font-extrabold text-slate-400 text-sm">Kampala Hills Explorer</h4>
+                  <p class="text-stone-400 text-xs mt-1 leading-relaxed">Scale Kampala's historical hills via local boda-bodas to visit historic temples and street-food joints.</p>
+                </div>
+              </div>
+              <button disabled class="w-full py-3.5 bg-stone-200 text-stone-400 rounded-xl font-black text-xs uppercase tracking-widest mt-4 cursor-not-allowed">
+                Coming Soon
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer Area -->
+    <footer class="bg-jungle text-stone-300 text-center py-6 px-4 text-xs font-semibold space-y-1 mt-auto">
+      <p>© 2026 Mizizi Bajaj Adventures. All rights reserved.</p>
+      <p class="text-ochre opacity-80">Locally planned, vetted, and sourced in Arusha, Tanzania.</p>
+    </footer>
+
+  </div>
+
+  <!-- Sign Out Confirmation Drawer Modal Sheet -->
+  <div id="logout-confirm-modal" class="modal-overlay">
+    <div class="modal-sheet">
+      <div class="modal-drag-handle"></div>
+      <div class="p-6 space-y-6">
+        <div class="text-center">
+          <span class="text-4xl block mb-2">🚪</span>
+          <h2 class="text-2xl font-black text-slate-800">Signing Out?</h2>
+          <p class="text-stone-500 text-xs mt-1">Are you sure you want to log out of your rider profile?</p>
+        </div>
+        <div class="flex gap-3">
+          <button id="logout-cancel-btn" class="w-1/2 py-3.5 bg-stone-200 text-slate-700 font-bold rounded-xl text-xs uppercase tracking-wider">Cancel</button>
+          <button id="logout-ok-btn" class="w-1/2 py-3.5 bg-red-600 text-white font-bold rounded-xl text-xs uppercase tracking-wider">Confirm Sign Out</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Simulator Scripts -->
+  <script src="js/auth.js"></script>
+  <script src="js/payments.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const emailBadge = document.getElementById('user-email');
+      const welcomeTitle = document.getElementById('welcome-title');
+      const routeCountBadge = document.getElementById('route-count-badge');
+      const arushaBtn = document.getElementById('arusha-action-btn');
+      const arushaPrice = document.getElementById('arusha-status-price');
+      const abandonmentBanner = document.getElementById('abandonment-banner');
+      const closeBannerBtn = document.getElementById('close-banner-btn');
+      
+      const logoutModal = document.getElementById('logout-confirm-modal');
+      const logoutBtn = document.getElementById('dashboard-logout-btn');
+      const logoutCancel = document.getElementById('logout-cancel-btn');
+      const logoutOk = document.getElementById('logout-ok-btn');
+
+      // Auth Observer to render state
+      let activeUser = null;
+
+      const refreshDashboardUI = async (user) => {
+        if (!user) return;
+        activeUser = user;
+        
+        // Display email and welcome message
+        emailBadge.textContent = user.email;
+        const namePart = user.email.split('@')[0];
+        welcomeTitle.textContent = `Welcome, ${namePart.charAt(0).toUpperCase() + namePart.slice(1)}!`;
+
+        // Check if checkout was abandoned
+        if (user.paymentAbandoned && !user.hasPaid) {
+          abandonmentBanner.classList.remove('hidden');
+        } else {
+          abandonmentBanner.classList.add('hidden');
+        }
+
+        // Adjust Arusha card based on payment status
+        if (user.hasPaid) {
+          arushaPrice.textContent = 'Unlocked';
+          arushaPrice.className = 'text-xs font-bold text-emerald-600';
+          
+          arushaBtn.textContent = 'Enter Route';
+          arushaBtn.className = 'w-full py-3.5 bg-emerald-600 text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-emerald-700 transition-all text-center block shadow-md';
+          
+          routeCountBadge.textContent = '1 Unlocked';
+          routeCountBadge.className = 'badge-jungle';
+        } else {
+          arushaPrice.textContent = '£6.00';
+          arushaPrice.className = 'text-xs font-bold text-amber-600';
+          
+          arushaBtn.textContent = 'Unlock Route';
+          arushaBtn.className = 'w-full py-3.5 btn-gold text-xs uppercase tracking-widest font-black shadow-md';
+          
+          routeCountBadge.textContent = '0 Unlocked';
+          routeCountBadge.className = 'badge-gold';
+        }
+      };
+
+      // Listen for simulated auth state
+      FirebaseSim.onAuthStateChanged((user) => {
+        if (user) refreshDashboardUI(user);
+      });
+
+      // Handle cart abandonment banner dismiss
+      closeBannerBtn.addEventListener('click', () => {
+        abandonmentBanner.classList.add('hidden');
+      });
+
+      // Listen for payment abandonment events dispatched by payments.js
+      window.addEventListener('mizizi_payment_abandoned', () => {
+        if (activeUser) {
+          FirebaseSim.getUserRecord(activeUser.email).then(updated => {
+            if (updated) refreshDashboardUI(updated);
+          });
+        }
+      });
+
+      // Arusha Button click
+      arushaBtn.addEventListener('click', () => {
+        if (activeUser) {
+          if (activeUser.hasPaid) {
+            // Save selected city to session and enter app.html
+            const session = JSON.parse(localStorage.getItem('mizizi_sim_session') || '{}');
+            session.selectedCity = 'Arusha';
+            localStorage.setItem('mizizi_sim_session', JSON.stringify(session));
+            window.location.href = 'app.html';
+          } else {
+            // Unpaid user opens Stripe Checkout simulator
+            StripeSim.open();
+          }
+        }
+      });
+
+      // Logout modal prompts
+      logoutBtn.addEventListener('click', () => {
+        logoutModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+
+      logoutCancel.addEventListener('click', () => {
+        logoutModal.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+
+      logoutOk.addEventListener('click', async () => {
+        logoutModal.classList.remove('active');
+        document.body.style.overflow = '';
+        await FirebaseSim.signOut();
+        window.location.replace('index.html');
+      });
+
+      // Close modal on outside click
+      logoutModal.addEventListener('click', (e) => {
+        if (e.target === logoutModal) {
+          logoutModal.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -240,11 +240,12 @@
       </div>
 
       <!-- Logged-in profile section -->
-      <div class="p-4 border-t border-emerald-950 bg-emerald-950 text-[10px] space-y-2 font-bold tracking-wider">
+      <div class="p-4 border-t border-emerald-950 bg-emerald-950 text-[10px] space-y-2.5 font-bold tracking-wider">
         <div class="flex items-center gap-1.5 text-emerald-400">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
           <span id="user-email-badge" class="truncate normal-case">loading...</span>
         </div>
+        <button id="change-city-btn" class="text-emerald-300 hover:text-white transition-colors block w-full text-left uppercase">Change City</button>
         <button id="sign-out-btn" class="text-amber-400 hover:text-white transition-colors block w-full text-left uppercase">Sign Out</button>
       </div>
     </div>
@@ -321,6 +322,42 @@
     </div>
   </div>
 
+  <!-- Change City Confirmation Drawer Modal Sheet -->
+  <div id="city-confirm-modal" class="modal-overlay">
+    <div class="modal-sheet">
+      <div class="modal-drag-handle"></div>
+      <div class="p-6 space-y-6">
+        <div class="text-center">
+          <span class="text-4xl block mb-2">🌍</span>
+          <h2 class="text-2xl font-black text-slate-800">Change City?</h2>
+          <p class="text-stone-500 text-xs mt-1 leading-relaxed">Are you sure you want to change city? Your current route tracking progress for Arusha will be saved.</p>
+        </div>
+        <div class="flex gap-3">
+          <button id="city-confirm-cancel-btn" class="w-1/2 py-3.5 bg-stone-200 text-slate-700 font-bold rounded-xl text-xs uppercase tracking-wider">Cancel</button>
+          <button id="city-confirm-ok-btn" class="w-1/2 py-3.5 btn-gold font-bold rounded-xl text-xs uppercase tracking-wider">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sign Out Confirmation Drawer Modal Sheet -->
+  <div id="logout-confirm-modal" class="modal-overlay">
+    <div class="modal-sheet">
+      <div class="modal-drag-handle"></div>
+      <div class="p-6 space-y-6">
+        <div class="text-center">
+          <span class="text-4xl block mb-2">🚪</span>
+          <h2 class="text-2xl font-black text-slate-800">Signing Out?</h2>
+          <p class="text-stone-500 text-xs mt-1">Are you sure you want to log out of your rider profile?</p>
+        </div>
+        <div class="flex gap-3">
+          <button id="logout-cancel-btn" class="w-1/2 py-3.5 bg-stone-200 text-slate-700 font-bold rounded-xl text-xs uppercase tracking-wider">Cancel</button>
+          <button id="logout-ok-btn" class="w-1/2 py-3.5 bg-red-600 text-white font-bold rounded-xl text-xs uppercase tracking-wider">Confirm Sign Out</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- 5. Persistent Global Audio Player Bar (Fixed Bottom — Hidden by Default) -->
   <div id="global-audio-player" class="global-audio-player">
     <!-- Progress Bar (clickable/seekable, sits at the very top edge of the bar) -->
@@ -373,16 +410,84 @@
   
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Connect sign-out button
+      // Modals
+      const cityModal = document.getElementById('city-confirm-modal');
+      const logoutModal = document.getElementById('logout-confirm-modal');
+
+      // Buttons
+      const changeCityBtn = document.getElementById('change-city-btn');
+      const cityCancelBtn = document.getElementById('city-confirm-cancel-btn');
+      const cityOkBtn = document.getElementById('city-confirm-ok-btn');
+
       const signOutBtn = document.getElementById('sign-out-btn');
-      if (signOutBtn) {
-        signOutBtn.addEventListener('click', async () => {
-          if (confirm('Are you sure you want to end your Arusha Street Safari session?')) {
-            await FirebaseSim.signOut();
-            window.location.href = 'index.html';
-          }
+      const logoutCancelBtn = document.getElementById('logout-cancel-btn');
+      const logoutOkBtn = document.getElementById('logout-ok-btn');
+
+      // Close modal helpers
+      const closeModal = (modal) => {
+        if (modal) {
+          modal.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      };
+
+      const openModal = (modal) => {
+        if (modal) {
+          modal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      };
+
+      // Change City trigger
+      if (changeCityBtn) {
+        changeCityBtn.addEventListener('click', () => {
+          openModal(cityModal);
         });
       }
+
+      if (cityCancelBtn) {
+        cityCancelBtn.addEventListener('click', () => closeModal(cityModal));
+      }
+
+      if (cityOkBtn) {
+        cityOkBtn.addEventListener('click', () => {
+          closeModal(cityModal);
+          // Alert user that progress is saved (for peace of mind)
+          alert('Your route tracking progress for Arusha has been successfully saved.');
+          // Redirect to dashboard
+          window.location.href = 'dashboard.html';
+        });
+      }
+
+      // Sign Out trigger
+      if (signOutBtn) {
+        signOutBtn.addEventListener('click', () => {
+          openModal(logoutModal);
+        });
+      }
+
+      if (logoutCancelBtn) {
+        logoutCancelBtn.addEventListener('click', () => closeModal(logoutModal));
+      }
+
+      if (logoutOkBtn) {
+        logoutOkBtn.addEventListener('click', async () => {
+          closeModal(logoutModal);
+          await FirebaseSim.signOut();
+          window.location.replace('index.html');
+        });
+      }
+
+      // Close on backdrop tap
+      [cityModal, logoutModal].forEach(modal => {
+        if (modal) {
+          modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+              closeModal(modal);
+            }
+          });
+        }
+      });
     });
   </script>
 </body>

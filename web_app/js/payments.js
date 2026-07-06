@@ -84,8 +84,27 @@ const StripeSim = (() => {
 
     document.body.appendChild(overlay);
 
-    // Event listener to close
-    document.getElementById('stripe-close-btn').addEventListener('click', StripeSim.close);
+    // Event listener to close (triggers cart abandonment tracking)
+    document.getElementById('stripe-close-btn').addEventListener('click', () => {
+      const session = localStorage.getItem('mizizi_sim_session');
+      if (session) {
+        try {
+          const currentUser = JSON.parse(session);
+          FirebaseSim.getUserRecord(currentUser.email).then(user => {
+            if (user && !user.hasPaid) {
+              FirebaseSim.updateUserRecord(currentUser.email, {
+                paymentAbandoned: true,
+                abandonedAt: new Date().toISOString()
+              }).then(() => {
+                // Dispatch event so dashboard page can display the promo banner instantly
+                window.dispatchEvent(new Event('mizizi_payment_abandoned'));
+              });
+            }
+          });
+        } catch (e) {}
+      }
+      StripeSim.close();
+    });
     
     // Auto-formatting card number
     const cardInput = document.getElementById('stripe-card-number');

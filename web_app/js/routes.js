@@ -2708,38 +2708,18 @@ const RouteEngine = (() => {
 
         currentUserEmail = user.email;
 
-        // Paid status authorization gating check
-        if (user.hasPaid !== true) {
-          console.warn('Paid timeline authorization lock detected. Gating interface...');
-          // Enforce Paywall Checkout Launch
-          StripeSim.open();
+        // Verify user has paid and selected Arusha city route
+        const sessionStr = localStorage.getItem('mizizi_sim_session');
+        let selectedCity = null;
+        if (sessionStr) {
+          try {
+            selectedCity = JSON.parse(sessionStr).selectedCity;
+          } catch (e) {}
+        }
 
-          // Render locked landing-teaser overlays in app interface to prevent viewing
-          const blockDiv = document.createElement('div');
-          blockDiv.id = 'premium-lock-blocker';
-          blockDiv.className = 'fixed inset-0 z-50 flex items-center justify-center bg-slate-900 bg-opacity-70 backdrop-blur-md p-6';
-          blockDiv.innerHTML = `
-            <div class="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl animate-pop-elastic">
-              <span class="text-5xl block mb-4 animate-bounce-bajaj">🔒</span>
-              <h2 class="font-extrabold text-2xl text-slate-800 mb-2">Street Safari Locked</h2>
-              <p class="text-slate-500 text-sm leading-relaxed mb-6">Complete your payment of £6 to instantly unlock your complete 9-hour Arusha inner-city travel timeline!</p>
-              <button id="gatekeeper-pay-btn" class="w-full py-4 btn-gold text-lg shadow-lg animate-pulse-gold">Unlock Experience Now</button>
-            </div>
-          `;
-          document.body.appendChild(blockDiv);
-
-          document.getElementById('gatekeeper-pay-btn').addEventListener('click', () => {
-            StripeSim.open();
-          });
-
-          // Also set HOME link to route unpaid user to index.html
-          const navHomeBtn = document.getElementById('nav-home-btn');
-          if (navHomeBtn) {
-            navHomeBtn.addEventListener('click', () => {
-              window.location.replace('index.html');
-            });
-          }
-
+        if (user.hasPaid !== true || selectedCity !== 'Arusha') {
+          console.warn('Paid timeline lock or city unselected. Redirecting to dashboard...');
+          window.location.replace('dashboard.html');
           return;
         }
 
