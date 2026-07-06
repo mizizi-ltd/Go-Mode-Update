@@ -252,8 +252,53 @@
       };
 
       // Listen for simulated auth state
-      FirebaseSim.onAuthStateChanged((user) => {
-        if (user) refreshDashboardUI(user);
+      FirebaseSim.onAuthStateChanged(async (user) => {
+        if (user) {
+          // Check URL parameters for Stripe checkout returns
+          const urlParams = new URLSearchParams(window.location.search);
+          const paymentSuccess = urlParams.get('payment_success');
+          const paymentCanceled = urlParams.get('payment_canceled');
+          const paramEmail = urlParams.get('email');
+
+          if (paramEmail && paramEmail.toLowerCase() === user.email.toLowerCase()) {
+            if (paymentSuccess === 'true') {
+              console.log('Payment success detected from Stripe checkout return!');
+              // Mark paid locally
+              await FirebaseSim.updateUserRecord(user.email, { hasPaid: true, paymentAbandoned: false });
+              // Clear query params to clean URL
+              window.history.replaceState({}, document.title, window.location.pathname);
+              
+              // Trigger confetti celebration
+              StripeSim.confetti();
+              
+              // Fetch updated record and refresh UI
+              const updatedUser = await FirebaseSim.getUserRecord(user.email);
+              refreshDashboardUI(updatedUser);
+              
+              // Wait briefly for confetti, then auto-enter
+              setTimeout(() => {
+                const session = JSON.parse(localStorage.getItem('mizizi_sim_session') || '{}');
+                session.selectedCity = 'Arusha';
+                localStorage.setItem('mizizi_sim_session', JSON.stringify(session));
+                window.location.href = 'app.html';
+              }, 2000);
+              return;
+            } else if (paymentCanceled === 'true') {
+              console.log('Payment cancel/abandonment detected from Stripe checkout return!');
+              // Mark abandoned locally
+              await FirebaseSim.updateUserRecord(user.email, { paymentAbandoned: true, abandonedAt: new Date().toISOString() });
+              // Clear query params
+              window.history.replaceState({}, document.title, window.location.pathname);
+              
+              // Fetch updated record and refresh UI
+              const updatedUser = await FirebaseSim.getUserRecord(user.email);
+              refreshDashboardUI(updatedUser);
+              return;
+            }
+          }
+
+          refreshDashboardUI(user);
+        }
       });
 
       // Handle cart abandonment banner dismiss
@@ -281,7 +326,7 @@
             window.location.href = 'app.html';
           } else {
             // Unpaid user opens Stripe Checkout simulator
-            StripeSim.open();
+            StripeSim.open(activeUser.email, 'Arusha');
           }
         }
       });

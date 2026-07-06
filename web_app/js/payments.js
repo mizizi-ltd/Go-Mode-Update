@@ -208,12 +208,45 @@ const StripeSim = (() => {
   };
 
   return {
-    // Open payment paywall overlay
-    open: () => {
+    // Open payment paywall overlay (attempts Stripe API first, falls back to local simulation)
+    open: async (email, city) => {
+      // Auto-extract session context if not provided
+      if (!email) {
+        const session = localStorage.getItem('mizizi_sim_session');
+        if (session) {
+          try { email = JSON.parse(session).email; } catch (e) {}
+        }
+      }
+      
+      try {
+        console.log('Initiating checkout session request...');
+        const response = await fetch('/api/create-checkout-session', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email: email || 'guest@mizizi.com', city: city || 'Arusha' })
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.url) {
+            // Redirect to Stripe Checkout or simulated success URL
+            window.location.href = data.url;
+            return;
+          }
+        }
+      } catch (err) {
+        console.warn('Backend API checkout unavailable, using high-fidelity local checkout simulation:', err.message);
+      }
+
+      // Local interactive mock fallback
       ensureModalInjected();
       const overlay = document.getElementById('stripe-modal-overlay');
-      overlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
+      if (overlay) {
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
     },
 
     // Close payment paywall overlay
@@ -223,6 +256,11 @@ const StripeSim = (() => {
         overlay.classList.remove('active');
         document.body.style.overflow = '';
       }
+    },
+
+    // Trigger visual confetti celebration
+    confetti: () => {
+      triggerConfettiStorm();
     }
   };
 })();
