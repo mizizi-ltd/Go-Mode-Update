@@ -1640,6 +1640,39 @@ const RouteEngine = (() => {
     desc.textContent = node.shortDesc;
     detailsBody.appendChild(desc);
 
+    // 3.5. Atmospheric Audio Guide Play Trigger
+    if (node.audioGuide) {
+      const audioTrigger = document.createElement('div');
+      audioTrigger.className = 'bg-emerald-950 text-white rounded-xl p-3 flex items-center justify-between gap-3 shadow-sm cursor-pointer hover:bg-emerald-900 transition-colors mt-2';
+      
+      const audioInfo = document.createElement('div');
+      audioInfo.className = 'min-width-0 flex-grow';
+      
+      const audioTrackName = document.createElement('p');
+      audioTrackName.className = 'text-[9px] font-black tracking-wider text-ochre uppercase truncate';
+      audioTrackName.textContent = `🎧 ${node.title} Narration`;
+      
+      const audioHint = document.createElement('p');
+      audioHint.className = 'text-[8px] text-emerald-300 font-semibold';
+      audioHint.textContent = 'Tap to play audio guide ▸';
+      
+      audioInfo.appendChild(audioTrackName);
+      audioInfo.appendChild(audioHint);
+      
+      const playIcon = document.createElement('div');
+      playIcon.className = 'w-6 h-6 bg-ochre text-jungle rounded-full flex items-center justify-center text-xs font-black';
+      playIcon.innerHTML = `<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+      
+      audioTrigger.appendChild(audioInfo);
+      audioTrigger.appendChild(playIcon);
+      
+      audioTrigger.addEventListener('click', () => {
+        GlobalAudioPlayer.load(`${node.title} — ${node.category}`, `assets/${node.audioGuide}`);
+      });
+      
+      detailsBody.appendChild(audioTrigger);
+    }
+
     // 4. Gold "Read More" button
     const btn = document.createElement('button');
     btn.className = 'w-full py-3 btn-gold text-xs uppercase tracking-widest font-black shadow-md mt-auto';
