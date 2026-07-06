@@ -562,6 +562,7 @@ img {
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translateX(-100%); /* Hidden by default */
   box-shadow: 8px 0 20px rgba(0,0,0,0.15);
+  pointer-events: none; /* Let clicks pass through empty spaces to the map underneath */
 }
 
 .sidebar-container.active {
@@ -572,6 +573,7 @@ img {
 .sidebar-nav {
   width: 200px;
   background-color: var(--color-primary);
+  pointer-events: auto; /* Intercept clicks on navigation column */
   color: #FFFFFF;
   display: flex;
   flex-direction: column;
@@ -840,6 +842,7 @@ img {
   border-right: 1px solid var(--color-border);
   position: relative; /* Position relative for floating collapse arrow toggle */
   transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: auto; /* Intercept clicks on details column */
 }
 
 /* Collapsed state for Column 2 Details Panel (Requirement 1) */
