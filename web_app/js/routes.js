@@ -10,14 +10,14 @@ const RouteEngine = (() => {
       index: 0,
       time: "08:00",
       category: "Morning Anchor",
-      title: "Fifi's Café",
+      title: "Kitamu Coffee",
       image: "assets/clock-tower.jpg",
-      lat: -3.3733340,
-      lng: 36.6930866,
-      localTip: "Order their Tanzanian cappuccino & request a table near the balcony.",
-      swahiliPhrase: "Kahawa ya kienyeji (Traditional coffee)",
-      shortDesc: "Get a coffee and some breakfast in the morning. Kickstart your adventure at Fifi's Café, centred directly beside the historic mid-point landmark (Arusha Clock Tower). Fifi’s is a bustling local favourite with wonderful breakfast items, reliable Wi-Fi, and single-origin Tanzanian espresso. A good start for a morning brew. Say hi to Fiane (Fifi) when you walk in.",
-      fullDesc: "Centred directly beside the historic midpoint landmark (Clock Tower), Fifi's Café is the ultimate morning anchor in Arusha. It's a highly vibrant, premium coffee shop that balances standard Western amenities with incredible local flavour. The setting is bright, lively, and highly comfortable: perfect for orienting yourself before dive-bombing into local Bajaj transits. Spend this morning stop checking your map layers and pre-loading routing coordinates using their high-speed, stable Wi-Fi connection.",
+      lat: -3.370817762441645,
+      lng: 36.69371861086912,
+      localTip: "Order their local French press coffee paired with their legendary carrot cake.",
+      swahiliPhrase: "Kahawa tamu na keki (Sweet coffee and cake)",
+      shortDesc: "Get a coffee and some breakfast in the morning. Kickstart your adventure at Kitamu Coffee, located on Goliondoi Street right in the heart of the central Clock Tower area. It is a wonderfully expressive downtown staple blending a cozy urban café scene with a rustic, nature-filled garden restaurant.",
+      fullDesc: "Located on Goliondoi Street right in the heart of the central Clock Tower area, Kitamu Coffee (often expanding its identity into \"Kitamu House\") is a wonderfully expressive downtown staple. While it serves as an ultra-convenient jump-off landmark for city day-tours, a step past its entrance reveals a surprisingly expansive, multi-layered venue. Far from just a tiny, modern grab-and-go espresso bar, Kitamu blends a cozy urban café scene with a rustic, nature-filled garden restaurant that features gorgeous beaded chandeliers, wooden bridges, and clear, unobstructed views of Mount Meru.",
       safetyTips: "Pre-load your offline maps now. The Wi-Fi is strong here: do not rely on cellular signal inside dense transit alleys later in the day.",
       swahiliLesson: "Basic Swahili Practice: How to sound less like a tourist\n\n“Naomba”: ~nah-woh-mbah~ loosely means “I Humbly request...”. This is the most important lesson of your Swahili today. In Tanzania, this is the only polite and respectful way to ask for any service or any request from someone. Kenyan Swahili lets you say “I want...” (“Nataka”), but Tanzanians view “Nataka” as a direct order or a demand, and they consider it rude, bossy, and impolite. Use “Naomba” liberally, and you will immediately gain more rapport and trust in your day. Tourists say \"Nataka\"; seasoned residents and locals say “Naomba”.\n\nHakuna Matata:\nTourists say “Hakuna Matata”; people will say that to sell you something. Seasoned residents and locals say “Hamna Shida!” or “Hakuna shida” which means “It is not a concern” or “Not an issue”. Save Hakuna Matata for the clueless tourists.\n\nSawa:\nMeans “OK”. You will hear \"sawa\" everywhere, and you should sprinkle it in everywhere you would normally say “OK”. Tourists do not use sawa; seasoned residents will find themselves saying Sawa when they go back home abroad. It becomes ingrained in your daily lexicon.\n\nMambo Vipi / Poa:\nIn a nutshell, it is equivalent to saying “Yo! What’s up!”. Response is \"Poa\" (Cool).\n\nBwana:\nThe secret to disarming any man you may be negotiating with or trying to convince. Bwana is a street Swahili term meaning “Boss!” or “Sir”.\n\nGreeting: Mambo/Vipi\nResponse: Poa\n\"Pole, sielewi Kiswahili\" (Sorry, I do not understand Swahili).\n\nOrdering Food Dialogues:\n- 'Habari za asubuhi!' (Good morning!)\n- 'Naomba Coca-cola na kahawa, tafadhali.' (I kindly request a Coca-cola and coffee, please.)\n- 'Bei gani?' (How much is it?)\n- 'Asante sana!' (Thank you very much!)",
       audioGuide: "arusha_fifi_narration.mp3"
@@ -32,7 +32,7 @@ const RouteEngine = (() => {
       lng: 36.6944861,
       localTip: "Stand at the exact geographic midpoint between Cairo and Cape Town for a once-in-a-lifetime photo.",
       swahiliPhrase: "Mnara wa Saa (Clock Tower monument)",
-      shortDesc: "Walk 2 minutes from Fifi's to the iconic Arusha Clock Tower: the geographic midpoint between Cairo and Cape Town. This historic roundabout landmark is the symbolic heart of Arusha and the perfect orientation checkpoint.",
+      shortDesc: "Walk 2 minutes from Kitamu Coffee to the iconic Arusha Clock Tower: the geographic midpoint between Cairo and Cape Town. This historic roundabout landmark is the symbolic heart of Arusha and the perfect orientation checkpoint.",
       fullDesc: "The Arusha Clock Tower is the most iconic landmark in the city, standing at the exact midpoint between Cairo and Cape Town on the legendary Cape-to-Cairo highway. This charming roundabout monument serves as the geographic and cultural heart of Arusha. Originally built during the British colonial era, it has become a symbol of Arusha's central role in East African diplomacy and tourism. It's the perfect spot for an iconic photo and to orient yourself before diving into the Bajaj street safari network.",
       safetyTips: "When taking pictures of the tower, stay on the sidewalk: the roundabout is very busy. Beware of people selling and dragging dogs around the Clock Tower: they are illegal breeders. It is best to avoid getting involved with them or trying to rescue the dogs, which inadvertently supports the dog breeding industry in Arusha. Each dog purchased helps to keep these breeding operations alive.",
       swahiliLesson: "Landmark & Direction Dialogues:\n- 'Mnara wa Saa uko wapi?' (Where is the Clock Tower?)\n- 'Hapa ndipo katikati ya Afrika!' (This is the centre of Africa!)\n- 'Tafadhali nipige picha.' (Please take my photo.)\n- 'Asante, picha nzuri!' (Thank you, nice photo!)",
@@ -190,32 +190,32 @@ const RouteEngine = (() => {
     {
       altId: '1a',
       parentIndex: 0,
-      title: "Kitamu Coffee Shop",
+      title: "Eagle's Nest Cafe",
       image: "assets/hero.png",
-      lat: -3.370835,
-      lng: 36.693797,
-      swahiliPhrase: "Kahawa tamu (Sweet coffee)",
-      shortDesc: "The Vibe: Bustling, Cozy, & Central. Best Time to Visit: Early morning (6:30 AM – 8:00 AM) before your main tour itinerary begins. Perfect For: Travellers looking for a high-quality morning pick-me-up, premium Tanzanian coffee, and a quick breakfast right in the heart of town.",
+      lat: -3.3705549244875126,
+      lng: 36.69384013091561,
+      swahiliPhrase: "Kiota cha tai (Eagle's nest)",
+      shortDesc: "The Vibe: Ultra-Focused, Cozy, & Digital Nomad Sanctuary. Best Time to Visit: Morning to early afternoon for remote work or study. Perfect For: Freelancers, digital nomads, students, and caffeine purists who need reliable workspaces, internet, and specialty coffee.",
       hasDetailedGuide: true,
-      vibe: "Bustling, Cozy, & Central",
-      bestTime: "Early morning (6:30 AM – 8:00 AM) before your main tour itinerary begins.",
-      perfectFor: "Travellers looking for a high-quality morning pick-me-up, premium Tanzanian coffee, and a quick breakfast right in the heart of town.",
-      overview: "Kitamu Coffee is one of the quintessential downtown starting points. Opening early, it serves as the perfect launchpad for day tours. It provides a warm, modern, and comfortable urban space to fuel up before the city fully wakes up and your trip begins.",
+      vibe: "Ultra-Focused, Cozy, & Digital Nomad Sanctuary",
+      bestTime: "Morning to early afternoon for an uninterrupted, high-productivity remote work block or a quiet study session.",
+      perfectFor: "Freelancers, digital nomads, students, and caffeine purists who prioritize a reliable workspace, excellent internet, and stellar coffee.",
+      overview: "Eagle’s Nest Café is rapidly becoming known as one of Arusha’s absolute best-kept secrets for remote workers and digital nomads. Hidden away from the louder commercial strips, this specialized café was intentionally built to cater to those who need to lock in, open up a laptop, and get things done. Renowned for its focus on providing a seamless, stress-free work environment, it strips away the typical distractions of multi-layered tourist venues to focus on three critical pillars: blazing-fast internet, constant electricity, and premium specialty coffee.",
       whatToDo: [
-        { title: "The Coffee Experience", text: "Sample rich, flavourful Tanzanian black coffee, or choose from a full menu of hot beverages." },
-        { title: "The Early Breakfast", text: "Pair your morning brew with freshly baked pastries, classic chapatis with beans." },
-        { title: "Gear Up & Connect", text: "Take advantage of the free high-speed Wi-Fi and air conditioning to download your maps, check the day's itinerary, and comfortably wait for your guide." }
+        { title: "The Ultimate Workspace", text: "Settle into a quiet corner with abundant, reliable power outlets and a stable internet connection. It is the type of café where you can comfortably stick around for hours without feeling rushed by the staff." },
+        { title: "The Pul pulled Coffee Experience", text: "As a specialty coffee destination, they take their brewing seriously. Expect expertly crafted espresso drinks, smooth pour-overs, and a rich caffeine profile sourced from top-tier local beans that will keep your energy levels high all morning." },
+        { title: "Light Bites & Fuel", text: "Pair your workday with a rotating selection of fresh pastries, quick sandwiches, and simple, high-quality cafe fare designed to keep you focused without putting you into a food coma." }
       ],
-      theScene: "Kitamu offers a fascinating glimpse into the city's early morning routine. The atmosphere inside is clean, and welcoming, acting as a calm, secure bubble right next to the city's main landmarks. You will find a pleasant mix of early-rising tourists preparing for safaris, local business professionals heading into meetings, and tour operators coordinating their day.",
-      insiderTip: "Because of its prime location next to the Clock Tower, it is one of the easiest and safest navigation landmarks to meet people. Order a signature Tanzanian black coffee to truly appreciate the notes of the local volcanic soil.",
+      theScene: "The atmosphere at Eagle’s Nest is uniquely peaceful and focused. Unlike the bustling, high-volume tourist cafés near the Clock Tower or the festive garden environments across town, this space maintains a respectful, library-adjacent quietness. It’s highly social in a professional sense—you will find an inspiring community of local creatives, expat tech workers, and independent travelers quietly co-working side-by-side.",
+      insiderTip: "If you have an intense afternoon of video calls or deadlines, this is your fallback sanctuary. The staff is incredibly friendly and welcoming to long-stayers, making it feel more like a premium shared office with a world-class barista than a traditional high-turnover restaurant.",
       goIfYou: [
-        "Need an exceptional cup of coffee and a solid breakfast early in the morning.",
-        "Want an easily accessible, highly central downtown meeting.",
-        "Appreciate reliable Wi-Fi, clean facilities, & quick morning service."
+        "Need a guaranteed gold-standard remote work environment with strong Wi-Fi, silence, and plenty of power outlets.",
+        "Appreciate specialized, expertly extracted coffee over a giant, commercial food menu.",
+        "Want to escape the high-turnover tourist crowds to mix with Arusha's local digital professional community."
       ],
       avoidIf: [
-        "You are looking for a secluded, quiet garden escape: this is an urban cafe in a bustling commercial district.",
-        "You want a slow, rural farm-to-table experience (save that for the lodges later in the day)."
+        "You are looking for a loud, high-energy party atmosphere or a family-friendly playground venue.",
+        "You want a sprawling, full-course, fine-dining dinner experience."
       ]
     },
     {
@@ -844,7 +844,7 @@ const RouteEngine = (() => {
     container.appendChild(titleEl);
 
     // 4. Custom compilations for specific stops
-    if (node.index === 0) { // Fifi's Café
+    if (node.index === 0) { // Kitamu Coffee
       // Welcoming message
       const welcomePara = document.createElement('p');
       welcomePara.className = 'text-sm text-stone-600 leading-relaxed mb-4 font-medium';
@@ -856,11 +856,82 @@ const RouteEngine = (() => {
       routeOverview.textContent = "This Central Route is a 9-hour adrenaline high loop through Arusha. You'll explore the historic clock tower, view raw tanzanite gemstone checklists, African art, coffee plantations, sunset views, authentic culinary foods, and maybe... just maybe you'll get to experience and see Arushan life beyond the usual tourist experience.";
       container.appendChild(routeOverview);
 
-      // Main full description
-      const descEl = document.createElement('p');
-      descEl.className = 'text-sm text-stone-600 leading-relaxed mb-6 font-medium';
-      descEl.textContent = node.fullDesc;
-      container.appendChild(descEl);
+      // Intro
+      const introPara = document.createElement('p');
+      introPara.className = 'text-sm text-stone-600 leading-relaxed mb-6 font-semibold';
+      introPara.textContent = "Located on Goliondoi Street right in the heart of the central Clock Tower area, Kitamu Coffee (often expanding its identity into \"Kitamu House\") is a wonderfully expressive downtown staple. While it serves as an ultra-convenient jump-off landmark for city day-tours, a step past its entrance reveals a surprisingly expansive, multi-layered venue. Far from just a tiny, modern grab-and-go espresso bar, Kitamu blends a cozy urban café scene with a rustic, nature-filled garden restaurant that features gorgeous beaded chandeliers, wooden bridges, and clear, unobstructed views of Mount Meru.";
+      container.appendChild(introPara);
+
+      // What to Do
+      const sub1 = document.createElement('h4');
+      sub1.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-2 border-b pb-1';
+      sub1.textContent = "📋 What to Do";
+      container.appendChild(sub1);
+
+      const doPara = document.createElement('p');
+      doPara.className = 'text-sm text-stone-600 leading-relaxed mb-4 font-medium';
+      doPara.textContent = "Kitamu shines because it transitions effortlessly from an early morning fueling station into an afternoon lounge space:";
+      container.appendChild(doPara);
+
+      const doList = document.createElement('ul');
+      doList.className = 'list-disc pl-5 space-y-2 mb-6 text-sm text-stone-600 font-medium';
+      doList.innerHTML = `
+        <li><strong>The Coffee & Bakery:</strong> Sourcing straight from local volcanic northern Tanzanian farms, their rich, robust coffee is best enjoyed via French press. Pair it with their legendary carrot cake—frequently rated by long-time residents as the absolute best carrot cake in Arusha.</li>
+        <li><strong>Local & Global Eats:</strong> The extensive menu features excellent local Tanzanian staples like bhajia (savory fried dough balls), chapatis, and fresh tropical juices, alongside comforting Western plates like burgers, wood-fired pizzas, and widely praised pork ribs.</li>
+        <li><strong>The Souvenir Shop:</strong> If you want to bypass the high-pressure bargaining of the main street markets, the café hosts a small, low-stress, fixed-price local souvenir corner right on the property.</li>
+      `;
+      container.appendChild(doList);
+
+      // The Scene
+      const sub2 = document.createElement('h4');
+      sub2.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-2 border-b pb-1';
+      sub2.textContent = "🌟 The Scene";
+      container.appendChild(sub2);
+
+      const scenePara = document.createElement('p');
+      scenePara.className = 'text-sm text-stone-600 leading-relaxed mb-6 font-medium';
+      scenePara.textContent = "Inside, Kitamu is a vibrant mix of colorful African fabrics, warm wood textures, and lively global background music. Because of its prime central location, the crowd changes constantly—ranging from early-rising safari tourists checking their maps to local professionals conducting casual afternoon meetings. The back garden area offers a peaceful, scenic bubble that feels completely disconnected from the busy street traffic out front.";
+      container.appendChild(scenePara);
+
+      // Insider Tip Warning Box
+      const tipBox = document.createElement('div');
+      tipBox.className = 'bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6 text-xs text-amber-900';
+      tipBox.innerHTML = `
+        <p class="font-extrabold uppercase text-[10px] tracking-widest text-amber-700 mb-1.5">💡 Insider Tip: Slow Food Alert</p>
+        <p class="font-semibold leading-relaxed">
+          While the waitstaff is incredibly warm and polite, the kitchen prioritizes cooking things fresh from scratch rather than relying on microwaves. Food orders can easily take 40 minutes to arrive. Treat this as a leisurely European-style dining experience—grab a fresh juice or a cocktail, enjoy the garden atmosphere, and don't come if you are in a high-speed rush.
+        </p>
+      `;
+      container.appendChild(tipBox);
+
+      // Go If You / Avoid If comparison
+      const checkGrid = document.createElement('div');
+      checkGrid.className = 'grid grid-cols-2 gap-4 mt-6';
+      
+      const goCol = document.createElement('div');
+      goCol.className = 'space-y-2';
+      goCol.innerHTML = `
+        <p class="font-extrabold text-[10px] uppercase tracking-widest text-emerald-700 flex items-center gap-1">🟢 Go If You</p>
+        <ul class="space-y-1.5 text-xs text-stone-600 font-semibold list-none pl-0">
+          <li class="flex items-start gap-1">✔ Want high-quality Tanzanian coffee and the city's absolute best carrot cake.</li>
+          <li class="flex items-start gap-1">✔ Are looking for a secure garden oasis to decompress after the Maasai Market.</li>
+          <li class="flex items-start gap-1">✔ Want a flexible menu satisfying local flavors and Western comfort.</li>
+        </ul>
+      `;
+      
+      const avoidCol = document.createElement('div');
+      avoidCol.className = 'space-y-2';
+      avoidCol.innerHTML = `
+        <p class="font-extrabold text-[10px] uppercase tracking-widest text-red-600 flex items-center gap-1">🔴 Avoid If</p>
+        <ul class="space-y-1.5 text-xs text-stone-600 font-semibold list-none pl-0">
+          <li class="flex items-start gap-1">✖ You are on a tight timeline; service follows a relaxed, slow-food pace.</li>
+          <li class="flex items-start gap-1">✖ You want a quiet library study scene; it is a bustling community hub.</li>
+        </ul>
+      `;
+      
+      checkGrid.appendChild(goCol);
+      checkGrid.appendChild(avoidCol);
+      container.appendChild(checkGrid);
     } 
     else if (node.index === 1) { // Clock Tower
       const desc1 = document.createElement('p');
@@ -1978,7 +2049,8 @@ const RouteEngine = (() => {
 
     // 1. Center on Arusha Clock Tower Coordinates at optimized street zoom 14
     map = L.map('map', {
-      zoomControl: false // Deactivate default zoom to prevent overlapping the top-left hamburger button!
+      zoomControl: false, // Deactivate default zoom to prevent overlapping the top-left hamburger button!
+      doubleClickZoom: false // Disable double-click-to-zoom to support double-click-to-drop-pin
     }).setView([-3.3719, 36.6944], 14);
 
     // Add zoom controls to the bottom right for professional UI balance (Requirement 2 & 6)
@@ -2096,7 +2168,7 @@ const RouteEngine = (() => {
     // 5. Adventure Trail — Polyline Route Connector Lines
     // Sequential coordinates following the day's circular itinerary
     const routeCoords = [
-      [-3.3733340, 36.6930866], // Fifi's Café (Start)
+      [-3.370817762441645, 36.69371861086912], // Kitamu Coffee (Start)
       [-3.3723398, 36.6944861], // Clock Tower
       [-3.3712749, 36.6945194], // Tanzanite Experience
       [-3.3758457, 36.6923590], // Maasai Market
@@ -2105,12 +2177,12 @@ const RouteEngine = (() => {
       [-3.3980875, 36.7047969], // Canvas & Clay (Njiro)
       [-3.3706290, 36.7066330], // Gran Melia
       [-3.3764860, 36.7032019], // Amber Restaurant
-      [-3.3733340, 36.6930866]  // ← Close loop back to Fifi's Café
+      [-3.370817762441645, 36.69371861086912]  // ← Close loop back to Kitamu Coffee
     ];
 
     // Baby pastel palette — one distinct color per route segment (all 10 colors used)
     const segmentColors = [
-      '#ffb3ba', // Fifi's → Clock Tower (Blush Pink)
+      '#ffb3ba', // Kitamu → Clock Tower (Blush Pink)
       '#ffdfba', // Clock Tower → Tanzanite (Peach Cream)
       '#ffffba', // Tanzanite → Maasai Market (Lemon Chiffon)
       '#baffc9', // Maasai Market → Cultural Heritage (Mint Green)
@@ -2118,7 +2190,7 @@ const RouteEngine = (() => {
       '#a8e6cf', // Coffee Lodge → Canvas & Clay (Seafoam)
       '#dcedc1', // Canvas & Clay → Gran Melia (Pistachio)
       '#ffd3b6', // Gran Melia → Amber (Apricot)
-      '#ffaaa5', // Amber → Fifi's return (Salmon)
+      '#ffaaa5', // Amber → Kitamu return (Salmon)
       '#ff8b94'  // Reserve segment (Rose)
     ];
 
@@ -2155,7 +2227,7 @@ const RouteEngine = (() => {
     // 7. User-Generated Pin Dropping Mechanism
     let activeClickCoords = null;
 
-    map.on('click', (e) => {
+    const handlePinDropTrigger = (e) => {
       const modal = document.getElementById('custom-pin-modal');
       const input = document.getElementById('custom-pin-note');
       
@@ -2164,7 +2236,10 @@ const RouteEngine = (() => {
       activeClickCoords = e.latlng;
       input.value = '';
       modal.classList.add('active');
-    });
+    };
+
+    map.on('dblclick', handlePinDropTrigger);
+    map.on('contextmenu', handlePinDropTrigger);
 
     // Bind custom pin dialog modal anchors
     const cancelBtn = document.getElementById('custom-pin-cancel-btn');
