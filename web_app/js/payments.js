@@ -159,7 +159,13 @@ const StripeSim = (() => {
         }
         
         const currentUser = JSON.parse(session);
-        await FirebaseSim.updateUserRecord(currentUser.email, { hasPaid: true });
+        const paymentDate = new Date();
+        const expiryDate = new Date(paymentDate.getTime() + 30 * 24 * 60 * 60 * 1000);
+        await FirebaseSim.updateUserRecord(currentUser.email, { 
+          hasPaid: true,
+          paymentDate: paymentDate.toISOString(),
+          expiryDate: expiryDate.toISOString()
+        });
 
         // Success State
         btnText.textContent = 'Payment Secured!';

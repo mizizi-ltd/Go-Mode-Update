@@ -231,7 +231,13 @@
 
         // Adjust Arusha card based on payment status
         if (user.hasPaid) {
-          arushaPrice.textContent = 'Unlocked';
+          let statusText = 'Unlocked';
+          if (user.expiryDate) {
+            const expDate = new Date(user.expiryDate);
+            const options = { month: 'short', day: 'numeric', year: 'numeric' };
+            statusText = `Unlocked (Expires ${expDate.toLocaleDateString('en-US', options)})`;
+          }
+          arushaPrice.textContent = statusText;
           arushaPrice.className = 'text-xs font-bold text-emerald-600';
           
           arushaBtn.textContent = 'Enter Route';
@@ -263,8 +269,15 @@
           if (paramEmail && paramEmail.toLowerCase() === user.email.toLowerCase()) {
             if (paymentSuccess === 'true') {
               console.log('Payment success detected from Stripe checkout return!');
+              const pDate = new Date();
+              const eDate = new Date(pDate.getTime() + 30 * 24 * 60 * 60 * 1000);
               // Mark paid locally
-              await FirebaseSim.updateUserRecord(user.email, { hasPaid: true, paymentAbandoned: false });
+              await FirebaseSim.updateUserRecord(user.email, { 
+                hasPaid: true, 
+                paymentAbandoned: false,
+                paymentDate: pDate.toISOString(),
+                expiryDate: eDate.toISOString()
+              });
               // Clear query params to clean URL
               window.history.replaceState({}, document.title, window.location.pathname);
               

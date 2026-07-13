@@ -22,6 +22,8 @@ const FirebaseSim = (() => {
           email: 'paid@mizizi.com',
           password: 'password123',
           hasPaid: true,
+          paymentDate: new Date().toISOString(),
+          expiryDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
           createdAt: new Date().toISOString()
         }
       };
@@ -35,15 +37,27 @@ const FirebaseSim = (() => {
     localStorage.setItem(USERS_KEY, JSON.stringify(users));
   };
 
-  // Get current active session user
+  // Get current active session user (auto-expires payment status after 30 days)
   const getCurrentUser = () => {
     const session = localStorage.getItem(SESSION_KEY);
     if (!session) return null;
     try {
       const parsedSession = JSON.parse(session);
-      // Fetch latest record from users db to get updated payment status
       const users = getStoredUsers();
-      return users[parsedSession.email] || null;
+      const user = users[parsedSession.email];
+      
+      // Dynamic Expiration Check
+      if (user && user.hasPaid && user.expiryDate) {
+        if (new Date() > new Date(user.expiryDate)) {
+          console.warn(`Access expired for ${user.email}. Restricting premium access.`);
+          user.hasPaid = false;
+          user.subscriptionExpired = true;
+          users[parsedSession.email] = user;
+          saveStoredUsers(users);
+        }
+      }
+      
+      return user || null;
     } catch (e) {
       return null;
     }
