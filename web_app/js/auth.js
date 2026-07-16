@@ -37,6 +37,42 @@ const FirebaseSim = (() => {
     localStorage.setItem(USERS_KEY, JSON.stringify(users));
   };
 
+  // Asynchronously query server for latest database status (dynamic cross-device/tab synchronization)
+  const syncUserStatusFromServer = async (email) => {
+    try {
+      const response = await fetch(`/api/user-status?email=${encodeURIComponent(email)}`);
+      if (response.ok) {
+        const data = await response.json();
+        const users = getStoredUsers();
+        const localUser = users[email];
+        
+        if (localUser) {
+          const statusChanged = 
+            localUser.hasPaid !== data.hasPaid || 
+            localUser.expiryDate !== data.expiryDate;
+            
+          if (statusChanged) {
+            console.log(`[SYNC] Local payment status out of sync for ${email}. Updating from server...`);
+            localUser.hasPaid = data.hasPaid;
+            localUser.paymentDate = data.paymentDate;
+            localUser.expiryDate = data.expiryDate;
+            
+            if (data.hasPaid) {
+              localUser.paymentAbandoned = false;
+              if (localUser.abandonedAt) delete localUser.abandonedAt;
+            }
+            
+            users[email] = localUser;
+            saveStoredUsers(users);
+            FirebaseSim._notifyListeners();
+          }
+        }
+      }
+    } catch (err) {
+      console.warn('[SYNC] Failed to contact server for payment status checks:', err.message);
+    }
+  };
+
   // Get current active session user (auto-expires payment status after 30 days)
   const getCurrentUser = () => {
     const session = localStorage.getItem(SESSION_KEY);
@@ -55,6 +91,11 @@ const FirebaseSim = (() => {
           users[parsedSession.email] = user;
           saveStoredUsers(users);
         }
+      }
+
+      // Trigger server synchronization check in the background
+      if (user) {
+        syncUserStatusFromServer(user.email);
       }
       
       return user || null;
@@ -149,6 +190,13 @@ const FirebaseSim = (() => {
       const users = getStoredUsers();
       if (!users[email]) throw new Error('User not found in simulated Firestore database.');
       
+      // Clean up cart abandonment attributes when user completes payment
+      if (data.hasPaid === true) {
+        data.paymentAbandoned = false;
+        if (users[email].abandonedAt) delete users[email].abandonedAt;
+        if (data.abandonedAt !== undefined) delete data.abandonedAt;
+      }
+
       users[email] = { ...users[email], ...data };
       saveStoredUsers(users);
       FirebaseSim._notifyListeners();

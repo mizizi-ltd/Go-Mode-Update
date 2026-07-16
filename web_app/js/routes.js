@@ -2843,6 +2843,26 @@ const RouteEngine = (() => {
           emailBadge.textContent = user.email;
         }
 
+        // Render subscription expiration countdown if available
+        const expiryContainer = document.getElementById('subscription-expiry-container');
+        const expiryBadge = document.getElementById('subscription-expiry-badge');
+        if (expiryContainer && expiryBadge && user.expiryDate) {
+          const expiryTime = new Date(user.expiryDate).getTime();
+          const now = Date.now();
+          const diffMs = expiryTime - now;
+          const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+          
+          if (diffDays > 0) {
+            expiryBadge.textContent = `${diffDays} day${diffDays === 1 ? '' : 's'} remaining`;
+            expiryContainer.classList.remove('hidden');
+          } else {
+            expiryBadge.textContent = 'Expired';
+            expiryContainer.classList.remove('hidden');
+          }
+        } else if (expiryContainer) {
+          expiryContainer.classList.add('hidden');
+        }
+
         // Configure home button redirect back to app.html home overview state
         const navHomeBtn = document.getElementById('nav-home-btn');
         if (navHomeBtn) {

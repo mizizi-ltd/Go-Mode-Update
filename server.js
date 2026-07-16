@@ -19,6 +19,15 @@ let registeredIpnUrl = null;
 let cachedToken = null;
 let tokenExpiry = null;
 
+// Server-side database registry for paid user verification (Sandbox fallback)
+let paidUsersRegistry = {
+  'paid@mizizi.com': {
+    hasPaid: true,
+    paymentDate: new Date().toISOString(),
+    expiryDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
+  }
+};
+
 // Firebase Admin Configuration (with fallback)
 let db = null;
 if (process.env.FIREBASE_SERVICE_ACCOUNT_KEY) {
@@ -184,13 +193,59 @@ app.post('/api/create-checkout-session', async (req, res) => {
   } catch (err) {
     console.error('Pesapal Checkout Error:', err.message);
     
+    if (PESAPAL_ENV === 'production') {
+      return res.status(500).json({ error: 'Payment checkout creation failed. Please try again later.' });
+    }
+    
     // Sandbox Simulation Mode Fallback:
-    // If credentials are invalid/missing, we fallback to our sandbox simulator so development is never blocked!
     console.warn('⚠️ Falling back to Sandbox Local Simulation due to error');
+    const pDate = new Date();
+    const eDate = new Date(pDate.getTime() + 30 * 24 * 60 * 60 * 1000);
+    paidUsersRegistry[email.toLowerCase()] = {
+      hasPaid: true,
+      paymentDate: pDate.toISOString(),
+      expiryDate: eDate.toISOString()
+    };
+
     const hostUrl = `${req.protocol}://${req.get('host')}`;
     const simulatedSuccessUrl = `${hostUrl}/dashboard.html?payment_success=true&email=${encodeURIComponent(email)}`;
     return res.json({ url: simulatedSuccessUrl });
   }
+});
+
+// API: Get User Payment and Expiry Status (Source of truth)
+app.get('/api/user-status', async (req, res) => {
+  const { email } = req.query;
+  if (!email) {
+    return res.status(400).json({ error: 'Email query parameter is required' });
+  }
+
+  const normalizedEmail = email.toLowerCase();
+
+  // 1. Try to read from Cloud Firestore if available
+  if (db) {
+    try {
+      const userDoc = await db.collection('users').doc(normalizedEmail).get();
+      if (userDoc.exists) {
+        const userData = userDoc.data();
+        return res.json({
+          email: normalizedEmail,
+          hasPaid: userData.hasPaid || false,
+          paymentDate: userData.paymentDate || null,
+          expiryDate: userData.expiryDate || null
+        });
+      }
+    } catch (err) {
+      console.error('Failed to fetch from Firestore, falling back to server memory registry:', err.message);
+    }
+  }
+
+  // 2. Fallback to server-side in-memory registry
+  const record = paidUsersRegistry[normalizedEmail] || { hasPaid: false, paymentDate: null, expiryDate: null };
+  return res.json({
+    email: normalizedEmail,
+    ...record
+  });
 });
 
 // API: Callback Redirect Landing (Redirects user back to client dashboard)
@@ -224,6 +279,18 @@ app.get('/api/pesapal-callback', async (req, res) => {
 
     // status_code === 1 means "Completed" success
     if (data.status_code === 1) {
+      const paymentDate = new Date();
+      const expiryDate = new Date(paymentDate.getTime() + 30 * 24 * 60 * 60 * 1000);
+
+      // Update in-memory registry for dynamic synchronization
+      if (email) {
+        paidUsersRegistry[email.toLowerCase()] = {
+          hasPaid: true,
+          paymentDate: paymentDate.toISOString(),
+          expiryDate: expiryDate.toISOString()
+        };
+      }
+
       // 1. Update Cloud Firestore
       if (db && email) {
         await db.collection('users').doc(email).set({
@@ -231,7 +298,9 @@ app.get('/api/pesapal-callback', async (req, res) => {
           paymentAbandoned: false,
           paidCity: 'Arusha',
           orderTrackingId: OrderTrackingId,
-          lastPaymentTimestamp: new Date().toISOString()
+          paymentDate: paymentDate.toISOString(),
+          expiryDate: expiryDate.toISOString(),
+          lastPaymentTimestamp: paymentDate.toISOString()
         }, { merge: true });
         console.log(`🔥 Firestore status marked PAID for ${email}`);
       }
@@ -279,17 +348,32 @@ app.post('/api/pesapal-ipn', async (req, res) => {
     console.log(`IPN verified transaction status: ${data.payment_status_description} (code: ${data.status_code})`);
 
     // Update status in Firestore database if payment completed
-    if (data.status_code === 1 && db) {
-      const email = data.description; // Pesapal returns submitted email or details in billing/desc
+    if (data.status_code === 1) {
+      const email = data.description; // Pesapal returns submitted email in description
       if (email && email.includes('@')) {
-        await db.collection('users').doc(email).set({
+        const paymentDate = new Date();
+        const expiryDate = new Date(paymentDate.getTime() + 30 * 24 * 60 * 60 * 1000);
+
+        // Update in-memory registry
+        paidUsersRegistry[email.toLowerCase()] = {
           hasPaid: true,
-          paymentAbandoned: false,
-          paidCity: 'Arusha',
-          orderTrackingId: OrderTrackingId,
-          lastPaymentTimestamp: new Date().toISOString()
-        }, { merge: true });
-        console.log(`🔥 Webhook marked user ${email} PAID in Firestore`);
+          paymentDate: paymentDate.toISOString(),
+          expiryDate: expiryDate.toISOString()
+        };
+
+        // Update Firestore
+        if (db) {
+          await db.collection('users').doc(email).set({
+            hasPaid: true,
+            paymentAbandoned: false,
+            paidCity: 'Arusha',
+            orderTrackingId: OrderTrackingId,
+            paymentDate: paymentDate.toISOString(),
+            expiryDate: expiryDate.toISOString(),
+            lastPaymentTimestamp: paymentDate.toISOString()
+          }, { merge: true });
+          console.log(`🔥 Webhook marked user ${email} PAID in Firestore`);
+        }
       }
     }
 
