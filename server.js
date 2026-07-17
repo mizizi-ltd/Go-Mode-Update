@@ -11,7 +11,7 @@ const CONSUMER_KEY = process.env.PESAPAL_CONSUMER_KEY;
 const CONSUMER_SECRET = process.env.PESAPAL_CONSUMER_SECRET;
 const PESAPAL_ENV = process.env.PESAPAL_ENVIRONMENT || 'sandbox';
 const PESAPAL_BASE_URL = PESAPAL_ENV === 'sandbox' 
-  ? 'https://cyb3r.pesapal.com/pesapalv3' 
+  ? 'https://cybqa.pesapal.com/pesapalv3' 
   : 'https://pay.pesapal.com/v3';
 
 let activeIpnId = null;
@@ -65,7 +65,7 @@ async function getPesapalToken() {
   }
 
   console.log('Refreshing Pesapal Bearer Token...');
-  const response = await fetch(`${PESAPAL_BASE_URL}/api/Auth/RegisterConsumer`, {
+  const response = await fetch(`${PESAPAL_BASE_URL}/api/Auth/RequestToken`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -114,7 +114,7 @@ async function ensureIpnRegistered(hostUrl) {
     },
     body: JSON.stringify({
       url: targetWebhookUrl,
-      ipn_notification_type: 'GET' // Default webhook method
+      ipn_notification_type: 'POST'
     })
   });
 
