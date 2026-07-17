@@ -1491,3 +1491,24 @@ body:has(.global-audio-player.visible) .overlay-scroll-container {
   }
 }
 
+/* ===== Mobile UX and Viewport Height Fixes ===== */
+@supports (height: 100dvh) {
+  body, .app-wrapper, .map-container, .sidebar-container, .overlay-screen {
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+  }
+}
+
+/* Ensure scrollable containers have ample bottom breathing room on all mobile devices */
+.details-body {
+  padding-bottom: 5rem !important; /* Extra padding at the bottom of Column 2 stop details */
+}
+
+.sidebar-nav {
+  padding-bottom: 5rem !important; /* Extra padding at the bottom of Column 1 navigation */
+}
+
+.overlay-scroll-container {
+  padding-bottom: 6rem !important; /* Extra padding at the bottom of full-screen overlays */
+}
+

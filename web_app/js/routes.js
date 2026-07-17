@@ -2083,7 +2083,7 @@ const RouteEngine = (() => {
     // 1. Center on Arusha Clock Tower Coordinates at optimized street zoom 14
     map = L.map('map', {
       zoomControl: false, // Deactivate default zoom to prevent overlapping the top-left hamburger button!
-      doubleClickZoom: false // Disable double-click-to-zoom to support double-click-to-drop-pin
+      doubleClickZoom: true // Enable double-click-to-zoom
     }).setView([-3.3719, 36.6944], 14);
 
     // Add zoom controls to the bottom right for professional UI balance (Requirement 2 & 6)
@@ -2271,7 +2271,38 @@ const RouteEngine = (() => {
       modal.classList.add('active');
     };
 
-    map.on('dblclick', handlePinDropTrigger);
+    // Long-press detection variables for mobile touch screens
+    let longPressTimer = null;
+    const LONG_PRESS_DURATION = 600; // milliseconds to qualify as a long-press
+
+    const handleMapTouchStart = (e) => {
+      // Clear any existing timer
+      if (longPressTimer) clearTimeout(longPressTimer);
+      
+      // Ignore right-clicks as they are handled by 'contextmenu'
+      if (e.originalEvent && e.originalEvent.button !== 0 && e.originalEvent.button !== undefined) {
+        return;
+      }
+
+      longPressTimer = setTimeout(() => {
+        handlePinDropTrigger(e);
+      }, LONG_PRESS_DURATION);
+    };
+
+    const handleMapTouchEnd = () => {
+      if (longPressTimer) {
+        clearTimeout(longPressTimer);
+        longPressTimer = null;
+      }
+    };
+
+    // Listen to mousedown (covers PC left clicks and mobile touches)
+    map.on('mousedown', handleMapTouchStart);
+    
+    // Cancel the long-press timer if the user moves, drags, zooms, or releases
+    map.on('mouseup dragstart zoomstart movestart click touchend touchmove', handleMapTouchEnd);
+
+    // Support standard right-click context menu on PC
     map.on('contextmenu', handlePinDropTrigger);
 
     // Bind custom pin dialog modal anchors
