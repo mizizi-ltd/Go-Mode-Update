@@ -257,6 +257,8 @@
         }
       };
 
+      let isProcessingRedirect = false;
+
       // Listen for simulated auth state
       FirebaseSim.onAuthStateChanged(async (user) => {
         if (user) {
@@ -267,10 +269,16 @@
           const paramEmail = urlParams.get('email');
 
           if (paramEmail && paramEmail.toLowerCase() === user.email.toLowerCase()) {
-            if (paymentSuccess === 'true') {
+            if (paymentSuccess === 'true' && !isProcessingRedirect) {
+              isProcessingRedirect = true;
               console.log('Payment success detected from Stripe checkout return!');
+              
+              // Clear query params immediately to prevent loop re-entry
+              window.history.replaceState({}, document.title, window.location.pathname);
+              
               const pDate = new Date();
               const eDate = new Date(pDate.getTime() + 30 * 24 * 60 * 60 * 1000);
+              
               // Mark paid locally
               await FirebaseSim.updateUserRecord(user.email, { 
                 hasPaid: true, 
@@ -278,8 +286,6 @@
                 paymentDate: pDate.toISOString(),
                 expiryDate: eDate.toISOString()
               });
-              // Clear query params to clean URL
-              window.history.replaceState({}, document.title, window.location.pathname);
               
               // Trigger confetti celebration
               StripeSim.confetti();
@@ -296,12 +302,15 @@
                 window.location.href = 'app.html';
               }, 2000);
               return;
-            } else if (paymentCanceled === 'true') {
+            } else if (paymentCanceled === 'true' && !isProcessingRedirect) {
+              isProcessingRedirect = true;
               console.log('Payment cancel/abandonment detected from Stripe checkout return!');
+              
+              // Clear query params immediately to prevent loop re-entry
+              window.history.replaceState({}, document.title, window.location.pathname);
+              
               // Mark abandoned locally
               await FirebaseSim.updateUserRecord(user.email, { paymentAbandoned: true, abandonedAt: new Date().toISOString() });
-              // Clear query params
-              window.history.replaceState({}, document.title, window.location.pathname);
               
               // Fetch updated record and refresh UI
               const updatedUser = await FirebaseSim.getUserRecord(user.email);
@@ -310,7 +319,9 @@
             }
           }
 
-          refreshDashboardUI(user);
+          if (!isProcessingRedirect) {
+            refreshDashboardUI(user);
+          }
         }
       });
 

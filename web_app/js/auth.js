@@ -6,6 +6,7 @@
 const FirebaseSim = (() => {
   const USERS_KEY = 'mizizi_sim_users';
   const SESSION_KEY = 'mizizi_sim_session';
+  let lastSyncTimestamp = 0;
 
   // Seed default demo users if they don't exist
   const getStoredUsers = () => {
@@ -93,9 +94,13 @@ const FirebaseSim = (() => {
         }
       }
 
-      // Trigger server synchronization check in the background
+      // Trigger server synchronization check in the background (throttled to once every 10 seconds)
       if (user) {
-        syncUserStatusFromServer(user.email);
+        const now = Date.now();
+        if (now - lastSyncTimestamp > 10000) {
+          lastSyncTimestamp = now;
+          syncUserStatusFromServer(user.email);
+        }
       }
       
       return user || null;
