@@ -1,31 +1,22 @@
-[debug] [2026-07-20T07:34:35.397Z] ----------------------------------------------------------------------
-[debug] [2026-07-20T07:34:35.401Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\leond\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only hosting
-[debug] [2026-07-20T07:34:35.401Z] CLI Version:   15.22.4
-[debug] [2026-07-20T07:34:35.402Z] Platform:      win32
-[debug] [2026-07-20T07:34:35.402Z] Node Version:  v24.16.0
-[debug] [2026-07-20T07:34:35.402Z] Detected Agent: antigravity
-[debug] [2026-07-20T07:34:35.402Z] Time:          Mon Jul 20 2026 10:34:35 GMT+0300 (East Africa Time)
-[debug] [2026-07-20T07:34:35.403Z] ----------------------------------------------------------------------
+[debug] [2026-07-20T07:46:07.384Z] ----------------------------------------------------------------------
+[debug] [2026-07-20T07:46:07.398Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\leond\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only hosting
+[debug] [2026-07-20T07:46:07.400Z] CLI Version:   15.22.4
+[debug] [2026-07-20T07:46:07.400Z] Platform:      win32
+[debug] [2026-07-20T07:46:07.402Z] Node Version:  v24.16.0
+[debug] [2026-07-20T07:46:07.405Z] Detected Agent: antigravity
+[debug] [2026-07-20T07:46:07.406Z] Time:          Mon Jul 20 2026 10:46:07 GMT+0300 (East Africa Time)
+[debug] [2026-07-20T07:46:07.406Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2026-07-20T07:34:40.925Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2026-07-20T07:34:40.926Z] > authorizing via signed-in user (mizizicorp@gmail.com)
-[debug] [2026-07-20T07:34:40.926Z] [iam] checking project bajaj-adventure-1 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
-[debug] [2026-07-20T07:34:40.928Z] Checked if tokens are valid: true, expires at: 1784534415361
-[debug] [2026-07-20T07:34:40.928Z] Checked if tokens are valid: true, expires at: 1784534415361
-[debug] [2026-07-20T07:34:40.929Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/bajaj-adventure-1:testIamPermissions [none]
-[debug] [2026-07-20T07:34:40.930Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/bajaj-adventure-1:testIamPermissions  x-goog-user-project=bajaj-adventure-1
-[debug] [2026-07-20T07:34:40.930Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/bajaj-adventure-1:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
-[debug] [2026-07-20T07:34:42.806Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/bajaj-adventure-1:testIamPermissions 200
-[debug] [2026-07-20T07:34:42.807Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/bajaj-adventure-1:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
-[debug] [2026-07-20T07:34:42.809Z] Checked if tokens are valid: true, expires at: 1784534415361
-[debug] [2026-07-20T07:34:42.809Z] Checked if tokens are valid: true, expires at: 1784534415361
-[debug] [2026-07-20T07:34:42.810Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/bajaj-adventure-1 [none]
-[debug] [2026-07-20T07:34:43.763Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/bajaj-adventure-1 200
-[debug] [2026-07-20T07:34:43.763Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/bajaj-adventure-1 {"projectId":"bajaj-adventure-1","projectNumber":"1072223816154","displayName":"bajajadventurebeta","name":"projects/bajaj-adventure-1","resources":{"hostingSite":"bajaj-adventure-1"},"state":"ACTIVE","labels":{"firebase":"enabled","firebaseworkflows/environment":"production"},"etag":"1_df38eaa7-9505-414c-9456-73d667c8360e"}
-[info] 
-[info] === Deploying to 'bajaj-adventure-1'...
-[info] 
-[info] i  deploying hosting 
-[debug] [2026-07-20T07:34:43.770Z] Checked if tokens are valid: true, expires at: 1784534415361
-[debug] [2026-07-20T07:34:43.770Z] Checked if tokens are valid: true, expires at: 1784534415361
-[debug] [2026-07-20T07:34:43.771Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/bajaj-adventure-1/sites/bajaj-adventure-1 [none]
+[debug] [2026-07-20T07:46:15.497Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-07-20T07:46:15.497Z] > authorizing via signed-in user (mizizicorp@gmail.com)
+[debug] [2026-07-20T07:46:15.498Z] [iam] checking project bajaj-adventure-1 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-07-20T07:46:15.500Z] Checked if tokens are valid: false, expires at: 1784534415361
+[debug] [2026-07-20T07:46:15.500Z] Checked if tokens are valid: false, expires at: 1784534415361
+[debug] [2026-07-20T07:46:15.500Z] > refreshing access token with scopes: []
+[debug] [2026-07-20T07:46:15.508Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-07-20T07:46:15.508Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-07-20T07:46:16.196Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-07-20T07:46:16.197Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-07-20T07:46:16.234Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/bajaj-adventure-1:testIamPermissions [none]
+[debug] [2026-07-20T07:46:16.234Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/bajaj-adventure-1:testIamPermissions  x-goog-user-project=bajaj-adventure-1
+[debug] [2026-07-20T07:46:16.234Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/bajaj-adventure-1:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
