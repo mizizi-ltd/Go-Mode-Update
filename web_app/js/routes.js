@@ -11,7 +11,8 @@ const RouteEngine = (() => {
       time: "08:00",
       category: "Morning Anchor",
       title: "Kitamu Coffee",
-      image: "assets/clock-tower.jpg",
+      image: "assets/kitamucafe(Medium).JPG",
+      detailImages: ["assets/kitamu-coffee.jpg"],
       lat: -3.370817762441645,
       lng: 36.69371861086912,
       localTip: "Order their local French press coffee paired with their legendary carrot cake.",
@@ -27,7 +28,8 @@ const RouteEngine = (() => {
       time: "08:30",
       category: "Heritage Stop",
       title: "The Tanzanite Experience",
-      image: "assets/tanzanite.jpg",
+      image: "assets/tanzanitexp2.jpg",
+      detailImages: ["assets/tanzanitexp2.jpg"],
       lat: -3.3712749,
       lng: 36.6945194,
       localTip: "Always check for the official grading certification inside the museum showroom.",
@@ -43,7 +45,8 @@ const RouteEngine = (() => {
       time: "09:30",
       category: "Historic Landmark",
       title: "Arusha Clock Tower",
-      image: "assets/arusha-clock-tower.jpg",
+      image: "assets/clocktowersidebar.JPG",
+      detailImages: ["assets/clocktowerMedium.jpeg"],
       lat: -3.3723398,
       lng: 36.6944861,
       localTip: "Stand at the exact geographic midpoint between Cairo and Cape Town for a once-in-a-lifetime photo.",
@@ -59,7 +62,8 @@ const RouteEngine = (() => {
       time: "10:30",
       category: "Cultural Shopping",
       title: "Maasai Market",
-      image: "assets/maasai_market_lane.jpg",
+      image: "assets/maasaimarket1.jpg",
+      detailImages: ["assets/maasaimarketbargaining.jpg", "assets/maasaimarketlookingartwork1.jpg"],
       lat: -3.3758457,
       lng: 36.6923590,
       localTip: "Always bargain respectfully—aim for 50-60% of the initial vendor offer.",
@@ -91,7 +95,8 @@ const RouteEngine = (() => {
       time: "11:45",
       category: "Cultural Core",
       title: "Cultural Heritage Centre Gallery",
-      image: "assets/cultural_heritage_centre.jpg",
+      image: "assets/Cultural-Heritage-1.jpg",
+      detailImages: ["assets/Cultural-Heritage-1.jpg"],
       lat: -3.3769058,
       lng: 36.6581811,
       localTip: "Climb to the top-floor mask gallery showroom for the best art collection.",
@@ -107,7 +112,8 @@ const RouteEngine = (() => {
       time: "13:15",
       category: "Culinary Stop",
       title: "Arusha Coffee Lodge",
-      image: "assets/bannercoffeelodge.jpg",
+      image: "assets/ArushaCoffeeRestaurant.jpg",
+      detailImages: ["assets/ArushaCoffeeRestaurant.jpg", "assets/ArushaCoffeegarden.jpg", "assets/Lunchbreak.jpg"],
       lat: -3.3745016,
       lng: 36.6439397,
       localTip: "Ask for a seat in the outdoor garden pavilion for a tranquil dining atmosphere.",
@@ -139,7 +145,8 @@ const RouteEngine = (() => {
       time: "15:15",
       category: "Creative Stop",
       title: "Clay & Canvas (Njiro)",
-      image: "assets/canvas_clay-pots.jpg",
+      image: "assets/canvasclaysidebar.jpg",
+      detailImages: ["assets/canvasclay.jpg", "assets/canvas_clay-pots.jpg"],
       lat: -3.3980875,
       lng: 36.7047969,
       localTip: "Paint traditional clay mugs and sip local sweet banana wine under a covered canopy garden.",
@@ -155,7 +162,8 @@ const RouteEngine = (() => {
       time: "17:30",
       category: "Sundowner",
       title: "Rooftop Lounge at Gran Melia",
-      image: "assets/gran_melia_cocktails.jpg",
+      image: "assets/granmeliarooftop.avif",
+      detailImages: ["assets/gran-melia-arushapool.jpg", "assets/sundowners.jpg"],
       lat: -3.3706290,
       lng: 36.7066330,
       localTip: "Arrive by 17:45 sharp to watch the sky turn brilliant orange and purple directly over Mount Meru.",
@@ -171,7 +179,8 @@ const RouteEngine = (() => {
       time: "19:00",
       category: "Dinner Anchor",
       title: "Amber Restaurant",
-      image: "assets/hero.png",
+      image: "assets/ambersidebar.JPG",
+      detailImages: ["assets/amberribs.jpg"],
       lat: -3.3764860,
       lng: 36.7032019,
       localTip: "Request their Chicken Makhanwala paired with hot clay-oven garlic naan bread.",
@@ -254,7 +263,8 @@ const RouteEngine = (() => {
       altId: '4a',
       parentIndex: 3,
       title: "Bounce Warehouse",
-      image: "assets/hero.png",
+      image: "assets/bouncepage.jpg",
+      detailImages: ["assets/bouncesidebarjpg.jpg"],
       lat: -3.383785,
       lng: 36.683923,
       swahiliPhrase: "Kuruka na kucheza (Jump and play)",
@@ -286,7 +296,8 @@ const RouteEngine = (() => {
       altId: '6a',
       parentIndex: 6,
       title: "Sable Square",
-      image: "assets/hero.png",
+      image: "assets/sablesquarefront.jpg",
+      detailImages: ["assets/butter&scotchcafe.jpg", "assets/smileys.jpg"],
       lat: -3.360309,
       lng: 36.609154,
       swahiliPhrase: "Soko la kisasa (Modern marketplace)",
@@ -348,7 +359,8 @@ const RouteEngine = (() => {
       altId: '6c',
       parentIndex: 6,
       title: "Blue Heron (Schwari)",
-      image: "assets/hero.png",
+      image: "assets/blueheronsidebar.JPG",
+      detailImages: ["assets/blueheron.jpg", "assets/blueheronview.jpg"],
       lat: -3.386010,
       lng: 36.613022,
       swahiliPhrase: "Ndege wa maji (Water bird)",
@@ -379,7 +391,8 @@ const RouteEngine = (() => {
       altId: '6d',
       parentIndex: 6,
       title: "Tumbili Lodge Restaurant",
-      image: "assets/hero.png",
+      image: "assets/tumbili.avif",
+      detailImages: ["assets/tumbiligarden.jpg"],
       lat: -3.392684,
       lng: 36.627238,
       swahiliPhrase: "Nyumba ya tumbili (House of monkeys)",
@@ -411,7 +424,8 @@ const RouteEngine = (() => {
       altId: '7a',
       parentIndex: 8,
       title: "Village Supermarket",
-      image: "assets/hero.png",
+      image: "assets/villagecafenjirosidebar.JPG",
+      detailImages: ["assets/villagecake.jpg"],
       lat: -3.392783,
       lng: 36.704375,
       swahiliPhrase: "Duka kuu la kijiji (Village supermarket)",
@@ -454,7 +468,8 @@ const RouteEngine = (() => {
       altId: '9a',
       parentIndex: 10,
       title: "Georges Tavern & Pub",
-      image: "assets/hero.png",
+      image: "assets/georgestavernsidebar.JPG",
+      detailImages: ["assets/georgestavern.webp"],
       lat: -3.3717635,
       lng: 36.7025014,
       localTip: "Arrive before 19:00 to grab one of the outdoor terrace tables with fairy-light canopy views.",
@@ -465,7 +480,8 @@ const RouteEngine = (() => {
       altId: '9b',
       parentIndex: 10,
       title: "Peace Chinese Restaurant",
-      image: "assets/hero.png",
+      image: "assets/peacerestaurantsidebar.JPG",
+      detailImages: ["assets/peacefood.jpg", "assets/peacesoup.jpg"],
       lat: -3.366377,
       lng: 36.702023,
       localTip: "The Szechuan mapo tofu and hand-pulled noodles are outstanding — request extra chili oil.",
@@ -476,7 +492,8 @@ const RouteEngine = (() => {
       altId: '9c',
       parentIndex: 10,
       title: "Kibila Restaurant",
-      image: "assets/hero.png",
+      image: "assets/kabilasidebar.JPG",
+      detailImages: ["assets/kabila1.jpg", "assets/kabila2.jpg"],
       lat: -3.376795,
       lng: 36.700784,
       localTip: "Try the Kibila Special Platter — a shared feast of grilled meats, pilau rice, and kachumbari salad.",
@@ -825,11 +842,25 @@ const RouteEngine = (() => {
 
   // Dynamic full guide compiler for main stops
   const compileDetailedGuide = (node, container) => {
-    // 1. Full Image
+    // 1. Primary Detailed / Full Image
+    const mainImgSrc = (node.detailImages && node.detailImages.length > 0) ? node.detailImages[0] : node.image;
     const fullImg = document.createElement('img');
-    fullImg.src = node.image;
-    fullImg.className = 'w-full h-56 object-cover rounded-2xl border border-stone-200 mb-6';
+    fullImg.src = mainImgSrc;
+    fullImg.className = 'w-full h-56 object-cover rounded-2xl border border-stone-200 mb-4 shadow-sm';
     container.appendChild(fullImg);
+
+    // Render multi-image gallery if available
+    if (node.detailImages && node.detailImages.length > 1) {
+      const galleryGrid = document.createElement('div');
+      galleryGrid.className = 'grid grid-cols-2 gap-3 mb-6';
+      node.detailImages.slice(1).forEach(imgSrc => {
+        const gImg = document.createElement('img');
+        gImg.src = imgSrc;
+        gImg.className = 'w-full h-36 object-cover rounded-xl border border-stone-200 shadow-sm hover:scale-[1.02] transition-transform';
+        galleryGrid.appendChild(gImg);
+      });
+      container.appendChild(galleryGrid);
+    }
 
     // 2. Category Badge
     const catBadge = document.createElement('span');
@@ -1467,11 +1498,25 @@ const RouteEngine = (() => {
 
   // Dynamic full guide compiler for detour stops
   const compileDetailedAltGuide = (alt, container) => {
-    // 1. Full Image
+    // 1. Primary Detailed / Full Image
+    const mainImgSrc = (alt.detailImages && alt.detailImages.length > 0) ? alt.detailImages[0] : alt.image;
     const fullImg = document.createElement('img');
-    fullImg.src = alt.image;
-    fullImg.className = 'w-full h-56 object-cover rounded-2xl border border-stone-200 mb-6';
+    fullImg.src = mainImgSrc;
+    fullImg.className = 'w-full h-56 object-cover rounded-2xl border border-stone-200 mb-4 shadow-sm';
     container.appendChild(fullImg);
+
+    // Render multi-image gallery if available
+    if (alt.detailImages && alt.detailImages.length > 1) {
+      const galleryGrid = document.createElement('div');
+      galleryGrid.className = 'grid grid-cols-2 gap-3 mb-6';
+      alt.detailImages.slice(1).forEach(imgSrc => {
+        const gImg = document.createElement('img');
+        gImg.src = imgSrc;
+        gImg.className = 'w-full h-36 object-cover rounded-xl border border-stone-200 shadow-sm hover:scale-[1.02] transition-transform';
+        galleryGrid.appendChild(gImg);
+      });
+      container.appendChild(galleryGrid);
+    }
 
     // 2. Detour Badge
     const badge = document.createElement('span');
@@ -1847,7 +1892,7 @@ const RouteEngine = (() => {
 
     // Banner
     const img = document.createElement('img');
-    img.src = 'assets/hero.png';
+    img.src = 'assets/coffeebreakmorning.JPG';
     img.className = 'w-full h-32 object-cover border border-stone-200';
     detailsBody.appendChild(img);
 
