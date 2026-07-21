@@ -840,26 +840,120 @@ const RouteEngine = (() => {
     }
   };
 
+  // ── Editorial Image Helpers ──────────────────────────────────────────────
+  // Builds a float-wrapped <figure> for in-body editorial image placement.
+  // alignment: 'left' | 'right' | 'full'
+  const buildEditorialFigure = (src, caption, alignment) => {
+    const fig = document.createElement('figure');
+    fig.className = `editorial-figure editorial-figure--${alignment}`;
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = caption || '';
+    img.className = 'editorial-figure__img';
+    fig.appendChild(img);
+    if (caption) {
+      const cap = document.createElement('figcaption');
+      cap.className = 'editorial-figure__caption';
+      cap.textContent = caption;
+      fig.appendChild(cap);
+    }
+    return fig;
+  };
+
+  // Clearfix so floats never bleed into following sections.
+  const buildClearfix = () => {
+    const cf = document.createElement('div');
+    cf.className = 'editorial-clearfix';
+    return cf;
+  };
+
+  // Overflow photo gallery grid for 3rd image onward.
+  const buildOverflowGallery = (images, captions) => {
+    const section = document.createElement('div');
+    section.className = 'editorial-overflow-gallery';
+    const heading = document.createElement('p');
+    heading.className = 'editorial-overflow-gallery__heading';
+    heading.textContent = 'Photo Gallery';
+    section.appendChild(heading);
+    const grid = document.createElement('div');
+    grid.className = 'editorial-overflow-gallery__grid';
+    images.forEach((src, idx) => {
+      const fig = document.createElement('figure');
+      fig.className = 'editorial-overflow-gallery__item';
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = captions[idx] || '';
+      img.className = 'editorial-overflow-gallery__img';
+      fig.appendChild(img);
+      if (captions[idx]) {
+        const cap = document.createElement('figcaption');
+        cap.className = 'editorial-figure__caption';
+        cap.textContent = captions[idx];
+        fig.appendChild(cap);
+      }
+      grid.appendChild(fig);
+    });
+    section.appendChild(grid);
+    return section;
+  };
+
+  // Injects body images naturally into a container using alternating float alignment.
+  // bodyImages: [{ src, caption }]
+  // Image 1 → float-left after 2nd body element; Image 2 → float-right after 4th body element; 3+ → overflow gallery.
+  const injectEditorialImages = (container, bodyImages) => {
+    if (!bodyImages || bodyImages.length === 0) return;
+    const alignments = ['left', 'right'];
+    const inlineCount = Math.min(2, bodyImages.length);
+    // Gather eligible insertion targets (excluding hero figure = first child)
+    const children = Array.from(container.children);
+    const targets = children.filter((el, i) =>
+      i > 0 && (el.tagName === 'P' || el.tagName === 'H4' || el.tagName === 'UL' || el.tagName === 'PRE' || el.tagName === 'DIV')
+    );
+    // Insert after target indices [1] and [3]
+    const insertAfterIdx = [1, 3].slice(0, inlineCount);
+    insertAfterIdx.forEach((tIdx, i) => {
+      const target = targets[tIdx];
+      if (!target) return;
+      const fig = buildEditorialFigure(bodyImages[i].src, bodyImages[i].caption, alignments[i]);
+      const cf = buildClearfix();
+      if (target.nextSibling) {
+        container.insertBefore(fig, target.nextSibling);
+        container.insertBefore(cf, fig.nextSibling);
+      } else {
+        container.appendChild(fig);
+        container.appendChild(cf);
+      }
+    });
+    // Remaining images → overflow gallery
+    if (bodyImages.length > 2) {
+      const ov = buildOverflowGallery(
+        bodyImages.slice(2).map(b => b.src),
+        bodyImages.slice(2).map(b => b.caption)
+      );
+      container.appendChild(ov);
+    }
+  };
+
   // Dynamic full guide compiler for main stops
   const compileDetailedGuide = (node, container) => {
-    // 1. Primary Detailed / Full Image
+    // 1. Hero / Primary image — always full-width, never floated
     const mainImgSrc = (node.detailImages && node.detailImages.length > 0) ? node.detailImages[0] : node.image;
-    const fullImg = document.createElement('img');
-    fullImg.src = mainImgSrc;
-    fullImg.className = 'w-full h-56 object-cover rounded-2xl border border-stone-200 mb-4 shadow-sm';
-    container.appendChild(fullImg);
+    const heroFig = document.createElement('figure');
+    heroFig.className = 'editorial-hero';
+    const heroImg = document.createElement('img');
+    heroImg.src = mainImgSrc;
+    heroImg.alt = node.title;
+    heroImg.className = 'editorial-hero__img';
+    heroFig.appendChild(heroImg);
+    container.appendChild(heroFig);
 
-    // Render multi-image gallery if available
+    // Prepare body images (everything after hero) for later editorial injection
+    const bodyImgDefs = [];
     if (node.detailImages && node.detailImages.length > 1) {
-      const galleryGrid = document.createElement('div');
-      galleryGrid.className = 'grid grid-cols-2 gap-3 mb-6';
-      node.detailImages.slice(1).forEach(imgSrc => {
-        const gImg = document.createElement('img');
-        gImg.src = imgSrc;
-        gImg.className = 'w-full h-36 object-cover rounded-xl border border-stone-200 shadow-sm hover:scale-[1.02] transition-transform';
-        galleryGrid.appendChild(gImg);
+      const captions = node.editorialCaptions || [];
+      node.detailImages.slice(1).forEach((src, idx) => {
+        bodyImgDefs.push({ src, caption: captions[idx] || '' });
       });
-      container.appendChild(galleryGrid);
     }
 
     // 2. Category Badge
@@ -1431,7 +1525,10 @@ const RouteEngine = (() => {
       container.appendChild(descEl);
     }
 
-    // 5. Transit/Safety Warn Card (universal if safetyTips exists)
+    // 5. Editorial body image injection (natural float-wrap throughout body text)
+    injectEditorialImages(container, bodyImgDefs);
+
+    // 5b. Transit/Safety Warn Card (universal if safetyTips exists)
     if (node.safetyTips) {
       const warnCard = document.createElement('div');
       warnCard.className = 'bg-stone-50 border border-stone-200 rounded-xl p-4 flex gap-3 items-start mb-6 text-xs text-stone-600';
@@ -1498,24 +1595,24 @@ const RouteEngine = (() => {
 
   // Dynamic full guide compiler for detour stops
   const compileDetailedAltGuide = (alt, container) => {
-    // 1. Primary Detailed / Full Image
+    // 1. Hero / Primary image — full-width, never floated
     const mainImgSrc = (alt.detailImages && alt.detailImages.length > 0) ? alt.detailImages[0] : alt.image;
-    const fullImg = document.createElement('img');
-    fullImg.src = mainImgSrc;
-    fullImg.className = 'w-full h-56 object-cover rounded-2xl border border-stone-200 mb-4 shadow-sm';
-    container.appendChild(fullImg);
+    const heroFig = document.createElement('figure');
+    heroFig.className = 'editorial-hero';
+    const heroImg = document.createElement('img');
+    heroImg.src = mainImgSrc;
+    heroImg.alt = alt.title;
+    heroImg.className = 'editorial-hero__img';
+    heroFig.appendChild(heroImg);
+    container.appendChild(heroFig);
 
-    // Render multi-image gallery if available
+    // Prepare body images for editorial injection after content is rendered
+    const altBodyImgDefs = [];
     if (alt.detailImages && alt.detailImages.length > 1) {
-      const galleryGrid = document.createElement('div');
-      galleryGrid.className = 'grid grid-cols-2 gap-3 mb-6';
-      alt.detailImages.slice(1).forEach(imgSrc => {
-        const gImg = document.createElement('img');
-        gImg.src = imgSrc;
-        gImg.className = 'w-full h-36 object-cover rounded-xl border border-stone-200 shadow-sm hover:scale-[1.02] transition-transform';
-        galleryGrid.appendChild(gImg);
+      const captions = alt.editorialCaptions || [];
+      alt.detailImages.slice(1).forEach((src, idx) => {
+        altBodyImgDefs.push({ src, caption: captions[idx] || '' });
       });
-      container.appendChild(galleryGrid);
     }
 
     // 2. Detour Badge
@@ -1625,6 +1722,9 @@ const RouteEngine = (() => {
     splitGrid.appendChild(goCard);
     splitGrid.appendChild(avoidCard);
     container.appendChild(splitGrid);
+
+    // 9b. Editorial body image injection
+    injectEditorialImages(container, altBodyImgDefs);
 
     // 10. Directions Button
     const dirBtn = document.createElement('a');
