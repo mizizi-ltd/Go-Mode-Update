@@ -1058,7 +1058,7 @@ const RouteEngine = (() => {
       checkGrid.appendChild(avoidCol);
       container.appendChild(checkGrid);
     } 
-    else if (node.index === 1) { // Clock Tower
+    else if (node.index === 2) { // Clock Tower
       const desc1 = document.createElement('p');
       desc1.className = 'text-sm text-stone-600 leading-relaxed mb-4 font-medium';
       desc1.textContent = "The Arusha Clock Tower: midpoint between Cairo and Cape Town... or is it actually? The true depth of the history of the clock tower lies less in the story of its construction and more in the rich colonial history of the area where it stands.";
@@ -1147,7 +1147,7 @@ const RouteEngine = (() => {
       table.appendChild(tbody);
       container.appendChild(table);
     } 
-    else if (node.index === 2) { // Tanzanite Experience
+    else if (node.index === 1) { // Tanzanite Experience
       const desc1 = document.createElement('p');
       desc1.className = 'text-sm text-stone-600 leading-relaxed mb-6 font-medium';
       desc1.textContent = node.fullDesc;
