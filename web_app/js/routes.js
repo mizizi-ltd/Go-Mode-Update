@@ -934,6 +934,14 @@ const RouteEngine = (() => {
     }
   };
 
+  // Helper to wrap tables for mobile responsiveness
+  const wrapTable = (tbl) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'editorial-table-wrapper';
+    wrap.appendChild(tbl);
+    return wrap;
+  };
+
   // Dynamic full guide compiler for main stops
   const compileDetailedGuide = (node, container) => {
     // 1. Hero / Primary image — always full-width, never floated
@@ -1124,13 +1132,6 @@ const RouteEngine = (() => {
         { y: "2000", m: "Bill Clinton labels Arusha the 'Geneva of Africa'." },
         { y: "2006", m: "Arusha was officially declared a city." }
       ];
-
-      const wrapTable = (tbl) => {
-        const wrap = document.createElement('div');
-        wrap.className = 'editorial-table-wrapper';
-        wrap.appendChild(tbl);
-        return wrap;
-      };
 
       const table = document.createElement('table');
       table.className = 'w-full text-xs text-left border-collapse border border-stone-200';
