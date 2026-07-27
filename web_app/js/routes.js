@@ -1125,8 +1125,15 @@ const RouteEngine = (() => {
         { y: "2006", m: "Arusha was officially declared a city." }
       ];
 
+      const wrapTable = (tbl) => {
+        const wrap = document.createElement('div');
+        wrap.className = 'editorial-table-wrapper';
+        wrap.appendChild(tbl);
+        return wrap;
+      };
+
       const table = document.createElement('table');
-      table.className = 'w-full text-xs text-left border-collapse border border-stone-200 mb-6';
+      table.className = 'w-full text-xs text-left border-collapse border border-stone-200';
       
       const thead = document.createElement('thead');
       thead.className = 'bg-stone-50 border-b border-stone-200';
@@ -1145,7 +1152,7 @@ const RouteEngine = (() => {
         tbody.appendChild(tr);
       });
       table.appendChild(tbody);
-      container.appendChild(table);
+      container.appendChild(wrapTable(table));
     } 
     else if (node.index === 1) { // Tanzanite Experience
       const desc1 = document.createElement('p');
@@ -1273,7 +1280,7 @@ const RouteEngine = (() => {
         cTbody.appendChild(tr);
       });
       cTable.appendChild(cTbody);
-      container.appendChild(cTable);
+      container.appendChild(wrapTable(cTable));
 
       // Insider Negotiation Tactics
       const sub4 = document.createElement('h4');
@@ -1328,7 +1335,7 @@ const RouteEngine = (() => {
         tbody1.appendChild(tr);
       });
       table1.appendChild(tbody1);
-      container.appendChild(table1);
+      container.appendChild(wrapTable(table1));
 
       const desc2 = document.createElement('p');
       desc2.className = 'text-sm text-stone-600 leading-relaxed mb-6 font-medium';
@@ -1370,7 +1377,7 @@ const RouteEngine = (() => {
         tbody2.appendChild(tr);
       });
       table2.appendChild(tbody2);
-      container.appendChild(table2);
+      container.appendChild(wrapTable(table2));
 
       // Tribal Exhibits
       const tblTitle3 = document.createElement('h4');
@@ -1407,7 +1414,7 @@ const RouteEngine = (() => {
         tbody3.appendChild(tr);
       });
       table3.appendChild(tbody3);
-      container.appendChild(table3);
+      container.appendChild(wrapTable(table3));
     } 
     else if (node.index === 6) { // Coffee Lodge
       const desc1 = document.createElement('p');
@@ -1500,7 +1507,7 @@ const RouteEngine = (() => {
         </tr>`;
       });
       hTable.appendChild(hTbody);
-      container.appendChild(hTable);
+      container.appendChild(wrapTable(hTable));
 
       const sub2 = document.createElement('h4');
       sub2.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-2 border-b pb-1';
@@ -1564,10 +1571,10 @@ const RouteEngine = (() => {
       audioTrigger.className = 'bg-emerald-950 text-white rounded-2xl p-4 flex items-center justify-between gap-4 shadow-sm cursor-pointer hover:bg-emerald-900 transition-colors';
 
       const audioInfo = document.createElement('div');
-      audioInfo.className = 'space-y-0.5';
+      audioInfo.className = 'min-w-0 flex-1 overflow-hidden space-y-0.5';
 
       const audioTrackName = document.createElement('p');
-      audioTrackName.className = 'text-xs font-black tracking-wider text-ochre uppercase';
+      audioTrackName.className = 'text-[10px] sm:text-xs font-black tracking-wider text-ochre uppercase truncate leading-tight';
       audioTrackName.textContent = node.title + ' — Narration';
 
       const audioHint = document.createElement('p');
@@ -1791,10 +1798,10 @@ const RouteEngine = (() => {
       audioTrigger.className = 'bg-emerald-950 text-white rounded-xl p-3 flex items-center justify-between gap-3 shadow-sm cursor-pointer hover:bg-emerald-900 transition-colors mt-2';
       
       const audioInfo = document.createElement('div');
-      audioInfo.className = 'min-width-0 flex-grow';
+      audioInfo.className = 'min-w-0 flex-1 overflow-hidden space-y-0.5';
       
       const audioTrackName = document.createElement('p');
-      audioTrackName.className = 'text-[9px] font-black tracking-wider text-ochre uppercase truncate';
+      audioTrackName.className = 'text-[9px] sm:text-[10px] font-black tracking-wider text-ochre uppercase truncate leading-tight';
       audioTrackName.textContent = `🎧 ${node.title} Narration`;
       
       const audioHint = document.createElement('p');
@@ -2343,19 +2350,33 @@ const RouteEngine = (() => {
           <a href="https://www.google.com/maps/dir/?api=1&destination=${node.lat},${node.lng}" target="_blank" class="w-full py-2 bg-emerald-900 hover:bg-emerald-950 text-white font-extrabold rounded-lg text-[10px] uppercase tracking-widest text-center flex items-center justify-center gap-1 shadow-sm transition-colors">
             Get Directions 🚗
           </a>
+
+          <button id="map-read-more-btn-${node.index}" class="w-full py-2 bg-amber-500 hover:bg-amber-400 text-slate-900 font-black rounded-lg text-[10px] uppercase tracking-widest text-center flex items-center justify-center gap-1 shadow-sm transition-transform active:scale-95 cursor-pointer mt-1">
+            Read More 📖
+          </button>
         </div>
       `;
 
       marker.bindPopup(popupHtml);
 
-      // Listen for popup opening to bind the audio trigger to the global player
+      // Listen for popup opening to bind the audio trigger and read more button
       marker.on('popupopen', () => {
         const trigger = document.getElementById(`map-audio-trigger-${node.index}`);
-        if (!trigger) return;
+        if (trigger) {
+          trigger.addEventListener('click', () => {
+            GlobalAudioPlayer.load(`${node.title} — ${node.category}`, `assets/${node.audioGuide}`);
+          });
+        }
 
-        trigger.addEventListener('click', () => {
-          GlobalAudioPlayer.load(`${node.title} — ${node.category}`, `assets/${node.audioGuide}`);
-        });
+        const readMoreBtn = document.getElementById(`map-read-more-btn-${node.index}`);
+        if (readMoreBtn) {
+          readMoreBtn.addEventListener('click', () => {
+            marker.closePopup();
+            openOverlay(`${node.title} - Detailed Guide`, (container) => {
+              compileDetailedGuide(node, container);
+            });
+          });
+        }
       });
 
       // Audio now persists in global player — no popupclose kill needed

@@ -942,11 +942,10 @@ img {
   pointer-events: all;
 }
 
-/* Premium Detailing Header (Reduced rounding to 0.375rem / 6px) */
 .overlay-header {
   background-color: var(--color-primary);
   color: #FFFFFF;
-  padding: 1rem 2rem;
+  padding: 1rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -957,9 +956,17 @@ img {
 .overlay-header h2 {
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
-  flex-shrink: 1;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.25;
+  flex: 1 1 auto;
   min-width: 0;
+}
+
+#overlay-close-btn {
+  flex-shrink: 0 !important;
+  white-space: nowrap;
 }
 
 /* Detailing Scroll Container */
@@ -999,6 +1006,54 @@ img {
 .overlay-content-card span,
 .overlay-content-card a {
   font-size: 12px !important;
+}
+
+/* Detailed Guide Sub-Section Spacing (Avoid wall-of-text feel) */
+.overlay-content-card h4,
+.details-body h4 {
+  margin-top: 2rem !important;
+  margin-bottom: 0.85rem !important;
+  padding-bottom: 0.35rem !important;
+  letter-spacing: 0.08em;
+}
+
+.overlay-content-card p,
+.details-body p {
+  margin-bottom: 1.25rem !important;
+  line-height: 1.65 !important;
+}
+
+.overlay-content-card ul,
+.details-body ul,
+.overlay-content-card ol,
+.details-body ol {
+  margin-bottom: 1.5rem !important;
+}
+
+.overlay-content-card li,
+.details-body li {
+  margin-bottom: 0.5rem !important;
+  line-height: 1.6 !important;
+}
+
+/* Mobile Table Responsiveness & Fit */
+.overlay-content-card table,
+.details-body table {
+  width: 100% !important;
+  border-collapse: collapse;
+  min-width: 440px; /* Prevents column clipping on mobile viewports */
+}
+
+.table-wrapper,
+.editorial-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 1rem;
+  margin-bottom: 1.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  background-color: #FFFFFF;
 }
 
 /* Responsive constraints on mobile screens */
