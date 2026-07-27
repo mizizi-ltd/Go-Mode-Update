@@ -2643,13 +2643,32 @@ const RouteEngine = (() => {
           <h3 class="font-black text-amber-700 text-sm tracking-tight leading-tight">${alt.title}</h3>
           <span class="inline-block text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-amber-50 border border-amber-200 text-amber-600 uppercase tracking-wider">Detour Option</span>
           <div class="bg-stone-50 border border-stone-200 rounded-lg p-2 text-[10px] text-stone-600 leading-normal">
-            <strong>\uD83D\uDCA1 Tip:</strong> ${alt.localTip}
+            <strong>💡 Tip:</strong> ${alt.localTip}
           </div>
           <a href="https://www.google.com/maps/dir/?api=1&destination=${alt.lat},${alt.lng}" target="_blank" class="w-full py-2 bg-amber-500 hover:bg-amber-600 text-white font-extrabold rounded-lg text-[10px] uppercase tracking-widest text-center flex items-center justify-center gap-1 shadow-sm transition-colors">
-            Get Directions \uD83D\uDE97
+            Get Directions 🚗
           </a>
+          <button id="map-alt-read-more-btn-${alt.altId}" class="w-full py-2 bg-stone-900 hover:bg-black text-amber-400 font-black rounded-lg text-[10px] uppercase tracking-widest text-center flex items-center justify-center gap-1 shadow-sm transition-transform active:scale-95 cursor-pointer mt-1">
+            Read More 📖
+          </button>
         </div>
       `);
+
+      marker.on('popupopen', () => {
+        const readMoreBtn = document.getElementById(`map-alt-read-more-btn-${alt.altId}`);
+        if (readMoreBtn) {
+          readMoreBtn.addEventListener('click', () => {
+            marker.closePopup();
+            if (alt.hasDetailedGuide) {
+              openOverlay(`${alt.title} - Detailed Guide`, (container) => {
+                compileDetailedAltGuide(alt, container);
+              });
+            } else {
+              showAlternativeDetails(alt.altId);
+            }
+          });
+        }
+      });
     });
 
     // Re-apply pulsing classes whenever Leaflet completes drawing or panning the map view
