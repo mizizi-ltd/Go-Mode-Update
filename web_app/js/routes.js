@@ -3040,17 +3040,18 @@ const RouteEngine = (() => {
 
         currentUserEmail = user.email;
 
-        // Verify user has paid and selected Arusha city route
+        // Verify user has paid access to the selected city route
         const sessionStr = localStorage.getItem('mizizi_sim_session');
-        let selectedCity = null;
+        let selectedCity = 'arusha';
         if (sessionStr) {
           try {
-            selectedCity = JSON.parse(sessionStr).selectedCity;
+            const parsedSess = JSON.parse(sessionStr);
+            if (parsedSess.selectedCity) selectedCity = parsedSess.selectedCity.toLowerCase();
           } catch (e) {}
         }
 
-        if (user.hasPaid !== true || selectedCity !== 'Arusha') {
-          console.warn('Paid timeline lock or city unselected. Redirecting to dashboard...');
+        if (!FirebaseSim.hasAccessToCity(user, selectedCity)) {
+          console.warn(`Paid route lock: user unauthorized for ${selectedCity}. Redirecting to dashboard...`);
           window.location.replace('dashboard.html');
           return;
         }
@@ -3059,32 +3060,44 @@ const RouteEngine = (() => {
         const lockBlocker = document.getElementById('premium-lock-blocker');
         if (lockBlocker) lockBlocker.remove();
 
-        console.log(`Access authorized for ${user.email}. Restructuring navigation hooks...`);
+        console.log(`Access authorized for ${user.email} in ${selectedCity}. Restructuring navigation hooks...`);
         
         // Display active logged-in user badge details
         const emailBadge = document.getElementById('user-email-badge');
         if (emailBadge) {
-          emailBadge.textContent = user.email;
+          emailBadge.textContent = user.isMaster ? `${user.email} (Master Pass)` : user.email;
         }
 
-        // Render subscription expiration countdown if available
+        // Render subscription expiration countdown for active city
         const expiryContainer = document.getElementById('subscription-expiry-container');
         const expiryBadge = document.getElementById('subscription-expiry-badge');
-        if (expiryContainer && expiryBadge && user.expiryDate) {
-          const expiryTime = new Date(user.expiryDate).getTime();
-          const now = Date.now();
-          const diffMs = expiryTime - now;
-          const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
-          
-          if (diffDays > 0) {
-            expiryBadge.textContent = `${diffDays} day${diffDays === 1 ? '' : 's'} remaining`;
+        if (expiryContainer && expiryBadge) {
+          if (user.isMaster) {
+            expiryBadge.textContent = 'Permanent Master Pass';
             expiryContainer.classList.remove('hidden');
           } else {
-            expiryBadge.textContent = 'Expired';
-            expiryContainer.classList.remove('hidden');
+            let activeExpDate = user.expiryDate;
+            if (user.unlockedCities && user.unlockedCities[selectedCity] && user.unlockedCities[selectedCity].expiryDate) {
+              activeExpDate = user.unlockedCities[selectedCity].expiryDate;
+            }
+
+            if (activeExpDate) {
+              const expiryTime = new Date(activeExpDate).getTime();
+              const now = Date.now();
+              const diffMs = expiryTime - now;
+              const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+              
+              if (diffDays > 0) {
+                expiryBadge.textContent = `${diffDays} day${diffDays === 1 ? '' : 's'} remaining`;
+                expiryContainer.classList.remove('hidden');
+              } else {
+                expiryBadge.textContent = 'Expired';
+                expiryContainer.classList.remove('hidden');
+              }
+            } else {
+              expiryContainer.classList.add('hidden');
+            }
           }
-        } else if (expiryContainer) {
-          expiryContainer.classList.add('hidden');
         }
 
         // Configure home button redirect back to app.html home overview state

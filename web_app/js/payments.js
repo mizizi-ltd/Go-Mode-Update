@@ -1,17 +1,27 @@
-/**
- * Stripe Checkout Simulation Engine
- * Renders a gorgeous, realistic simulated Stripe payment overlay and handles payments.
- */
-
 const StripeSim = (() => {
+  let activePackageType = 'single_city';
+  let activeCityId = 'arusha';
+  let activeCityTitle = 'Arusha';
+  let activePrice = '£6.00';
+
   // Create and inject the modal into the DOM if it doesn't exist
   const ensureModalInjected = () => {
-    if (document.getElementById('stripe-modal-overlay')) return;
+    let overlay = document.getElementById('stripe-modal-overlay');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = 'stripe-modal-overlay';
+      overlay.className = 'modal-overlay';
+      document.body.appendChild(overlay);
+    }
 
-    const overlay = document.createElement('div');
-    overlay.id = 'stripe-modal-overlay';
-    overlay.className = 'modal-overlay';
-    
+    const titleText = activePackageType === 'all_access'
+      ? 'Mizizi All-Access Pass (All Cities & Routes)'
+      : `Mizizi Pass — ${activeCityTitle} Routes`;
+
+    const subtitleText = activePackageType === 'all_access'
+      ? 'Unlimited access to all present & future cities for 90 days'
+      : 'Full 30-day access to all inner-city routes in ' + activeCityTitle;
+
     overlay.innerHTML = `
       <div class="modal-sheet animate-pop-elastic" style="background-color: #F8FAFC;">
         <div class="modal-drag-handle"></div>
@@ -19,11 +29,10 @@ const StripeSim = (() => {
           <!-- Stripe Stylized Header -->
           <div class="flex items-center justify-between pb-4 mb-6 border-b border-slate-200">
             <div class="flex items-center gap-2">
-              <!-- Stripe Stylized S logo -->
               <svg class="w-8 h-8 text-[#635BFF]" fill="currentColor" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
                 <path d="M20 0C8.954 0 0 8.954 0 20s8.954 20 20 20 20-8.954 20-20S31.046 0 20 0zm4.24 23.364c0 4.24-5.32 4.24-5.32 4.24-4.8 0-4.8-3.08-4.8-3.08h2.6c0 1.28 1.96 1.28 2.2 1.28.84 0 2.72-.08 2.72-2.44 0-2.36-2.52-2.36-4.96-2.92-3.12-.72-4.48-1.84-4.48-4.44 0-4.24 5.32-4.24 5.32-4.24 3.92 0 4.24 2.8 4.24 2.8h-2.56c0-.96-1.4-1-1.68-1-.8 0-2.72.04-2.72 2.28 0 2.24 2.36 2.28 4.8 2.84 3.44.8 4.88 1.92 4.88 4.68z"/>
               </svg>
-              <span class="font-bold text-slate-800" font-family="system-ui">Stripe Checkout</span>
+              <span class="font-bold text-slate-800">Stripe Checkout</span>
             </div>
             <button id="stripe-close-btn" class="p-1 text-slate-400 hover:text-slate-600 rounded-full hover:bg-slate-100 transition-colors">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -34,11 +43,12 @@ const StripeSim = (() => {
 
           <!-- Checkout Details -->
           <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm mb-6">
-            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Product</p>
-            <p class="font-bold text-slate-800 text-lg">Mizizi Bajaj Adventures — Arusha Loop</p>
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Selected Package</p>
+            <p class="font-bold text-slate-800 text-base sm:text-lg leading-tight">${titleText}</p>
+            <p class="text-stone-500 text-xs mt-1 font-medium">${subtitleText}</p>
             <div class="flex justify-between items-baseline mt-4 pt-4 border-t border-slate-100">
               <span class="text-slate-500 font-medium">Total Price</span>
-              <span class="text-2xl font-black text-slate-800">£6.00 <span class="text-sm font-normal text-slate-500">(~$9 USD)</span></span>
+              <span class="text-2xl font-black text-slate-800">${activePrice} <span class="text-sm font-normal text-slate-500">${activePackageType === 'all_access' ? '(~$19 USD)' : '(~$9 USD)'}</span></span>
             </div>
           </div>
 
@@ -57,7 +67,6 @@ const StripeSim = (() => {
               <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Card Information</label>
               <div class="relative">
                 <input type="text" id="stripe-card-number" class="mizizi-input" placeholder="4242 4242 4242 4242" maxlength="19" required style="border-color: #CBD5E1;">
-                <!-- Card Network Icon (Visa/Mastercard) -->
                 <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold" id="card-network-badge">VISA</span>
               </div>
             </div>
@@ -74,15 +83,13 @@ const StripeSim = (() => {
             </div>
 
             <button type="submit" id="stripe-submit-btn" class="w-full mt-6 py-4 btn-jungle flex items-center justify-center gap-2 font-bold text-lg" style="background-color: #635BFF; border-radius: 0.75rem;">
-              <span id="stripe-btn-text">Pay £6.00</span>
+              <span id="stripe-btn-text">Pay ${activePrice}</span>
               <div id="stripe-btn-spinner" class="hidden w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
             </button>
           </form>
         </div>
       </div>
     `;
-
-    document.body.appendChild(overlay);
 
     // Event listener to close (triggers cart abandonment tracking)
     document.getElementById('stripe-close-btn').addEventListener('click', () => {
@@ -96,7 +103,6 @@ const StripeSim = (() => {
                 paymentAbandoned: true,
                 abandonedAt: new Date().toISOString()
               }).then(() => {
-                // Dispatch event so dashboard page can display the promo banner instantly
                 window.dispatchEvent(new Event('mizizi_payment_abandoned'));
               });
             }
@@ -146,52 +152,51 @@ const StripeSim = (() => {
       
       // Loading State
       submitBtn.disabled = true;
-      btnText.textContent = 'Processing Payment...';
+      btnText.textContent = 'Securing Access...';
       spinner.classList.remove('hidden');
 
       try {
-        // Simulate high-security transaction processing
         await new Promise(resolve => setTimeout(resolve, 1500));
 
-        const session = localStorage.getItem('mizizi_sim_session');
-        if (!session) {
+        const sessionStr = localStorage.getItem('mizizi_sim_session');
+        if (!sessionStr) {
           throw new Error('No active user session detected. Please log in first.');
         }
         
-        const currentUser = JSON.parse(session);
-        const paymentDate = new Date();
-        const expiryDate = new Date(paymentDate.getTime() + 30 * 24 * 60 * 60 * 1000);
-        await FirebaseSim.updateUserRecord(currentUser.email, { 
-          hasPaid: true,
-          paymentDate: paymentDate.toISOString(),
-          expiryDate: expiryDate.toISOString()
-        });
+        const currentUser = JSON.parse(sessionStr);
+
+        // Unlock Package via auth.js helper engine
+        await FirebaseSim.unlockPackageForUser(currentUser.email, activePackageType, activeCityId);
+
+        // Set session active city
+        const sessionObj = JSON.parse(sessionStr);
+        sessionObj.selectedCity = activeCityId;
+        localStorage.setItem('mizizi_sim_session', JSON.stringify(sessionObj));
 
         // Success State
         btnText.textContent = 'Payment Secured!';
         spinner.classList.add('hidden');
-        submitBtn.style.backgroundColor = '#10B981'; // Green checkout success
+        submitBtn.style.backgroundColor = '#10B981';
 
-        // Trigger gorgeous confetti storm
+        // Trigger confetti storm
         triggerConfettiStorm();
 
         await new Promise(resolve => setTimeout(resolve, 1000));
         
         StripeSim.close();
         
-        // Bounce user straight to the unlocked premium experience
+        // Bounce user straight to unlocked app
         window.location.href = 'app.html';
 
       } catch (err) {
         alert(err.message);
         submitBtn.disabled = false;
-        btnText.textContent = 'Pay £6.00';
+        btnText.textContent = `Pay ${activePrice}`;
         spinner.classList.add('hidden');
       }
     });
   };
 
-  // Fun digital confetti shower to celebrate unlocking the street safari!
   const triggerConfettiStorm = () => {
     const colors = ['#E5A93C', '#0B3C2B', '#635BFF', '#10B981', '#F59E0B', '#3B82F6'];
     for (let i = 0; i < 75; i++) {
@@ -206,7 +211,6 @@ const StripeSim = (() => {
       
       document.body.appendChild(conf);
       
-      // Clean up DOM after animation finishes
       setTimeout(() => {
         conf.remove();
       }, 2500);
@@ -214,9 +218,12 @@ const StripeSim = (() => {
   };
 
   return {
-    // Open payment paywall overlay (attempts Stripe API first, falls back to local simulation)
-    open: async (email, city) => {
-      // Auto-extract session context if not provided
+    open: async (email, packageType = 'single_city', cityId = 'arusha', cityTitle = 'Arusha', price = '£6.00') => {
+      activePackageType = packageType;
+      activeCityId = cityId;
+      activeCityTitle = cityTitle;
+      activePrice = price;
+
       if (!email) {
         const session = localStorage.getItem('mizizi_sim_session');
         if (session) {
@@ -231,13 +238,17 @@ const StripeSim = (() => {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ email: email || 'guest@mizizi.com', city: city || 'Arusha' })
+          body: JSON.stringify({
+            email: email || 'guest@mizizi.com',
+            packageType: packageType,
+            cityId: cityId,
+            price: price
+          })
         });
         
         if (response.ok) {
           const data = await response.json();
           if (data && data.url) {
-            // Redirect to Stripe Checkout or simulated success URL
             window.location.href = data.url;
             return;
           }
@@ -246,7 +257,6 @@ const StripeSim = (() => {
         console.warn('Backend API checkout unavailable, using high-fidelity local checkout simulation:', err.message);
       }
 
-      // Local interactive mock fallback
       ensureModalInjected();
       const overlay = document.getElementById('stripe-modal-overlay');
       if (overlay) {
@@ -255,7 +265,6 @@ const StripeSim = (() => {
       }
     },
 
-    // Close payment paywall overlay
     close: () => {
       const overlay = document.getElementById('stripe-modal-overlay');
       if (overlay) {
@@ -264,7 +273,6 @@ const StripeSim = (() => {
       }
     },
 
-    // Trigger visual confetti celebration
     confetti: () => {
       triggerConfettiStorm();
     }

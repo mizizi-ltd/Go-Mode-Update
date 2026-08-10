@@ -136,14 +136,19 @@ async function ensureIpnRegistered(hostUrl) {
 
 // API: Create Pesapal Order / checkout session (Replaces Stripe endpoint)
 app.post('/api/create-checkout-session', async (req, res) => {
-  const { email, city } = req.body;
+  const { email, packageType = 'single_city', cityId = 'arusha', city = 'Arusha' } = req.body;
 
   if (!email) {
     return res.status(400).json({ error: 'User email is required' });
   }
 
+  const isAllAccess = packageType === 'all_access';
+  const amount = isAllAccess ? 14.99 : 6.00;
+  const description = isAllAccess
+    ? 'Mizizi Bajaj Adventures — All-Access Explorer Pass (All Cities)'
+    : `Mizizi Bajaj Adventures — ${city} Inner-City Loop`;
+
   try {
-    // Dynamic Host Address Detection (works for both localhost and ngrok domains)
     const hostUrl = `${req.protocol}://${req.get('host')}`;
     
     // 1. Authenticate with Pesapal and Register Webhook URL
@@ -152,9 +157,9 @@ app.post('/api/create-checkout-session', async (req, res) => {
 
     // 2. Submit Transaction Order Details
     const uniqueRef = `ref_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`;
-    const callbackUrl = `${hostUrl}/api/pesapal-callback?email=${encodeURIComponent(email)}`;
+    const callbackUrl = `${hostUrl}/api/pesapal-callback?email=${encodeURIComponent(email)}&packageType=${encodeURIComponent(packageType)}&cityId=${encodeURIComponent(cityId)}`;
     
-    console.log(`Submitting Pesapal order request: Ref ${uniqueRef} for ${email}`);
+    console.log(`Submitting Pesapal order request: Ref ${uniqueRef} for ${email} (${packageType})`);
     const response = await fetch(`${PESAPAL_BASE_URL}/api/Transactions/SubmitOrderRequest`, {
       method: 'POST',
       headers: {
@@ -165,8 +170,8 @@ app.post('/api/create-checkout-session', async (req, res) => {
       body: JSON.stringify({
         id: uniqueRef,
         currency: 'GBP',
-        amount: 6.00,
-        description: `Mizizi Bajaj Adventures — Arusha Loop`,
+        amount: amount,
+        description: description,
         callback_url: callbackUrl,
         notification_id: ipnId,
         billing_address: {
@@ -200,15 +205,36 @@ app.post('/api/create-checkout-session', async (req, res) => {
     // Sandbox Simulation Mode Fallback:
     console.warn('⚠️ Falling back to Sandbox Local Simulation due to error');
     const pDate = new Date();
-    const eDate = new Date(pDate.getTime() + 30 * 24 * 60 * 60 * 1000);
-    paidUsersRegistry[email.toLowerCase()] = {
+    const days = isAllAccess ? 90 : 30;
+    const eDate = new Date(pDate.getTime() + days * 24 * 60 * 60 * 1000);
+
+    const normEmail = email.toLowerCase();
+    const existing = paidUsersRegistry[normEmail] || {};
+    const unlocked = existing.unlockedCities || {};
+
+    if (isAllAccess) {
+      ['arusha', 'nairobi', 'kampala'].forEach(c => {
+        unlocked[c] = { paidDate: pDate.toISOString(), expiryDate: eDate.toISOString() };
+      });
+    } else {
+      const normCity = (cityId || 'arusha').toLowerCase();
+      // Requirement 2: Latest purchase extends all currently owned cities
+      Object.keys(unlocked).forEach(cKey => {
+        unlocked[cKey].expiryDate = eDate.toISOString();
+      });
+      unlocked[normCity] = { paidDate: pDate.toISOString(), expiryDate: eDate.toISOString() };
+    }
+
+    paidUsersRegistry[normEmail] = {
       hasPaid: true,
+      allAccessPass: isAllAccess,
+      unlockedCities: unlocked,
       paymentDate: pDate.toISOString(),
       expiryDate: eDate.toISOString()
     };
 
     const hostUrl = `${req.protocol}://${req.get('host')}`;
-    const simulatedSuccessUrl = `${hostUrl}/dashboard.html?payment_success=true&email=${encodeURIComponent(email)}`;
+    const simulatedSuccessUrl = `${hostUrl}/dashboard.html?payment_success=true&email=${encodeURIComponent(email)}&packageType=${encodeURIComponent(packageType)}&cityId=${encodeURIComponent(cityId)}`;
     return res.json({ url: simulatedSuccessUrl });
   }
 });
@@ -222,6 +248,18 @@ app.get('/api/user-status', async (req, res) => {
 
   const normalizedEmail = email.toLowerCase();
 
+  // Master account check
+  if (normalizedEmail === 'master@mizizi.com') {
+    return res.json({
+      email: normalizedEmail,
+      hasPaid: true,
+      isMaster: true,
+      allAccessPass: true,
+      paymentDate: new Date().toISOString(),
+      expiryDate: null
+    });
+  }
+
   // 1. Try to read from Cloud Firestore if available
   if (db) {
     try {
@@ -231,6 +269,8 @@ app.get('/api/user-status', async (req, res) => {
         return res.json({
           email: normalizedEmail,
           hasPaid: userData.hasPaid || false,
+          allAccessPass: userData.allAccessPass || false,
+          unlockedCities: userData.unlockedCities || {},
           paymentDate: userData.paymentDate || null,
           expiryDate: userData.expiryDate || null
         });
@@ -241,7 +281,7 @@ app.get('/api/user-status', async (req, res) => {
   }
 
   // 2. Fallback to server-side in-memory registry
-  const record = paidUsersRegistry[normalizedEmail] || { hasPaid: false, paymentDate: null, expiryDate: null };
+  const record = paidUsersRegistry[normalizedEmail] || { hasPaid: false, allAccessPass: false, unlockedCities: {}, paymentDate: null, expiryDate: null };
   return res.json({
     email: normalizedEmail,
     ...record
@@ -250,7 +290,7 @@ app.get('/api/user-status', async (req, res) => {
 
 // API: Callback Redirect Landing (Redirects user back to client dashboard)
 app.get('/api/pesapal-callback', async (req, res) => {
-  const { OrderTrackingId, OrderMerchantReference, email } = req.query;
+  const { OrderTrackingId, OrderMerchantReference, email, packageType = 'single_city', cityId = 'arusha' } = req.query;
   const hostUrl = `${req.protocol}://${req.get('host')}`;
 
   console.log(`Processing callback redirect. TrackingId: ${OrderTrackingId}, email: ${email}`);
@@ -260,7 +300,6 @@ app.get('/api/pesapal-callback', async (req, res) => {
   }
 
   try {
-    // Query Transaction Status directly from Pesapal
     const token = await getPesapalToken();
     const response = await fetch(`${PESAPAL_BASE_URL}/api/Transactions/GetTransactionStatus?orderTrackingId=${OrderTrackingId}`, {
       method: 'GET',
@@ -280,33 +319,55 @@ app.get('/api/pesapal-callback', async (req, res) => {
     // status_code === 1 means "Completed" success
     if (data.status_code === 1) {
       const paymentDate = new Date();
-      const expiryDate = new Date(paymentDate.getTime() + 30 * 24 * 60 * 60 * 1000);
+      const isAllAccess = packageType === 'all_access';
+      const days = isAllAccess ? 90 : 30;
+      const expiryDate = new Date(paymentDate.getTime() + days * 24 * 60 * 60 * 1000);
 
-      // Update in-memory registry for dynamic synchronization
-      if (email) {
-        paidUsersRegistry[email.toLowerCase()] = {
+      const normEmail = (email || '').toLowerCase();
+      const existing = paidUsersRegistry[normEmail] || {};
+      const unlocked = existing.unlockedCities || {};
+
+      if (isAllAccess) {
+        ['arusha', 'nairobi', 'kampala'].forEach(c => {
+          unlocked[c] = { paidDate: paymentDate.toISOString(), expiryDate: expiryDate.toISOString() };
+        });
+      } else {
+        const normCity = (cityId || 'arusha').toLowerCase();
+        // Latest purchase extends all owned cities
+        Object.keys(unlocked).forEach(cKey => {
+          unlocked[cKey].expiryDate = expiryDate.toISOString();
+        });
+        unlocked[normCity] = { paidDate: paymentDate.toISOString(), expiryDate: expiryDate.toISOString() };
+      }
+
+      if (normEmail) {
+        paidUsersRegistry[normEmail] = {
           hasPaid: true,
+          allAccessPass: isAllAccess,
+          unlockedCities: unlocked,
           paymentDate: paymentDate.toISOString(),
           expiryDate: expiryDate.toISOString()
         };
       }
 
       // 1. Update Cloud Firestore
-      if (db && email) {
-        await db.collection('users').doc(email).set({
+      if (db && normEmail) {
+        await db.collection('users').doc(normEmail).set({
           hasPaid: true,
+          allAccessPass: isAllAccess,
+          unlockedCities: unlocked,
           paymentAbandoned: false,
-          paidCity: 'Arusha',
+          paidCity: cityId || 'Arusha',
           orderTrackingId: OrderTrackingId,
           paymentDate: paymentDate.toISOString(),
           expiryDate: expiryDate.toISOString(),
           lastPaymentTimestamp: paymentDate.toISOString()
         }, { merge: true });
-        console.log(`🔥 Firestore status marked PAID for ${email}`);
+        console.log(`🔥 Firestore status marked PAID for ${normEmail}`);
       }
 
       // 2. Redirect to dashboard with success query
-      return res.redirect(`${hostUrl}/dashboard.html?payment_success=true&email=${encodeURIComponent(email)}`);
+      return res.redirect(`${hostUrl}/dashboard.html?payment_success=true&email=${encodeURIComponent(normEmail)}&packageType=${encodeURIComponent(packageType)}&cityId=${encodeURIComponent(cityId)}`);
     } else {
       console.log(`Transaction incomplete. Status code: ${data.status_code}`);
       return res.redirect(`${hostUrl}/dashboard.html?payment_canceled=true&email=${encodeURIComponent(email)}`);

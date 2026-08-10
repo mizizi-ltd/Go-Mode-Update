@@ -56,7 +56,10 @@
       
       <!-- Welcome Profile Section -->
       <section class="bg-white rounded-3xl p-6 border border-stone-200 shadow-sm space-y-2">
-        <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest">Rider Portal</p>
+        <div class="flex items-center justify-between">
+          <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest">Rider Portal</p>
+          <span id="account-type-badge" class="badge-jungle text-[9px] uppercase tracking-wider font-extrabold hidden">Master Access Pass</span>
+        </div>
         <h1 class="text-2xl font-black text-slate-800 tracking-tight leading-none" id="welcome-title">Welcome, Traveller!</h1>
         <div class="flex items-center gap-1.5 text-xs text-emerald-600 font-bold">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -64,11 +67,32 @@
         </div>
       </section>
 
+      <!-- All-Access Explorer Pass Banner (Package 2) -->
+      <section class="bg-gradient-to-br from-emerald-900 via-jungle to-slate-900 text-white rounded-3xl p-6 shadow-md border border-emerald-800 space-y-4 relative overflow-hidden">
+        <div class="flex items-start justify-between">
+          <div class="space-y-1">
+            <span class="bg-amber-400 text-jungle text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full inline-block">Best Value Pass</span>
+            <h3 class="text-xl font-black tracking-tight text-white mt-1">All-Access Explorer Pass</h3>
+            <p class="text-emerald-200 text-xs leading-relaxed max-w-xs font-medium">Unlock <strong>EVERY city &amp; EVERY route</strong> (present &amp; future) across Tanzania, Kenya, and Uganda for <strong>3 full months (90 days)</strong>.</p>
+          </div>
+          <span class="text-3xl flex-shrink-0">🌍</span>
+        </div>
+        <div class="flex items-center justify-between pt-2 border-t border-emerald-800/80">
+          <div>
+            <span class="text-2xl font-black text-amber-400">£14.99</span>
+            <span class="text-xs text-emerald-300 font-medium ml-1">(~$19 USD / 90 Days)</span>
+          </div>
+          <button id="all-access-buy-btn" class="py-3 px-5 bg-ochre hover:bg-white text-jungle font-black text-xs uppercase tracking-widest rounded-xl transition-all shadow-md">
+            Unlock All Cities
+          </button>
+        </div>
+      </section>
+
       <!-- Route Catalog Section -->
       <section class="space-y-6">
         <div class="flex justify-between items-baseline">
           <h2 class="text-xl font-black text-slate-800 tracking-tight">Adventure Catalog</h2>
-          <span class="badge-gold" id="route-count-badge">1 Unlocked</span>
+          <span class="badge-gold" id="route-count-badge">0 Unlocked</span>
         </div>
         
         <!-- Routes Grid grouped by Country -->
@@ -77,7 +101,7 @@
           <!-- Country Group: Tanzania -->
           <div class="space-y-3">
             <h3 class="text-xs font-black text-stone-400 uppercase tracking-widest border-b pb-1.5 flex items-center gap-1.5">
-              <span>🇹🇿</span> Tanzania
+              <span>🇹🇿</span> Tanzania — Arusha City
             </h3>
             
             <!-- Route Card: Arusha -->
@@ -111,52 +135,52 @@
             </div>
           </div>
 
-          <!-- Country Group: Kenya (Coming Soon) -->
+          <!-- Country Group: Kenya -->
           <div class="space-y-3">
             <h3 class="text-xs font-black text-stone-400 uppercase tracking-widest border-b pb-1.5 flex items-center gap-1.5">
-              <span>🇰🇪</span> Kenya
+              <span>🇰🇪</span> Kenya — Nairobi City
             </h3>
             
             <!-- Nairobi Card -->
-            <div class="mizizi-card bg-stone-50 p-4 opacity-75 border border-stone-200">
+            <div class="mizizi-card bg-white p-4 relative overflow-hidden flex flex-col gap-4 border border-stone-200">
               <div class="flex gap-4">
-                <div class="w-20 h-20 bg-stone-200 rounded-xl flex items-center justify-center text-stone-400 font-extrabold text-xs flex-shrink-0">🇰🇪</div>
-                <div>
+                <img src="assets/nairobi-city.jpg" onerror="this.onerror=null; this.src='assets/arusha-clock-tower.jpg';" class="w-20 h-20 object-cover rounded-xl border border-stone-200 flex-shrink-0" alt="Nairobi">
+                <div class="min-width-0 flex-grow">
                   <div class="flex items-center justify-between mb-1">
-                    <span class="badge-gold">Nairobi</span>
-                    <span class="text-xs font-bold text-stone-400">Coming Soon</span>
+                    <span class="badge-gold">Nairobi Beat</span>
+                    <span class="text-xs font-bold text-amber-600" id="nairobi-status-price">£6.00</span>
                   </div>
-                  <h4 class="font-extrabold text-slate-400 text-sm">Nairobi Street Beat</h4>
+                  <h4 class="font-extrabold text-slate-800 text-sm">Nairobi Street Beat</h4>
                   <p class="text-stone-400 text-xs mt-1 leading-relaxed">Explore the lively backstreets of the Green City in the Sun, including local markets and Matatu culture.</p>
                 </div>
               </div>
-              <button disabled class="w-full py-3.5 bg-stone-200 text-stone-400 rounded-xl font-black text-xs uppercase tracking-widest mt-4 cursor-not-allowed">
-                Coming Soon
+              <button id="nairobi-action-btn" class="w-full py-3.5 rounded-xl font-black text-xs uppercase tracking-widest transition-all text-center block shadow-sm">
+                Unlock City (£6.00)
               </button>
             </div>
           </div>
 
-          <!-- Country Group: Uganda (Coming Soon) -->
+          <!-- Country Group: Uganda -->
           <div class="space-y-3">
             <h3 class="text-xs font-black text-stone-400 uppercase tracking-widest border-b pb-1.5 flex items-center gap-1.5">
-              <span>🇺🇬</span> Uganda
+              <span>🇺🇬</span> Uganda — Kampala City
             </h3>
             
             <!-- Kampala Card -->
-            <div class="mizizi-card bg-stone-50 p-4 opacity-75 border border-stone-200">
+            <div class="mizizi-card bg-white p-4 relative overflow-hidden flex flex-col gap-4 border border-stone-200">
               <div class="flex gap-4">
-                <div class="w-20 h-20 bg-stone-200 rounded-xl flex items-center justify-center text-stone-400 font-extrabold text-xs flex-shrink-0">🇺🇬</div>
-                <div>
+                <img src="assets/kampala-city.jpg" onerror="this.onerror=null; this.src='assets/arusha-clock-tower.jpg';" class="w-20 h-20 object-cover rounded-xl border border-stone-200 flex-shrink-0" alt="Kampala">
+                <div class="min-width-0 flex-grow">
                   <div class="flex items-center justify-between mb-1">
-                    <span class="badge-gold">Kampala</span>
-                    <span class="text-xs font-bold text-stone-400">Coming Soon</span>
+                    <span class="badge-gold">Kampala Hills</span>
+                    <span class="text-xs font-bold text-amber-600" id="kampala-status-price">£6.00</span>
                   </div>
-                  <h4 class="font-extrabold text-slate-400 text-sm">Kampala Hills Explorer</h4>
+                  <h4 class="font-extrabold text-slate-800 text-sm">Kampala Hills Explorer</h4>
                   <p class="text-stone-400 text-xs mt-1 leading-relaxed">Scale Kampala's historical hills via local boda-bodas to visit historic temples and street-food joints.</p>
                 </div>
               </div>
-              <button disabled class="w-full py-3.5 bg-stone-200 text-stone-400 rounded-xl font-black text-xs uppercase tracking-widest mt-4 cursor-not-allowed">
-                Coming Soon
+              <button id="kampala-action-btn" class="w-full py-3.5 rounded-xl font-black text-xs uppercase tracking-widest transition-all text-center block shadow-sm">
+                Unlock City (£6.00)
               </button>
             </div>
           </div>
@@ -198,9 +222,17 @@
     document.addEventListener('DOMContentLoaded', () => {
       const emailBadge = document.getElementById('user-email');
       const welcomeTitle = document.getElementById('welcome-title');
+      const accountBadge = document.getElementById('account-type-badge');
       const routeCountBadge = document.getElementById('route-count-badge');
+      
+      const allAccessBuyBtn = document.getElementById('all-access-buy-btn');
       const arushaBtn = document.getElementById('arusha-action-btn');
       const arushaPrice = document.getElementById('arusha-status-price');
+      const nairobiBtn = document.getElementById('nairobi-action-btn');
+      const nairobiPrice = document.getElementById('nairobi-status-price');
+      const kampalaBtn = document.getElementById('kampala-action-btn');
+      const kampalaPrice = document.getElementById('kampala-status-price');
+
       const abandonmentBanner = document.getElementById('abandonment-banner');
       const closeBannerBtn = document.getElementById('close-banner-btn');
       
@@ -209,51 +241,91 @@
       const logoutCancel = document.getElementById('logout-cancel-btn');
       const logoutOk = document.getElementById('logout-ok-btn');
 
-      // Auth Observer to render state
       let activeUser = null;
+
+      const formatExpiryText = (expStr) => {
+        if (!expStr) return 'Unlocked';
+        const expDate = new Date(expStr);
+        const options = { month: 'short', day: 'numeric' };
+        return `Unlocked (Expires ${expDate.toLocaleDateString('en-US', options)})`;
+      };
 
       const refreshDashboardUI = async (user) => {
         if (!user) return;
         activeUser = user;
         
-        // Display email and welcome message
         emailBadge.textContent = user.email;
         const namePart = user.email.split('@')[0];
         welcomeTitle.textContent = `Welcome, ${namePart.charAt(0).toUpperCase() + namePart.slice(1)}!`;
 
-        // Check if checkout was abandoned
+        if (user.isMaster) {
+          accountBadge.classList.remove('hidden');
+          accountBadge.textContent = 'Master Admin (Unlimited)';
+        } else if (user.allAccessPass) {
+          accountBadge.classList.remove('hidden');
+          accountBadge.textContent = 'All-Access Pass (Active)';
+        } else {
+          accountBadge.classList.add('hidden');
+        }
+
         if (user.paymentAbandoned && !user.hasPaid) {
           abandonmentBanner.classList.remove('hidden');
         } else {
           abandonmentBanner.classList.add('hidden');
         }
 
-        // Adjust Arusha card based on payment status
-        if (user.hasPaid) {
-          let statusText = 'Unlocked';
-          if (user.expiryDate) {
-            const expDate = new Date(user.expiryDate);
-            const options = { month: 'short', day: 'numeric', year: 'numeric' };
-            statusText = `Unlocked (Expires ${expDate.toLocaleDateString('en-US', options)})`;
-          }
-          arushaPrice.textContent = statusText;
+        let unlockedCount = 0;
+
+        // Evaluate Arusha
+        const hasArusha = FirebaseSim.hasAccessToCity(user, 'arusha');
+        if (hasArusha) {
+          unlockedCount++;
+          const exp = user.isMaster ? 'Unlimited' : (user.unlockedCities && user.unlockedCities.arusha ? formatExpiryText(user.unlockedCities.arusha.expiryDate) : formatExpiryText(user.expiryDate));
+          arushaPrice.textContent = user.isMaster ? 'Unlocked (Permanent)' : exp;
           arushaPrice.className = 'text-xs font-bold text-emerald-600';
-          
           arushaBtn.textContent = 'Enter Route';
           arushaBtn.className = 'w-full py-3.5 bg-emerald-600 text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-emerald-700 transition-all text-center block shadow-md';
-          
-          routeCountBadge.textContent = '1 Unlocked';
-          routeCountBadge.className = 'badge-jungle';
         } else {
           arushaPrice.textContent = '£6.00';
           arushaPrice.className = 'text-xs font-bold text-amber-600';
-          
-          arushaBtn.textContent = 'Unlock Route';
+          arushaBtn.textContent = 'Unlock City (£6.00)';
           arushaBtn.className = 'w-full py-3.5 btn-gold text-xs uppercase tracking-widest font-black shadow-md';
-          
-          routeCountBadge.textContent = '0 Unlocked';
-          routeCountBadge.className = 'badge-gold';
         }
+
+        // Evaluate Nairobi
+        const hasNairobi = FirebaseSim.hasAccessToCity(user, 'nairobi');
+        if (hasNairobi) {
+          unlockedCount++;
+          const exp = user.isMaster ? 'Unlocked (Permanent)' : (user.unlockedCities && user.unlockedCities.nairobi ? formatExpiryText(user.unlockedCities.nairobi.expiryDate) : formatExpiryText(user.expiryDate));
+          nairobiPrice.textContent = user.isMaster ? 'Unlocked (Permanent)' : exp;
+          nairobiPrice.className = 'text-xs font-bold text-emerald-600';
+          nairobiBtn.textContent = 'Enter Route';
+          nairobiBtn.className = 'w-full py-3.5 bg-emerald-600 text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-emerald-700 transition-all text-center block shadow-md';
+        } else {
+          nairobiPrice.textContent = '£6.00';
+          nairobiPrice.className = 'text-xs font-bold text-amber-600';
+          nairobiBtn.textContent = 'Unlock City (£6.00)';
+          nairobiBtn.className = 'w-full py-3.5 btn-gold text-xs uppercase tracking-widest font-black shadow-md';
+        }
+
+        // Evaluate Kampala
+        const hasKampala = FirebaseSim.hasAccessToCity(user, 'kampala');
+        if (hasKampala) {
+          unlockedCount++;
+          const exp = user.isMaster ? 'Unlocked (Permanent)' : (user.unlockedCities && user.unlockedCities.kampala ? formatExpiryText(user.unlockedCities.kampala.expiryDate) : formatExpiryText(user.expiryDate));
+          kampalaPrice.textContent = user.isMaster ? 'Unlocked (Permanent)' : exp;
+          kampalaPrice.className = 'text-xs font-bold text-emerald-600';
+          kampalaBtn.textContent = 'Enter Route';
+          kampalaBtn.className = 'w-full py-3.5 bg-emerald-600 text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-emerald-700 transition-all text-center block shadow-md';
+        } else {
+          kampalaPrice.textContent = '£6.00';
+          kampalaPrice.className = 'text-xs font-bold text-amber-600';
+          kampalaBtn.textContent = 'Unlock City (£6.00)';
+          kampalaBtn.className = 'w-full py-3.5 btn-gold text-xs uppercase tracking-widest font-black shadow-md';
+        }
+
+        routeCountBadge.textContent = `${unlockedCount} City Unlocked`;
+        routeCountBadge.className = unlockedCount > 0 ? 'badge-jungle' : 'badge-gold';
       };
 
       let isProcessingRedirect = false;
@@ -272,19 +344,14 @@
               isProcessingRedirect = true;
               console.log('Payment success detected from Stripe checkout return!');
               
+              const paramPkg = urlParams.get('packageType') || 'single_city';
+              const paramCity = urlParams.get('cityId') || 'arusha';
+
               // Clear query params immediately to prevent loop re-entry
               window.history.replaceState({}, document.title, window.location.pathname);
               
-              const pDate = new Date();
-              const eDate = new Date(pDate.getTime() + 30 * 24 * 60 * 60 * 1000);
-              
-              // Mark paid locally
-              await FirebaseSim.updateUserRecord(user.email, { 
-                hasPaid: true, 
-                paymentAbandoned: false,
-                paymentDate: pDate.toISOString(),
-                expiryDate: eDate.toISOString()
-              });
+              // Mark paid locally via helper
+              await FirebaseSim.unlockPackageForUser(user.email, paramPkg, paramCity);
               
               // Trigger confetti celebration
               StripeSim.confetti();
@@ -296,7 +363,7 @@
               // Wait briefly for confetti, then auto-enter
               setTimeout(() => {
                 const session = JSON.parse(localStorage.getItem('mizizi_sim_session') || '{}');
-                session.selectedCity = 'Arusha';
+                session.selectedCity = paramCity === 'all' ? 'arusha' : paramCity;
                 localStorage.setItem('mizizi_sim_session', JSON.stringify(session));
                 window.location.href = 'app.html';
               }, 2000);
@@ -305,13 +372,8 @@
               isProcessingRedirect = true;
               console.log('Payment cancel/abandonment detected from Stripe checkout return!');
               
-              // Clear query params immediately to prevent loop re-entry
               window.history.replaceState({}, document.title, window.location.pathname);
-              
-              // Mark abandoned locally
               await FirebaseSim.updateUserRecord(user.email, { paymentAbandoned: true, abandonedAt: new Date().toISOString() });
-              
-              // Fetch updated record and refresh UI
               const updatedUser = await FirebaseSim.getUserRecord(user.email);
               refreshDashboardUI(updatedUser);
               return;
@@ -329,7 +391,7 @@
         abandonmentBanner.classList.add('hidden');
       });
 
-      // Listen for payment abandonment events dispatched by payments.js
+      // Listen for payment abandonment events
       window.addEventListener('mizizi_payment_abandoned', () => {
         if (activeUser) {
           FirebaseSim.getUserRecord(activeUser.email).then(updated => {
@@ -338,18 +400,58 @@
         }
       });
 
-      // Arusha Button click
-      arushaBtn.addEventListener('click', () => {
+      // Package 2: All-Access Pass Button
+      allAccessBuyBtn.addEventListener('click', () => {
         if (activeUser) {
-          if (activeUser.hasPaid) {
-            // Save selected city to session and enter app.html
+          if (FirebaseSim.hasAccessToCity(activeUser, 'arusha') && FirebaseSim.hasAccessToCity(activeUser, 'nairobi') && FirebaseSim.hasAccessToCity(activeUser, 'kampala')) {
             const session = JSON.parse(localStorage.getItem('mizizi_sim_session') || '{}');
-            session.selectedCity = 'Arusha';
+            session.selectedCity = 'arusha';
             localStorage.setItem('mizizi_sim_session', JSON.stringify(session));
             window.location.href = 'app.html';
           } else {
-            // Unpaid user opens Stripe Checkout simulator
-            StripeSim.open(activeUser.email, 'Arusha');
+            StripeSim.open(activeUser.email, 'all_access', 'all', 'All Cities Pass', '£14.99');
+          }
+        }
+      });
+
+      // Arusha City Button
+      arushaBtn.addEventListener('click', () => {
+        if (activeUser) {
+          if (FirebaseSim.hasAccessToCity(activeUser, 'arusha')) {
+            const session = JSON.parse(localStorage.getItem('mizizi_sim_session') || '{}');
+            session.selectedCity = 'arusha';
+            localStorage.setItem('mizizi_sim_session', JSON.stringify(session));
+            window.location.href = 'app.html';
+          } else {
+            StripeSim.open(activeUser.email, 'single_city', 'arusha', 'Arusha', '£6.00');
+          }
+        }
+      });
+
+      // Nairobi City Button
+      nairobiBtn.addEventListener('click', () => {
+        if (activeUser) {
+          if (FirebaseSim.hasAccessToCity(activeUser, 'nairobi')) {
+            const session = JSON.parse(localStorage.getItem('mizizi_sim_session') || '{}');
+            session.selectedCity = 'nairobi';
+            localStorage.setItem('mizizi_sim_session', JSON.stringify(session));
+            window.location.href = 'app.html';
+          } else {
+            StripeSim.open(activeUser.email, 'single_city', 'nairobi', 'Nairobi', '£6.00');
+          }
+        }
+      });
+
+      // Kampala City Button
+      kampalaBtn.addEventListener('click', () => {
+        if (activeUser) {
+          if (FirebaseSim.hasAccessToCity(activeUser, 'kampala')) {
+            const session = JSON.parse(localStorage.getItem('mizizi_sim_session') || '{}');
+            session.selectedCity = 'kampala';
+            localStorage.setItem('mizizi_sim_session', JSON.stringify(session));
+            window.location.href = 'app.html';
+          } else {
+            StripeSim.open(activeUser.email, 'single_city', 'kampala', 'Kampala', '£6.00');
           }
         }
       });
