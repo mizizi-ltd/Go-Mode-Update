@@ -5,9 +5,14 @@ const cors = require("cors");
 const path = require("path");
 require("dotenv").config({ path: path.join(__dirname, ".env") });
 
-// Initialize Firebase Admin SDK (uses default app credentials in cloud environment)
-admin.initializeApp();
-const db = admin.firestore();
+// Initialize Firebase Admin SDK (safely guarded)
+if (!admin.apps.length) {
+  admin.initializeApp();
+}
+
+function getDb() {
+  return admin.firestore();
+}
 
 const app = express();
 app.use(express.json());
@@ -29,7 +34,7 @@ app.use(cors({
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
-      callback(null, true); // Fallback allow for dynamic redirects
+      callback(null, true);
     }
   }
 }));
@@ -47,7 +52,6 @@ let registeredIpnUrl = null;
 let cachedToken = null;
 let tokenExpiry = null;
 
-// Server memory fallback registry
 let paidUsersRegistry = {};
 
 // Helper: Get Pesapal Auth Token
@@ -150,7 +154,7 @@ app.get("/api/user-status", async (req, res) => {
   }
 
   try {
-    const userDoc = await db.collection("users").doc(normalizedEmail).get();
+    const userDoc = await getDb().collection("users").doc(normalizedEmail).get();
     if (userDoc.exists) {
       const userData = userDoc.data();
       return res.json({
@@ -278,7 +282,7 @@ app.get("/api/pesapal-callback", async (req, res) => {
       const expiryDate = new Date(paymentDate.getTime() + days * 24 * 60 * 60 * 1000);
 
       const normEmail = (email || "").toLowerCase();
-      const existingDoc = await db.collection("users").doc(normEmail).get();
+      const existingDoc = await getDb().collection("users").doc(normEmail).get();
       const existingData = existingDoc.exists ? existingDoc.data() : {};
       const unlocked = existingData.unlockedCities || {};
 
@@ -288,14 +292,13 @@ app.get("/api/pesapal-callback", async (req, res) => {
         });
       } else {
         const normCity = (cityId || "arusha").toLowerCase();
-        // Extend all existing owned cities to latest purchase expiry date
         Object.keys(unlocked).forEach(cKey => {
           unlocked[cKey].expiryDate = expiryDate.toISOString();
         });
         unlocked[normCity] = { paidDate: paymentDate.toISOString(), expiryDate: expiryDate.toISOString() };
       }
 
-      await db.collection("users").doc(normEmail).set({
+      await getDb().collection("users").doc(normEmail).set({
         hasPaid: true,
         allAccessPass: isAllAccess,
         unlockedCities: unlocked,
@@ -354,7 +357,7 @@ app.post("/api/pesapal-ipn", async (req, res) => {
         const expiryDate = new Date(paymentDate.getTime() + 30 * 24 * 60 * 60 * 1000);
 
         const normEmail = email.toLowerCase();
-        await db.collection("users").doc(normEmail).set({
+        await getDb().collection("users").doc(normEmail).set({
           hasPaid: true,
           paymentAbandoned: false,
           paidCity: "Arusha",
