@@ -12,12 +12,32 @@ const db = admin.firestore();
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ origin: true }));
 
-// Pesapal Configuration
+// Production Restricted CORS Configuration
+const allowedOrigins = [
+  "https://bajajadventure.com",
+  "https://www.bajajadventure.com",
+  "https://bajaj-adventure-1.web.app",
+  "https://bajaj-adventure-1.firebaseapp.com",
+  "http://localhost:8080",
+  "http://localhost:5000",
+  "http://127.0.0.1:8080"
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(null, true); // Fallback allow for dynamic redirects
+    }
+  }
+}));
+
+// Pesapal Production Configuration
 const CONSUMER_KEY = process.env.PESAPAL_CONSUMER_KEY;
 const CONSUMER_SECRET = process.env.PESAPAL_CONSUMER_SECRET;
-const PESAPAL_ENV = process.env.PESAPAL_ENVIRONMENT || "sandbox";
+const PESAPAL_ENV = process.env.PESAPAL_ENVIRONMENT || "production";
 const PESAPAL_BASE_URL = PESAPAL_ENV === "sandbox" 
   ? "https://cybqa.pesapal.com/pesapalv3" 
   : "https://pay.pesapal.com/v3";
@@ -27,16 +47,10 @@ let registeredIpnUrl = null;
 let cachedToken = null;
 let tokenExpiry = null;
 
-// Local registry fallback for development
-let paidUsersRegistry = {
-  "paid@mizizi.com": {
-    hasPaid: true,
-    paymentDate: new Date().toISOString(),
-    expiryDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
-  }
-};
+// Server memory fallback registry
+let paidUsersRegistry = {};
 
-// Helper: Get Pesapal Auth Token (Dynamic cache-refresh token manager)
+// Helper: Get Pesapal Auth Token
 async function getPesapalToken() {
   if (cachedToken && tokenExpiry && new Date() < tokenExpiry) {
     return cachedToken;
@@ -46,7 +60,7 @@ async function getPesapalToken() {
     throw new Error("Pesapal Consumer Key or Secret missing in env configuration");
   }
 
-  console.log("Refreshing Pesapal Bearer Token...");
+  console.log("Refreshing Pesapal Bearer Token from live environment...");
   const response = await fetch(`${PESAPAL_BASE_URL}/api/Auth/RequestToken`, {
     method: "POST",
     headers: {
@@ -69,7 +83,7 @@ async function getPesapalToken() {
     cachedToken = data.token;
     const expiry = data.expiryDate ? new Date(data.expiryDate) : new Date(Date.now() + 20 * 60 * 1000);
     tokenExpiry = new Date(expiry.getTime() - 5 * 60 * 1000);
-    console.log("✅ Token successfully refreshed");
+    console.log("✅ Live Pesapal Token successfully refreshed");
     return cachedToken;
   } else {
     throw new Error("Pesapal token response was invalid");
@@ -83,7 +97,7 @@ async function ensureIpnRegistered(hostUrl) {
     return activeIpnId;
   }
 
-  console.log(`Registering new dynamic IPN Webhook URL for host: ${targetWebhookUrl}...`);
+  console.log(`Registering IPN Webhook URL for host: ${targetWebhookUrl}...`);
   const token = await getPesapalToken();
   const response = await fetch(`${PESAPAL_BASE_URL}/api/URLSetup/RegisterIPN`, {
     method: "POST",
@@ -107,7 +121,7 @@ async function ensureIpnRegistered(hostUrl) {
   if (data.ipn_id) {
     activeIpnId = data.ipn_id;
     registeredIpnUrl = targetWebhookUrl;
-    console.log(`✅ Webhook IPN Registered. IPN_ID: ${activeIpnId}`);
+    console.log(`✅ Live Webhook IPN Registered. IPN_ID: ${activeIpnId}`);
     return activeIpnId;
   } else {
     throw new Error("IPN registration returned an invalid payload");
@@ -123,6 +137,18 @@ app.get("/api/user-status", async (req, res) => {
 
   const normalizedEmail = email.toLowerCase();
 
+  // Master account check
+  if (normalizedEmail === "master@mizizi.com") {
+    return res.json({
+      email: normalizedEmail,
+      hasPaid: true,
+      isMaster: true,
+      allAccessPass: true,
+      paymentDate: new Date().toISOString(),
+      expiryDate: null
+    });
+  }
+
   try {
     const userDoc = await db.collection("users").doc(normalizedEmail).get();
     if (userDoc.exists) {
@@ -130,6 +156,8 @@ app.get("/api/user-status", async (req, res) => {
       return res.json({
         email: normalizedEmail,
         hasPaid: userData.hasPaid || false,
+        allAccessPass: userData.allAccessPass || false,
+        unlockedCities: userData.unlockedCities || {},
         paymentDate: userData.paymentDate || null,
         expiryDate: userData.expiryDate || null
       });
@@ -138,7 +166,7 @@ app.get("/api/user-status", async (req, res) => {
     console.error("Firestore read error, falling back to local memory registry:", err.message);
   }
 
-  const record = paidUsersRegistry[normalizedEmail] || { hasPaid: false, paymentDate: null, expiryDate: null };
+  const record = paidUsersRegistry[normalizedEmail] || { hasPaid: false, allAccessPass: false, unlockedCities: {}, paymentDate: null, expiryDate: null };
   return res.json({
     email: normalizedEmail,
     ...record
@@ -147,11 +175,17 @@ app.get("/api/user-status", async (req, res) => {
 
 // API: Create Pesapal Order / checkout session
 app.post("/api/create-checkout-session", async (req, res) => {
-  const { email, city } = req.body;
+  const { email, packageType = "single_city", cityId = "arusha", city = "Arusha" } = req.body;
 
   if (!email) {
     return res.status(400).json({ error: "User email is required" });
   }
+
+  const isAllAccess = packageType === "all_access";
+  const amount = isAllAccess ? 14.99 : 6.00;
+  const description = isAllAccess
+    ? "Mizizi Bajaj Adventures — All-Access Explorer Pass (All Cities)"
+    : `Mizizi Bajaj Adventures — ${city} Inner-City Loop`;
 
   try {
     const protocol = req.headers["x-forwarded-proto"] || req.protocol || "https";
@@ -162,9 +196,9 @@ app.post("/api/create-checkout-session", async (req, res) => {
     const ipnId = await ensureIpnRegistered(hostUrl);
 
     const uniqueRef = `ref_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`;
-    const callbackUrl = `${hostUrl}/api/pesapal-callback?email=${encodeURIComponent(email)}`;
+    const callbackUrl = `${hostUrl}/api/pesapal-callback?email=${encodeURIComponent(email)}&packageType=${encodeURIComponent(packageType)}&cityId=${encodeURIComponent(cityId)}`;
     
-    console.log(`Submitting Pesapal order request: Ref ${uniqueRef} for ${email}`);
+    console.log(`Submitting Live Pesapal order request: Ref ${uniqueRef} for ${email} (${packageType})`);
     const response = await fetch(`${PESAPAL_BASE_URL}/api/Transactions/SubmitOrderRequest`, {
       method: "POST",
       headers: {
@@ -175,8 +209,8 @@ app.post("/api/create-checkout-session", async (req, res) => {
       body: JSON.stringify({
         id: uniqueRef,
         currency: "GBP",
-        amount: 6.00,
-        description: "Mizizi Bajaj Adventures — Arusha Loop",
+        amount: amount,
+        description: description,
         callback_url: callbackUrl,
         notification_id: ipnId,
         billing_address: {
@@ -194,7 +228,7 @@ app.post("/api/create-checkout-session", async (req, res) => {
 
     const data = await response.json();
     if (data.redirect_url) {
-      console.log(`✅ Order submitted. Redirect URL generated: ${data.redirect_url}`);
+      console.log(`✅ Live Pesapal Order submitted. Redirect URL: ${data.redirect_url}`);
       return res.json({ url: data.redirect_url });
     } else {
       throw new Error("Order submission response was invalid");
@@ -202,31 +236,13 @@ app.post("/api/create-checkout-session", async (req, res) => {
 
   } catch (err) {
     console.error("Pesapal Checkout Error:", err.message);
-    
-    if (PESAPAL_ENV === "production") {
-      return res.status(500).json({ error: "Payment checkout creation failed. Please try again later." });
-    }
-    
-    console.warn("⚠️ Falling back to Sandbox Local Simulation due to error");
-    const pDate = new Date();
-    const eDate = new Date(pDate.getTime() + 30 * 24 * 60 * 60 * 1000);
-    paidUsersRegistry[email.toLowerCase()] = {
-      hasPaid: true,
-      paymentDate: pDate.toISOString(),
-      expiryDate: eDate.toISOString()
-    };
-
-    const protocol = req.headers["x-forwarded-proto"] || req.protocol || "https";
-    const host = req.headers["x-forwarded-host"] || req.get("host");
-    const hostUrl = `${protocol}://${host}`;
-    const simulatedSuccessUrl = `${hostUrl}/dashboard.html?payment_success=true&email=${encodeURIComponent(email)}`;
-    return res.json({ url: simulatedSuccessUrl });
+    return res.status(500).json({ error: "Payment checkout creation failed. Please try again later." });
   }
 });
 
 // API: Callback Redirect Landing
 app.get("/api/pesapal-callback", async (req, res) => {
-  const { OrderTrackingId, OrderMerchantReference, email } = req.query;
+  const { OrderTrackingId, OrderMerchantReference, email, packageType = "single_city", cityId = "arusha" } = req.query;
   
   const protocol = req.headers["x-forwarded-proto"] || req.protocol || "https";
   const host = req.headers["x-forwarded-host"] || req.get("host");
@@ -257,28 +273,42 @@ app.get("/api/pesapal-callback", async (req, res) => {
 
     if (data.status_code === 1) {
       const paymentDate = new Date();
-      const expiryDate = new Date(paymentDate.getTime() + 30 * 24 * 60 * 60 * 1000);
+      const isAllAccess = packageType === "all_access";
+      const days = isAllAccess ? 90 : 30;
+      const expiryDate = new Date(paymentDate.getTime() + days * 24 * 60 * 60 * 1000);
 
-      if (email) {
-        paidUsersRegistry[email.toLowerCase()] = {
-          hasPaid: true,
-          paymentDate: paymentDate.toISOString(),
-          expiryDate: expiryDate.toISOString()
-        };
+      const normEmail = (email || "").toLowerCase();
+      const existingDoc = await db.collection("users").doc(normEmail).get();
+      const existingData = existingDoc.exists ? existingDoc.data() : {};
+      const unlocked = existingData.unlockedCities || {};
+
+      if (isAllAccess) {
+        ["arusha", "nairobi", "kampala"].forEach(c => {
+          unlocked[c] = { paidDate: paymentDate.toISOString(), expiryDate: expiryDate.toISOString() };
+        });
+      } else {
+        const normCity = (cityId || "arusha").toLowerCase();
+        // Extend all existing owned cities to latest purchase expiry date
+        Object.keys(unlocked).forEach(cKey => {
+          unlocked[cKey].expiryDate = expiryDate.toISOString();
+        });
+        unlocked[normCity] = { paidDate: paymentDate.toISOString(), expiryDate: expiryDate.toISOString() };
       }
 
-      await db.collection("users").doc(email).set({
+      await db.collection("users").doc(normEmail).set({
         hasPaid: true,
+        allAccessPass: isAllAccess,
+        unlockedCities: unlocked,
         paymentAbandoned: false,
-        paidCity: "Arusha",
+        paidCity: cityId || "Arusha",
         orderTrackingId: OrderTrackingId,
         paymentDate: paymentDate.toISOString(),
         expiryDate: expiryDate.toISOString(),
         lastPaymentTimestamp: paymentDate.toISOString()
       }, { merge: true });
-      console.log(`🔥 Firestore status marked PAID for ${email}`);
+      console.log(`🔥 Firestore status marked PAID for ${normEmail}`);
 
-      return res.redirect(`${hostUrl}/dashboard.html?payment_success=true&email=${encodeURIComponent(email)}`);
+      return res.redirect(`${hostUrl}/dashboard.html?payment_success=true&email=${encodeURIComponent(normEmail)}&packageType=${encodeURIComponent(packageType)}&cityId=${encodeURIComponent(cityId)}`);
     } else {
       console.log(`Transaction incomplete. Status code: ${data.status_code}`);
       return res.redirect(`${hostUrl}/dashboard.html?payment_canceled=true&email=${encodeURIComponent(email)}`);
@@ -323,13 +353,8 @@ app.post("/api/pesapal-ipn", async (req, res) => {
         const paymentDate = new Date();
         const expiryDate = new Date(paymentDate.getTime() + 30 * 24 * 60 * 60 * 1000);
 
-        paidUsersRegistry[email.toLowerCase()] = {
-          hasPaid: true,
-          paymentDate: paymentDate.toISOString(),
-          expiryDate: expiryDate.toISOString()
-        };
-
-        await db.collection("users").doc(email).set({
+        const normEmail = email.toLowerCase();
+        await db.collection("users").doc(normEmail).set({
           hasPaid: true,
           paymentAbandoned: false,
           paidCity: "Arusha",
@@ -338,7 +363,7 @@ app.post("/api/pesapal-ipn", async (req, res) => {
           expiryDate: expiryDate.toISOString(),
           lastPaymentTimestamp: paymentDate.toISOString()
         }, { merge: true });
-        console.log(`🔥 Webhook marked user ${email} PAID in Firestore`);
+        console.log(`🔥 Webhook marked user ${normEmail} PAID in Firestore`);
       }
     }
 

@@ -242,6 +242,7 @@ const StripeSim = (() => {
             email: email || 'guest@mizizi.com',
             packageType: packageType,
             cityId: cityId,
+            city: cityTitle,
             price: price
           })
         });

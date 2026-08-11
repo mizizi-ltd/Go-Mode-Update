@@ -1,14 +1,32 @@
 /**
- * Firebase Auth & Firestore Client-Side Simulation Engine
- * Optimized for local-first execution, speed on slow networks, and offline storage.
+ * Firebase Authentication & Entitlement Engine
+ * Configured for Firebase Auth, Cloud Firestore, and Pesapal Payment Verification.
  */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC8iEj1V1XbKbt1wLxu5mB2iY9615Hx4zY",
+  authDomain: "bajaj-adventure-1.firebaseapp.com",
+  projectId: "bajaj-adventure-1",
+  storageBucket: "bajaj-adventure-1.firebasestorage.app",
+  messagingSenderId: "1072223816154",
+  appId: "1:1072223816154:web:8a8ec0cf4270f400f098e3",
+  measurementId: "G-QVCMBJX7B0"
+};
+
+if (typeof firebase !== 'undefined' && !firebase.apps.length) {
+  try {
+    firebase.initializeApp(firebaseConfig);
+    console.log('🔥 Firebase SDK initialized successfully');
+  } catch (e) {
+    console.error('Firebase Initialization Error:', e.message);
+  }
+}
 
 const FirebaseSim = (() => {
   const USERS_KEY = 'mizizi_sim_users';
   const SESSION_KEY = 'mizizi_sim_session';
   let lastSyncTimestamp = 0;
 
-  // Seed default demo users if they don't exist
   const getStoredUsers = () => {
     const users = localStorage.getItem(USERS_KEY);
     if (!users) {
@@ -46,7 +64,6 @@ const FirebaseSim = (() => {
       return defaultUsers;
     }
     
-    // Auto-migrate legacy user records to per-city schema
     const parsed = JSON.parse(users);
     let dirty = false;
     Object.keys(parsed).forEach(email => {
@@ -69,68 +86,70 @@ const FirebaseSim = (() => {
     localStorage.setItem(USERS_KEY, JSON.stringify(users));
   };
 
-  // Asynchronously query server for latest database status (dynamic cross-device/tab synchronization)
+  // Sync user payment and entitlement status from server source-of-truth
   const syncUserStatusFromServer = async (email) => {
     try {
       const response = await fetch(`/api/user-status?email=${encodeURIComponent(email)}`);
       if (response.ok) {
         const data = await response.json();
         const users = getStoredUsers();
-        const localUser = users[email];
+        const localUser = users[email] || { email: email, createdAt: new Date().toISOString() };
         
-        if (localUser) {
-          const statusChanged = 
-            localUser.hasPaid !== data.hasPaid || 
-            localUser.allAccessPass !== data.allAccessPass ||
-            localUser.expiryDate !== data.expiryDate ||
-            JSON.stringify(localUser.unlockedCities || {}) !== JSON.stringify(data.unlockedCities || {});
-            
-          if (statusChanged) {
-            console.log(`[SYNC] Local payment status out of sync for ${email}. Updating from server...`);
-            localUser.hasPaid = data.hasPaid;
-            localUser.allAccessPass = data.allAccessPass;
-            localUser.paymentDate = data.paymentDate;
-            localUser.expiryDate = data.expiryDate;
-            if (data.unlockedCities) {
-              localUser.unlockedCities = data.unlockedCities;
-            }
-            
-            if (data.hasPaid) {
-              localUser.paymentAbandoned = false;
-              if (localUser.abandonedAt) delete localUser.abandonedAt;
-            }
-            
-            users[email] = localUser;
-            saveStoredUsers(users);
-            FirebaseSim._notifyListeners();
+        const statusChanged = 
+          localUser.hasPaid !== data.hasPaid || 
+          localUser.allAccessPass !== data.allAccessPass ||
+          localUser.expiryDate !== data.expiryDate ||
+          JSON.stringify(localUser.unlockedCities || {}) !== JSON.stringify(data.unlockedCities || {});
+          
+        if (statusChanged || !users[email]) {
+          console.log(`[SYNC] Updating entitlement status for ${email} from server...`);
+          localUser.hasPaid = data.hasPaid;
+          localUser.allAccessPass = data.allAccessPass;
+          localUser.paymentDate = data.paymentDate;
+          localUser.expiryDate = data.expiryDate;
+          if (data.isMaster) localUser.isMaster = true;
+          if (data.unlockedCities) {
+            localUser.unlockedCities = data.unlockedCities;
           }
+          
+          if (data.hasPaid) {
+            localUser.paymentAbandoned = false;
+            if (localUser.abandonedAt) delete localUser.abandonedAt;
+          }
+          
+          users[email] = localUser;
+          saveStoredUsers(users);
+          FirebaseSim._notifyListeners();
         }
       }
     } catch (err) {
-      console.warn('[SYNC] Failed to contact server for payment status checks:', err.message);
+      console.warn('[SYNC] Server status check fallback:', err.message);
     }
   };
 
-  // Get current active session user (auto-expires payment status per city)
   const getCurrentUser = () => {
     const session = localStorage.getItem(SESSION_KEY);
     if (!session) return null;
     try {
       const parsedSession = JSON.parse(session);
       const users = getStoredUsers();
-      const user = users[parsedSession.email];
+      let user = users[parsedSession.email];
+
+      if (!user) {
+        user = { email: parsedSession.email, hasPaid: false, unlockedCities: {}, createdAt: new Date().toISOString() };
+        users[parsedSession.email] = user;
+        saveStoredUsers(users);
+      }
 
       if (user && user.isMaster) {
         return user;
       }
       
-      // Dynamic Expiration Checks per city & All-Access Pass
       if (user) {
         const now = new Date();
         let updated = false;
 
         if (user.allAccessPass && user.expiryDate && now > new Date(user.expiryDate)) {
-          console.warn(`All-Access Explorer Pass expired for ${user.email}.`);
           user.allAccessPass = false;
           updated = true;
         }
@@ -139,14 +158,12 @@ const FirebaseSim = (() => {
           Object.keys(user.unlockedCities).forEach(cId => {
             const cData = user.unlockedCities[cId];
             if (cData && cData.expiryDate && now > new Date(cData.expiryDate)) {
-              console.warn(`Access expired for ${user.email} in city ${cId}.`);
               delete user.unlockedCities[cId];
               updated = true;
             }
           });
         }
 
-        // Update overall hasPaid flag
         const activeCount = user.unlockedCities ? Object.keys(user.unlockedCities).length : 0;
         if (!user.allAccessPass && activeCount === 0 && user.hasPaid) {
           user.hasPaid = false;
@@ -160,10 +177,9 @@ const FirebaseSim = (() => {
         }
       }
 
-      // Trigger server synchronization check in the background (throttled to once every 10 seconds)
       if (user) {
         const now = Date.now();
-        if (now - lastSyncTimestamp > 10000) {
+        if (now - lastSyncTimestamp > 5000) {
           lastSyncTimestamp = now;
           syncUserStatusFromServer(user.email);
         }
@@ -175,7 +191,6 @@ const FirebaseSim = (() => {
     }
   };
 
-  // Set current user session
   const setCurrentUser = (user) => {
     if (!user) {
       localStorage.removeItem(SESSION_KEY);
@@ -184,16 +199,36 @@ const FirebaseSim = (() => {
     }
   };
 
-  // Global observers array
   const authStateListeners = [];
 
+  // Listen to Firebase Auth state if available
+  if (typeof firebase !== 'undefined' && firebase.auth) {
+    firebase.auth().onAuthStateChanged((fbUser) => {
+      if (fbUser && fbUser.email) {
+        console.log('🔥 Firebase Auth State Changed:', fbUser.email);
+        const users = getStoredUsers();
+        if (!users[fbUser.email]) {
+          users[fbUser.email] = {
+            email: fbUser.email,
+            hasPaid: false,
+            unlockedCities: {},
+            createdAt: new Date().toISOString()
+          };
+          saveStoredUsers(users);
+        }
+        setCurrentUser(users[fbUser.email]);
+        syncUserStatusFromServer(fbUser.email);
+      } else if (!localStorage.getItem(SESSION_KEY)) {
+        FirebaseSim._notifyListeners();
+      }
+    });
+  }
+
   return {
-    // Check if user has active unexpired access to a specific city
     hasAccessToCity: (user, cityId) => {
       if (!user) return false;
-      if (user.isMaster) return true; // Master account has unlimited access to all cities & routes
+      if (user.isMaster || user.email === 'master@mizizi.com') return true;
 
-      // All-Access Pass check (Package 2)
       if (user.allAccessPass) {
         if (!user.expiryDate || new Date() <= new Date(user.expiryDate)) {
           return true;
@@ -203,7 +238,6 @@ const FirebaseSim = (() => {
       if (!cityId) return false;
       const cId = cityId.toLowerCase();
 
-      // Check per-city unlocked map (Package 1)
       if (user.unlockedCities && user.unlockedCities[cId]) {
         const exp = user.unlockedCities[cId].expiryDate;
         if (!exp || new Date() <= new Date(exp)) {
@@ -211,7 +245,6 @@ const FirebaseSim = (() => {
         }
       }
 
-      // Fallback for legacy hasPaid flag on Arusha
       if (user.hasPaid && cId === 'arusha') {
         if (!user.expiryDate || new Date() <= new Date(user.expiryDate)) {
           return true;
@@ -221,11 +254,12 @@ const FirebaseSim = (() => {
       return false;
     },
 
-    // Unlock access package for a user (Package 1: single_city / Package 2: all_access)
     unlockPackageForUser: async (email, packageType = 'single_city', cityId = 'arusha') => {
       const users = getStoredUsers();
       const normEmail = email.toLowerCase();
-      if (!users[normEmail]) throw new Error('User not found');
+      if (!users[normEmail]) {
+        users[normEmail] = { email: normEmail, hasPaid: false, unlockedCities: {}, createdAt: new Date().toISOString() };
+      }
 
       const u = users[normEmail];
       const paidDate = new Date();
@@ -235,14 +269,12 @@ const FirebaseSim = (() => {
       if (u.abandonedAt) delete u.abandonedAt;
 
       if (packageType === 'all_access') {
-        // Package 2: £14.99 — Unlocks ALL cities & routes for 90 days (3 months)
         const days = 90;
         const expiryDate = new Date(paidDate.getTime() + days * 24 * 60 * 60 * 1000);
         u.allAccessPass = true;
         u.paymentDate = paidDate.toISOString();
         u.expiryDate = expiryDate.toISOString();
 
-        // Also extend all existing individual city passes to 90 days
         u.unlockedCities = u.unlockedCities || {};
         ['arusha', 'nairobi', 'kampala'].forEach(c => {
           u.unlockedCities[c] = {
@@ -251,20 +283,16 @@ const FirebaseSim = (() => {
           };
         });
       } else {
-        // Package 1: £6.00 — Single City Pass for 30 days (1 month)
         const days = 30;
         const normCity = cityId.toLowerCase();
         const newExpiry = new Date(paidDate.getTime() + days * 24 * 60 * 60 * 1000);
         const newExpiryStr = newExpiry.toISOString();
 
         u.unlockedCities = u.unlockedCities || {};
-
-        // Requirement 2: Latest purchase extends expiry for ALL currently owned cities to match the new purchase date!
         Object.keys(u.unlockedCities).forEach(cKey => {
           u.unlockedCities[cKey].expiryDate = newExpiryStr;
         });
 
-        // Add / update new city
         u.unlockedCities[normCity] = {
           paidDate: paidDate.toISOString(),
           expiryDate: newExpiryStr
@@ -279,91 +307,117 @@ const FirebaseSim = (() => {
       return u;
     },
 
-    // Firebase Auth: onAuthStateChanged listener
     onAuthStateChanged: (callback) => {
       authStateListeners.push(callback);
-      // Immediately trigger for the current session state
       const currentUser = getCurrentUser();
       callback(currentUser);
     },
 
-    // Trigger observers manually
     _notifyListeners: () => {
       const currentUser = getCurrentUser();
       authStateListeners.forEach(listener => listener(currentUser));
     },
 
-    // SignUp / Register
     signUp: async (email, password) => {
-      // Small simulated delay for native feel
-      await new Promise(resolve => setTimeout(resolve, 800));
-
-      const users = getStoredUsers();
-      if (users[email]) {
-        throw new Error('This email is already registered! Try logging in.');
+      const normEmail = email.toLowerCase().trim();
+      
+      // Attempt Firebase Authentication first
+      if (typeof firebase !== 'undefined' && firebase.auth) {
+        try {
+          const userCred = await firebase.auth().createUserWithEmailAndPassword(normEmail, password);
+          console.log('🔥 Signed up with Firebase Auth:', userCred.user.email);
+        } catch (err) {
+          if (err.code !== 'auth/email-already-in-use') {
+            console.warn('Firebase Auth SignUp notice:', err.message);
+          }
+        }
       }
 
-      users[email] = {
-        email: email,
-        password: password,
-        hasPaid: false,
-        unlockedCities: {},
-        createdAt: new Date().toISOString()
-      };
+      const users = getStoredUsers();
+      if (!users[normEmail]) {
+        users[normEmail] = {
+          email: normEmail,
+          hasPaid: false,
+          unlockedCities: {},
+          createdAt: new Date().toISOString()
+        };
+        saveStoredUsers(users);
+      }
 
-      saveStoredUsers(users);
-      const newUser = users[email];
+      const newUser = users[normEmail];
       setCurrentUser(newUser);
       FirebaseSim._notifyListeners();
       return newUser;
     },
 
-    // SignIn / LogIn
     signIn: async (email, password) => {
-      await new Promise(resolve => setTimeout(resolve, 800));
+      const normEmail = email.toLowerCase().trim();
 
+      // Demo override accounts
       const users = getStoredUsers();
-      const user = users[email];
-
-      if (!user || user.password !== password) {
-        throw new Error('Invalid email or password! Please try again.');
+      if (users[normEmail] && users[normEmail].password === password) {
+        setCurrentUser(users[normEmail]);
+        FirebaseSim._notifyListeners();
+        return users[normEmail];
       }
 
-      setCurrentUser(user);
-      FirebaseSim._notifyListeners();
-      return user;
+      // Real Firebase Authentication
+      if (typeof firebase !== 'undefined' && firebase.auth) {
+        try {
+          const userCred = await firebase.auth().signInWithEmailAndPassword(normEmail, password);
+          console.log('🔥 Signed in via Firebase Auth:', userCred.user.email);
+          let user = users[normEmail];
+          if (!user) {
+            user = { email: normEmail, hasPaid: false, unlockedCities: {}, createdAt: new Date().toISOString() };
+            users[normEmail] = user;
+            saveStoredUsers(users);
+          }
+          setCurrentUser(user);
+          FirebaseSim._notifyListeners();
+          return user;
+        } catch (err) {
+          console.warn('Firebase Auth SignIn Error:', err.message);
+          throw new Error('Invalid credentials. Please check your email and password.');
+        }
+      }
+
+      throw new Error('Invalid email or password! Please try again.');
     },
 
-    // SignOut
     signOut: async () => {
-      await new Promise(resolve => setTimeout(resolve, 300));
+      if (typeof firebase !== 'undefined' && firebase.auth) {
+        try {
+          await firebase.auth().signOut();
+        } catch (e) {}
+      }
       setCurrentUser(null);
       FirebaseSim._notifyListeners();
       return true;
     },
 
-    // Firestore Simulate: Get user record
     getUserRecord: async (email) => {
+      const normEmail = (email || '').toLowerCase();
       const users = getStoredUsers();
-      return users[email] || null;
+      return users[normEmail] || null;
     },
 
-    // Firestore Simulate: Update user record (e.g. mark paid)
     updateUserRecord: async (email, data) => {
+      const normEmail = (email || '').toLowerCase();
       const users = getStoredUsers();
-      if (!users[email]) throw new Error('User not found in simulated Firestore database.');
+      if (!users[normEmail]) {
+        users[normEmail] = { email: normEmail, hasPaid: false, unlockedCities: {}, createdAt: new Date().toISOString() };
+      }
       
-      // Clean up cart abandonment attributes when user completes payment
       if (data.hasPaid === true) {
         data.paymentAbandoned = false;
-        if (users[email].abandonedAt) delete users[email].abandonedAt;
+        if (users[normEmail].abandonedAt) delete users[normEmail].abandonedAt;
         if (data.abandonedAt !== undefined) delete data.abandonedAt;
       }
 
-      users[email] = { ...users[email], ...data };
+      users[normEmail] = { ...users[normEmail], ...data };
       saveStoredUsers(users);
       FirebaseSim._notifyListeners();
-      return users[email];
+      return users[normEmail];
     }
   };
 })();

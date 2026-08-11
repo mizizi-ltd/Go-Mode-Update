@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 8080;
 // Pesapal Configuration
 const CONSUMER_KEY = process.env.PESAPAL_CONSUMER_KEY;
 const CONSUMER_SECRET = process.env.PESAPAL_CONSUMER_SECRET;
-const PESAPAL_ENV = process.env.PESAPAL_ENVIRONMENT || 'sandbox';
+const PESAPAL_ENV = process.env.PESAPAL_ENVIRONMENT || 'production';
 const PESAPAL_BASE_URL = PESAPAL_ENV === 'sandbox' 
   ? 'https://cybqa.pesapal.com/pesapalv3' 
   : 'https://pay.pesapal.com/v3';
