@@ -1564,12 +1564,12 @@ const RouteEngine = (() => {
     // 7. Audio Guide — Load to Global Player
     if (node.audioGuide) {
       const audioTitle = document.createElement('h4');
-      audioTitle.className = 'text-sm font-black text-jungle uppercase tracking-widest mt-6 mb-3 border-b pb-2';
-      audioTitle.textContent = "🎧 Atmospheric Audio Guide";
+      audioTitle.className = 'text-xs font-black text-jungle uppercase tracking-widest mt-4 mb-2 border-b pb-1.5';
+      audioTitle.textContent = "🎧 Audio Guide";
       container.appendChild(audioTitle);
 
       const audioTrigger = document.createElement('div');
-      audioTrigger.className = 'bg-emerald-950 text-white rounded-2xl p-4 flex items-center justify-between gap-4 shadow-sm cursor-pointer hover:bg-emerald-900 transition-colors';
+      audioTrigger.className = 'bg-emerald-950 text-white rounded-xl p-2.5 sm:p-3 flex items-center justify-between gap-3 shadow-sm cursor-pointer hover:bg-emerald-900 transition-colors border border-emerald-800';
 
       const audioInfo = document.createElement('div');
       audioInfo.className = 'min-w-0 flex-1 overflow-hidden space-y-0.5';
@@ -1579,15 +1579,15 @@ const RouteEngine = (() => {
       audioTrackName.textContent = node.title + ' — Narration';
 
       const audioHint = document.createElement('p');
-      audioHint.className = 'text-[10px] text-emerald-300 font-semibold';
-      audioHint.textContent = 'Tap to play in audio player ▸';
+      audioHint.className = 'text-[9px] sm:text-[10px] text-emerald-300 font-semibold';
+      audioHint.textContent = 'Tap to play narration ▸';
 
       audioInfo.appendChild(audioTrackName);
       audioInfo.appendChild(audioHint);
 
       const playBtn = document.createElement('button');
-      playBtn.className = 'p-3 bg-ochre text-jungle rounded-full font-black text-xs hover:bg-white transition-colors flex items-center justify-center flex-shrink-0';
-      playBtn.innerHTML = `<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+      playBtn.className = 'w-9 h-9 sm:w-10 sm:h-10 bg-ochre hover:bg-white text-jungle rounded-full font-black shadow-md flex items-center justify-center flex-shrink-0 transition-transform hover:scale-105 border-2 border-amber-300';
+      playBtn.innerHTML = `<svg class="w-4 h-4 sm:w-5 sm:h-5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
 
       const triggerPlay = () => {
         GlobalAudioPlayer.load(`${node.title} — ${node.category}`, `assets/${node.audioGuide}`);

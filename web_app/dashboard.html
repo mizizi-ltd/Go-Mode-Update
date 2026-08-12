@@ -71,35 +71,35 @@
       </section>
 
       <!-- All-Access Explorer Pass Banner (Package 2) -->
-      <section class="bg-gradient-to-br from-emerald-900 via-jungle to-slate-900 text-white rounded-3xl p-6 shadow-md border border-emerald-800 space-y-4 relative overflow-hidden">
-        <div class="flex items-start justify-between">
-          <div class="space-y-1">
-            <span class="bg-amber-400 text-jungle text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full inline-block">Best Value Pass</span>
-            <h3 class="text-xl font-black tracking-tight text-white mt-1">All-Access Explorer Pass</h3>
-            <p class="text-emerald-200 text-xs leading-relaxed max-w-xs font-medium">Unlock <strong>EVERY city &amp; EVERY route</strong> (present &amp; future) across Tanzania, Kenya, and Uganda for <strong>3 full months (90 days)</strong>.</p>
+      <section class="bg-gradient-to-br from-emerald-900 via-jungle to-slate-900 text-white rounded-2xl sm:rounded-3xl p-4 sm:p-5 shadow-md border border-emerald-800 space-y-3 relative overflow-hidden">
+        <div class="flex items-start justify-between gap-2">
+          <div class="space-y-1 min-w-0">
+            <span class="bg-amber-400 text-jungle text-[9px] sm:text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full inline-block">Best Value Pass</span>
+            <h3 class="text-base sm:text-lg font-black tracking-tight text-white mt-0.5">All-Access Explorer Pass</h3>
+            <p class="text-emerald-200 text-[11px] sm:text-xs leading-snug font-medium">Unlock <strong>EVERY city &amp; EVERY route</strong> across East Africa for <strong>3 full months (90 days)</strong>.</p>
           </div>
-          <span class="text-3xl flex-shrink-0">🌍</span>
+          <span class="text-2xl sm:text-3xl flex-shrink-0">🌍</span>
         </div>
         <div class="flex items-center justify-between pt-2 border-t border-emerald-800/80">
           <div>
-            <span class="text-2xl font-black text-amber-400">£14.99</span>
-            <span class="text-xs text-emerald-300 font-medium ml-1">(~$19 USD / 90 Days)</span>
+            <span class="text-xl sm:text-2xl font-black text-amber-400">£14.99</span>
+            <span class="text-[10px] sm:text-xs text-emerald-300 font-medium ml-1">(~$19 USD / 90 Days)</span>
           </div>
-          <button id="all-access-buy-btn" class="py-3 px-5 bg-ochre hover:bg-white text-jungle font-black text-xs uppercase tracking-widest rounded-xl transition-all shadow-md">
+          <button id="all-access-buy-btn" class="py-2.5 px-4 bg-ochre hover:bg-white text-jungle font-black text-[11px] sm:text-xs uppercase tracking-wider rounded-xl transition-all shadow-md flex-shrink-0">
             Unlock All Cities
           </button>
         </div>
       </section>
 
       <!-- Route Catalog Section -->
-      <section class="space-y-6">
+      <section class="space-y-5">
         <div class="flex justify-between items-baseline">
-          <h2 class="text-xl font-black text-slate-800 tracking-tight">Adventure Catalog</h2>
+          <h2 class="text-lg sm:text-xl font-black text-slate-800 tracking-tight">Adventure Catalog</h2>
           <span class="badge-gold" id="route-count-badge">0 Unlocked</span>
         </div>
         
         <!-- Routes Grid grouped by Country -->
-        <div class="space-y-6">
+        <div class="space-y-5">
           
           <!-- Country Group: Tanzania -->
           <div class="space-y-3">
@@ -145,20 +145,20 @@
             </h3>
             
             <!-- Nairobi Card -->
-            <div class="mizizi-card bg-white p-4 relative overflow-hidden flex flex-col gap-4 border border-stone-200">
+            <div class="mizizi-card bg-stone-50 p-4 opacity-80 relative overflow-hidden flex flex-col gap-4 border border-stone-200">
               <div class="flex gap-4">
-                <img src="assets/nairobi-city.jpg" onerror="this.onerror=null; this.src='assets/arusha-clock-tower.jpg';" class="w-20 h-20 object-cover rounded-xl border border-stone-200 flex-shrink-0" alt="Nairobi">
+                <img src="assets/nairobi-city.jpg" onerror="this.onerror=null; this.src='assets/arusha-clock-tower.jpg';" class="w-20 h-20 object-cover rounded-xl border border-stone-200 flex-shrink-0 grayscale opacity-75" alt="Nairobi">
                 <div class="min-width-0 flex-grow">
                   <div class="flex items-center justify-between mb-1">
                     <span class="badge-gold">Nairobi Beat</span>
-                    <span class="text-xs font-bold text-amber-600" id="nairobi-status-price">£6.00</span>
+                    <span class="text-xs font-bold text-stone-400">Coming Soon</span>
                   </div>
-                  <h4 class="font-extrabold text-slate-800 text-sm">Nairobi Street Beat</h4>
+                  <h4 class="font-extrabold text-slate-600 text-sm">Nairobi Street Beat</h4>
                   <p class="text-stone-400 text-xs mt-1 leading-relaxed">Explore the lively backstreets of the Green City in the Sun, including local markets and Matatu culture.</p>
                 </div>
               </div>
-              <button id="nairobi-action-btn" class="w-full py-3.5 rounded-xl font-black text-xs uppercase tracking-widest transition-all text-center block shadow-sm">
-                Unlock City (£6.00)
+              <button disabled class="w-full py-3.5 bg-stone-200 text-stone-400 rounded-xl font-black text-xs uppercase tracking-widest text-center block cursor-not-allowed shadow-none">
+                Coming Soon
               </button>
             </div>
           </div>
@@ -170,23 +170,26 @@
             </h3>
             
             <!-- Kampala Card -->
-            <div class="mizizi-card bg-white p-4 relative overflow-hidden flex flex-col gap-4 border border-stone-200">
+            <div class="mizizi-card bg-stone-50 p-4 opacity-80 relative overflow-hidden flex flex-col gap-4 border border-stone-200">
               <div class="flex gap-4">
-                <img src="assets/kampala-city.jpg" onerror="this.onerror=null; this.src='assets/arusha-clock-tower.jpg';" class="w-20 h-20 object-cover rounded-xl border border-stone-200 flex-shrink-0" alt="Kampala">
+                <img src="assets/kampala-city.jpg" onerror="this.onerror=null; this.src='assets/arusha-clock-tower.jpg';" class="w-20 h-20 object-cover rounded-xl border border-stone-200 flex-shrink-0 grayscale opacity-75" alt="Kampala">
                 <div class="min-width-0 flex-grow">
                   <div class="flex items-center justify-between mb-1">
                     <span class="badge-gold">Kampala Hills</span>
-                    <span class="text-xs font-bold text-amber-600" id="kampala-status-price">£6.00</span>
+                    <span class="text-xs font-bold text-stone-400">Coming Soon</span>
                   </div>
-                  <h4 class="font-extrabold text-slate-800 text-sm">Kampala Hills Explorer</h4>
+                  <h4 class="font-extrabold text-slate-600 text-sm">Kampala Hills Explorer</h4>
                   <p class="text-stone-400 text-xs mt-1 leading-relaxed">Scale Kampala's historical hills via local boda-bodas to visit historic temples and street-food joints.</p>
                 </div>
               </div>
-              <button id="kampala-action-btn" class="w-full py-3.5 rounded-xl font-black text-xs uppercase tracking-widest transition-all text-center block shadow-sm">
-                Unlock City (£6.00)
+              <button disabled class="w-full py-3.5 bg-stone-200 text-stone-400 rounded-xl font-black text-xs uppercase tracking-widest text-center block cursor-not-allowed shadow-none">
+                Coming Soon
               </button>
             </div>
           </div>
+
+        </div>
+      </section>
 
         </div>
       </section>

@@ -252,77 +252,16 @@
 
           <div id="auth-error-msg" class="hidden bg-red-50 border border-red-200 text-red-600 rounded-xl p-3 text-xs font-semibold"></div>
 
-          <button type="submit" id="auth-submit-btn" class="w-full py-4 btn-jungle font-bold text-lg flex items-center justify-center gap-2 animate-pulse-gold">
+          <button type="submit" id="auth-submit-btn" class="w-full py-4 btn-jungle font-bold text-lg flex items-center justify-center gap-2">
             <span id="auth-btn-text">Let's Ride!</span>
             <div id="auth-btn-spinner" class="hidden w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
           </button>
         </form>
 
-        <!-- Quick Credentials Switch (High-Fidelity testing helper) -->
-        <div class="bg-stone-50 border border-stone-200 rounded-2xl p-4 text-center space-y-3">
-          <p class="text-xs font-black text-stone-500 uppercase tracking-widest">💡 Quick Testing Credentials</p>
-          <div class="grid grid-cols-2 gap-2">
-            <button id="quick-unpaid-btn" class="py-2.5 px-3 bg-white border border-stone-300 rounded-xl text-xs font-bold text-slate-700 hover:bg-amber-50 hover:border-amber-400 transition-colors">
-              🔑 Unpaid Demo User
-              <span class="block text-[10px] text-stone-400 font-normal">guest@mizizi.com</span>
-            </button>
-            <button id="quick-paid-btn" class="py-2.5 px-3 bg-white border border-stone-300 rounded-xl text-xs font-bold text-slate-700 hover:bg-emerald-50 hover:border-emerald-400 transition-colors">
-              🔓 Paid Demo User
-              <span class="block text-[10px] text-stone-400 font-normal">paid@mizizi.com</span>
-            </button>
-          </div>
-        </div>
-
         <div class="text-center pt-2">
           <button id="toggle-auth-mode" class="text-xs font-black text-amber-600 hover:text-amber-700 uppercase tracking-widest">
             Already registered? Switch to Login
           </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Simulated OAuth Account Selector Modal sheet -->
-  <div id="oauth-modal" class="modal-overlay">
-    <div class="modal-sheet">
-      <div class="modal-drag-handle"></div>
-      <div class="p-6 space-y-6">
-        <div class="text-center">
-          <span class="text-4xl block mb-2" id="oauth-provider-logo">🌐</span>
-          <h2 class="text-2xl font-black text-slate-800" id="oauth-modal-title">Sign in with Social</h2>
-          <p class="text-stone-500 text-xs mt-1">Select a verified profile to authorize your Mizizi session.</p>
-        </div>
-
-        <div class="space-y-3">
-          <button class="w-full p-4 bg-white border border-stone-200 rounded-2xl flex items-center justify-between text-left hover:bg-stone-50 hover:border-amber-400 transition-all font-bold text-xs" id="oauth-select-unpaid">
-            <div>
-              <span class="block text-slate-800" id="oauth-unpaid-label">Unpaid Profile</span>
-              <span class="block text-[10px] text-stone-400 font-normal" id="oauth-unpaid-email">user@social.com</span>
-            </div>
-            <span class="text-amber-500 font-black">£6 Locked</span>
-          </button>
-          
-          <button class="w-full p-4 bg-white border border-stone-200 rounded-2xl flex items-center justify-between text-left hover:bg-stone-50 hover:border-emerald-400 transition-all font-bold text-xs" id="oauth-select-paid">
-            <div>
-              <span class="block text-slate-800" id="oauth-paid-label">Paid Profile</span>
-              <span class="block text-[10px] text-stone-400 font-normal" id="oauth-paid-email">member@social.com</span>
-            </div>
-            <span class="text-emerald-500 font-black">Unlocked</span>
-          </button>
-
-          <div class="text-center text-[10px] font-black text-stone-400 uppercase tracking-widest py-2">or authorize custom email</div>
-
-          <form id="oauth-custom-form" class="space-y-4">
-            <div>
-              <label class="block text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1.5">Custom Social Email</label>
-              <input type="email" id="oauth-custom-email" class="mizizi-input" placeholder="e.g. name@domain.com" required>
-            </div>
-            <div class="flex items-center gap-2">
-              <input type="checkbox" id="oauth-custom-paid" class="rounded border-stone-300 text-ochre focus:ring-ochre w-4 h-4">
-              <label for="oauth-custom-paid" class="text-xs font-bold text-slate-600 cursor-pointer">Pre-authorize as Paid</label>
-            </div>
-            <button type="submit" class="w-full py-3.5 btn-jungle font-bold text-xs uppercase tracking-widest rounded-xl">Authorize Custom Session</button>
-          </form>
         </div>
       </div>
     </div>
@@ -352,36 +291,31 @@
 
       let isSignUpMode = true;
 
-      // Close modal on tap outside sheet
-      loginModal.addEventListener('click', (e) => {
-        if (e.target === loginModal) {
-          loginModal.classList.remove('active');
-          document.body.style.overflow = '';
-        }
-      });
-
-      // Show modal triggers
       const openModal = () => {
         loginModal.classList.add('active');
         document.body.style.overflow = 'hidden';
       };
 
-      document.getElementById('nav-login-btn').addEventListener('click', () => {
-        isSignUpMode = false;
-        modalTitle.textContent = "Welcome Back!";
-        modalSubtitle.textContent = "Enter your rider credentials to load your dashboard.";
-        btnText.textContent = "Start Journey";
-        toggleModeBtn.textContent = "Need an account? Sign Up Now";
-        openModal();
+      const closeModal = () => {
+        loginModal.classList.remove('active');
+        document.body.style.overflow = '';
+      };
+
+      // Header CTA triggers
+      document.querySelectorAll('#nav-login-btn, #hero-cta-btn').forEach(btn => {
+        if (btn) btn.addEventListener('click', () => {
+            isSignUpMode = btn.id === 'hero-cta-btn';
+            modalTitle.textContent = isSignUpMode ? "Ready for Adventure?" : "Welcome Back!";
+            modalSubtitle.textContent = isSignUpMode ? "Create an account to start your Arusha Street Safari." : "Enter your rider credentials to load your dashboard.";
+            btnText.textContent = isSignUpMode ? "Let's Ride!" : "Start Journey";
+            toggleModeBtn.textContent = isSignUpMode ? "Already registered? Switch to Login" : "Need an account? Sign Up Now";
+            openModal();
+        });
       });
 
-      document.getElementById('hero-cta-btn').addEventListener('click', () => {
-        isSignUpMode = true;
-        modalTitle.textContent = "Ready for Adventure?";
-        modalSubtitle.textContent = "Create an account to start your Arusha Street Safari.";
-        btnText.textContent = "Let's Ride!";
-        toggleModeBtn.textContent = "Already registered? Switch to Login";
-        openModal();
+      // Close modal on outside click
+      loginModal.addEventListener('click', (e) => {
+        if (e.target === loginModal) closeModal();
       });
 
       // Toggle signup/signin modes
@@ -401,6 +335,18 @@
         }
       });
 
+      // Social Auth triggers
+      const socialAuthNotice = () => {
+        authEmail.focus();
+        errorMsg.textContent = "Please enter your email and password below to sign in or create an account.";
+        errorMsg.classList.remove('hidden');
+      };
+
+      const googleBtn = document.getElementById('google-login-btn');
+      const appleBtn = document.getElementById('apple-login-btn');
+      if (googleBtn) googleBtn.addEventListener('click', socialAuthNotice);
+      if (appleBtn) appleBtn.addEventListener('click', socialAuthNotice);
+
       // Submit Auth form handler
       authForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -418,113 +364,15 @@
             user = await FirebaseSim.signIn(authEmail.value, authPassword.value);
           }
           
-          // Redirect authenticated user immediately to dashboard
-          loginModal.classList.remove('active');
-          document.body.style.overflow = '';
+          closeModal();
           window.location.href = 'dashboard.html';
-
         } catch (err) {
-          errorMsg.textContent = err.message;
+          errorMsg.textContent = err.message || 'Authentication error. Please check your details.';
           errorMsg.classList.remove('hidden');
-          
           submitBtn.disabled = false;
           btnSpinner.classList.add('hidden');
-          btnText.textContent = isSignUpMode ? "Let's Ride!" : "Start Journey";
+          btnText.textContent = isSignUpMode ? "Let's Ride!" : 'Start Journey';
         }
-      });
-
-      // OAuth Modal references
-      const oauthModal = document.getElementById('oauth-modal');
-      const oauthModalTitle = document.getElementById('oauth-modal-title');
-      const oauthProviderLogo = document.getElementById('oauth-provider-logo');
-      const oauthUnpaidEmail = document.getElementById('oauth-unpaid-email');
-      const oauthPaidEmail = document.getElementById('oauth-paid-email');
-      const oauthUnpaidLabel = document.getElementById('oauth-unpaid-label');
-      const oauthPaidLabel = document.getElementById('oauth-paid-label');
-
-      let currentOAuthProvider = '';
-
-      const openOAuthModal = (provider) => {
-        currentOAuthProvider = provider;
-        oauthProviderLogo.textContent = provider === 'Google' ? '🌐' : '🍎';
-        oauthModalTitle.textContent = `Sign in with ${provider}`;
-        
-        oauthUnpaidLabel.textContent = `${provider} Unpaid Profile`;
-        oauthUnpaidEmail.textContent = `${provider.toLowerCase()}-unpaid@mizizi.com`;
-        
-        oauthPaidLabel.textContent = `${provider} Paid Profile`;
-        oauthPaidEmail.textContent = `${provider.toLowerCase()}-paid@mizizi.com`;
-
-        loginModal.classList.remove('active');
-        oauthModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      };
-
-      // Close OAuth modal on backdrop tap
-      oauthModal.addEventListener('click', (e) => {
-        if (e.target === oauthModal) {
-          oauthModal.classList.remove('active');
-          document.body.style.overflow = '';
-        }
-      });
-
-      document.getElementById('google-login-btn').addEventListener('click', () => openOAuthModal('Google'));
-      document.getElementById('apple-login-btn').addEventListener('click', () => openOAuthModal('Apple'));
-
-      // Helper to execute simulated OAuth sign in
-      const performOAuthLogin = async (email, preAuthorizePaid) => {
-        try {
-          // Trigger FirebaseSim signup/signin
-          let user;
-          try {
-            user = await FirebaseSim.signUp(email, 'oauth-simulated-password');
-          } catch (e) {
-            // If user already exists, sign them in
-            user = await FirebaseSim.signIn(email, 'oauth-simulated-password');
-          }
-          
-          if (preAuthorizePaid) {
-            await FirebaseSim.updateUserRecord(email, { hasPaid: true });
-          }
-
-          oauthModal.classList.remove('active');
-          document.body.style.overflow = '';
-          window.location.href = 'dashboard.html';
-        } catch (err) {
-          alert('OAuth simulation error: ' + err.message);
-        }
-      };
-
-      document.getElementById('oauth-select-unpaid').addEventListener('click', () => {
-        const email = oauthUnpaidEmail.textContent;
-        performOAuthLogin(email, false);
-      });
-
-      document.getElementById('oauth-select-paid').addEventListener('click', () => {
-        const email = oauthPaidEmail.textContent;
-        performOAuthLogin(email, true);
-      });
-
-      document.getElementById('oauth-custom-form').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = document.getElementById('oauth-custom-email').value;
-        const prePaid = document.getElementById('oauth-custom-paid').checked;
-        performOAuthLogin(email, prePaid);
-      });
-
-      // Quick-test login credentials triggers
-      document.getElementById('quick-unpaid-btn').addEventListener('click', async () => {
-        authEmail.value = 'guest@mizizi.com';
-        authPassword.value = 'password123';
-        isSignUpMode = false;
-        authForm.dispatchEvent(new Event('submit'));
-      });
-
-      document.getElementById('quick-paid-btn').addEventListener('click', async () => {
-        authEmail.value = 'paid@mizizi.com';
-        authPassword.value = 'password123';
-        isSignUpMode = false;
-        authForm.dispatchEvent(new Event('submit'));
       });
     });
   </script>
