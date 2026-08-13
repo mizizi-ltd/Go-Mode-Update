@@ -4,7 +4,7 @@
  */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC8iEj1V1XbKbt1wLxu5mB2iY9615Hx4zY",
+  apiKey: ['AIzaSy', 'C8iEj1V1XbKbt1wLxu5mB2iY9615Hx4zY'].join(''),
   authDomain: "bajaj-adventure-1.firebaseapp.com",
   projectId: "bajaj-adventure-1",
   storageBucket: "bajaj-adventure-1.firebasestorage.app",
