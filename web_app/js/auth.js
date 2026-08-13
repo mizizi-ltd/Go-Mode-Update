@@ -318,14 +318,19 @@ const FirebaseSim = (() => {
       authStateListeners.forEach(listener => listener(currentUser));
     },
 
-    signUp: async (email, password) => {
+    signUp: async (email, password, name = '') => {
       const normEmail = email.toLowerCase().trim();
+      const trimmedName = (name || '').trim();
+      const firstName = trimmedName ? trimmedName.split(' ')[0] : '';
       
       // Attempt Firebase Authentication first
       if (typeof firebase !== 'undefined' && firebase.auth) {
         try {
           const userCred = await firebase.auth().createUserWithEmailAndPassword(normEmail, password);
           console.log('🔥 Signed up with Firebase Auth:', userCred.user.email);
+          if (userCred.user && trimmedName && userCred.user.updateProfile) {
+            await userCred.user.updateProfile({ displayName: trimmedName });
+          }
         } catch (err) {
           if (err.code !== 'auth/email-already-in-use') {
             console.warn('Firebase Auth SignUp notice:', err.message);
@@ -337,12 +342,21 @@ const FirebaseSim = (() => {
       if (!users[normEmail]) {
         users[normEmail] = {
           email: normEmail,
+          name: trimmedName,
+          displayName: trimmedName,
+          firstName: firstName,
           hasPaid: false,
           unlockedCities: {},
           createdAt: new Date().toISOString()
         };
-        saveStoredUsers(users);
+      } else {
+        if (trimmedName) {
+          users[normEmail].name = trimmedName;
+          users[normEmail].displayName = trimmedName;
+          users[normEmail].firstName = firstName;
+        }
       }
+      saveStoredUsers(users);
 
       const newUser = users[normEmail];
       setCurrentUser(newUser);

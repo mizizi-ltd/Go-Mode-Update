@@ -264,8 +264,21 @@
         activeUser = user;
         
         emailBadge.textContent = user.email;
-        const namePart = user.email.split('@')[0];
-        welcomeTitle.textContent = `Welcome, ${namePart.charAt(0).toUpperCase() + namePart.slice(1)}!`;
+        let displayFirstName = '';
+        if (user.firstName) {
+          displayFirstName = user.firstName;
+        } else if (user.name || user.displayName) {
+          displayFirstName = (user.name || user.displayName).trim().split(' ')[0];
+        }
+
+        if (!displayFirstName) {
+          const namePart = user.email.split('@')[0];
+          displayFirstName = namePart.charAt(0).toUpperCase() + namePart.slice(1);
+        } else {
+          displayFirstName = displayFirstName.charAt(0).toUpperCase() + displayFirstName.slice(1);
+        }
+
+        welcomeTitle.textContent = `Welcome, ${displayFirstName}!`;
 
         if (user.isMaster) {
           accountBadge.classList.remove('hidden');
