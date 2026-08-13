@@ -373,31 +373,30 @@
             }
             if (provider) {
               const res = await firebase.auth().signInWithPopup(provider);
-              const user = res.user;
-              if (user) {
-                let localUser = {
-                  email: user.email.toLowerCase(),
-                  name: user.displayName || '',
-                  displayName: user.displayName || '',
-                  firstName: user.displayName ? user.displayName.split(' ')[0] : '',
-                  hasPaid: false,
-                  unlockedCities: {},
-                  createdAt: new Date().toISOString()
-                };
-                FirebaseSim.setCurrentUser(localUser);
+              const fbUser = res.user;
+              if (fbUser && fbUser.email) {
+                // Persist into local session via the proper public helper
+                await FirebaseSim.signInWithOAuth(fbUser);
                 closeModal();
                 window.location.href = 'dashboard.html';
                 return;
               }
             }
           } catch (err) {
-            console.warn(`${providerName} auth popup notice:`, err.message);
+            // If user closed popup or auth was cancelled, don't show error
+            if (err.code === 'auth/popup-closed-by-user' || err.code === 'auth/cancelled-popup-request') {
+              return;
+            }
+            console.warn(`${providerName} auth error:`, err.code, err.message);
+            errorMsg.textContent = `${providerName} sign-in failed: ${err.message}`;
+            errorMsg.classList.remove('hidden');
+            return;
           }
         }
 
-        // Prompt user to complete email login/signup
+        // Fallback if Firebase SDK not loaded
         authEmail.focus();
-        errorMsg.textContent = `Please enter your details below to ${isSignUpMode ? 'sign up' : 'log in'}.`;
+        errorMsg.textContent = `${providerName} sign-in is not available. Please use email login.`;
         errorMsg.classList.remove('hidden');
       };
 

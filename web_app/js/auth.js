@@ -5,7 +5,7 @@
 
 const firebaseConfig = {
   apiKey: ['AIzaSy', 'C8iEj1V1XbKbt1wLxu5mB2iY9615Hx4zY'].join(''),
-  authDomain: "bajaj-adventure-1.firebaseapp.com",
+  authDomain: "bajajadventure.com",
   projectId: "bajaj-adventure-1",
   storageBucket: "bajaj-adventure-1.firebasestorage.app",
   messagingSenderId: "1072223816154",
@@ -430,6 +430,40 @@ const FirebaseSim = (() => {
 
       users[normEmail] = { ...users[normEmail], ...data };
       saveStoredUsers(users);
+      FirebaseSim._notifyListeners();
+      return users[normEmail];
+    },
+
+    // Expose session management for OAuth flows
+    setCurrentUser: (user) => {
+      setCurrentUser(user);
+    },
+
+    // OAuth sign-in helper: persists user into local store and sets session
+    signInWithOAuth: async (firebaseUser) => {
+      const normEmail = firebaseUser.email.toLowerCase();
+      const users = getStoredUsers();
+      if (!users[normEmail]) {
+        users[normEmail] = {
+          email: normEmail,
+          name: firebaseUser.displayName || '',
+          displayName: firebaseUser.displayName || '',
+          firstName: firebaseUser.displayName ? firebaseUser.displayName.split(' ')[0] : '',
+          hasPaid: false,
+          unlockedCities: {},
+          createdAt: new Date().toISOString()
+        };
+      } else {
+        // Update display name if it was missing
+        if (firebaseUser.displayName && !users[normEmail].displayName) {
+          users[normEmail].name = firebaseUser.displayName;
+          users[normEmail].displayName = firebaseUser.displayName;
+          users[normEmail].firstName = firebaseUser.displayName.split(' ')[0];
+        }
+      }
+      saveStoredUsers(users);
+      setCurrentUser(users[normEmail]);
+      await syncUserStatusFromServer(normEmail);
       FirebaseSim._notifyListeners();
       return users[normEmail];
     }
