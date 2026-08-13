@@ -79,7 +79,7 @@ const RouteEngine = (() => {
       time: "11:15",
       category: "Transit Core",
       title: "Bajaj to Cultural Heritage Centre",
-      image: "assets/hero.png",
+      image: "assets/hero.jpg",
       lat: -3.3723398,
       lng: 36.6944861,
       localTip: "Secure your bags on the floor. Do not hold your phone outside the cabin frame.",
@@ -129,7 +129,7 @@ const RouteEngine = (() => {
       time: "14:45",
       category: "Logistics Pivot",
       title: "Bypass Transfer to Njiro",
-      image: "assets/hero.png",
+      image: "assets/hero.jpg",
       lat: -3.3750000,
       lng: 36.6800000,
       localTip: "Highway dust is severe and high-speed saloon traffic makes open cabins dangerous. Use a private saloon car.",
@@ -200,7 +200,7 @@ const RouteEngine = (() => {
       altId: '1a',
       parentIndex: 0,
       title: "Eagle's Nest Cafe",
-      image: "assets/hero.png",
+      image: "assets/hero.jpg",
       lat: -3.3705549244875126,
       lng: 36.69384013091561,
       swahiliPhrase: "Kiota cha tai (Eagle's nest)",
@@ -231,7 +231,7 @@ const RouteEngine = (() => {
       altId: '1b',
       parentIndex: 0,
       title: "Coffee Culture",
-      image: "assets/hero.png",
+      image: "assets/hero.jpg",
       lat: -3.3719259221558495,
       lng: 36.694397155849444,
       swahiliPhrase: "Utamaduni wa kahawa (Coffee culture)",
@@ -328,7 +328,7 @@ const RouteEngine = (() => {
       altId: '6b',
       parentIndex: 6,
       title: "Endurance Estate",
-      image: "assets/hero.png",
+      image: "assets/hero.jpg",
       lat: -3.354186,
       lng: 36.615962,
       swahiliPhrase: "Kambi ya msingi (Base camp)",
@@ -456,7 +456,7 @@ const RouteEngine = (() => {
       altId: '7b',
       parentIndex: 8,
       title: "Beer Garden",
-      image: "assets/hero.png",
+      image: "assets/hero.jpg",
       lat: -3.3872896,
       lng: 36.7015253,
       localTip: "Try a cold Safari Lager or Kilimanjaro Premium — both are brewed locally in Arusha.",
@@ -1922,7 +1922,7 @@ const RouteEngine = (() => {
   const compileOverviewContents = (container) => {
     // Image
     const fullImg = document.createElement('img');
-    fullImg.src = 'assets/hero.png';
+    fullImg.src = 'assets/hero.jpg';
     fullImg.className = 'w-full h-56 object-cover border border-stone-200 mb-6';
     container.appendChild(fullImg);
 
