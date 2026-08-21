@@ -56,6 +56,8 @@ img {
     background-color: var(--color-bg);
   }
   .app-wrapper {
+    box-shadow: none;
+  }
 }
 
 /* Pre-Hiding Fullscreen Loading Overlay */
