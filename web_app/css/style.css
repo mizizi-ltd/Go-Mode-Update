@@ -56,8 +56,34 @@ img {
     background-color: var(--color-bg);
   }
   .app-wrapper {
-    box-shadow: none;
-  }
+}
+
+/* Pre-Hiding Fullscreen Loading Overlay */
+#app-loading-screen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999999;
+  background-color: #0B3C2B; /* Deep Jungle Green */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+  pointer-events: auto;
+}
+
+#app-loading-screen.fade-out {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+#app-loading-screen img {
+  border-radius: 16px !important;
 }
 
 /* Fun Keyframe Animations */

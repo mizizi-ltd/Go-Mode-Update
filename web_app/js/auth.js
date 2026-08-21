@@ -466,11 +466,24 @@ const FirebaseSim = (() => {
       await syncUserStatusFromServer(normEmail);
       FirebaseSim._notifyListeners();
       return users[normEmail];
+    },
+
+    // Smoothly dismiss the Jungle Green loading overlay
+    dismissLoadingScreen: () => {
+      const loader = document.getElementById('app-loading-screen');
+      if (loader) {
+        loader.classList.add('fade-out');
+        setTimeout(() => {
+          if (loader && loader.parentNode) {
+            loader.style.display = 'none';
+          }
+        }, 400);
+      }
     }
   };
 })();
 
-// Guard app.html and dashboard.html from unauthorized intruders
+// Guard app.html and dashboard.html from unauthorized intruders & handle loading transition
 document.addEventListener('DOMContentLoaded', () => {
   const path = window.location.pathname;
   if (path.endsWith('app.html') || path.endsWith('dashboard.html')) {
@@ -478,7 +491,19 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!user) {
         console.warn('Unauthorized intruder detected. Redirecting to access gate...');
         window.location.replace('index.html');
+      } else {
+        // Authenticated user verified -> smoothly fade out green loading screen
+        setTimeout(() => {
+          FirebaseSim.dismissLoadingScreen();
+        }, 300);
       }
     });
+
+    // Fail-safe fallback to ensure loading screen never hangs
+    setTimeout(() => {
+      if (localStorage.getItem('mizizi_sim_session')) {
+        FirebaseSim.dismissLoadingScreen();
+      }
+    }, 3500);
   }
 });
