@@ -77,12 +77,11 @@
       z-index: 999999;
       background-color: #0B3C2B; /* Jungle Green */
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       opacity: 1;
       visibility: visible;
-      transition: opacity 0.35s ease, visibility 0.35s ease;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
       pointer-events: auto;
     }
     #app-loading-screen.fade-out {
@@ -91,7 +90,11 @@
       pointer-events: none !important;
     }
     #app-loading-screen img {
-      border-radius: 16px !important;
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      outline: none !important;
+      filter: none !important;
     }
   </style>
 
@@ -107,15 +110,9 @@
 </head>
 <body class="overflow-hidden bg-stone-100">
 
-  <!-- Green Fullscreen Loading Screen with Bajaj PC GIF -->
+  <!-- Clean & Flat Green Fullscreen Loading Screen with Centered GIF -->
   <div id="app-loading-screen">
-    <div class="flex flex-col items-center justify-center p-6 text-center space-y-4">
-      <img src="assets/bjadvpc.gif" alt="Loading Bajaj Adventure..." class="w-32 h-32 sm:w-40 sm:h-40 object-contain shadow-2xl">
-      <div class="flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
-        <p class="text-xs font-black uppercase tracking-widest text-amber-400">Loading Adventure...</p>
-      </div>
-    </div>
+    <img src="assets/bjadvpc.gif" alt="Loading..." class="w-40 h-40 sm:w-52 sm:h-52 object-contain border-none rounded-none shadow-none">
   </div>
 
   <!-- 1. Background Interactive OpenStreetMap/Leaflet Layer -->
