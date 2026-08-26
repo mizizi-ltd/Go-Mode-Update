@@ -955,6 +955,18 @@ const RouteEngine = (() => {
     heroFig.appendChild(heroImg);
     container.appendChild(heroFig);
 
+    // 1.5 Low-profile Audio Guide Play Button — immediately under first image
+    if (node.audioGuide) {
+      const playAudioBtn = document.createElement('button');
+      playAudioBtn.type = 'button';
+      playAudioBtn.className = 'w-full py-2.5 px-3 mb-4 bg-emerald-950 hover:bg-emerald-900 text-ochre font-bold text-xs rounded-md flex items-center justify-center gap-2 border border-emerald-800 shadow-sm transition-colors cursor-pointer';
+      playAudioBtn.innerHTML = `<svg class="w-4 h-4 fill-current text-ochre" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> <span>Play Audio Guide</span>`;
+      playAudioBtn.addEventListener('click', () => {
+        GlobalAudioPlayer.load(`${node.title} — ${node.category}`, `assets/${node.audioGuide}`);
+      });
+      container.appendChild(playAudioBtn);
+    }
+
     // Prepare body images (everything after hero) for later editorial injection
     const bodyImgDefs = [];
     if (node.detailImages && node.detailImages.length > 1) {
@@ -1561,43 +1573,6 @@ const RouteEngine = (() => {
       container.appendChild(swahiliEl);
     }
 
-    // 7. Audio Guide — Load to Global Player
-    if (node.audioGuide) {
-      const audioTitle = document.createElement('h4');
-      audioTitle.className = 'text-xs font-black text-jungle uppercase tracking-widest mt-4 mb-2 border-b pb-1.5';
-      audioTitle.textContent = "🎧 Audio Guide";
-      container.appendChild(audioTitle);
-
-      const audioTrigger = document.createElement('div');
-      audioTrigger.className = 'bg-emerald-950 text-white rounded-md p-2.5 sm:p-3 flex items-center justify-between gap-3 shadow-sm cursor-pointer hover:bg-emerald-900 transition-colors border border-emerald-800';
-
-      const audioInfo = document.createElement('div');
-      audioInfo.className = 'min-w-0 flex-1 overflow-hidden space-y-0.5';
-
-      const audioTrackName = document.createElement('p');
-      audioTrackName.className = 'text-[10px] sm:text-xs font-black tracking-wider text-ochre uppercase truncate leading-tight';
-      audioTrackName.textContent = node.title + ' — Narration';
-
-      const audioHint = document.createElement('p');
-      audioHint.className = 'text-[9px] sm:text-[10px] text-emerald-300 font-semibold';
-      audioHint.textContent = 'Tap to play narration ▸';
-
-      audioInfo.appendChild(audioTrackName);
-      audioInfo.appendChild(audioHint);
-
-      const playBtn = document.createElement('button');
-      playBtn.className = 'w-9 h-9 sm:w-10 sm:h-10 bg-ochre hover:bg-white text-jungle rounded-full font-black shadow-md flex items-center justify-center flex-shrink-0 transition-transform hover:scale-105 border-2 border-amber-300';
-      playBtn.innerHTML = `<svg class="w-4 h-4 sm:w-5 sm:h-5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
-
-      const triggerPlay = () => {
-        GlobalAudioPlayer.load(`${node.title} — ${node.category}`, `assets/${node.audioGuide}`);
-      };
-      audioTrigger.addEventListener('click', triggerPlay);
-      playBtn.addEventListener('click', (e) => { e.stopPropagation(); triggerPlay(); });
-
-      audioTrigger.appendChild(audioInfo);
-      audioTrigger.appendChild(playBtn);
-      container.appendChild(audioTrigger);
     }
   };
 
@@ -1613,6 +1588,18 @@ const RouteEngine = (() => {
     heroImg.className = 'editorial-hero__img';
     heroFig.appendChild(heroImg);
     container.appendChild(heroFig);
+
+    // 1.5 Low-profile Detour Audio Play Button — immediately under first image
+    if (alt.audioGuide) {
+      const playAudioBtn = document.createElement('button');
+      playAudioBtn.type = 'button';
+      playAudioBtn.className = 'w-full py-2.5 px-3 mb-4 bg-emerald-950 hover:bg-emerald-900 text-ochre font-bold text-xs rounded-md flex items-center justify-center gap-2 border border-emerald-800 shadow-sm transition-colors cursor-pointer';
+      playAudioBtn.innerHTML = `<svg class="w-4 h-4 fill-current text-ochre" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> <span>Play Detour Audio Guide</span>`;
+      playAudioBtn.addEventListener('click', () => {
+        GlobalAudioPlayer.load(`${alt.title} — Detour`, `assets/${alt.audioGuide}`);
+      });
+      container.appendChild(playAudioBtn);
+    }
 
     // Prepare body images for editorial injection after content is rendered
     const altBodyImgDefs = [];
@@ -1781,6 +1768,18 @@ const RouteEngine = (() => {
     img.alt = node.title;
     detailsBody.appendChild(img);
 
+    // 1.5 Low-profile Audio Guide Play Button — directly under first image
+    if (node.audioGuide) {
+      const playAudioBtn = document.createElement('button');
+      playAudioBtn.type = 'button';
+      playAudioBtn.className = 'w-full py-2.5 px-3 bg-emerald-950 hover:bg-emerald-900 text-ochre font-bold text-xs rounded-md flex items-center justify-center gap-2 border border-emerald-800 shadow-sm transition-colors cursor-pointer';
+      playAudioBtn.innerHTML = `<svg class="w-4 h-4 fill-current text-ochre" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> <span>Play Audio Guide</span>`;
+      playAudioBtn.addEventListener('click', () => {
+        GlobalAudioPlayer.load(`${node.title} — ${node.category}`, `assets/${node.audioGuide}`);
+      });
+      detailsBody.appendChild(playAudioBtn);
+    }
+
     // 2. Swahili Quick Phrase badge
     const lingoBadge = document.createElement('div');
     lingoBadge.className = 'badge-gold text-[10px] py-1.5 px-3 rounded-lg flex items-center gap-1.5 font-bold tracking-wider';
@@ -1792,39 +1791,6 @@ const RouteEngine = (() => {
     desc.className = 'text-xs text-stone-600 font-semibold leading-relaxed';
     desc.textContent = node.shortDesc;
     detailsBody.appendChild(desc);
-
-    // 3.5. Atmospheric Audio Guide Play Trigger
-    if (node.audioGuide) {
-      const audioTrigger = document.createElement('div');
-      audioTrigger.className = 'bg-emerald-950 text-white rounded-md p-3 flex items-center justify-between gap-3 shadow-sm cursor-pointer hover:bg-emerald-900 transition-colors mt-2';
-      
-      const audioInfo = document.createElement('div');
-      audioInfo.className = 'min-w-0 flex-1 overflow-hidden space-y-0.5';
-      
-      const audioTrackName = document.createElement('p');
-      audioTrackName.className = 'text-[9px] sm:text-[10px] font-black tracking-wider text-ochre uppercase truncate leading-tight';
-      audioTrackName.textContent = `🎧 ${node.title} Narration`;
-      
-      const audioHint = document.createElement('p');
-      audioHint.className = 'text-[8px] text-emerald-300 font-semibold';
-      audioHint.textContent = 'Tap to play audio guide ▸';
-      
-      audioInfo.appendChild(audioTrackName);
-      audioInfo.appendChild(audioHint);
-      
-      const playIcon = document.createElement('div');
-      playIcon.className = 'w-6 h-6 bg-ochre text-jungle rounded-full flex items-center justify-center text-xs font-black';
-      playIcon.innerHTML = `<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
-      
-      audioTrigger.appendChild(audioInfo);
-      audioTrigger.appendChild(playIcon);
-      
-      audioTrigger.addEventListener('click', () => {
-        GlobalAudioPlayer.load(`${node.title} — ${node.category}`, `assets/${node.audioGuide}`);
-      });
-      
-      detailsBody.appendChild(audioTrigger);
-    }
 
     // 4. Gold "Read More" button
     const btn = document.createElement('button');
@@ -1876,6 +1842,18 @@ const RouteEngine = (() => {
     img.alt = alt.title;
     detailsBody.appendChild(img);
 
+    // 1.5 Low-profile Audio Guide Play Button for detours (if available)
+    if (alt.audioGuide) {
+      const playAudioBtn = document.createElement('button');
+      playAudioBtn.type = 'button';
+      playAudioBtn.className = 'w-full py-2.5 px-3 bg-emerald-950 hover:bg-emerald-900 text-ochre font-bold text-xs rounded-md flex items-center justify-center gap-2 border border-emerald-800 shadow-sm transition-colors cursor-pointer';
+      playAudioBtn.innerHTML = `<svg class="w-4 h-4 fill-current text-ochre" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> <span>Play Detour Audio Guide</span>`;
+      playAudioBtn.addEventListener('click', () => {
+        GlobalAudioPlayer.load(`${alt.title} — Detour`, `assets/${alt.audioGuide}`);
+      });
+      detailsBody.appendChild(playAudioBtn);
+    }
+
     // 2. Swahili Phrase badge
     const lingoBadge = document.createElement('div');
     lingoBadge.className = 'badge-gold text-[10px] py-1.5 px-3 rounded-lg flex items-center gap-1.5 font-bold tracking-wider';
@@ -1923,46 +1901,24 @@ const RouteEngine = (() => {
     // Image
     const fullImg = document.createElement('img');
     fullImg.src = 'assets/hero.jpg';
-    fullImg.className = 'w-full h-56 object-cover border border-stone-200 mb-6';
+    fullImg.className = 'w-full h-56 object-cover border border-stone-200 mb-4';
     container.appendChild(fullImg);
+
+    // 1. Morning Brief Audio Play Button — immediately under first image
+    const quickAudio = document.createElement('button');
+    quickAudio.type = 'button';
+    quickAudio.className = 'w-full py-2.5 px-3 mb-5 bg-emerald-950 hover:bg-emerald-900 text-ochre font-bold text-xs rounded-md flex items-center justify-center gap-2 border border-emerald-800 shadow-sm transition-colors cursor-pointer';
+    quickAudio.innerHTML = `<svg class="w-4 h-4 fill-current text-ochre" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> <span>Play Morning Brief Audio</span>`;
+    quickAudio.addEventListener('click', () => {
+      GlobalAudioPlayer.load('Morning Brief — Arusha Overview', 'assets/morning_brief.mp3');
+    });
+    container.appendChild(quickAudio);
 
     // Heading
     const titleEl = document.createElement('h3');
     titleEl.className = 'text-2xl font-black text-slate-800 tracking-tight mb-4';
     titleEl.textContent = "Arusha Bajaj Safari: Morning Brief & Overview";
     container.appendChild(titleEl);
-
-    // 1. Morning Brief Audio Play Button
-    const audioTrigger = document.createElement('div');
-    audioTrigger.className = 'bg-emerald-950 text-white rounded-md p-3 sm:p-3.5 flex items-center justify-between gap-3 shadow-sm cursor-pointer hover:bg-emerald-900 transition-colors border border-emerald-800 mb-6';
-
-    const audioInfo = document.createElement('div');
-    audioInfo.className = 'min-w-0 flex-1 overflow-hidden space-y-0.5';
-
-    const audioTrackName = document.createElement('p');
-    audioTrackName.className = 'text-xs font-black tracking-wider text-ochre uppercase truncate leading-tight';
-    audioTrackName.textContent = '🎧 Morning Brief — Audio Narration';
-
-    const audioHint = document.createElement('p');
-    audioHint.className = 'text-[10px] sm:text-xs text-emerald-300 font-semibold';
-    audioHint.textContent = 'Tap to play voice overview & briefing ▸';
-
-    audioInfo.appendChild(audioTrackName);
-    audioInfo.appendChild(audioHint);
-
-    const playBtn = document.createElement('button');
-    playBtn.className = 'w-10 h-10 bg-ochre hover:bg-white text-jungle rounded-md font-black shadow-md flex items-center justify-center flex-shrink-0 transition-transform hover:scale-105 border border-amber-300';
-    playBtn.innerHTML = `<svg class="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
-
-    const triggerPlay = () => {
-      GlobalAudioPlayer.load('Morning Brief — Arusha Overview', 'assets/morning_brief.mp3');
-    };
-    audioTrigger.addEventListener('click', triggerPlay);
-    playBtn.addEventListener('click', (e) => { e.stopPropagation(); triggerPlay(); });
-
-    audioTrigger.appendChild(audioInfo);
-    audioTrigger.appendChild(playBtn);
-    container.appendChild(audioTrigger);
 
     // 2. Core descriptor with Paragraphing after Welcome
     const descContainer = document.createElement('div');
@@ -2065,7 +2021,7 @@ const RouteEngine = (() => {
     // Quick Audio Play Trigger in Panel
     const quickAudio = document.createElement('button');
     quickAudio.type = 'button';
-    quickAudio.className = 'w-full py-2.5 px-3 bg-emerald-950 hover:bg-emerald-900 text-ochre font-bold text-xs rounded-md flex items-center justify-center gap-2 border border-emerald-800 shadow-sm transition-colors';
+    quickAudio.className = 'w-full py-2.5 px-3 bg-emerald-950 hover:bg-emerald-900 text-ochre font-bold text-xs rounded-md flex items-center justify-center gap-2 border border-emerald-800 shadow-sm transition-colors cursor-pointer';
     quickAudio.innerHTML = `<svg class="w-4 h-4 fill-current text-ochre" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> <span>Play Morning Brief Audio</span>`;
     quickAudio.addEventListener('click', () => {
       GlobalAudioPlayer.load('Morning Brief — Arusha Overview', 'assets/morning_brief.mp3');
@@ -2398,29 +2354,22 @@ const RouteEngine = (() => {
         <div class="space-y-2.5 max-w-[250px]">
           <h3 class="font-black text-emerald-900 text-sm tracking-tight leading-tight">${node.title}</h3>
           <span class="inline-block text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-stone-100 border text-stone-500 uppercase tracking-wider">${node.category}</span>
+
+          <!-- Low-profile Audio Guide Trigger -->
+          <button type="button" id="map-audio-trigger-${node.index}" class="w-full py-2 px-2.5 bg-emerald-950 hover:bg-emerald-900 text-ochre font-bold text-[10px] rounded-md flex items-center justify-center gap-1.5 border border-emerald-800 shadow-sm transition-colors cursor-pointer">
+            <svg class="w-3.5 h-3.5 fill-current text-ochre" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <span>Play Audio Guide</span>
+          </button>
           
-          <div class="bg-amber-50 border border-amber-200 rounded-lg p-2 text-[10px] text-amber-800 leading-normal">
+          <div class="bg-amber-50 border border-amber-200 rounded-md p-2 text-[10px] text-amber-800 leading-normal">
             <strong>💡 Quick Tip:</strong> ${node.localTip || node.shortDesc}
           </div>
 
-          <!-- Audio Guide — Load to Global Player -->
-          <div id="map-audio-trigger-${node.index}" class="bg-emerald-950 text-white rounded-md p-2.5 flex items-center justify-between gap-3 shadow-sm cursor-pointer hover:bg-emerald-900 transition-colors">
-            <div class="space-y-0.5 min-w-0 flex-grow">
-              <p class="text-[9px] font-black tracking-widest text-amber-400 uppercase truncate">Audio Guide</p>
-              <p class="text-[8px] text-emerald-300 font-semibold uppercase truncate">Tap to play ▸</p>
-            </div>
-            <button class="p-2 bg-amber-400 text-emerald-950 rounded-full font-black text-xs hover:bg-white transition-all flex-shrink-0 flex items-center justify-center shadow">
-              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"/>
-              </svg>
-            </button>
-          </div>
-
-          <a href="https://www.google.com/maps/dir/?api=1&destination=${node.lat},${node.lng}" target="_blank" class="w-full py-2 bg-emerald-900 hover:bg-emerald-950 text-white font-extrabold rounded-lg text-[10px] uppercase tracking-widest text-center flex items-center justify-center gap-1 shadow-sm transition-colors">
+          <a href="https://www.google.com/maps/dir/?api=1&destination=${node.lat},${node.lng}" target="_blank" class="w-full py-2 bg-emerald-900 hover:bg-emerald-950 text-white font-extrabold rounded-md text-[10px] uppercase tracking-widest text-center flex items-center justify-center gap-1 shadow-sm transition-colors">
             Get Directions 🚗
           </a>
 
-          <button id="map-read-more-btn-${node.index}" class="w-full py-2 bg-amber-500 hover:bg-amber-400 text-slate-900 font-black rounded-lg text-[10px] uppercase tracking-widest text-center flex items-center justify-center gap-1 shadow-sm transition-transform active:scale-95 cursor-pointer mt-1">
+          <button id="map-read-more-btn-${node.index}" class="w-full py-2 bg-amber-500 hover:bg-amber-400 text-slate-900 font-black rounded-md text-[10px] uppercase tracking-widest text-center flex items-center justify-center gap-1 shadow-sm transition-transform active:scale-95 cursor-pointer mt-1">
             Read More 📖
           </button>
         </div>
