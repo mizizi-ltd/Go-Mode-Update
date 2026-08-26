@@ -532,10 +532,12 @@ const FirebaseSim = (() => {
   };
 })();
 
-// Guard app.html and dashboard.html from unauthorized intruders & handle loading transition
+// Guard app and dashboard from unauthorized intruders & handle loading transition
 document.addEventListener('DOMContentLoaded', () => {
-  const path = window.location.pathname;
-  if (path.endsWith('app.html') || path.endsWith('dashboard.html')) {
+  const path = (window.location.pathname || '').toLowerCase();
+  const isProtected = path.includes('app') || path.includes('dashboard') || document.getElementById('map') || document.getElementById('dashboard-logout-btn');
+
+  if (isProtected) {
     FirebaseSim.onAuthStateChanged((user) => {
       if (!user) {
         console.warn('Unauthorized intruder detected. Redirecting to access gate...');
@@ -544,15 +546,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Authenticated user verified -> smoothly fade out green loading screen
         setTimeout(() => {
           FirebaseSim.dismissLoadingScreen();
-        }, 300);
+        }, 100);
       }
     });
 
     // Fail-safe fallback to ensure loading screen never hangs
     setTimeout(() => {
-      if (localStorage.getItem('mizizi_sim_session')) {
-        FirebaseSim.dismissLoadingScreen();
-      }
-    }, 3500);
+      FirebaseSim.dismissLoadingScreen();
+    }, 1000);
   }
 });

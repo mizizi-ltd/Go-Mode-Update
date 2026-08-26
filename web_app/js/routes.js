@@ -3274,8 +3274,15 @@ const RouteEngine = (() => {
 })();
 
 // Initialize Premium timeline layers
-if (window.location.pathname.endsWith('app.html')) {
+const shouldInitRouteEngine = () => {
+  const p = (window.location.pathname || '').toLowerCase();
+  return p.includes('app') || !!document.getElementById('map');
+};
+
+if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
-    RouteEngine.init();
+    if (shouldInitRouteEngine()) RouteEngine.init();
   });
+} else {
+  if (shouldInitRouteEngine()) RouteEngine.init();
 }

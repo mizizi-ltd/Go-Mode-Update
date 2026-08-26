@@ -85,7 +85,7 @@
         <img src="assets/bajajheader.png" alt="Bajaj Adventure" class="w-8 h-8 object-contain">
         <span class="font-extrabold text-base sm:text-lg tracking-wider text-ochre uppercase">Bajaj Adventure</span>
       </div>
-      <button id="dashboard-logout-btn" type="button" class="px-3.5 py-1.5 rounded-md text-xs font-black uppercase tracking-wider bg-red-600 hover:bg-red-700 text-white transition-all shadow-sm cursor-pointer">Sign Out</button>
+      <button id="dashboard-logout-btn" type="button" onclick="handleDashboardSignOut(event)" class="px-3.5 py-1.5 rounded-md text-xs font-black uppercase tracking-wider bg-red-600 hover:bg-red-700 text-white transition-all shadow-sm cursor-pointer relative z-50">Sign Out</button>
     </header>
 
     <!-- Abandoned Cart Discount Banner (Hidden by default) -->
@@ -271,7 +271,80 @@
   <script src="js/auth.js"></script>
   <script src="js/payments.js"></script>
   <script>
+    // Global immediate Sign Out execution handler
+    window.handleDashboardSignOut = async function(e) {
+      if (e) {
+        try { e.preventDefault(); e.stopPropagation(); } catch(err) {}
+      }
+      
+      const btn = document.getElementById('dashboard-logout-btn');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Signing out...';
+        btn.style.opacity = '0.7';
+        btn.style.pointerEvents = 'none';
+      }
+
+      const okBtn = document.getElementById('logout-ok-btn');
+      if (okBtn) {
+        okBtn.disabled = true;
+        okBtn.textContent = 'Signing out...';
+      }
+
+      // 1. Invalidate localStorage & sessionStorage instantly
+      try {
+        localStorage.removeItem('mizizi_sim_session');
+        sessionStorage.clear();
+        Object.keys(localStorage).forEach((key) => {
+          if (key.startsWith('firebase:') || key.startsWith('firebaseLocalStorage') || key === 'mizizi_sim_session') {
+            try { localStorage.removeItem(key); } catch (err) {}
+          }
+        });
+      } catch (err) {}
+
+      // 2. Clear cookies
+      try {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i];
+          const eqPos = cookie.indexOf('=');
+          const name = eqPos > -1 ? cookie.substr(0, eqPos).trim() : cookie.trim();
+          if (name) {
+            document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;`;
+            document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=${window.location.hostname};`;
+            document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=.${window.location.hostname};`;
+          }
+        }
+      } catch (err) {}
+
+      // 3. Clear IndexedDB
+      try {
+        if (typeof window !== 'undefined' && window.indexedDB) {
+          indexedDB.deleteDatabase('firebaseLocalStorageDb');
+          indexedDB.deleteDatabase('firebase-heartbeat-database');
+        }
+      } catch (err) {}
+
+      // 4. Perform Firebase auth signout
+      try {
+        if (typeof FirebaseSim !== 'undefined' && FirebaseSim.signOut) {
+          await FirebaseSim.signOut();
+        } else if (typeof firebase !== 'undefined' && firebase.auth) {
+          await firebase.auth().signOut().catch(() => {});
+        }
+      } catch (err) {
+        console.warn('Sign out notice:', err);
+      } finally {
+        window.location.replace('index.html?logout=' + Date.now());
+      }
+    };
+
     document.addEventListener('DOMContentLoaded', () => {
+      // Immediate fail-safe dismissal of loading screen
+      if (typeof FirebaseSim !== 'undefined' && FirebaseSim.dismissLoadingScreen) {
+        FirebaseSim.dismissLoadingScreen();
+      }
+      
       const emailBadge = document.getElementById('user-email');
       const welcomeTitle = document.getElementById('welcome-title');
       const accountBadge = document.getElementById('account-type-badge');
@@ -521,41 +594,15 @@
         }
       });
 
-      // Clean, instant, and secure sign out handler
-      const performSignOut = async () => {
-        if (logoutBtn) {
-          logoutBtn.disabled = true;
-          logoutBtn.textContent = 'Signing out...';
-          logoutBtn.classList.add('opacity-75');
-        }
-        if (logoutOk) {
-          logoutOk.disabled = true;
-          logoutOk.textContent = 'Signing out...';
-        }
-        if (logoutModal) {
-          logoutModal.classList.remove('active');
-          document.body.style.overflow = '';
-        }
-        try {
-          await FirebaseSim.signOut();
-        } catch(err) {
-          console.warn('Sign out notice:', err);
-        } finally {
-          window.location.replace('index.html?logout=' + Date.now());
-        }
-      };
-
       if (logoutBtn) {
         logoutBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          performSignOut();
+          window.handleDashboardSignOut(e);
         });
       }
 
       if (logoutOk) {
         logoutOk.addEventListener('click', (e) => {
-          e.preventDefault();
-          performSignOut();
+          window.handleDashboardSignOut(e);
         });
       }
 
