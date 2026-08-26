@@ -529,8 +529,28 @@
       }
 
       // Sign Out trigger
+      const performSignOut = async () => {
+        if (signOutBtn) {
+          signOutBtn.disabled = true;
+          signOutBtn.textContent = 'Signing out...';
+        }
+        if (logoutOkBtn) {
+          logoutOkBtn.disabled = true;
+          logoutOkBtn.textContent = 'Signing out...';
+        }
+        closeModal(logoutModal);
+        try {
+          await FirebaseSim.signOut();
+        } catch(err) {
+          console.warn('Sign out notice:', err);
+        } finally {
+          window.location.replace('index.html?logout=' + Date.now());
+        }
+      };
+
       if (signOutBtn) {
-        signOutBtn.addEventListener('click', () => {
+        signOutBtn.addEventListener('click', (e) => {
+          e.preventDefault();
           openModal(logoutModal);
         });
       }
@@ -540,10 +560,9 @@
       }
 
       if (logoutOkBtn) {
-        logoutOkBtn.addEventListener('click', async () => {
-          closeModal(logoutModal);
-          await FirebaseSim.signOut();
-          window.location.replace('index.html');
+        logoutOkBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          performSignOut();
         });
       }
 

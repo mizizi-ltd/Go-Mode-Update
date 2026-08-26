@@ -199,11 +199,16 @@ const FirebaseSim = (() => {
     }
   };
 
+  let isExplicitlySignedOut = false;
   const authStateListeners = [];
 
   // Listen to Firebase Auth state if available
   if (typeof firebase !== 'undefined' && firebase.auth) {
     firebase.auth().onAuthStateChanged((fbUser) => {
+      if (isExplicitlySignedOut) {
+        console.log('🔒 Explicit signout active — skipping auto-relog');
+        return;
+      }
       if (fbUser && fbUser.email) {
         console.log('🔥 Firebase Auth State Changed:', fbUser.email);
         const users = getStoredUsers();
@@ -399,6 +404,12 @@ const FirebaseSim = (() => {
     },
 
     signOut: async () => {
+      isExplicitlySignedOut = true;
+
+      // 1. Clear in-memory current user and notify immediately
+      setCurrentUser(null);
+
+      // 2. Firebase Auth SDK Sign Out
       try {
         if (typeof firebase !== 'undefined' && firebase.auth) {
           await firebase.auth().signOut().catch(() => {});
@@ -407,14 +418,28 @@ const FirebaseSim = (() => {
         console.warn('Firebase signOut notice:', e);
       }
 
-      // 1. Clear local session tokens & application storage
-      setCurrentUser(null);
+      // 3. Clear local session tokens & purge all auth persistence in localStorage & sessionStorage
       try {
         localStorage.removeItem(SESSION_KEY);
         sessionStorage.clear();
+
+        // Purge any stored Firebase auth tokens or simulation cache
+        Object.keys(localStorage).forEach((key) => {
+          if (key.startsWith('firebase:') || key.startsWith('firebaseLocalStorage') || key === SESSION_KEY) {
+            try { localStorage.removeItem(key); } catch (e) {}
+          }
+        });
       } catch (e) {}
 
-      // 2. Cookie Theft Protection: Invalidate and clear all document cookies
+      // 4. Invalidate and clear IndexedDB to prevent silent automatic re-authentication
+      try {
+        if (typeof window !== 'undefined' && window.indexedDB) {
+          indexedDB.deleteDatabase('firebaseLocalStorageDb');
+          indexedDB.deleteDatabase('firebase-heartbeat-database');
+        }
+      } catch (e) {}
+
+      // 5. Cookie Theft Protection: Invalidate and clear all document cookies across all path/domain permutations
       try {
         const cookies = document.cookie.split(';');
         for (let i = 0; i < cookies.length; i++) {
@@ -424,6 +449,7 @@ const FirebaseSim = (() => {
           if (name) {
             document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;`;
             document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=${window.location.hostname};`;
+            document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=.${window.location.hostname};`;
           }
         }
       } catch (e) {}

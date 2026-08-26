@@ -521,19 +521,41 @@
         }
       });
 
-      // Logout modal prompts
+      // Clean, instant, and secure sign out handler
+      const performSignOut = async () => {
+        if (logoutBtn) {
+          logoutBtn.disabled = true;
+          logoutBtn.textContent = 'Signing out...';
+          logoutBtn.classList.add('opacity-75');
+        }
+        if (logoutOk) {
+          logoutOk.disabled = true;
+          logoutOk.textContent = 'Signing out...';
+        }
+        if (logoutModal) {
+          logoutModal.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+        try {
+          await FirebaseSim.signOut();
+        } catch(err) {
+          console.warn('Sign out notice:', err);
+        } finally {
+          window.location.replace('index.html?logout=' + Date.now());
+        }
+      };
+
       if (logoutBtn) {
         logoutBtn.addEventListener('click', (e) => {
           e.preventDefault();
-          if (logoutModal) {
-            logoutModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-          } else {
-            // Direct signout fallback
-            FirebaseSim.signOut().then(() => {
-              window.location.replace('index.html');
-            });
-          }
+          performSignOut();
+        });
+      }
+
+      if (logoutOk) {
+        logoutOk.addEventListener('click', (e) => {
+          e.preventDefault();
+          performSignOut();
         });
       }
 
@@ -543,23 +565,6 @@
           if (logoutModal) {
             logoutModal.classList.remove('active');
             document.body.style.overflow = '';
-          }
-        });
-      }
-
-      if (logoutOk) {
-        logoutOk.addEventListener('click', async (e) => {
-          e.preventDefault();
-          logoutOk.disabled = true;
-          logoutOk.textContent = 'Signing out...';
-          try {
-            if (logoutModal) logoutModal.classList.remove('active');
-            document.body.style.overflow = '';
-            await FirebaseSim.signOut();
-          } catch(err) {
-            console.warn('Logout notice:', err);
-          } finally {
-            window.location.replace('index.html');
           }
         });
       }
