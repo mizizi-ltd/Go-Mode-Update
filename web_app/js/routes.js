@@ -521,14 +521,10 @@ const RouteEngine = (() => {
   // Expand Details Pane helper (Requirement 1 & 3)
   const expandDetailsPane = () => {
     const detailsCol = document.getElementById('sidebar-details-column');
-    const overlayClick = document.getElementById('map-click-overlay');
     const toggleArrow = document.getElementById('details-toggle-arrow');
     
     if (detailsCol) {
       detailsCol.classList.remove('collapsed');
-    }
-    if (overlayClick) {
-      overlayClick.classList.add('active');
     }
     if (toggleArrow) {
       toggleArrow.style.transform = 'rotate(0deg)'; // Points left (default open state)
@@ -545,10 +541,8 @@ const RouteEngine = (() => {
 
     // Auto-collapse the 2nd column (details panel) so it doesn't obscure the overlay
     const detailsCol = document.getElementById('sidebar-details-column');
-    const overlayClick = document.getElementById('map-click-overlay');
     const toggleArrow = document.getElementById('details-toggle-arrow');
     if (detailsCol) detailsCol.classList.add('collapsed');
-    if (overlayClick) overlayClick.classList.remove('active');
     if (toggleArrow) toggleArrow.style.transform = 'rotate(180deg)';
 
     // Auto-collapse the main sidebar (Column 1) so it doesn't cover overlay contents
@@ -813,10 +807,8 @@ const RouteEngine = (() => {
 
     // Collapse the 2nd column (details panel) so it moves out of the way
     const detailsCol = document.getElementById('sidebar-details-column');
-    const overlayClick = document.getElementById('map-click-overlay');
     const toggleArrow = document.getElementById('details-toggle-arrow');
     if (detailsCol) detailsCol.classList.add('collapsed');
-    if (overlayClick) overlayClick.classList.remove('active');
     if (toggleArrow) toggleArrow.style.transform = 'rotate(180deg)';
 
     activeStopIndex = null;
@@ -835,8 +827,6 @@ const RouteEngine = (() => {
       if (hb) hb.classList.remove('active');
       if (io) io.classList.remove('hidden');
       if (ic) ic.classList.add('hidden');
-      const overlay = document.getElementById('map-click-overlay');
-      if (overlay) overlay.classList.remove('active');
     }
   };
 
@@ -2408,7 +2398,8 @@ const RouteEngine = (() => {
     // 1. Center on Arusha Clock Tower Coordinates at optimized street zoom 14
     map = L.map('map', {
       zoomControl: false, // Deactivate default zoom to prevent overlapping the top-left hamburger button!
-      doubleClickZoom: true // Enable double-click-to-zoom
+      doubleClickZoom: true, // Enable double-click-to-zoom
+      tap: false // Disable legacy mobile 300ms tap capture simulation to prevent input lockout
     }).setView([-3.3719, 36.6944], 14);
 
     // Add zoom controls to the bottom right for professional UI balance (Requirement 2 & 6)
@@ -2421,6 +2412,18 @@ const RouteEngine = (() => {
       updateWhenIdle: true, // Prevents background data pre-fetching inside active transits!
       updateWhenZooming: false
     }).addTo(map);
+
+    // Allow clicking or dragging anywhere on the map to dismiss mobile sidebars without blocking interaction
+    map.on('click dragstart', () => {
+      if (window.innerWidth < 768) {
+        const detailsCol = document.getElementById('sidebar-details-column');
+        const toggleArrow = document.getElementById('details-toggle-arrow');
+        if (detailsCol && !detailsCol.classList.contains('collapsed')) {
+          detailsCol.classList.add('collapsed');
+          if (toggleArrow) toggleArrow.style.transform = 'rotate(180deg)';
+        }
+      }
+    });
 
     // 3. Define user-generated pin icon
     const userIcon = L.divIcon({
@@ -2882,10 +2885,6 @@ const RouteEngine = (() => {
         } else {
           iconOpen.classList.remove('hidden');
           iconClose.classList.add('hidden');
-
-          // Deactivate map click overlay when sidebar closes so the map becomes interactive
-          const overlay = document.getElementById('map-click-overlay');
-          if (overlay) overlay.classList.remove('active');
         }
       });
     }
@@ -2910,8 +2909,6 @@ const RouteEngine = (() => {
       });
     }
 
-    // clearActiveNav now defined at module level to share with map clicks
-
     // HOME Navigation: Load Morning Brief / Overview
     const navHomeBtn = document.getElementById('nav-home-btn');
     if (navHomeBtn) {
@@ -2922,10 +2919,6 @@ const RouteEngine = (() => {
             const isCollapsed = sidebarDetailsCol.classList.toggle('collapsed');
             if (detailsToggleArrow) {
               detailsToggleArrow.style.transform = isCollapsed ? 'rotate(180deg)' : 'rotate(0deg)';
-            }
-            if (mapClickOverlay) {
-              if (isCollapsed) mapClickOverlay.classList.remove('active');
-              else mapClickOverlay.classList.add('active');
             }
           }
           return;
@@ -2961,9 +2954,6 @@ const RouteEngine = (() => {
         if (detailsToggleArrow) {
           detailsToggleArrow.style.transform = 'rotate(180deg)'; // Points right
         }
-        if (mapClickOverlay) {
-          mapClickOverlay.classList.remove('active');
-        }
 
         // Instantly compile and open the full-screen Overview overlay page
         openOverlay("Route 1 Overview - Morning Brief", compileOverviewContents);
@@ -2985,11 +2975,6 @@ const RouteEngine = (() => {
           detailsToggleArrow.style.transform = 'rotate(180deg)'; // Points right
         }
         
-        // Hide the transparent click overlay (allowing direct interaction with background maps)
-        if (mapClickOverlay) {
-          mapClickOverlay.classList.remove('active');
-        }
-
         // Collapse the main sidebar (Column 1) so the full map backdrop is revealed
         closeMainSidebar();
 
@@ -3013,10 +2998,6 @@ const RouteEngine = (() => {
             const isCollapsed = sidebarDetailsCol.classList.toggle('collapsed');
             if (detailsToggleArrow) {
               detailsToggleArrow.style.transform = isCollapsed ? 'rotate(180deg)' : 'rotate(0deg)';
-            }
-            if (mapClickOverlay) {
-              if (isCollapsed) mapClickOverlay.classList.remove('active');
-              else mapClickOverlay.classList.add('active');
             }
           }
           return;
@@ -3056,9 +3037,6 @@ const RouteEngine = (() => {
         if (detailsToggleArrow) {
           detailsToggleArrow.style.transform = 'rotate(180deg)'; // Points right
         }
-        if (mapClickOverlay) {
-          mapClickOverlay.classList.remove('active');
-        }
 
         openSwahiliSurvivalOverlay();
       });
@@ -3074,10 +3052,6 @@ const RouteEngine = (() => {
             const isCollapsed = sidebarDetailsCol.classList.toggle('collapsed');
             if (detailsToggleArrow) {
               detailsToggleArrow.style.transform = isCollapsed ? 'rotate(180deg)' : 'rotate(0deg)';
-            }
-            if (mapClickOverlay) {
-              if (isCollapsed) mapClickOverlay.classList.remove('active');
-              else mapClickOverlay.classList.add('active');
             }
           }
           return;
@@ -3104,44 +3078,20 @@ const RouteEngine = (() => {
     const detailsToggleBtn = document.getElementById('details-pane-toggle-btn');
     const sidebarDetailsCol = document.getElementById('sidebar-details-column');
     const detailsToggleArrow = document.getElementById('details-toggle-arrow');
-    const mapClickOverlay = document.getElementById('map-click-overlay');
 
     if (detailsToggleBtn && sidebarDetailsCol) {
       // Set initial arrow state to pointing left (open)
       detailsToggleArrow.style.transform = 'rotate(0deg)';
 
       detailsToggleBtn.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent map backdrop click overlay from instantly closing it
+        e.stopPropagation();
         const isCollapsed = sidebarDetailsCol.classList.toggle('collapsed');
 
         if (isCollapsed) {
           detailsToggleArrow.style.transform = 'rotate(180deg)'; // Points right (outwards) when collapsed
-          if (mapClickOverlay) mapClickOverlay.classList.remove('active');
         } else {
           detailsToggleArrow.style.transform = 'rotate(0deg)'; // Points left (inwards) when open
-          if (mapClickOverlay) mapClickOverlay.classList.add('active');
         }
-      });
-    }
-
-    // Transparent Map Click Backdrop Overlay (Requirement 3)
-    if (mapClickOverlay) {
-      mapClickOverlay.addEventListener('click', () => {
-        // Automatically hide/collapse details Column 2 when map backdrop is clicked
-        if (sidebarDetailsCol) {
-          sidebarDetailsCol.classList.add('collapsed');
-        }
-        if (detailsToggleArrow) {
-          detailsToggleArrow.style.transform = 'rotate(180deg)'; // Points right
-        }
-        // Automatically hide any active overlays
-        const openDetailOverlay = document.getElementById('detail-overlay');
-        if (openDetailOverlay) {
-          openDetailOverlay.classList.remove('active');
-          document.body.style.overflow = '';
-        }
-        // Deactivate map click overlay
-        mapClickOverlay.classList.remove('active');
       });
     }
 

@@ -34,7 +34,7 @@
   <!-- Custom print style for offline guide generation -->
   <style>
     @media print {
-      body, .map-container, .hamburger-btn, .sidebar-container, header, #map-click-overlay {
+      body, .map-container, .hamburger-btn, .sidebar-container, header {
         display: none !important;
       }
       .overlay-screen {
@@ -123,9 +123,6 @@
       <span>Toggle Minimal Map</span>
     </button>
   </div>
-
-  <!-- 1b. Transparent Map Click Overlay (Catches clicks outside to close sidebar details/overlays) -->
-  <div id="map-click-overlay" class="fixed inset-0"></div>
 
   <!-- 2. Floating Hamburger Menu Icon -->
   <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle Navigation Sidebar">
