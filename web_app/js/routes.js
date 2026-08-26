@@ -1572,8 +1572,6 @@ const RouteEngine = (() => {
       swahiliEl.textContent = node.swahiliLesson;
       container.appendChild(swahiliEl);
     }
-
-    }
   };
 
   // Dynamic full guide compiler for detour stops
