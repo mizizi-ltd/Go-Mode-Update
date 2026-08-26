@@ -1028,7 +1028,7 @@ const RouteEngine = (() => {
 
       // Insider Tip Warning Box
       const tipBox = document.createElement('div');
-      tipBox.className = 'bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6 text-xs text-amber-900';
+      tipBox.className = 'bg-amber-50 border border-amber-200 rounded-md p-4 mb-6 text-xs text-amber-900';
       tipBox.innerHTML = `
         <p class="font-extrabold uppercase text-[10px] tracking-widest text-amber-700 mb-1.5">💡 Insider Tip: Slow Food Alert</p>
         <p class="font-semibold leading-relaxed">
@@ -1201,8 +1201,8 @@ const RouteEngine = (() => {
       const imageGrid = document.createElement('div');
       imageGrid.className = 'grid grid-cols-2 gap-3 mb-6';
       imageGrid.innerHTML = `
-        <img src="assets/maasaiwoman.jpg" class="w-full h-36 object-cover rounded-xl border border-stone-200" alt="Maasai Woman Artisan">
-        <img src="assets/maasaimarketgirl.jpg" class="w-full h-36 object-cover rounded-xl border border-stone-200" alt="Maasai Market Bead Seller">
+        <img src="assets/maasaiwoman.jpg" class="w-full h-36 object-cover rounded-md border border-stone-200" alt="Maasai Woman Artisan">
+        <img src="assets/maasaimarketgirl.jpg" class="w-full h-36 object-cover rounded-md border border-stone-200" alt="Maasai Market Bead Seller">
       `;
       container.appendChild(imageGrid);
 
@@ -1539,7 +1539,7 @@ const RouteEngine = (() => {
     // 5b. Transit/Safety Warn Card (universal if safetyTips exists)
     if (node.safetyTips) {
       const warnCard = document.createElement('div');
-      warnCard.className = 'bg-stone-50 border border-stone-200 rounded-xl p-4 flex gap-3 items-start mb-6 text-xs text-stone-600';
+      warnCard.className = 'bg-stone-50 border border-stone-200 rounded-md p-4 flex gap-3 items-start mb-6 text-xs text-stone-600';
       warnCard.innerHTML = `<span class="text-lg">⚠️</span>
         <div>
           <p class="font-extrabold uppercase text-[10px] tracking-widest text-slate-500 mb-0.5">Logistics & Safety Warning</p>
@@ -1556,7 +1556,7 @@ const RouteEngine = (() => {
       container.appendChild(lessonTitle);
 
       const swahiliEl = document.createElement('pre');
-      swahiliEl.className = 'bg-stone-50 rounded-xl p-4 text-xs font-semibold text-stone-700 leading-relaxed whitespace-pre-wrap font-sans';
+      swahiliEl.className = 'bg-stone-50 rounded-md p-4 text-xs font-semibold text-stone-700 leading-relaxed whitespace-pre-wrap font-sans';
       swahiliEl.textContent = node.swahiliLesson;
       container.appendChild(swahiliEl);
     }
@@ -1569,7 +1569,7 @@ const RouteEngine = (() => {
       container.appendChild(audioTitle);
 
       const audioTrigger = document.createElement('div');
-      audioTrigger.className = 'bg-emerald-950 text-white rounded-xl p-2.5 sm:p-3 flex items-center justify-between gap-3 shadow-sm cursor-pointer hover:bg-emerald-900 transition-colors border border-emerald-800';
+      audioTrigger.className = 'bg-emerald-950 text-white rounded-md p-2.5 sm:p-3 flex items-center justify-between gap-3 shadow-sm cursor-pointer hover:bg-emerald-900 transition-colors border border-emerald-800';
 
       const audioInfo = document.createElement('div');
       audioInfo.className = 'min-w-0 flex-1 overflow-hidden space-y-0.5';
@@ -1637,7 +1637,7 @@ const RouteEngine = (() => {
 
     // 4. Quick Info Box (Vibe, Best Time, Perfect For)
     const infoBox = document.createElement('div');
-    infoBox.className = 'bg-stone-50 border border-stone-200 rounded-xl p-4 space-y-2 mb-6 text-xs text-stone-600';
+    infoBox.className = 'bg-stone-50 border border-stone-200 rounded-md p-4 space-y-2 mb-6 text-xs text-stone-600';
     infoBox.innerHTML = `
       <div><span class="font-extrabold uppercase text-[9px] tracking-widest text-slate-400 block">The Vibe</span><span class="font-bold text-slate-700">${alt.vibe}</span></div>
       <div class="border-t border-stone-100 pt-2"><span class="font-extrabold uppercase text-[9px] tracking-widest text-slate-400 block">Best Time to Visit</span><span class="font-bold text-slate-700">${alt.bestTime}</span></div>
@@ -1687,13 +1687,13 @@ const RouteEngine = (() => {
     container.appendChild(sceneTitle);
 
     const sceneEl = document.createElement('p');
-    sceneEl.className = 'text-sm text-stone-600 leading-relaxed mb-6 font-medium bg-stone-50 rounded-xl p-4 border-l-4 border-amber-400';
+    sceneEl.className = 'text-sm text-stone-600 leading-relaxed mb-6 font-medium bg-stone-50 rounded-md p-4 border-l-4 border-amber-400';
     sceneEl.textContent = alt.theScene;
     container.appendChild(sceneEl);
 
     // 8. Insider Tip
     const tipCard = document.createElement('div');
-    tipCard.className = 'bg-amber-50 border border-amber-200 rounded-xl p-4 flex gap-3 items-start mb-6 text-xs text-amber-800';
+    tipCard.className = 'bg-amber-50 border border-amber-200 rounded-md p-4 flex gap-3 items-start mb-6 text-xs text-amber-800';
     tipCard.innerHTML = `
       <span class="text-lg">💡</span>
       <div>
@@ -1708,7 +1708,7 @@ const RouteEngine = (() => {
     splitGrid.className = 'grid grid-cols-1 md:grid-cols-2 gap-4 mb-6';
 
     const goCard = document.createElement('div');
-    goCard.className = 'bg-emerald-50 border border-emerald-100 rounded-xl p-4 space-y-2 text-xs';
+    goCard.className = 'bg-emerald-50 border border-emerald-100 rounded-md p-4 space-y-2 text-xs';
     goCard.innerHTML = `<p class="font-extrabold text-emerald-800 uppercase text-[10px] tracking-widest mb-2">✔️ Go If You</p>`;
     alt.goIfYou.forEach(point => {
       const row = document.createElement('div');
@@ -1718,7 +1718,7 @@ const RouteEngine = (() => {
     });
 
     const avoidCard = document.createElement('div');
-    avoidCard.className = 'bg-rose-50 border border-rose-100 rounded-xl p-4 space-y-2 text-xs';
+    avoidCard.className = 'bg-rose-50 border border-rose-100 rounded-md p-4 space-y-2 text-xs';
     avoidCard.innerHTML = `<p class="font-extrabold text-rose-800 uppercase text-[10px] tracking-widest mb-2">❌ Avoid If</p>`;
     alt.avoidIf.forEach(point => {
       const row = document.createElement('div');
@@ -1738,7 +1738,7 @@ const RouteEngine = (() => {
     const dirBtn = document.createElement('a');
     dirBtn.href = `https://www.google.com/maps/dir/?api=1&destination=${alt.lat},${alt.lng}`;
     dirBtn.target = '_blank';
-    dirBtn.className = 'w-full py-3.5 bg-emerald-900 hover:bg-emerald-950 text-white font-extrabold rounded-xl text-xs uppercase tracking-widest text-center block shadow-md';
+    dirBtn.className = 'w-full py-3.5 bg-emerald-900 hover:bg-emerald-950 text-white font-extrabold rounded-md text-xs uppercase tracking-widest text-center block shadow-md';
     dirBtn.textContent = 'Get Directions 🚗';
     container.appendChild(dirBtn);
   };
@@ -1777,7 +1777,7 @@ const RouteEngine = (() => {
     // 1. Banner Image
     const img = document.createElement('img');
     img.src = node.image;
-    img.className = 'w-full h-32 object-cover rounded-xl border border-stone-200';
+    img.className = 'w-full h-32 object-cover rounded-md border border-stone-200';
     img.alt = node.title;
     detailsBody.appendChild(img);
 
@@ -1796,7 +1796,7 @@ const RouteEngine = (() => {
     // 3.5. Atmospheric Audio Guide Play Trigger
     if (node.audioGuide) {
       const audioTrigger = document.createElement('div');
-      audioTrigger.className = 'bg-emerald-950 text-white rounded-xl p-3 flex items-center justify-between gap-3 shadow-sm cursor-pointer hover:bg-emerald-900 transition-colors mt-2';
+      audioTrigger.className = 'bg-emerald-950 text-white rounded-md p-3 flex items-center justify-between gap-3 shadow-sm cursor-pointer hover:bg-emerald-900 transition-colors mt-2';
       
       const audioInfo = document.createElement('div');
       audioInfo.className = 'min-w-0 flex-1 overflow-hidden space-y-0.5';
@@ -1872,7 +1872,7 @@ const RouteEngine = (() => {
     // 1. Banner Image
     const img = document.createElement('img');
     img.src = alt.image;
-    img.className = 'w-full h-32 object-cover rounded-xl border border-stone-200';
+    img.className = 'w-full h-32 object-cover rounded-md border border-stone-200';
     img.alt = alt.title;
     detailsBody.appendChild(img);
 
@@ -1891,7 +1891,7 @@ const RouteEngine = (() => {
     // 4. Local Tip card
     if (alt.localTip) {
       const tipCard = document.createElement('div');
-      tipCard.className = 'bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-800 flex gap-2 items-start';
+      tipCard.className = 'bg-amber-50 border border-amber-200 rounded-md p-3 text-xs text-amber-800 flex gap-2 items-start';
       tipCard.innerHTML = `<span>💡</span><div><p class="font-extrabold uppercase text-[10px] tracking-widest text-amber-600 mb-0.5">Local Tip</p><p class="font-medium">${alt.localTip}</p></div>`;
       detailsBody.appendChild(tipCard);
     }
@@ -1932,11 +1932,69 @@ const RouteEngine = (() => {
     titleEl.textContent = "Arusha Bajaj Safari: Morning Brief & Overview";
     container.appendChild(titleEl);
 
-    // Core descriptor
-    const descEl = document.createElement('p');
-    descEl.className = 'text-sm text-stone-600 leading-relaxed mb-6 font-medium';
-    descEl.textContent = "Welcome to Mizizi Bajaj Adventures! This itinerary has been planned and sourced by locals in Arusha to give you a highly immersive, authentic, and perfectly vetted street safari. You will bypass the boring tourist shuttle routes and ride directly inside our curated network of Bajaj drivers, tasting the authentic dust, local coffee roasts, and artistic galleries of this volcanic highland hub. Read these safety warning protocols and timings thoroughly before your departure.";
-    container.appendChild(descEl);
+    // 1. Morning Brief Audio Play Button
+    const audioTrigger = document.createElement('div');
+    audioTrigger.className = 'bg-emerald-950 text-white rounded-md p-3 sm:p-3.5 flex items-center justify-between gap-3 shadow-sm cursor-pointer hover:bg-emerald-900 transition-colors border border-emerald-800 mb-6';
+
+    const audioInfo = document.createElement('div');
+    audioInfo.className = 'min-w-0 flex-1 overflow-hidden space-y-0.5';
+
+    const audioTrackName = document.createElement('p');
+    audioTrackName.className = 'text-xs font-black tracking-wider text-ochre uppercase truncate leading-tight';
+    audioTrackName.textContent = '🎧 Morning Brief — Audio Narration';
+
+    const audioHint = document.createElement('p');
+    audioHint.className = 'text-[10px] sm:text-xs text-emerald-300 font-semibold';
+    audioHint.textContent = 'Tap to play voice overview & briefing ▸';
+
+    audioInfo.appendChild(audioTrackName);
+    audioInfo.appendChild(audioHint);
+
+    const playBtn = document.createElement('button');
+    playBtn.className = 'w-10 h-10 bg-ochre hover:bg-white text-jungle rounded-md font-black shadow-md flex items-center justify-center flex-shrink-0 transition-transform hover:scale-105 border border-amber-300';
+    playBtn.innerHTML = `<svg class="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+
+    const triggerPlay = () => {
+      GlobalAudioPlayer.load('Morning Brief — Arusha Overview', 'assets/morning_brief.mp3');
+    };
+    audioTrigger.addEventListener('click', triggerPlay);
+    playBtn.addEventListener('click', (e) => { e.stopPropagation(); triggerPlay(); });
+
+    audioTrigger.appendChild(audioInfo);
+    audioTrigger.appendChild(playBtn);
+    container.appendChild(audioTrigger);
+
+    // 2. Core descriptor with Paragraphing after Welcome
+    const descContainer = document.createElement('div');
+    descContainer.className = 'space-y-3 mb-6';
+    descContainer.innerHTML = `
+      <p class="text-sm font-extrabold text-slate-800">Welcome to Mizizi Bajaj Adventures!</p>
+      <p class="text-xs sm:text-sm text-stone-600 leading-relaxed font-medium">This itinerary has been planned and sourced by locals in Arusha to give you a highly immersive, authentic, and perfectly vetted street safari.</p>
+      <p class="text-xs sm:text-sm text-stone-600 leading-relaxed font-medium">You will bypass the boring tourist shuttle routes and ride directly inside our curated network of Bajaj drivers, tasting the authentic dust, local coffee roasts, and artistic galleries of this volcanic highland hub.</p>
+      <p class="text-xs sm:text-sm text-stone-600 leading-relaxed font-medium">Read these safety warning protocols and timings thoroughly before your departure.</p>
+    `;
+    container.appendChild(descContainer);
+
+    // 3. Strongly Highlighted Detour & Alternative Options Feature Box
+    const detourHighlightCard = document.createElement('div');
+    detourHighlightCard.className = 'bg-gradient-to-br from-amber-50 to-amber-100/80 border-2 border-amber-300 rounded-md p-4 sm:p-5 mb-6 shadow-sm';
+    detourHighlightCard.innerHTML = `
+      <div class="flex items-center gap-2 mb-2">
+        <span class="text-lg">🛺</span>
+        <h4 class="text-xs sm:text-sm font-black text-amber-950 uppercase tracking-wider">🌟 Pro Feature: Detour & Alternative Stops</h4>
+      </div>
+      <p class="text-xs sm:text-sm text-stone-700 font-semibold leading-relaxed mb-2.5">
+        Look out for the <strong>Detour & Alternative options</strong> situated right next to the main anchor stops across your map and sidebar!
+      </p>
+      <p class="text-xs text-stone-600 leading-relaxed mb-2.5 font-medium">
+        These are hand-picked, vetted local gems in close proximity to the main stops that are worth exploring depending on your specific personal interests, appetite, and the time of day you arrive.
+      </p>
+      <div class="bg-white/90 border border-amber-300/80 rounded p-3 text-xs text-amber-950 font-medium space-y-1">
+        <p>💡 <strong class="text-amber-900">Local Insider Tip:</strong> Some of these Detour stops are <strong>absolutely phenomenal</strong> depending on the time you are in the area (such as fresh morning single-origin coffee roasts, afternoon light in tribal carving studios, or vibrant golden-hour sundowners).</p>
+        <p class="text-[11px] text-stone-600">Simply click any gold Detour marker on the map or expand the "Alternative Options" dropdown on any stop to customize your journey in real time.</p>
+      </div>
+    `;
+    container.appendChild(detourHighlightCard);
 
     // Timeline Schedule Table
     const listTitle = document.createElement('h4');
@@ -1973,7 +2031,7 @@ const RouteEngine = (() => {
 
     // Security Warn card
     const safetyDiv = document.createElement('div');
-    safetyDiv.className = 'bg-amber-50 border border-amber-200 rounded-xl p-4 flex gap-3 text-xs text-amber-800';
+    safetyDiv.className = 'bg-amber-50 border border-amber-200 rounded-md p-4 flex gap-3 text-xs text-amber-800';
     safetyDiv.innerHTML = `<span>💡</span>
       <div>
         <p class="font-extrabold mb-0.5 uppercase tracking-wider text-[10px]">Essential Bajaj Packing list</p>
@@ -2003,6 +2061,16 @@ const RouteEngine = (() => {
     img.src = 'assets/coffeebreakmorning.JPG';
     img.className = 'w-full h-32 object-cover border border-stone-200';
     detailsBody.appendChild(img);
+
+    // Quick Audio Play Trigger in Panel
+    const quickAudio = document.createElement('button');
+    quickAudio.type = 'button';
+    quickAudio.className = 'w-full py-2.5 px-3 bg-emerald-950 hover:bg-emerald-900 text-ochre font-bold text-xs rounded-md flex items-center justify-center gap-2 border border-emerald-800 shadow-sm transition-colors';
+    quickAudio.innerHTML = `<svg class="w-4 h-4 fill-current text-ochre" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> <span>Play Morning Brief Audio</span>`;
+    quickAudio.addEventListener('click', () => {
+      GlobalAudioPlayer.load('Morning Brief — Arusha Overview', 'assets/morning_brief.mp3');
+    });
+    detailsBody.appendChild(quickAudio);
 
     // Context summary
     const summary = document.createElement('p');
@@ -2039,7 +2107,7 @@ const RouteEngine = (() => {
 
     // Subtitle warn
     const warn = document.createElement('div');
-    warn.className = 'bg-red-50 border border-red-200 text-red-700 p-3 rounded-xl text-xs font-bold leading-normal';
+    warn.className = 'bg-red-50 border border-red-200 text-red-700 p-3 rounded-md text-xs font-bold leading-normal';
     warn.textContent = "Mizizi is centered on safety. Keep this panel loaded offline. If you face any security or transit issues inside Arusha town, reach out immediately!";
     detailsBody.appendChild(warn);
 
@@ -2056,7 +2124,7 @@ const RouteEngine = (() => {
 
     contacts.forEach((con) => {
       const card = document.createElement('div');
-      card.className = 'bg-white border border-stone-200 p-3 rounded-xl text-xs shadow-sm flex flex-col gap-1';
+      card.className = 'bg-white border border-stone-200 p-3 rounded-md text-xs shadow-sm flex flex-col gap-1';
       
       const title = document.createElement('p');
       title.className = 'font-bold text-slate-500 uppercase tracking-widest text-[9px]';
@@ -2091,7 +2159,7 @@ const RouteEngine = (() => {
 
       // "Naomba" vs "Nataka" custom card
       const politeCard = document.createElement('div');
-      politeCard.className = 'bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6 text-xs text-amber-900';
+      politeCard.className = 'bg-amber-50 border border-amber-200 rounded-md p-4 mb-6 text-xs text-amber-900';
       politeCard.innerHTML = `
         <p class="font-extrabold uppercase text-[10px] tracking-widest text-amber-700 mb-1.5">💡 Tanzanian Politeness Protocol</p>
         <p class="font-semibold leading-relaxed">
@@ -2107,7 +2175,7 @@ const RouteEngine = (() => {
       container.appendChild(soundTitle);
 
       const audioSim = document.createElement('div');
-      audioSim.className = 'bg-emerald-950 text-white rounded-2xl p-4 mb-6 space-y-3 shadow-md';
+      audioSim.className = 'bg-emerald-950 text-white rounded-md p-4 mb-6 space-y-3 shadow-md';
 
       const audioHead = document.createElement('div');
       audioHead.className = 'flex justify-between items-center mb-1';
@@ -2136,7 +2204,7 @@ const RouteEngine = (() => {
 
       tracks.forEach((track) => {
         const item = document.createElement('div');
-        item.className = 'flex justify-between items-center py-2 px-3 bg-emerald-900 bg-opacity-40 rounded-xl text-xs hover:bg-emerald-900 transition-colors cursor-pointer';
+        item.className = 'flex justify-between items-center py-2 px-3 bg-emerald-900 bg-opacity-40 rounded-md text-xs hover:bg-emerald-900 transition-colors cursor-pointer';
 
         const info = document.createElement('span');
         info.className = 'font-bold';
@@ -2336,7 +2404,7 @@ const RouteEngine = (() => {
           </div>
 
           <!-- Audio Guide — Load to Global Player -->
-          <div id="map-audio-trigger-${node.index}" class="bg-emerald-950 text-white rounded-xl p-2.5 flex items-center justify-between gap-3 shadow-sm cursor-pointer hover:bg-emerald-900 transition-colors">
+          <div id="map-audio-trigger-${node.index}" class="bg-emerald-950 text-white rounded-md p-2.5 flex items-center justify-between gap-3 shadow-sm cursor-pointer hover:bg-emerald-900 transition-colors">
             <div class="space-y-0.5 min-w-0 flex-grow">
               <p class="text-[9px] font-black tracking-widest text-amber-400 uppercase truncate">Audio Guide</p>
               <p class="text-[8px] text-emerald-300 font-semibold uppercase truncate">Tap to play ▸</p>
