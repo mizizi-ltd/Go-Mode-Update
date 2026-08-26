@@ -942,6 +942,36 @@ const RouteEngine = (() => {
     return wrap;
   };
 
+  // Get visible main stops that form the core loop (excluding transit connectors)
+  const getVisibleMainStops = () => {
+    return ARUSHA_LOOP_PAYLOAD.filter(n => n.category !== "Transit Core" && n.category !== "Logistics Pivot");
+  };
+
+  // Get next or previous main stop index
+  const getAdjacentMainStopIndex = (currentIndex, direction) => {
+    const mainStops = getVisibleMainStops();
+    const currentPos = mainStops.findIndex(n => n.index === currentIndex);
+    if (currentPos === -1) return null;
+    const targetPos = (currentPos + direction + mainStops.length) % mainStops.length;
+    return mainStops[targetPos].index;
+  };
+
+  // Programmatically shift user to a main stop
+  const navigateToMainStop = (targetIndex, shouldOpenPopup = true) => {
+    document.querySelectorAll('.sidebar-sub-link').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.sidebar-alt-link').forEach(btn => btn.classList.remove('active'));
+    const link = document.querySelector(`.sidebar-sub-link[data-index="${targetIndex}"]`);
+    if (link) link.classList.add('active');
+    const locationsToggle = document.getElementById('nav-locations-toggle');
+    if (locationsToggle) locationsToggle.classList.add('active');
+
+    showLocationDetails(targetIndex);
+    const targetNode = ARUSHA_LOOP_PAYLOAD[targetIndex];
+    if (targetNode && targetNode.marker && shouldOpenPopup) {
+      targetNode.marker.openPopup();
+    }
+  };
+
   // Dynamic full guide compiler for main stops
   const compileDetailedGuide = (node, container) => {
     // 1. Hero / Primary image — always full-width, never floated
@@ -1572,6 +1602,91 @@ const RouteEngine = (() => {
       swahiliEl.textContent = node.swahiliLesson;
       container.appendChild(swahiliEl);
     }
+
+    // 7. Nearby Detour & Alternative Options (if available for this stop)
+    const stopDetours = ALTERNATIVE_LOCATIONS.filter(alt => alt.parentIndex === node.index);
+    if (stopDetours.length > 0) {
+      const detourSection = document.createElement('div');
+      detourSection.className = 'bg-amber-50/80 border border-amber-200 rounded-md p-4 space-y-3 mt-6 mb-4';
+      detourSection.innerHTML = `
+        <div class="flex items-center justify-between gap-2 border-b border-amber-200 pb-2">
+          <h4 class="text-xs font-black text-amber-950 uppercase tracking-widest flex items-center gap-1.5">
+            <span>🛺</span> Nearby Detours & Alternative Gems (${stopDetours.length})
+          </h4>
+          <span class="text-[10px] font-bold text-amber-700 uppercase tracking-wider bg-amber-100 px-2 py-0.5 rounded">Optional</span>
+        </div>
+        <p class="text-xs text-amber-900 font-medium">Near this main stop, these vetted local options are available depending on your interests and timing:</p>
+      `;
+
+      const detourGrid = document.createElement('div');
+      detourGrid.className = 'grid grid-cols-1 sm:grid-cols-2 gap-2.5';
+
+      stopDetours.forEach(alt => {
+        const card = document.createElement('div');
+        card.className = 'bg-white border border-amber-200 rounded-md p-2.5 flex items-center gap-2.5 shadow-xs hover:border-amber-400 hover:shadow-sm transition-all cursor-pointer group';
+        card.innerHTML = `
+          <img src="${alt.image}" class="w-12 h-12 object-cover rounded flex-shrink-0 border border-stone-200" alt="${alt.title}" />
+          <div class="min-w-0 flex-1">
+            <h5 class="text-xs font-black text-slate-800 truncate group-hover:text-emerald-950">${alt.title}</h5>
+            <p class="text-[10px] text-amber-700 font-bold truncate">${alt.vibe || 'Detour Option'}</p>
+            <span class="text-[10px] text-emerald-800 font-extrabold flex items-center gap-0.5 mt-0.5">Explore Detour Guide →</span>
+          </div>
+        `;
+        card.addEventListener('click', () => {
+          openOverlay(`${alt.title} - Detailed Guide`, (altContainer) => {
+            compileDetailedAltGuide(alt, altContainer);
+          });
+          const scrollContainer = document.querySelector('.overlay-scroll-container');
+          if (scrollContainer) scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        detourGrid.appendChild(card);
+      });
+
+      detourSection.appendChild(detourGrid);
+      container.appendChild(detourSection);
+    }
+
+    // 8. Next & Previous Stop Navigation Buttons (Main Stops only)
+    const prevIndex = getAdjacentMainStopIndex(node.index, -1);
+    const nextIndex = getAdjacentMainStopIndex(node.index, 1);
+
+    if (prevIndex !== null && nextIndex !== null) {
+      const prevNode = ARUSHA_LOOP_PAYLOAD[prevIndex];
+      const nextNode = ARUSHA_LOOP_PAYLOAD[nextIndex];
+
+      const navContainer = document.createElement('div');
+      navContainer.className = 'flex items-center justify-between gap-3 pt-6 border-t border-stone-200 mt-6';
+
+      const prevBtn = document.createElement('button');
+      prevBtn.type = 'button';
+      prevBtn.className = 'flex-1 py-3 px-3 bg-stone-100 hover:bg-stone-200 text-slate-800 font-black text-xs rounded-md border border-stone-300 flex items-center justify-center gap-1.5 transition-all active:scale-95 cursor-pointer shadow-xs';
+      prevBtn.innerHTML = `<span>←</span> <span class="truncate">Prev: ${prevNode.title}</span>`;
+      prevBtn.addEventListener('click', () => {
+        navigateToMainStop(prevIndex, false);
+        openOverlay(`${prevNode.title} - Detailed Guide`, (newContainer) => {
+          compileDetailedGuide(prevNode, newContainer);
+        });
+        const scrollContainer = document.querySelector('.overlay-scroll-container');
+        if (scrollContainer) scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      const nextBtn = document.createElement('button');
+      nextBtn.type = 'button';
+      nextBtn.className = 'flex-1 py-3 px-3 bg-emerald-900 hover:bg-emerald-950 text-white font-black text-xs rounded-md flex items-center justify-center gap-1.5 transition-all active:scale-95 cursor-pointer shadow-md';
+      nextBtn.innerHTML = `<span class="truncate">Next: ${nextNode.title}</span> <span>→</span>`;
+      nextBtn.addEventListener('click', () => {
+        navigateToMainStop(nextIndex, false);
+        openOverlay(`${nextNode.title} - Detailed Guide`, (newContainer) => {
+          compileDetailedGuide(nextNode, newContainer);
+        });
+        const scrollContainer = document.querySelector('.overlay-scroll-container');
+        if (scrollContainer) scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      navContainer.appendChild(prevBtn);
+      navContainer.appendChild(nextBtn);
+      container.appendChild(navContainer);
+    }
   };
 
   // Dynamic full guide compiler for detour stops
@@ -1790,6 +1905,36 @@ const RouteEngine = (() => {
     desc.textContent = node.shortDesc;
     detailsBody.appendChild(desc);
 
+    // 3.8. Nearby Detour Options List (if available for this stop)
+    const stopDetours = ALTERNATIVE_LOCATIONS.filter(alt => alt.parentIndex === node.index);
+    if (stopDetours.length > 0) {
+      const detourSec = document.createElement('div');
+      detourSec.className = 'space-y-2 mt-2 pt-2 border-t border-stone-200';
+      detourSec.innerHTML = `<h4 class="text-[10px] font-black uppercase tracking-wider text-amber-800 flex items-center gap-1"><span>🛺</span> Detour Options (${stopDetours.length})</h4>`;
+      
+      const detourList = document.createElement('div');
+      detourList.className = 'space-y-1.5';
+      stopDetours.forEach(alt => {
+        const item = document.createElement('button');
+        item.type = 'button';
+        item.className = 'w-full p-2 bg-amber-50 hover:bg-amber-100/80 border border-amber-200 rounded-md text-left flex items-center gap-2 transition-colors cursor-pointer group';
+        item.innerHTML = `
+          <img src="${alt.image}" class="w-8 h-8 object-cover rounded flex-shrink-0 border border-amber-200" alt="${alt.title}" />
+          <div class="min-w-0 flex-1">
+            <p class="text-xs font-black text-slate-800 truncate group-hover:text-emerald-950">${alt.title}</p>
+            <p class="text-[9px] text-amber-800 font-semibold truncate">${alt.vibe || alt.shortDesc}</p>
+          </div>
+          <span class="text-xs text-amber-600 font-bold flex-shrink-0">›</span>
+        `;
+        item.addEventListener('click', () => {
+          showAlternativeDetails(alt.altId);
+        });
+        detourList.appendChild(item);
+      });
+      detourSec.appendChild(detourList);
+      detailsBody.appendChild(detourSec);
+    }
+
     // 4. Gold "Read More" button
     const btn = document.createElement('button');
     btn.className = 'w-full py-3 btn-gold text-xs uppercase tracking-widest font-black shadow-md mt-auto';
@@ -1929,24 +2074,15 @@ const RouteEngine = (() => {
     `;
     container.appendChild(descContainer);
 
-    // 3. Strongly Highlighted Detour & Alternative Options Feature Box
+    // 3. Compact Pro Feature Detour & Alternative Stops Card (Requirement D)
     const detourHighlightCard = document.createElement('div');
-    detourHighlightCard.className = 'bg-gradient-to-br from-amber-50 to-amber-100/80 border-2 border-amber-300 rounded-md p-4 sm:p-5 mb-6 shadow-sm';
+    detourHighlightCard.className = 'bg-amber-50 border border-amber-200 rounded-md p-3.5 mb-6 text-xs text-amber-900 shadow-xs';
     detourHighlightCard.innerHTML = `
-      <div class="flex items-center gap-2 mb-2">
-        <span class="text-lg">🛺</span>
-        <h4 class="text-xs sm:text-sm font-black text-amber-950 uppercase tracking-wider">🌟 Pro Feature: Detour & Alternative Stops</h4>
+      <div class="flex items-center gap-1.5 font-black uppercase text-[11px] tracking-wider text-amber-800 mb-1">
+        <span>🛺 🌟</span>
+        <span>Pro Feature: Detour & Alternative Stops</span>
       </div>
-      <p class="text-xs sm:text-sm text-stone-700 font-semibold leading-relaxed mb-2.5">
-        Look out for the <strong>Detour & Alternative options</strong> situated right next to the main anchor stops across your map and sidebar!
-      </p>
-      <p class="text-xs text-stone-600 leading-relaxed mb-2.5 font-medium">
-        These are hand-picked, vetted local gems in close proximity to the main stops that are worth exploring depending on your specific personal interests, appetite, and the time of day you arrive.
-      </p>
-      <div class="bg-white/90 border border-amber-300/80 rounded p-3 text-xs text-amber-950 font-medium space-y-1">
-        <p>💡 <strong class="text-amber-900">Local Insider Tip:</strong> Some of these Detour stops are <strong>absolutely phenomenal</strong> depending on the time you are in the area (such as fresh morning single-origin coffee roasts, afternoon light in tribal carving studios, or vibrant golden-hour sundowners).</p>
-        <p class="text-[11px] text-stone-600">Simply click any gold Detour marker on the map or expand the "Alternative Options" dropdown on any stop to customize your journey in real time.</p>
-      </div>
+      <p class="text-stone-700 leading-relaxed font-medium">Check the map and sidebar for Detour & Alternative options next to the main anchor stops! These are local gems, hand-picked and vetted, near the main stops, worth exploring dependent specifically on your particular personal interests, appetite and the time of day you are in the area.</p>
     `;
     container.appendChild(detourHighlightCard);
 
@@ -2370,12 +2506,22 @@ const RouteEngine = (() => {
           <button id="map-read-more-btn-${node.index}" class="w-full py-2 bg-amber-500 hover:bg-amber-400 text-slate-900 font-black rounded-md text-[10px] uppercase tracking-widest text-center flex items-center justify-center gap-1 shadow-sm transition-transform active:scale-95 cursor-pointer mt-1">
             Read More 📖
           </button>
+
+          <!-- Next & Previous Main Stop Navigation Buttons below Read More -->
+          <div class="flex items-center gap-1.5 pt-0.5">
+            <button type="button" id="map-prev-btn-${node.index}" class="flex-1 py-1.5 px-2 bg-stone-100 hover:bg-stone-200 text-slate-800 font-extrabold text-[10px] rounded-md border border-stone-300 flex items-center justify-center gap-1 shadow-xs transition-all active:scale-95 cursor-pointer">
+              <span>← Prev</span>
+            </button>
+            <button type="button" id="map-next-btn-${node.index}" class="flex-1 py-1.5 px-2 bg-stone-100 hover:bg-stone-200 text-slate-800 font-extrabold text-[10px] rounded-md border border-stone-300 flex items-center justify-center gap-1 shadow-xs transition-all active:scale-95 cursor-pointer">
+              <span>Next →</span>
+            </button>
+          </div>
         </div>
       `;
 
       marker.bindPopup(popupHtml);
 
-      // Listen for popup opening to bind the audio trigger and read more button
+      // Listen for popup opening to bind the audio trigger and navigation buttons
       marker.on('popupopen', () => {
         const trigger = document.getElementById(`map-audio-trigger-${node.index}`);
         if (trigger) {
@@ -2391,6 +2537,28 @@ const RouteEngine = (() => {
             openOverlay(`${node.title} - Detailed Guide`, (container) => {
               compileDetailedGuide(node, container);
             });
+          });
+        }
+
+        const prevBtn = document.getElementById(`map-prev-btn-${node.index}`);
+        if (prevBtn) {
+          prevBtn.addEventListener('click', () => {
+            const prevIndex = getAdjacentMainStopIndex(node.index, -1);
+            if (prevIndex !== null) {
+              marker.closePopup();
+              navigateToMainStop(prevIndex, true);
+            }
+          });
+        }
+
+        const nextBtn = document.getElementById(`map-next-btn-${node.index}`);
+        if (nextBtn) {
+          nextBtn.addEventListener('click', () => {
+            const nextIndex = getAdjacentMainStopIndex(node.index, 1);
+            if (nextIndex !== null) {
+              marker.closePopup();
+              navigateToMainStop(nextIndex, true);
+            }
           });
         }
       });
