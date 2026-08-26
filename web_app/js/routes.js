@@ -989,8 +989,8 @@ const RouteEngine = (() => {
     if (node.audioGuide) {
       const playAudioBtn = document.createElement('button');
       playAudioBtn.type = 'button';
-      playAudioBtn.className = 'w-full py-2.5 px-3 mb-4 bg-emerald-950 hover:bg-emerald-900 text-ochre font-bold text-xs rounded-md flex items-center justify-center gap-2 border border-emerald-800 shadow-sm transition-colors cursor-pointer';
-      playAudioBtn.innerHTML = `<svg class="w-4 h-4 fill-current text-ochre" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> <span>Play Audio Guide</span>`;
+      playAudioBtn.className = 'w-full py-2 px-3 mb-3.5 bg-emerald-950 hover:bg-emerald-900 text-ochre font-bold text-[11px] rounded-md flex items-center justify-center gap-2 border border-emerald-800 shadow-sm transition-colors cursor-pointer';
+      playAudioBtn.innerHTML = `<svg class="w-3.5 h-3.5 fill-current text-ochre" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> <span>Play Audio Guide</span>`;
       playAudioBtn.addEventListener('click', () => {
         GlobalAudioPlayer.load(`${node.title} — ${node.category}`, `assets/${node.audioGuide}`);
       });
@@ -1651,20 +1651,20 @@ const RouteEngine = (() => {
     const nextIndex = getAdjacentMainStopIndex(node.index, 1);
 
     if (prevIndex !== null && nextIndex !== null) {
-      const prevNode = ARUSHA_LOOP_PAYLOAD[prevIndex];
       const nextNode = ARUSHA_LOOP_PAYLOAD[nextIndex];
+      const nextTitleAbbr = nextNode.title.length > 15 ? nextNode.title.slice(0, 14) + '…' : nextNode.title;
 
       const navContainer = document.createElement('div');
-      navContainer.className = 'flex items-center justify-between gap-3 pt-6 border-t border-stone-200 mt-6';
+      navContainer.className = 'flex items-center justify-between gap-3 pt-5 border-t border-stone-200 mt-5';
 
       const prevBtn = document.createElement('button');
       prevBtn.type = 'button';
-      prevBtn.className = 'flex-1 py-3 px-3 bg-stone-100 hover:bg-stone-200 text-slate-800 font-black text-xs rounded-md border border-stone-300 flex items-center justify-center gap-1.5 transition-all active:scale-95 cursor-pointer shadow-xs';
-      prevBtn.innerHTML = `<span>←</span> <span class="truncate">Prev: ${prevNode.title}</span>`;
+      prevBtn.className = 'flex-1 py-2 px-3 bg-stone-100 hover:bg-stone-200 text-slate-800 font-extrabold text-[11px] rounded-md border border-stone-300 flex items-center justify-center gap-1 transition-all active:scale-95 cursor-pointer shadow-2xs';
+      prevBtn.innerHTML = `<span>← Prev.</span>`;
       prevBtn.addEventListener('click', () => {
         navigateToMainStop(prevIndex, false);
-        openOverlay(`${prevNode.title} - Detailed Guide`, (newContainer) => {
-          compileDetailedGuide(prevNode, newContainer);
+        openOverlay(`${ARUSHA_LOOP_PAYLOAD[prevIndex].title} - Detailed Guide`, (newContainer) => {
+          compileDetailedGuide(ARUSHA_LOOP_PAYLOAD[prevIndex], newContainer);
         });
         const scrollContainer = document.querySelector('.overlay-scroll-container');
         if (scrollContainer) scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1672,8 +1672,8 @@ const RouteEngine = (() => {
 
       const nextBtn = document.createElement('button');
       nextBtn.type = 'button';
-      nextBtn.className = 'flex-1 py-3 px-3 bg-emerald-900 hover:bg-emerald-950 text-white font-black text-xs rounded-md flex items-center justify-center gap-1.5 transition-all active:scale-95 cursor-pointer shadow-md';
-      nextBtn.innerHTML = `<span class="truncate">Next: ${nextNode.title}</span> <span>→</span>`;
+      nextBtn.className = 'flex-1 py-2 px-3 bg-emerald-900 hover:bg-emerald-950 text-white font-extrabold text-[11px] rounded-md flex items-center justify-center gap-1 transition-all active:scale-95 cursor-pointer shadow-sm truncate';
+      nextBtn.innerHTML = `<span class="truncate">Next: ${nextTitleAbbr}</span> <span>→</span>`;
       nextBtn.addEventListener('click', () => {
         navigateToMainStop(nextIndex, false);
         openOverlay(`${nextNode.title} - Detailed Guide`, (newContainer) => {
@@ -1706,8 +1706,8 @@ const RouteEngine = (() => {
     if (alt.audioGuide) {
       const playAudioBtn = document.createElement('button');
       playAudioBtn.type = 'button';
-      playAudioBtn.className = 'w-full py-2.5 px-3 mb-4 bg-emerald-950 hover:bg-emerald-900 text-ochre font-bold text-xs rounded-md flex items-center justify-center gap-2 border border-emerald-800 shadow-sm transition-colors cursor-pointer';
-      playAudioBtn.innerHTML = `<svg class="w-4 h-4 fill-current text-ochre" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> <span>Play Detour Audio Guide</span>`;
+      playAudioBtn.className = 'w-full py-2 px-3 mb-3.5 bg-emerald-950 hover:bg-emerald-900 text-ochre font-bold text-[11px] rounded-md flex items-center justify-center gap-2 border border-emerald-800 shadow-sm transition-colors cursor-pointer';
+      playAudioBtn.innerHTML = `<svg class="w-3.5 h-3.5 fill-current text-ochre" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> <span>Play Detour Audio Guide</span>`;
       playAudioBtn.addEventListener('click', () => {
         GlobalAudioPlayer.load(`${alt.title} — Detour`, `assets/${alt.audioGuide}`);
       });
@@ -1838,7 +1838,7 @@ const RouteEngine = (() => {
     const dirBtn = document.createElement('a');
     dirBtn.href = `https://www.google.com/maps/dir/?api=1&destination=${alt.lat},${alt.lng}`;
     dirBtn.target = '_blank';
-    dirBtn.className = 'w-full py-3.5 bg-emerald-900 hover:bg-emerald-950 text-white font-extrabold rounded-md text-xs uppercase tracking-widest text-center block shadow-md';
+    dirBtn.className = 'w-full py-2 bg-emerald-900 hover:bg-emerald-950 text-white font-extrabold rounded-md text-[11px] uppercase tracking-wider text-center block shadow-sm';
     dirBtn.textContent = 'Get Directions 🚗';
     container.appendChild(dirBtn);
   };
@@ -1885,8 +1885,8 @@ const RouteEngine = (() => {
     if (node.audioGuide) {
       const playAudioBtn = document.createElement('button');
       playAudioBtn.type = 'button';
-      playAudioBtn.className = 'w-full py-2.5 px-3 bg-emerald-950 hover:bg-emerald-900 text-ochre font-bold text-xs rounded-md flex items-center justify-center gap-2 border border-emerald-800 shadow-sm transition-colors cursor-pointer';
-      playAudioBtn.innerHTML = `<svg class="w-4 h-4 fill-current text-ochre" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> <span>Play Audio Guide</span>`;
+      playAudioBtn.className = 'w-full py-2 px-3 bg-emerald-950 hover:bg-emerald-900 text-ochre font-bold text-[11px] rounded-md flex items-center justify-center gap-2 border border-emerald-800 shadow-sm transition-colors cursor-pointer';
+      playAudioBtn.innerHTML = `<svg class="w-3.5 h-3.5 fill-current text-ochre" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> <span>Play Audio Guide</span>`;
       playAudioBtn.addEventListener('click', () => {
         GlobalAudioPlayer.load(`${node.title} — ${node.category}`, `assets/${node.audioGuide}`);
       });
@@ -1895,7 +1895,7 @@ const RouteEngine = (() => {
 
     // 2. Swahili Quick Phrase badge
     const lingoBadge = document.createElement('div');
-    lingoBadge.className = 'badge-gold text-[10px] py-1.5 px-3 rounded-lg flex items-center gap-1.5 font-bold tracking-wider';
+    lingoBadge.className = 'badge-gold text-[10px] py-1 px-2.5 rounded-md flex items-center gap-1.5 font-bold tracking-wider';
     lingoBadge.innerHTML = `🗣️ <span class="truncate">${node.swahiliPhrase}</span>`;
     detailsBody.appendChild(lingoBadge);
 
@@ -1905,26 +1905,35 @@ const RouteEngine = (() => {
     desc.textContent = node.shortDesc;
     detailsBody.appendChild(desc);
 
-    // 3.8. Nearby Detour Options List (if available for this stop)
+    // 4. Gold "Read More" button — placed ABOVE detours for immediate access (Requirement 3)
+    const btn = document.createElement('button');
+    btn.className = 'w-full py-2 btn-gold text-[11px] uppercase tracking-wider font-black shadow-sm mt-1';
+    btn.textContent = "Read Full Guide";
+    btn.addEventListener('click', () => {
+      // Trigger dynamic detail overlay compilation
+      openOverlay(`${node.title} - Detailed Guide`, (container) => {
+        compileDetailedGuide(node, container);
+      });
+    });
+    detailsBody.appendChild(btn);
+
+    // 5. Slim, low-profile Nearby Detour Options List (Requirement 2 & 3)
     const stopDetours = ALTERNATIVE_LOCATIONS.filter(alt => alt.parentIndex === node.index);
     if (stopDetours.length > 0) {
       const detourSec = document.createElement('div');
-      detourSec.className = 'space-y-2 mt-2 pt-2 border-t border-stone-200';
-      detourSec.innerHTML = `<h4 class="text-[10px] font-black uppercase tracking-wider text-amber-800 flex items-center gap-1"><span>🛺</span> Detour Options (${stopDetours.length})</h4>`;
+      detourSec.className = 'space-y-1 mt-2 pt-2 border-t border-stone-200';
+      detourSec.innerHTML = `<h4 class="text-[9px] font-extrabold uppercase tracking-wider text-amber-800 flex items-center gap-1 mb-1"><span>🛺</span> Detour Options (${stopDetours.length})</h4>`;
       
       const detourList = document.createElement('div');
-      detourList.className = 'space-y-1.5';
+      detourList.className = 'space-y-1';
       stopDetours.forEach(alt => {
         const item = document.createElement('button');
         item.type = 'button';
-        item.className = 'w-full p-2 bg-amber-50 hover:bg-amber-100/80 border border-amber-200 rounded-md text-left flex items-center gap-2 transition-colors cursor-pointer group';
+        item.className = 'w-full py-1.5 px-2 bg-amber-50 hover:bg-amber-100/90 border border-amber-200 rounded text-left flex items-center gap-2 transition-colors cursor-pointer group shadow-2xs';
         item.innerHTML = `
-          <img src="${alt.image}" class="w-8 h-8 object-cover rounded flex-shrink-0 border border-amber-200" alt="${alt.title}" />
-          <div class="min-w-0 flex-1">
-            <p class="text-xs font-black text-slate-800 truncate group-hover:text-emerald-950">${alt.title}</p>
-            <p class="text-[9px] text-amber-800 font-semibold truncate">${alt.vibe || alt.shortDesc}</p>
-          </div>
-          <span class="text-xs text-amber-600 font-bold flex-shrink-0">›</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-500 flex-shrink-0"></span>
+          <span class="text-[11px] font-bold text-slate-800 truncate group-hover:text-emerald-950 flex-1">${alt.title}</span>
+          <span class="text-[10px] text-amber-700 font-extrabold flex-shrink-0">›</span>
         `;
         item.addEventListener('click', () => {
           showAlternativeDetails(alt.altId);
@@ -1934,19 +1943,6 @@ const RouteEngine = (() => {
       detourSec.appendChild(detourList);
       detailsBody.appendChild(detourSec);
     }
-
-    // 4. Gold "Read More" button
-    const btn = document.createElement('button');
-    btn.className = 'w-full py-3 btn-gold text-xs uppercase tracking-widest font-black shadow-md mt-auto';
-    btn.textContent = "Read More";
-    btn.addEventListener('click', () => {
-      // Trigger dynamic detail overlay compilation
-      openOverlay(`${node.title} - Detailed Guide`, (container) => {
-        compileDetailedGuide(node, container);
-      });
-    });
-
-    detailsBody.appendChild(btn);
   };
 
   // Render alternative location details in Column 2 (no Read More button)
@@ -1989,8 +1985,8 @@ const RouteEngine = (() => {
     if (alt.audioGuide) {
       const playAudioBtn = document.createElement('button');
       playAudioBtn.type = 'button';
-      playAudioBtn.className = 'w-full py-2.5 px-3 bg-emerald-950 hover:bg-emerald-900 text-ochre font-bold text-xs rounded-md flex items-center justify-center gap-2 border border-emerald-800 shadow-sm transition-colors cursor-pointer';
-      playAudioBtn.innerHTML = `<svg class="w-4 h-4 fill-current text-ochre" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> <span>Play Detour Audio Guide</span>`;
+      playAudioBtn.className = 'w-full py-2 px-3 bg-emerald-950 hover:bg-emerald-900 text-ochre font-bold text-[11px] rounded-md flex items-center justify-center gap-2 border border-emerald-800 shadow-sm transition-colors cursor-pointer';
+      playAudioBtn.innerHTML = `<svg class="w-3.5 h-3.5 fill-current text-ochre" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> <span>Play Detour Audio Guide</span>`;
       playAudioBtn.addEventListener('click', () => {
         GlobalAudioPlayer.load(`${alt.title} — Detour`, `assets/${alt.audioGuide}`);
       });
@@ -1999,7 +1995,7 @@ const RouteEngine = (() => {
 
     // 2. Swahili Phrase badge
     const lingoBadge = document.createElement('div');
-    lingoBadge.className = 'badge-gold text-[10px] py-1.5 px-3 rounded-lg flex items-center gap-1.5 font-bold tracking-wider';
+    lingoBadge.className = 'badge-gold text-[10px] py-1 px-2.5 rounded-md flex items-center gap-1.5 font-bold tracking-wider';
     lingoBadge.innerHTML = `🗣️ <span class="truncate">${alt.swahiliPhrase}</span>`;
     detailsBody.appendChild(lingoBadge);
 
@@ -2012,15 +2008,15 @@ const RouteEngine = (() => {
     // 4. Local Tip card
     if (alt.localTip) {
       const tipCard = document.createElement('div');
-      tipCard.className = 'bg-amber-50 border border-amber-200 rounded-md p-3 text-xs text-amber-800 flex gap-2 items-start';
-      tipCard.innerHTML = `<span>💡</span><div><p class="font-extrabold uppercase text-[10px] tracking-widest text-amber-600 mb-0.5">Local Tip</p><p class="font-medium">${alt.localTip}</p></div>`;
+      tipCard.className = 'bg-amber-50 border border-amber-200 rounded-md p-2.5 text-xs text-amber-800 flex gap-2 items-start';
+      tipCard.innerHTML = `<span>💡</span><div><p class="font-extrabold uppercase text-[9px] tracking-widest text-amber-700 mb-0.5">Local Tip</p><p class="font-medium">${alt.localTip}</p></div>`;
       detailsBody.appendChild(tipCard);
     }
 
     // 5. Read More button (if detour guide exists)
     if (alt.hasDetailedGuide) {
       const readMoreBtn = document.createElement('button');
-      readMoreBtn.className = 'w-full py-3 btn-gold text-xs uppercase tracking-widest font-black shadow-md mt-2';
+      readMoreBtn.className = 'w-full py-2 btn-gold text-[11px] uppercase tracking-wider font-black shadow-sm mt-1';
       readMoreBtn.textContent = 'Read Full Detour Guide';
       readMoreBtn.addEventListener('click', () => {
         openOverlay(`${alt.title} - Detailed Guide`, (container) => {
@@ -2034,7 +2030,7 @@ const RouteEngine = (() => {
     const dirLink = document.createElement('a');
     dirLink.href = `https://www.google.com/maps/dir/?api=1&destination=${alt.lat},${alt.lng}`;
     dirLink.target = '_blank';
-    dirLink.className = 'w-full py-3 btn-jungle text-xs uppercase tracking-widest font-black shadow-md mt-auto text-center block text-white';
+    dirLink.className = 'w-full py-2 btn-jungle text-[11px] uppercase tracking-wider font-black shadow-sm mt-auto text-center block text-white';
     dirLink.textContent = 'Get Directions 🚗';
     detailsBody.appendChild(dirLink);
   };
@@ -2050,8 +2046,8 @@ const RouteEngine = (() => {
     // 1. Morning Brief Audio Play Button — immediately under first image
     const quickAudio = document.createElement('button');
     quickAudio.type = 'button';
-    quickAudio.className = 'w-full py-2.5 px-3 mb-5 bg-emerald-950 hover:bg-emerald-900 text-ochre font-bold text-xs rounded-md flex items-center justify-center gap-2 border border-emerald-800 shadow-sm transition-colors cursor-pointer';
-    quickAudio.innerHTML = `<svg class="w-4 h-4 fill-current text-ochre" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> <span>Play Morning Brief Audio</span>`;
+    quickAudio.className = 'w-full py-2 px-3 mb-4 bg-emerald-950 hover:bg-emerald-900 text-ochre font-bold text-[11px] rounded-md flex items-center justify-center gap-2 border border-emerald-800 shadow-sm transition-colors cursor-pointer';
+    quickAudio.innerHTML = `<svg class="w-3.5 h-3.5 fill-current text-ochre" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> <span>Play Morning Brief Audio</span>`;
     quickAudio.addEventListener('click', () => {
       GlobalAudioPlayer.load('Morning Brief — Arusha Overview', 'assets/morning_brief.mp3');
     });
@@ -2155,8 +2151,8 @@ const RouteEngine = (() => {
     // Quick Audio Play Trigger in Panel
     const quickAudio = document.createElement('button');
     quickAudio.type = 'button';
-    quickAudio.className = 'w-full py-2.5 px-3 bg-emerald-950 hover:bg-emerald-900 text-ochre font-bold text-xs rounded-md flex items-center justify-center gap-2 border border-emerald-800 shadow-sm transition-colors cursor-pointer';
-    quickAudio.innerHTML = `<svg class="w-4 h-4 fill-current text-ochre" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> <span>Play Morning Brief Audio</span>`;
+    quickAudio.className = 'w-full py-2 px-3 bg-emerald-950 hover:bg-emerald-900 text-ochre font-bold text-[11px] rounded-md flex items-center justify-center gap-2 border border-emerald-800 shadow-sm transition-colors cursor-pointer';
+    quickAudio.innerHTML = `<svg class="w-3.5 h-3.5 fill-current text-ochre" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> <span>Play Morning Brief Audio</span>`;
     quickAudio.addEventListener('click', () => {
       GlobalAudioPlayer.load('Morning Brief — Arusha Overview', 'assets/morning_brief.mp3');
     });
@@ -2170,7 +2166,7 @@ const RouteEngine = (() => {
 
     // Read More Page button
     const btn = document.createElement('button');
-    btn.className = 'w-full py-3 btn-jungle text-xs uppercase tracking-widest font-black shadow-md mt-auto';
+    btn.className = 'w-full py-2 btn-jungle text-[11px] uppercase tracking-wider font-black shadow-sm mt-auto';
     btn.textContent = "Read Full Route Overview";
     btn.addEventListener('click', () => {
       openOverlay("Route 1 Overview - Morning Brief", compileOverviewContents);
@@ -2484,36 +2480,40 @@ const RouteEngine = (() => {
         showLocationDetails(node.index);
       });
 
+      const nextIndex = getAdjacentMainStopIndex(node.index, 1);
+      const nextNode = nextIndex !== null ? ARUSHA_LOOP_PAYLOAD[nextIndex] : null;
+      const nextTitleAbbr = nextNode ? (nextNode.title.length > 15 ? nextNode.title.slice(0, 14) + '…' : nextNode.title) : 'Stop';
+
       const popupHtml = `
-        <div class="space-y-2.5 max-w-[250px]">
-          <h3 class="font-black text-emerald-900 text-sm tracking-tight leading-tight">${node.title}</h3>
+        <div class="space-y-2 max-w-[240px]">
+          <h3 class="font-black text-emerald-900 text-xs sm:text-sm tracking-tight leading-tight">Stop ${stopCounter}: ${node.title}</h3>
           <span class="inline-block text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-stone-100 border text-stone-500 uppercase tracking-wider">${node.category}</span>
 
           <!-- Low-profile Audio Guide Trigger -->
-          <button type="button" id="map-audio-trigger-${node.index}" class="w-full py-2 px-2.5 bg-emerald-950 hover:bg-emerald-900 text-ochre font-bold text-[10px] rounded-md flex items-center justify-center gap-1.5 border border-emerald-800 shadow-sm transition-colors cursor-pointer">
-            <svg class="w-3.5 h-3.5 fill-current text-ochre" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <button type="button" id="map-audio-trigger-${node.index}" class="w-full py-1.5 px-2 bg-emerald-950 hover:bg-emerald-900 text-ochre font-bold text-[9px] rounded flex items-center justify-center gap-1.5 border border-emerald-800 shadow-xs transition-colors cursor-pointer">
+            <svg class="w-3 h-3 fill-current text-ochre" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
             <span>Play Audio Guide</span>
           </button>
           
-          <div class="bg-amber-50 border border-amber-200 rounded-md p-2 text-[10px] text-amber-800 leading-normal">
+          <div class="bg-amber-50 border border-amber-200 rounded p-1.5 text-[9px] text-amber-800 leading-normal">
             <strong>💡 Quick Tip:</strong> ${node.localTip || node.shortDesc}
           </div>
 
-          <a href="https://www.google.com/maps/dir/?api=1&destination=${node.lat},${node.lng}" target="_blank" class="w-full py-2 bg-emerald-900 hover:bg-emerald-950 text-white font-extrabold rounded-md text-[10px] uppercase tracking-widest text-center flex items-center justify-center gap-1 shadow-sm transition-colors">
+          <a href="https://www.google.com/maps/dir/?api=1&destination=${node.lat},${node.lng}" target="_blank" class="w-full py-1.5 bg-emerald-900 hover:bg-emerald-950 text-white font-extrabold rounded text-[9px] uppercase tracking-wider text-center flex items-center justify-center gap-1 shadow-xs transition-colors">
             Get Directions 🚗
           </a>
 
-          <button id="map-read-more-btn-${node.index}" class="w-full py-2 bg-amber-500 hover:bg-amber-400 text-slate-900 font-black rounded-md text-[10px] uppercase tracking-widest text-center flex items-center justify-center gap-1 shadow-sm transition-transform active:scale-95 cursor-pointer mt-1">
+          <button id="map-read-more-btn-${node.index}" class="w-full py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-900 font-black rounded text-[9px] uppercase tracking-wider text-center flex items-center justify-center gap-1 shadow-xs transition-transform active:scale-95 cursor-pointer mt-0.5">
             Read More 📖
           </button>
 
           <!-- Next & Previous Main Stop Navigation Buttons below Read More -->
           <div class="flex items-center gap-1.5 pt-0.5">
-            <button type="button" id="map-prev-btn-${node.index}" class="flex-1 py-1.5 px-2 bg-stone-100 hover:bg-stone-200 text-slate-800 font-extrabold text-[10px] rounded-md border border-stone-300 flex items-center justify-center gap-1 shadow-xs transition-all active:scale-95 cursor-pointer">
-              <span>← Prev</span>
+            <button type="button" id="map-prev-btn-${node.index}" class="flex-1 py-1 px-1.5 bg-stone-100 hover:bg-stone-200 text-slate-800 font-extrabold text-[9px] rounded border border-stone-300 flex items-center justify-center gap-0.5 shadow-2xs transition-all active:scale-95 cursor-pointer">
+              <span>← Prev.</span>
             </button>
-            <button type="button" id="map-next-btn-${node.index}" class="flex-1 py-1.5 px-2 bg-stone-100 hover:bg-stone-200 text-slate-800 font-extrabold text-[10px] rounded-md border border-stone-300 flex items-center justify-center gap-1 shadow-xs transition-all active:scale-95 cursor-pointer">
-              <span>Next →</span>
+            <button type="button" id="map-next-btn-${node.index}" class="flex-1 py-1 px-1.5 bg-stone-100 hover:bg-stone-200 text-slate-800 font-extrabold text-[9px] rounded border border-stone-300 flex items-center justify-center gap-0.5 shadow-2xs transition-all active:scale-95 cursor-pointer truncate">
+              <span class="truncate">Next: ${nextTitleAbbr}</span> <span>→</span>
             </button>
           </div>
         </div>
@@ -2824,15 +2824,15 @@ const RouteEngine = (() => {
 
       marker.bindPopup(`
         <div class="space-y-2 max-w-[230px]">
-          <h3 class="font-black text-amber-700 text-sm tracking-tight leading-tight">${alt.title}</h3>
+          <h3 class="font-black text-amber-700 text-xs sm:text-sm tracking-tight leading-tight">Detour ${alt.altId}: ${alt.title}</h3>
           <span class="inline-block text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-amber-50 border border-amber-200 text-amber-600 uppercase tracking-wider">Detour Option</span>
-          <div class="bg-stone-50 border border-stone-200 rounded-lg p-2 text-[10px] text-stone-600 leading-normal">
+          <div class="bg-stone-50 border border-stone-200 rounded p-1.5 text-[9px] text-stone-600 leading-normal">
             <strong>💡 Tip:</strong> ${alt.localTip}
           </div>
-          <a href="https://www.google.com/maps/dir/?api=1&destination=${alt.lat},${alt.lng}" target="_blank" class="w-full py-2 bg-amber-500 hover:bg-amber-600 text-white font-extrabold rounded-lg text-[10px] uppercase tracking-widest text-center flex items-center justify-center gap-1 shadow-sm transition-colors">
+          <a href="https://www.google.com/maps/dir/?api=1&destination=${alt.lat},${alt.lng}" target="_blank" class="w-full py-1.5 bg-amber-500 hover:bg-amber-600 text-white font-extrabold rounded text-[9px] uppercase tracking-wider text-center flex items-center justify-center gap-1 shadow-xs transition-colors">
             Get Directions 🚗
           </a>
-          <button id="map-alt-read-more-btn-${alt.altId}" class="w-full py-2 bg-stone-900 hover:bg-black text-amber-400 font-black rounded-lg text-[10px] uppercase tracking-widest text-center flex items-center justify-center gap-1 shadow-sm transition-transform active:scale-95 cursor-pointer mt-1">
+          <button id="map-alt-read-more-btn-${alt.altId}" class="w-full py-1.5 bg-stone-900 hover:bg-black text-amber-400 font-black rounded text-[9px] uppercase tracking-wider text-center flex items-center justify-center gap-1 shadow-xs transition-transform active:scale-95 cursor-pointer mt-0.5">
             Read More 📖
           </button>
         </div>

@@ -178,7 +178,7 @@
                 </div>
               </div>
               
-              <button id="arusha-action-btn" class="w-full py-3.5 rounded-md font-black text-xs uppercase tracking-widest transition-all text-center block shadow-sm">
+              <button id="arusha-action-btn" class="w-full py-2.5 rounded-md font-black text-xs uppercase tracking-widest transition-all text-center block shadow-2xs">
                 Loading status...
               </button>
             </div>
@@ -203,7 +203,7 @@
                   <p class="text-stone-400 text-xs mt-1 leading-relaxed">Explore the lively backstreets of the Green City in the Sun, including local markets and Matatu culture.</p>
                 </div>
               </div>
-              <button disabled class="w-full py-3.5 bg-stone-200 text-stone-400 rounded-md font-black text-xs uppercase tracking-widest text-center block cursor-not-allowed shadow-none">
+              <button disabled class="w-full py-2.5 bg-stone-200 text-stone-400 rounded-md font-black text-xs uppercase tracking-widest text-center block cursor-not-allowed shadow-none">
                 Coming Soon
               </button>
             </div>
@@ -228,7 +228,7 @@
                   <p class="text-stone-400 text-xs mt-1 leading-relaxed">Scale Kampala's historical hills via local boda-bodas to visit historic temples and street-food joints.</p>
                 </div>
               </div>
-              <button disabled class="w-full py-3.5 bg-stone-200 text-stone-400 rounded-md font-black text-xs uppercase tracking-widest text-center block cursor-not-allowed shadow-none">
+              <button disabled class="w-full py-2.5 bg-stone-200 text-stone-400 rounded-md font-black text-xs uppercase tracking-widest text-center block cursor-not-allowed shadow-none">
                 Coming Soon
               </button>
             </div>
@@ -257,8 +257,8 @@
           <p class="text-stone-500 text-xs mt-1">Are you sure you want to log out of your rider profile?</p>
         </div>
         <div class="flex gap-3">
-          <button id="logout-cancel-btn" type="button" class="w-1/2 py-3.5 bg-stone-200 text-slate-700 font-bold rounded-md text-xs uppercase tracking-wider hover:bg-stone-300 transition-colors cursor-pointer">Cancel</button>
-          <button id="logout-ok-btn" type="button" class="w-1/2 py-3.5 bg-red-600 text-white font-bold rounded-md text-xs uppercase tracking-wider hover:bg-red-700 transition-colors shadow-sm cursor-pointer">Confirm Sign Out</button>
+          <button id="logout-cancel-btn" type="button" class="w-1/2 py-2 px-3 bg-stone-200 text-slate-700 font-extrabold rounded-md text-[11px] uppercase tracking-wider hover:bg-stone-300 transition-colors cursor-pointer">Cancel</button>
+          <button id="logout-ok-btn" type="button" class="w-1/2 py-2 px-3 bg-red-600 text-white font-extrabold rounded-md text-[11px] uppercase tracking-wider hover:bg-red-700 transition-colors shadow-2xs cursor-pointer">Confirm Sign Out</button>
         </div>
       </div>
     </div>
@@ -422,12 +422,12 @@
           arushaPrice.textContent = user.isMaster ? 'Unlocked (Permanent)' : exp;
           arushaPrice.className = 'text-xs font-bold text-emerald-600';
           arushaBtn.textContent = 'Enter Route';
-          arushaBtn.className = 'w-full py-3.5 bg-emerald-600 text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-emerald-700 transition-all text-center block shadow-md';
+          arushaBtn.className = 'w-full py-2.5 bg-emerald-600 text-white rounded-md font-black text-xs uppercase tracking-widest hover:bg-emerald-700 transition-all text-center block shadow-sm';
         } else {
           arushaPrice.textContent = '£6.00';
           arushaPrice.className = 'text-xs font-bold text-amber-600';
           arushaBtn.textContent = 'Unlock City (£6.00)';
-          arushaBtn.className = 'w-full py-3.5 btn-gold text-xs uppercase tracking-widest font-black shadow-md';
+          arushaBtn.className = 'w-full py-2.5 btn-gold text-xs uppercase tracking-widest font-black shadow-sm';
         }
 
         // Evaluate Nairobi
@@ -438,12 +438,12 @@
           nairobiPrice.textContent = user.isMaster ? 'Unlocked (Permanent)' : exp;
           nairobiPrice.className = 'text-xs font-bold text-emerald-600';
           nairobiBtn.textContent = 'Enter Route';
-          nairobiBtn.className = 'w-full py-3.5 bg-emerald-600 text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-emerald-700 transition-all text-center block shadow-md';
+          nairobiBtn.className = 'w-full py-2.5 bg-emerald-600 text-white rounded-md font-black text-xs uppercase tracking-widest hover:bg-emerald-700 transition-all text-center block shadow-sm';
         } else {
           nairobiPrice.textContent = '£6.00';
           nairobiPrice.className = 'text-xs font-bold text-amber-600';
           nairobiBtn.textContent = 'Unlock City (£6.00)';
-          nairobiBtn.className = 'w-full py-3.5 btn-gold text-xs uppercase tracking-widest font-black shadow-md';
+          nairobiBtn.className = 'w-full py-2.5 btn-gold text-xs uppercase tracking-widest font-black shadow-sm';
         }
 
         // Evaluate Kampala
@@ -454,12 +454,12 @@
           kampalaPrice.textContent = user.isMaster ? 'Unlocked (Permanent)' : exp;
           kampalaPrice.className = 'text-xs font-bold text-emerald-600';
           kampalaBtn.textContent = 'Enter Route';
-          kampalaBtn.className = 'w-full py-3.5 bg-emerald-600 text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-emerald-700 transition-all text-center block shadow-md';
+          kampalaBtn.className = 'w-full py-2.5 bg-emerald-600 text-white rounded-md font-black text-xs uppercase tracking-widest hover:bg-emerald-700 transition-all text-center block shadow-sm';
         } else {
           kampalaPrice.textContent = '£6.00';
           kampalaPrice.className = 'text-xs font-bold text-amber-600';
           kampalaBtn.textContent = 'Unlock City (£6.00)';
-          kampalaBtn.className = 'w-full py-3.5 btn-gold text-xs uppercase tracking-widest font-black shadow-md';
+          kampalaBtn.className = 'w-full py-2.5 btn-gold text-xs uppercase tracking-widest font-black shadow-sm';
         }
 
         routeCountBadge.textContent = `${unlockedCount} City Unlocked`;
