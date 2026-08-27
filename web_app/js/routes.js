@@ -2176,48 +2176,318 @@ const RouteEngine = (() => {
 
     if (!detailsTitle || !detailsSubtitle || !detailsBody) return;
 
-    detailsTitle.textContent = "SOS Hotline";
-    detailsSubtitle.textContent = "Emergency Protocol";
+    detailsTitle.textContent = "🆘 SOS Hotline";
+    detailsSubtitle.textContent = "Emergency Protocol — Arusha";
 
     detailsBody.innerHTML = '';
 
-    // Subtitle warn
+    // Safety banner
     const warn = document.createElement('div');
-    warn.className = 'bg-red-50 border border-red-200 text-red-700 p-3 rounded-md text-xs font-bold leading-normal';
-    warn.textContent = "Mizizi is centered on safety. Keep this panel loaded offline. If you face any security or transit issues inside Arusha town, reach out immediately!";
+    warn.className = 'bg-red-50 border border-red-300 text-red-800 px-3 py-2 rounded-md text-[11px] font-semibold leading-snug';
+    warn.innerHTML = `<span class="font-black text-red-700">⚠️ Mizizi Safety First.</span> Keep this panel offline. If you face any security or transit issues in Arusha, reach out immediately!`;
     detailsBody.appendChild(warn);
 
-    // List of quick emergency contacts
-    const contacts = [
-      { name: "Vetted Saloon Driver (VIP)", info: "+255 700 000 000" },
-      { name: "Arusha General Hospital Clinic", info: "+255 27 254 4242" },
-      { name: "Tanzanian Tourist Police", info: "112 (or 999)" },
-      { name: "Mizizi Emergency Support Desk", info: "+255 800 MIZIZI" }
-    ];
-
-    const contactDiv = document.createElement('div');
-    contactDiv.className = 'space-y-3';
-
-    contacts.forEach((con) => {
+    // Helper to create a slim call card
+    const makeCard = (emoji, label, number, rawTel) => {
       const card = document.createElement('div');
-      card.className = 'bg-white border border-stone-200 p-3 rounded-md text-xs shadow-sm flex flex-col gap-1';
-      
-      const title = document.createElement('p');
-      title.className = 'font-bold text-slate-500 uppercase tracking-widest text-[9px]';
-      title.textContent = con.name;
+      card.className = 'flex items-center justify-between gap-2 bg-white border border-stone-200 rounded-md px-3 py-2 shadow-2xs';
 
-      const num = document.createElement('a');
-      num.href = `tel:${con.info.replace(/\s+/g, '')}`;
-      num.className = 'font-black text-slate-800 text-sm hover:text-red-600 transition-colors';
-      num.textContent = con.info;
+      const left = document.createElement('div');
+      left.className = 'flex items-center gap-2 min-w-0';
 
-      card.appendChild(title);
-      card.appendChild(num);
-      contactDiv.appendChild(card);
+      const ico = document.createElement('span');
+      ico.className = 'text-base flex-shrink-0';
+      ico.textContent = emoji;
+
+      const info = document.createElement('div');
+      info.className = 'min-w-0';
+
+      const lbl = document.createElement('p');
+      lbl.className = 'text-[9px] font-extrabold text-stone-400 uppercase tracking-widest truncate';
+      lbl.textContent = label;
+
+      const num = document.createElement('p');
+      num.className = 'text-xs font-black text-slate-800 truncate';
+      num.textContent = number;
+
+      info.appendChild(lbl);
+      info.appendChild(num);
+      left.appendChild(ico);
+      left.appendChild(info);
+
+      const callBtn = document.createElement('a');
+      callBtn.href = `tel:${rawTel}`;
+      callBtn.className = 'flex-shrink-0 bg-red-600 hover:bg-red-700 text-white text-[9px] font-black uppercase tracking-wider px-2 py-1 rounded transition-colors';
+      callBtn.textContent = 'Call';
+
+      card.appendChild(left);
+      card.appendChild(callBtn);
+      return card;
+    };
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'space-y-1.5';
+
+    // Section: Vetted Taxi
+    const taxiHead = document.createElement('p');
+    taxiHead.className = 'text-[9px] font-black text-amber-700 uppercase tracking-widest pt-1';
+    taxiHead.textContent = '🚕 Vetted Taxi';
+    wrapper.appendChild(taxiHead);
+    wrapper.appendChild(makeCard('🚘', 'ALMUS Willard — Kilimanjaro Taxi', '+255 762 983 198', '+255762983198'));
+
+    // Section: Tourist Police
+    const policeHead = document.createElement('p');
+    policeHead.className = 'text-[9px] font-black text-blue-700 uppercase tracking-widest pt-1';
+    policeHead.textContent = '👮 Tourist Police';
+    wrapper.appendChild(policeHead);
+    wrapper.appendChild(makeCard('🛡️', 'Tanzania Tourist Police', '+255 734 294 116', '+255734294116'));
+
+    // Section: National Emergency Lines
+    const emerHead = document.createElement('p');
+    emerHead.className = 'text-[9px] font-black text-red-700 uppercase tracking-widest pt-1';
+    emerHead.textContent = '🚨 National Emergency Lines';
+    wrapper.appendChild(emerHead);
+
+    // Two small dial pads for national numbers
+    const dialRow = document.createElement('div');
+    dialRow.className = 'grid grid-cols-3 gap-1.5';
+    [
+      { label: 'General', num: '112' },
+      { label: 'Police', num: '999' },
+      { label: 'Fire', num: '118' },
+    ].forEach(({ label, num }) => {
+      const btn = document.createElement('a');
+      btn.href = `tel:${num}`;
+      btn.className = 'flex flex-col items-center justify-center bg-red-50 border border-red-200 rounded-md py-2 gap-0.5 hover:bg-red-100 transition-colors cursor-pointer';
+      btn.innerHTML = `<span class="text-[10px] font-black text-red-700">${num}</span><span class="text-[8px] text-red-500 font-bold uppercase tracking-widest">${label}</span>`;
+      dialRow.appendChild(btn);
     });
+    wrapper.appendChild(dialRow);
 
-    detailsBody.appendChild(contactDiv);
+    // Section: Medevac
+    const medHead = document.createElement('p');
+    medHead.className = 'text-[9px] font-black text-emerald-700 uppercase tracking-widest pt-1';
+    medHead.textContent = '🚁 Air Ambulance (24h)';
+    wrapper.appendChild(medHead);
+    wrapper.appendChild(makeCard('✈️', 'Arusha Medevac — 24h Line 1', '+255 767 996 996', '+255767996996'));
+    wrapper.appendChild(makeCard('✈️', 'Arusha Medevac — 24h Line 2', '+255 683 996 996', '+255683996996'));
+
+    // Section: Snake Park
+    const snakeHead = document.createElement('p');
+    snakeHead.className = 'text-[9px] font-black text-amber-700 uppercase tracking-widest pt-1';
+    snakeHead.textContent = '🐍 Snake Bite Specialist';
+    wrapper.appendChild(snakeHead);
+    wrapper.appendChild(makeCard('🏥', 'Meserani Snake Park Clinic', '+255 754 440 800', '+255754440800'));
+
+    // Section: Mizizi Support
+    const mizHead = document.createElement('p');
+    mizHead.className = 'text-[9px] font-black text-jungle uppercase tracking-widest pt-1';
+    mizHead.textContent = '💚 Mizizi Support';
+    wrapper.appendChild(mizHead);
+    wrapper.appendChild(makeCard('📞', 'Mizizi Support Desk', '+255 764 225 389', '+255764225389'));
+
+    detailsBody.appendChild(wrapper);
+
+    // Read More / Detailed Emergency Protocol
+    const readMoreBtn = document.createElement('button');
+    readMoreBtn.type = 'button';
+    readMoreBtn.className = 'w-full py-2 px-3 bg-red-700 hover:bg-red-800 text-white font-black text-[11px] uppercase tracking-wider rounded-md flex items-center justify-center gap-1.5 shadow-sm transition-colors cursor-pointer mt-1';
+    readMoreBtn.innerHTML = `<span>📋 Full Emergency Protocol</span>`;
+    readMoreBtn.addEventListener('click', () => {
+      openEmergencyDetailOverlay();
+    });
+    detailsBody.appendChild(readMoreBtn);
   };
+
+  // Full Detailed Emergency Protocol overlay page
+  const openEmergencyDetailOverlay = () => {
+    openOverlay("Emergency Protocol — Arusha", (container) => {
+
+      // Hero header
+      const hero = document.createElement('div');
+      hero.className = 'bg-red-700 text-white rounded-md px-4 py-4 mb-5';
+      hero.innerHTML = `
+        <p class="text-[10px] font-black uppercase tracking-widest text-red-200 mb-1">🆘 Mizizi Safety Protocol</p>
+        <h2 class="text-xl font-black tracking-tight leading-tight mb-2">Emergencies & Medical Care in Arusha</h2>
+        <p class="text-xs font-semibold leading-relaxed text-red-100">While Arusha possesses numerous clinical centres, selecting a hospital with modern diagnostic machinery and dedicated trauma units is essential for rapid recovery. Public emergency lines can be slow — always contact private responders directly.</p>
+      `;
+      container.appendChild(hero);
+
+      // ── Helper: section heading ──
+      const sectionHead = (emoji, title, colorClass) => {
+        const h = document.createElement('h3');
+        h.className = `text-xs font-black uppercase tracking-widest ${colorClass} mb-2 mt-5 flex items-center gap-1.5 border-b pb-1.5`;
+        h.innerHTML = `<span>${emoji}</span><span>${title}</span>`;
+        return h;
+      };
+
+      // ── Helper: contact card (tall, detailed) ──
+      const makeDetailCard = (fields) => {
+        const card = document.createElement('div');
+        card.className = 'bg-white border border-stone-200 rounded-md p-3.5 shadow-2xs space-y-1.5 mb-3';
+
+        fields.forEach(({ icon, label, value, isPhone, isNote }) => {
+          const row = document.createElement('div');
+          if (isNote) {
+            row.className = 'bg-amber-50 border border-amber-200 rounded p-2 text-[10px] text-amber-800 leading-snug font-semibold mt-2';
+            row.innerHTML = `<strong>💡 Note:</strong> ${value}`;
+            card.appendChild(row);
+            return;
+          }
+          row.className = 'flex items-start gap-2';
+          const ico = document.createElement('span');
+          ico.className = 'text-sm flex-shrink-0 mt-0.5';
+          ico.textContent = icon || '•';
+          const txt = document.createElement('div');
+          txt.className = 'flex-1 min-w-0';
+          const lbl = document.createElement('p');
+          lbl.className = 'text-[9px] font-extrabold text-stone-400 uppercase tracking-widest';
+          lbl.textContent = label;
+          txt.appendChild(lbl);
+          if (isPhone) {
+            // Possibly multiple numbers separated by /
+            const nums = value.split('/').map(s => s.trim());
+            nums.forEach(n => {
+              const link = document.createElement('a');
+              link.href = `tel:${n.replace(/[\s\-()]/g, '')}`;
+              link.className = 'block text-sm font-black text-slate-800 hover:text-red-600 transition-colors';
+              link.textContent = n;
+              txt.appendChild(link);
+            });
+            // Call button for first number
+            const callRow = document.createElement('div');
+            callRow.className = 'flex flex-wrap gap-1.5 mt-1';
+            nums.forEach(n => {
+              const btn = document.createElement('a');
+              btn.href = `tel:${n.replace(/[\s\-()]/g, '')}`;
+              btn.className = 'bg-red-600 hover:bg-red-700 text-white text-[9px] font-black uppercase tracking-wider px-2.5 py-1 rounded transition-colors';
+              btn.textContent = `Call ${n}`;
+              callRow.appendChild(btn);
+            });
+            txt.appendChild(callRow);
+          } else {
+            const val = document.createElement('p');
+            val.className = 'text-xs font-bold text-slate-700';
+            val.textContent = value;
+            txt.appendChild(val);
+          }
+          row.appendChild(ico);
+          row.appendChild(txt);
+          card.appendChild(row);
+        });
+        return card;
+      };
+
+      // ── SECTION 1: National Emergency Lines ──
+      container.appendChild(sectionHead('🚨', 'National Emergency Lines', 'text-red-700'));
+
+      const dialGrid = document.createElement('div');
+      dialGrid.className = 'grid grid-cols-3 gap-2 mb-4';
+      [
+        { label: 'General', num: '112', desc: 'All emergencies' },
+        { label: 'Police', num: '999', desc: 'Security threat' },
+        { label: 'Fire', num: '118', desc: 'Fire brigade' },
+      ].forEach(({ label, num, desc }) => {
+        const tile = document.createElement('a');
+        tile.href = `tel:${num}`;
+        tile.className = 'flex flex-col items-center justify-center bg-red-50 border border-red-200 rounded-md py-3 gap-0.5 hover:bg-red-100 transition-colors cursor-pointer';
+        tile.innerHTML = `<span class="text-xl font-black text-red-700">${num}</span><span class="text-[9px] font-black text-red-600 uppercase tracking-widest">${label}</span><span class="text-[8px] text-red-400 font-semibold text-center">${desc}</span>`;
+        dialGrid.appendChild(tile);
+      });
+      container.appendChild(dialGrid);
+
+      // ── SECTION 2: Vetted Taxi ──
+      container.appendChild(sectionHead('🚕', 'Vetted Taxi Service', 'text-amber-700'));
+      container.appendChild(makeDetailCard([
+        { icon: '🧑', label: 'Driver', value: 'ALMUS Willard — Kilimanjaro Taxi' },
+        { icon: '📞', label: 'Contact', value: '+255 762 983 198', isPhone: true },
+        { isNote: true, value: 'Vetted and trusted by Mizizi. Use this driver for safe returns to your hotel or airport transfers.' },
+      ]));
+
+      // ── SECTION 3: Tourist Police ──
+      container.appendChild(sectionHead('👮', 'Tanzania Tourist Police', 'text-blue-700'));
+      container.appendChild(makeDetailCard([
+        { icon: '🛡️', label: 'Unit', value: 'Tanzania Tourist Police — Arusha Division' },
+        { icon: '📞', label: 'Direct Line', value: '+255 734 294 116', isPhone: true },
+        { isNote: true, value: 'Contact directly for theft, harassment, or tourist-targeted crimes. They have English-speaking officers on duty.' },
+      ]));
+
+      // ── SECTION 4: Air Ambulance ──
+      container.appendChild(sectionHead('🚁', 'Emergency Air Evacuation', 'text-emerald-700'));
+      container.appendChild(makeDetailCard([
+        { icon: '🏥', label: 'Provider', value: 'Arusha Medevac' },
+        { icon: '📍', label: 'Base Location', value: 'Arusha Airport (ARK)' },
+        { icon: '📞', label: '24-Hour Emergency Lines', value: '+255 767 996 996 / +255 683 996 996', isPhone: true },
+        { icon: 'ℹ️', label: 'Overview', value: 'Primary private medical evacuation and air ambulance service across Northern Tanzania. Flight physicians and critical care paramedics specialise in emergency tourist transfers.' },
+        { isNote: true, value: 'A 4-week tourist evacuation pass costs approximately $20 USD — guarantees rapid aircraft dispatch and en-route stabilisation. In-hospital care must be cleared by your travel insurance.' },
+      ]));
+
+      // ── SECTION 5: Snake Bite ──
+      container.appendChild(sectionHead('🐍', 'Specialist: Snake Bites', 'text-amber-700'));
+      container.appendChild(makeDetailCard([
+        { icon: '🏥', label: 'Clinic', value: 'Meserani Snake Park Medical Clinic' },
+        { icon: '📍', label: 'Location', value: 'Meserani — ~40 km west of Arusha on the Dodoma Road' },
+        { icon: '📞', label: 'Emergency Hotline', value: '+255 754 440 800', isPhone: true },
+        { icon: 'ℹ️', label: 'Overview', value: 'Recognised regional specialist centre and central repository for antivenom in Northern Tanzania. Stocks multiple polyvalent and monovalent antivenoms.' },
+        { isNote: true, value: 'Call their hotline DIRECTLY & IMMEDIATELY for advice BEFORE or DURING transit. Do NOT wait for general hospitals.' },
+      ]));
+
+      // ── SECTION 6: Recommended Hospitals ──
+      container.appendChild(sectionHead('🏥', 'Recommended Private Hospitals', 'text-slate-700'));
+
+      // NSK Hospital
+      const nskTitle = document.createElement('p');
+      nskTitle.className = 'text-xs font-black text-slate-700 mb-1.5 flex items-center gap-1.5';
+      nskTitle.innerHTML = `<span class="bg-emerald-100 text-emerald-800 text-[9px] font-black px-1.5 py-0.5 rounded uppercase tracking-wider">Adult Trauma</span> NSK Hospitals`;
+      container.appendChild(nskTitle);
+      container.appendChild(makeDetailCard([
+        { icon: '📍', label: 'Location', value: 'Industrial Road, Arusha' },
+        { icon: '🕐', label: 'Hours', value: 'Open 24/7 — Acute Trauma & Emergencies' },
+        { icon: '📞', label: 'Direct Line', value: '+255 626 221 331', isPhone: true },
+        { icon: 'ℹ️', label: 'Overview', value: 'One of the most modern private facilities in central Arusha — comprehensive digital diagnostic imaging, emergency wing, laboratory services, and surgical specialists.' },
+      ]));
+
+      // APMC
+      const apmcTitle = document.createElement('p');
+      apmcTitle.className = 'text-xs font-black text-slate-700 mb-1.5 flex items-center gap-1.5';
+      apmcTitle.innerHTML = `<span class="bg-pink-100 text-pink-700 text-[9px] font-black px-1.5 py-0.5 rounded uppercase tracking-wider">Children & Mothers</span> Arusha Pediatric & Maternal Care (APMC)`;
+      container.appendChild(apmcTitle);
+      container.appendChild(makeDetailCard([
+        { icon: '📍', label: 'Location', value: 'Serengeti Road, Block E, House No. 98, Arusha' },
+        { icon: '📞', label: 'Direct / WhatsApp', value: '+255 757 841 240', isPhone: true },
+        { icon: 'ℹ️', label: 'Overview', value: 'Operated under the Institute for Child Healthcare Africa (ICHA). Leading family-focused clinic for paediatric consultations, emergency childhood triage, and maternal care.' },
+      ]));
+
+      // Mount Meru
+      const mmuTitle = document.createElement('p');
+      mmuTitle.className = 'text-xs font-black text-slate-700 mb-1.5 flex items-center gap-1.5';
+      mmuTitle.innerHTML = `<span class="bg-blue-100 text-blue-700 text-[9px] font-black px-1.5 py-0.5 rounded uppercase tracking-wider">Regional Referral</span> Mount Meru Regional Hospital (VIP Wing)`;
+      container.appendChild(mmuTitle);
+      container.appendChild(makeDetailCard([
+        { icon: '📍', label: 'Location', value: 'Hospital Road (opposite AICC), City Centre' },
+        { icon: '📞', label: 'Customer Care Line', value: '+255 748 535 480', isPhone: true },
+        { icon: 'ℹ️', label: 'Overview', value: 'Largest regional referral hospital in Arusha. Use the dedicated VIP / Fast-Track Concierge Wing for expedited private consultations, private rooms, and coordinated emergency assistance.' },
+      ]));
+
+      // ── Rule of Thumb ──
+      const rule = document.createElement('div');
+      rule.className = 'bg-emerald-50 border border-emerald-200 rounded-md p-4 mt-4 mb-2';
+      rule.innerHTML = `
+        <p class="text-[10px] font-black uppercase tracking-widest text-emerald-700 mb-2">✅ Rule of Thumb</p>
+        <p class="text-xs text-emerald-900 font-semibold leading-relaxed">For <strong>life-threatening injuries</strong>, proceed immediately to the nearest facility for basic stabilisation. If transport allows, contact <strong>Arusha Medevac</strong> or direct your driver straight to <strong>NSK Hospital</strong> (adult trauma) or <strong>APMC</strong> (children).</p>
+      `;
+      container.appendChild(rule);
+
+      // ── Mizizi Support ──
+      container.appendChild(sectionHead('💚', 'Mizizi Support Desk', 'text-jungle'));
+      container.appendChild(makeDetailCard([
+        { icon: '📞', label: 'Support Hotline', value: '+255 764 225 389', isPhone: true },
+        { isNote: true, value: 'Reach out to the Mizizi team any time during your adventure. We are here to help coordinate, translate, and escalate any issue you face on the route.' },
+      ]));
+    });
+  };
+
+
 
   // Compile Swahili Survival full lingo overlay page
   const openSwahiliSurvivalOverlay = () => {
