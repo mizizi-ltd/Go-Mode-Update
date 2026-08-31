@@ -1,0 +1,35 @@
+# Bajaj Adventure — Arusha Bajaj Street Safari
+
+> Self-guided, 9-hour, high-texture urban street safari in Arusha, Tanzania, powered by local Bajaj (tuk-tuk) transit.
+
+## Overview
+Bajaj Adventure by Mizizi Ltd is a digital, self-guided street safari platform designed for independent travelers, safari-goers, and culture seekers spending 1 to 2 days in Arusha, Tanzania. It balances authentic local Bajaj transit with hand-picked cultural stops, historic landmarks, craft galleries, and vetted local dining anchors.
+
+- **Primary Destination**: Arusha, Tanzania (Gateway to the Serengeti & Mt. Kilimanjaro)
+- **Duration**: 9 Hours (08:00 AM – 17:00 PM)
+- **Transit Mode**: Local Bajaj (3-Wheeled Tuk-Tuk)
+- **Price**: £6.00 GBP (~$8.00 USD) one-time lifetime access. Zero subscription.
+- **Platform Web App**: https://bajajadventure.com / https://bajaj-adventure-1.web.app
+- **Publisher**: Mizizi Ltd
+
+## Key Features
+- **Interactive Offline Map & GPS Matrix**: 9 chronological main stops + detour options across Arusha town.
+- **Swahili Survival & Bajaj Lingo Guide**: Phonetic guide and Tanzanian politeness protocol ("Naomba..." vs "Nataka").
+- **Vetted Driver Translator Cards**: Pre-formatted Swahili destination cards to show Bajaj drivers.
+- **24/7 SOS Emergency Hotline**: Vetted taxi contacts, Tourist Police direct line, Arusha Medevac air ambulance, and hospital guide.
+- **Audio Guides**: Narrated audio walkthroughs for Clock Tower, Cultural Heritage Centre, Tanzanite Experience, Maasai Market, and Coffee Lodge.
+
+## The 9 Main Itinerary Stops (Arusha Loop)
+1. **Stop 1: Kitamu Coffee** (Clock Tower Area) — Morning anchor, legendary carrot cake, French press local coffee.
+2. **Stop 2: The Tanzanite Experience** (Blue Plaza) — Gemstone museum, raw tanzanite grading checklist, ethical trade history.
+3. **Stop 3: Arusha Clock Tower** (City Centre) — Historic landmark midpoint between Cairo and Cape Town, independence history.
+4. **Stop 4: Maasai Market Curios** (Fire Road) — Artisanal beadwork, wood carvings, sacred color symbolism, bargaining protocol.
+5. **Stop 5: Cultural Heritage Centre Gallery** (Dodoma Road) — 4-storey African art gallery, mask showroom, tribal artifacts.
+6. **Stop 6: Arusha Coffee Lodge** (Burka Estate) — Coffee plantation loungers, Shanga glassware workshop.
+7. **Stop 7: Clay & Canvas** (Njiro) — Pottery painting, local art studio, garden retreat.
+8. **Stop 8: Rooftop Lounge at Gran Melia** (Simeon Road) — Sunset view of Mount Meru, craft cocktails.
+9. **Stop 9: Amber Restaurant** (Sekei) — Contemporary Tanzanian dining, local grilled meats, dinner anchor.
+
+## Full Documentation & Data
+- [Full Itinerary & Swahili Lingo Guide](https://bajajadventure.com/llms-full.txt): Complete text of all 9 stops, detour options, Swahili vocabulary, and safety protocols.
+- [Interactive App](https://bajajadventure.com/app.html): Live web application map and offline guide viewer.

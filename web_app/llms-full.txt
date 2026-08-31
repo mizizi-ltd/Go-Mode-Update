@@ -1,0 +1,114 @@
+# Bajaj Adventure — Full Comprehensive Guide & AI Context Document
+
+## 1. About Mizizi Ltd & Bajaj Adventure
+Mizizi Ltd provides high-texture, authentic self-guided urban street safari guides in East Africa. The Bajaj Adventure platform allows tourists, backpackers, and safari travelers to explore Arusha independently in 9 hours using local 3-wheeled Bajaj (tuk-tuk) transport for £6.00 GBP (~$8.00 USD).
+
+- Website: https://bajajadventure.com
+- Mobile Web App: https://bajajadventure.com/app.html
+- User Dashboard: https://bajajadventure.com/dashboard.html
+- Location: Arusha, Tanzania
+
+---
+
+## 2. Chronological 9-Node Arusha Loop Itinerary
+
+### Stop 1: Kitamu Coffee
+- Category: Morning Anchor / Dining
+- Coordinates: -3.3719, 36.6944 (Clock Tower Area)
+- Ideal Time: 08:00 AM – 09:15 AM
+- Overview: Start your morning at Kitamu Coffee, located right in the heart of Arusha near the Clock Tower. Known for its rich French press Tanzanian AA coffee, fresh pastries, and legendary carrot cake.
+- Local Tip: Ask for a table in the garden courtyard. Order a pot of Kilimanjaro Arabica press coffee.
+
+### Stop 2: The Tanzanite Experience
+- Category: Heritage & Gemology
+- Coordinates: -3.3705, 36.6920 (Blue Plaza, 3rd Floor)
+- Ideal Time: 09:30 AM – 11:00 AM
+- Overview: The world's only dedicated Tanzanite museum. Learn about the rare blue-violet gemstone found exclusively in Merelani, Tanzania (a 2,000x rarer gemstone than diamond). View raw gemstone samples, master cutting demonstrations, and gemological certification standards.
+- Local Tip: Museum entry is free. Take the lift directly to the 3rd floor. Request a gemologist-guided tour.
+
+### Stop 3: Arusha Clock Tower
+- Category: Historic Landmark
+- Coordinates: -3.3719, 36.6944 (City Centre Roundabout)
+- Ideal Time: 11:00 AM – 11:30 AM
+- Overview: Built in the early 20th century, the Arusha Clock Tower historically marks the midpoint on the Great North Road between Cairo, Egypt and Cape Town, South Africa. It was also the site of early Tanzanian independence rallies.
+- Local Tip: Capture your photo from the pedestrian island on Boma Road for the best angle facing Mount Meru.
+
+### Stop 4: Maasai Market Curios & Crafts
+- Category: Artisan Market & Culture
+- Coordinates: -3.3688, 36.6912 (Fire Road)
+- Ideal Time: 11:30 AM – 12:45 PM
+- Overview: A bustling open-air market with over 100 Maasai craft stalls offering hand-woven baskets, beaded jewelry, wooden carvings, Tingatinga paintings, and traditional shúkà blankets.
+- Local Tip: Always bargain politely using Swahili. Colors in Maasai beadwork have specific meanings: Red represents bravery & blood, Blue represents energy & sky, Green represents nourishment & land, White represents purity & milk.
+
+### Stop 5: Cultural Heritage Centre Gallery
+- Category: Cultural Core & Museum
+- Coordinates: -3.3611, 36.6625 (Dodoma Road)
+- Ideal Time: 01:00 PM – 02:30 PM
+- Overview: A world-renowned cultural complex featuring a magnificent 4-storey African art gallery built in the shape of a traditional drum. Houses one of Africa's largest private collections of tribal masks, bronze sculptures, and contemporary African art.
+- Local Tip: Head straight to the top floor mask showroom for an panoramic view of the courtyard.
+
+### Stop 6: Arusha Coffee Lodge (Burka Estate)
+- Category: Plantation & Crafts
+- Coordinates: -3.3650, 36.6450 (Dodoma Road)
+- Ideal Time: 02:30 PM – 03:45 PM
+- Overview: Nestled on one of Tanzania's oldest working coffee plantations. Relax in lush botanical gardens and visit Shanga, an inspiring social enterprise workshop where disabled artisans create glassware, jewelry, and textiles from recycled materials.
+- Local Tip: Try the iced coffee float at the Garden Buffet and watch the glassblowers at Shanga.
+
+### Stop 7: Clay & Canvas (Njiro)
+- Category: Art Studio & Garden
+- Coordinates: -3.3950, 36.7100 (Njiro Road)
+- Ideal Time: 04:00 PM – 05:15 PM
+- Overview: A creative sanctuary in Njiro where visitors can paint custom ceramic pottery, browse local canvas artwork, and enjoy artisanal teas in a peaceful garden setting.
+- Local Tip: Perfect afternoon stop to relax before dinner.
+
+### Stop 8: Rooftop Lounge at Gran Melia
+- Category: Sunset & Cocktails
+- Coordinates: -3.3680, 36.7020 (Simeon Road)
+- Ideal Time: 05:30 PM – 06:45 PM
+- Overview: Luxury rooftop lounge offering spectacular unobstructed sunset views of Mount Meru and the surrounding lush hills.
+- Local Tip: Arrive by 05:30 PM to secure a balcony seat before golden hour. Order the Tanzanian Spiced Gin & Tonic.
+
+### Stop 9: Amber Restaurant
+- Category: Dinner Anchor
+- Coordinates: -3.3620, 36.6980 (Sekei)
+- Ideal Time: 07:00 PM – 09:00 PM
+- Overview: Premium contemporary dining venue blending local Tanzanian flame-grilled meats (Nyama Choma) with international cuisine.
+- Local Tip: Try the local grilled ribs paired with ugali and kachumbari salad.
+
+---
+
+## 3. Swahili Survival Vocabulary & Politeness Protocol
+
+### Tanzanian Politeness Protocol ("Naomba" vs "Nataka")
+In Tanzania, ALWAYS use **"Naomba..."** (*nah-woh-mbah*, meaning "I humbly request...") when asking for anything. While Kenyan Swahili commonly uses "Nataka" ("I want"), Tanzanians view "Nataka" as a direct command or demand, which is considered rude.
+
+### Core Street Vocabulary Table
+| English | Swahili | Pronunciation | Context / Usage |
+|---|---|---|---|
+| Hello / How are you? | Habari? / Mambo vipi? | *hah-bah-ree / mah-mboh vee-pee* | Standard polite greeting / Casual street greeting |
+| Thank you very much | Asante sana | *ah-sahn-teh sah-nah* | Universal gratitude |
+| Please / I request | Naomba | *nah-woh-mbah* | Polite request prefix |
+| How much is this? | Ni kiasi gani? | *nee kee-ah-see gah-nee* | Bargaining / Asking prices |
+| Stop here, please | Shusha hapa | *shoo-shah hah-pah* | Telling Bajaj driver to drop off |
+| Go slowly | Nenda polepole | *nehn-dah poh-leh-poh-leh* | Asking driver to slow down |
+| No thank you | Hapana asante | *hah-pah-nah ah-sahn-teh* | Declining vendor offers |
+| Friend | Rafiki | *rah-fee-kee* | Friendly address |
+| Good / Okay | Sawa | *sah-wah* | Agreement |
+
+---
+
+## 4. Emergency & Medical Protocol (Arusha)
+
+- **National Emergency Lines**:
+  - General Emergency: `112`
+  - Police: `999`
+  - Fire Brigade: `118` / `114`
+- **Vetted Taxi Service**: ALMUS Willard (Kilimanjaro Taxi) — `+255 762 983 198`
+- **Tanzania Tourist Police (Arusha Division)**: Direct Line `+255 734 294 116`
+- **Arusha Medevac (24-Hour Air Ambulance)**: `+255 767 996 996` / `+255 683 996 996` (Base: Arusha Airport - ARK)
+- **Meserani Snake Park Medical Clinic (Snake Bite Specialist)**: Hotline `+255 754 440 800` (Meserani, ~40km west of Arusha)
+- **Recommended Hospitals**:
+  - NSK Hospitals (Adult Trauma 24/7): Industrial Road · `+255 626 221 331`
+  - Arusha Pediatric & Maternal Care (APMC): Serengeti Road · `+255 757 841 240`
+  - Mount Meru Regional Hospital (VIP Wing): Hospital Road · `+255 748 535 480`
+- **Mizizi Support Desk**: `+255 764 225 389`

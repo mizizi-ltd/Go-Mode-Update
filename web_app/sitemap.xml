@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Landing Page -->
+  <url>
+    <loc>https://bajajadventure.com/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://bajajadventure.com/assets/hero.jpg</image:loc>
+      <image:title>Mizizi Bajaj Street Safari Adventures in Arusha, Tanzania</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://bajajadventure.com/assets/bajajheader.png</image:loc>
+      <image:title>Bajaj Adventure Logo</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://bajajadventure.com/index.html</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Interactive App & Map -->
+  <url>
+    <loc>https://bajajadventure.com/app.html</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://bajajadventure.com/assets/arusha-clock-tower.jpg</image:loc>
+      <image:title>Arusha Clock Tower</image:title>
+    </image:image>
+  </url>
+
+  <!-- Dashboard -->
+  <url>
+    <loc>https://bajajadventure.com/dashboard.html</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- AI LLM Open Index Files -->
+  <url>
+    <loc>https://bajajadventure.com/llms.txt</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://bajajadventure.com/llms-full.txt</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>
